@@ -50,6 +50,9 @@ public class GeneralKeyListener extends InputAdapter {
             case Keys.T:
                 ColorManager.toggle();
                 break;
+            case Keys.F:
+                EntiteManager.togglePlayerBall(); 
+                break;
         }
 
         return super.keyDown(keycode);

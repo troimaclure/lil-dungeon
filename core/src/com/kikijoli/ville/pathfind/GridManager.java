@@ -1,13 +1,13 @@
 package com.kikijoli.ville.pathfind;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.kikijoli.ville.manager.ColorManager;
-import static com.kikijoli.ville.maps.Tmap.shapeRenderer;
+import com.kikijoli.ville.maps.Tmap;
 import com.kikijoli.ville.util.Constantes;
+import com.kikijoli.ville.util.TextureUtil;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -23,6 +23,8 @@ public class GridManager {
     public static int COLUMNCOUNT;
     public static int ROWCOUNT;
     public static Tile[][] grid;
+    private static final String FLOOR = "sprite/floor.png";
+    private static final String WALL = "sprite/wall.png";
 
     public static void initialize(int rowCount, int columnCount, int size) {
         COLUMNCOUNT = columnCount;
@@ -94,26 +96,37 @@ public class GridManager {
     }
 
     public static void tour() {
-        shapeRenderer.begin(ShapeType.Filled);
-        Color c = shapeRenderer.getColor();
+        Tmap.spriteBatch.setColor(Color.WHITE);
         for (Tile[] object : GridManager.grid) {
             for (Tile tile : object) {
                 if (tile.state.equals(Constantes.WALL)) {
-                    shapeRenderer.setColor(ColorManager.getTextureColor());
+                    drawWall(tile);
                 } else {
-                    shapeRenderer.setColor(ColorManager.getBackgroundColor());
+                    drawFloor(tile);
                 }
-                shapeRenderer.rect(tile.getX(), tile.getY(), tile.getWidth(), tile.getHeight());
             }
         }
-        shapeRenderer.setColor(c);
-        shapeRenderer.end();
+
+    }
+
+    private static void drawFloor(Tile tile) {
+        if (ColorManager.mode)
+            Tmap.spriteBatch.draw(TextureUtil.getTexture(FLOOR), tile.getX(), tile.getY(), tile.getWidth(), tile.getHeight());
+        else
+            Tmap.spriteBatch.draw(TextureUtil.getTexture(WALL), tile.getX(), tile.getY(), tile.getWidth(), tile.getHeight());
+    }
+
+    private static void drawWall(Tile tile) {
+        if (ColorManager.mode)
+            Tmap.spriteBatch.draw(TextureUtil.getTexture(WALL), tile.getX(), tile.getY(), tile.getWidth(), tile.getHeight());
+        else
+            Tmap.spriteBatch.draw(TextureUtil.getTexture(FLOOR), tile.getX(), tile.getY(), tile.getWidth(), tile.getHeight());
     }
 
     public static boolean isClearZone(Rectangle entite) {
         for (Tile[] grille1 : grid) {
             for (Tile g : grille1) {
-                if (!g.state.equals(Constantes.EMPTY) && !g.state.equals(Constantes.KEY) && Intersector.overlaps(g.getBoundingRectangle(), entite)) {
+                if (!Constantes.NPC_MOVEMENT_FILTER.contains(g.state) && Intersector.overlaps(g.getBoundingRectangle(), entite)) {
                     return false;
                 }
             }

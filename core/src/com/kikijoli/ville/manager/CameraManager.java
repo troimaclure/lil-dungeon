@@ -15,19 +15,20 @@ import com.kikijoli.ville.util.Constantes;
  */
 public class CameraManager {
 
-    public static OrthographicCamera camera;
+    public static OrthographicCamera camera = new OrthographicCamera(Constantes.SCREENWIDTH, Constantes.SCREENHEIGHT);
 
     public static void initialize(int x, int y) {
-        camera = new OrthographicCamera(Constantes.SCREENWIDTH, Constantes.SCREENHEIGHT);
         camera.position.x = x;
         camera.position.y = y;
         camera.update();
-
     }
 
     public static void tour() {
         camera.unproject(worldCoordinates);
-        camera.position.set(EntiteManager.player.getX(), EntiteManager.player.getY(), 0);
+        if (!EntiteManager.playedBall)
+            camera.position.set(EntiteManager.player.getX(), EntiteManager.player.getY(), 0);
+        else
+            camera.position.set(EntiteManager.currentBallPosition.x, EntiteManager.currentBallPosition.y, 0);
         camera.update();
     }
 }

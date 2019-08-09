@@ -35,11 +35,8 @@ public class Entite extends Sprite implements IDrawable {
     @Override
     public void draw(SpriteBatch batch) {
         Rectangle r = this.getBoundingRectangle();
-        if (buisiness != null && buisiness.getTexture() != null) {
-            batch.draw(buisiness.getTexture(), r.x, r.y, r.width, r.height);
-        } else {
-            batch.draw(this.getTexture(), r.x, r.y, r.width, r.height);
-        }
+        batch.draw(this.getTexture(), r.x, r.y, r.width, r.height);
+
     }
 
 }

@@ -5,7 +5,6 @@
  */
 package com.kikijoli.ville.business;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.kikijoli.ville.abstracts.AbstractAction;
 import java.util.HashMap;
 
@@ -32,9 +31,5 @@ public abstract class AbstractBusiness extends AbstractAction {
     }
 
     public abstract AbstractAction getDefault();
-
-    public abstract boolean isWorking();
-
-    public abstract Texture getTexture();
 
 }

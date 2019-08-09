@@ -8,6 +8,8 @@ package com.kikijoli.ville.manager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.kikijoli.ville.drawable.entite.decor.Water;
+import com.kikijoli.ville.drawable.entite.npc.Guard;
+import com.kikijoli.ville.maps.Tmap;
 import com.kikijoli.ville.pathfind.GridManager;
 import com.kikijoli.ville.util.Constantes;
 
@@ -36,9 +38,17 @@ public class StageManager {
                         break;
                     case Constantes.LOCK:
                         LockManager.addLock((r - 1) * Constantes.TILESIZE, Math.abs(i - cols.length) * Constantes.TILESIZE);
+                        Tmap.addBox((r - 1) * Constantes.TILESIZE, Math.abs(i - cols.length) * Constantes.TILESIZE);
+
                         break;
                     case Constantes.KEY:
                         LockManager.addKey((r - 1) * Constantes.TILESIZE, Math.abs(i - cols.length) * Constantes.TILESIZE);
+                        break;
+                    case Constantes.GUARD:
+                        EntiteManager.addEntite(new Guard((r - 1) * Constantes.TILESIZE, Math.abs(i - cols.length) * Constantes.TILESIZE));
+                        break;
+                    case Constantes.WALL:
+                        Tmap.addBox((r - 1) * Constantes.TILESIZE, Math.abs(i - cols.length) * Constantes.TILESIZE);
                         break;
                 }
             }

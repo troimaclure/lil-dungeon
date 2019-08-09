@@ -15,10 +15,17 @@ import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Intersector;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.Array;
 import com.kikijoli.ville.listeners.GeneralKeyListener;
 import com.kikijoli.ville.manager.CameraManager;
 import static com.kikijoli.ville.manager.CameraManager.camera;
@@ -48,11 +55,11 @@ public class Tmap implements Screen {
     public static Vector3 worldCoordinates = new Vector3();
     public static Stage stage;
     public static FPSLogger fps;
+    Box2DDebugRenderer debugRenderer = new Box2DDebugRenderer();
 
     public static RayHandler getRay() {
         if (ray == null) {
             ray = new RayHandler(getWorld());
-//            ray.setAmbientLight(new Color(0.5f, 0.5f, 0.5f, 1.0f));
         }
         return ray;
     }
@@ -60,9 +67,37 @@ public class Tmap implements Screen {
     public static World getWorld() {
         if (world == null) {
             world = new World(new Vector2(0, 0), true);
-
         }
         return world;
+    }
+
+    public static void removeBoxs(Rectangle rectangle) {
+        Array<Body> bodies = new Array<>();
+        getWorld().getBodies(bodies);
+        Body destroy = null;
+        for (Body body : bodies) {
+            if (Intersector.overlaps((Rectangle) body.getUserData(), rectangle)) {
+                destroy = body;
+                break;
+
+            }
+        }
+        getWorld().destroyBody(destroy);
+        destroy.setUserData(null);
+        destroy = null;
+    }
+
+    public static void addBox(int x, int y) {
+        BodyDef groundBodyDef = new BodyDef();
+        groundBodyDef.position.set(new Vector2(x + 32, y + 32));
+
+        Body groundBody = getWorld().createBody(groundBodyDef);
+
+        PolygonShape groundBox = new PolygonShape();
+        groundBox.setAsBox(32, 32);
+        groundBody.createFixture(groundBox, 0.0f);
+        groundBox.dispose();
+        groundBody.setUserData(new Rectangle(x, y, Constantes.TILESIZE, Constantes.TILESIZE));
     }
 
     public Tmap() {
@@ -81,7 +116,6 @@ public class Tmap implements Screen {
         CameraManager.initialize(Constantes.TILESIZE * 15, Constantes.TILESIZE * 10);
         EntiteManager.initialize();
         test();
-
     }
 
     @Override
@@ -100,21 +134,21 @@ public class Tmap implements Screen {
         road();
         water();
 
-//        getRay().setAmbientLight(Color.BLACK);
-//        getRay().setCombinedMatrix(camera.combined,
-//                camera.position.x, camera.position.y,
-//                camera.viewportWidth * camera.zoom,
-//                camera.viewportHeight * camera.zoom);
-//        getRay().updateAndRender();
         spriteBatch.begin();
         MessageManager.drawIndicators();
         LockManager.tour();
         EntiteManager.tour();
-
         ParticleManager.tour(delta);
 
         spriteBatch.flush();
         spriteBatch.end();
+
+        getRay().setCombinedMatrix(camera.combined,
+                camera.position.x, camera.position.y,
+                camera.viewportWidth * camera.zoom,
+                camera.viewportHeight * camera.zoom);
+        getRay().update();
+        debugRenderer.render(world, camera.combined);
 
     }
 
@@ -132,9 +166,7 @@ public class Tmap implements Screen {
     }
 
     private void background() {
-        //        if (ShaderManager.invertColor != null) {
-//            spriteBatch.setShader(ShaderManager.invertColor);
-//        }
+
         spriteBatch.begin();
         GridManager.tour();
         spriteBatch.flush();

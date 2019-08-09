@@ -4,11 +4,13 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.kikijoli.ville.drawable.entite.Entite;
 import com.kikijoli.ville.drawable.entite.build.Key;
 import com.kikijoli.ville.drawable.entite.build.Lock;
 import com.kikijoli.ville.drawable.entite.npc.Npc;
 import com.kikijoli.ville.listeners.GeneralKeyListener;
+import com.kikijoli.ville.maps.Tmap;
 import static com.kikijoli.ville.maps.Tmap.spriteBatch;
 import static com.kikijoli.ville.maps.Tmap.worldCoordinates;
 import com.kikijoli.ville.pathfind.GridManager;
@@ -26,7 +28,9 @@ public class EntiteManager {
     public static ArrayList<Entite> entites = new ArrayList<>();
     public static ParticleEffect ball;
     public static ArrayList<Rectangle> walls = new ArrayList<Rectangle>();
-    private static ArrayList<Key> keys = new ArrayList<>();
+    private static final ArrayList<Key> keys = new ArrayList<>();
+    public static boolean playedBall = false;
+    public static Vector2 currentBallPosition = new Vector2();
 
     public static ArrayList<Entite> getEntites() {
         return (ArrayList<Entite>) entites.clone();
@@ -40,6 +44,7 @@ public class EntiteManager {
     public static void tour() {
         Color c = spriteBatch.getColor();
         handlePlayer();
+        handleBall();
         entites.stream().forEach((Entite entite) -> {
             renderEntity(entite);
         });
@@ -49,6 +54,7 @@ public class EntiteManager {
 
     private static void renderEntity(Entite entite) {
         spriteBatch.setColor(ColorManager.getTextureColor());
+
         spriteBatch.setShader(entite.shader);
 
         if (entite.visible) {
@@ -64,7 +70,7 @@ public class EntiteManager {
     }
 
     private static void handlePlayer() {
-
+        if (playedBall) return;
         for (int i = 0; i < player.speed; i++) {
             boolean move = handleY();
             move = handleX() || move;
@@ -150,13 +156,46 @@ public class EntiteManager {
     private static void doorOpen(Lock lock) {
         LockManager.locks.remove(lock);
         GridManager.setState(Constantes.EMPTY, lock.getBoundingRectangle());
+        Tmap.removeBoxs(lock.getBoundingRectangle());
+    }
+
+    public static void handleBall() {
+        if (!playedBall) return;
+        if (GeneralKeyListener.KeyDown) currentBallPosition.y -= 4;
+        else if (GeneralKeyListener.KeyUp) currentBallPosition.y += 4;
+        if (GeneralKeyListener.KeyRight) currentBallPosition.x += 4;
+        else if (GeneralKeyListener.KeyLeft) currentBallPosition.x -= 4;
+        ball.setPosition(currentBallPosition.x, currentBallPosition.y);
     }
 
     public static void moveBall() {
-        if (GeneralKeyListener.dragged && !GeneralKeyListener.rightButton)
+        if (playedBall) return;
+        if (GeneralKeyListener.dragged && !GeneralKeyListener.rightButton) {
             ball.setPosition(worldCoordinates.x, worldCoordinates.y);
-        else ball.setPosition(player.getX() - 15, player.getY() + 25);
+            currentBallPosition.x = worldCoordinates.x;
+            currentBallPosition.y = worldCoordinates.y;
+        } else {
+            calculateBallMovement();
+            ball.setPosition(currentBallPosition.x, currentBallPosition.y);
+        }
+    }
 
+    private static void calculateBallMovement() {
+        for (int i = 0; i <= player.speed + 1; i++) {
+            if (currentBallPosition.x > player.getX() - 15 && currentBallPosition.x > player.getX() + 35)
+                currentBallPosition.x -= 1;
+            else if (currentBallPosition.x < player.getX() - 15 && currentBallPosition.x < player.getX() + 35)
+                currentBallPosition.x += 1;
+            if (currentBallPosition.y > player.getY() + 48 && currentBallPosition.y > player.getY() + 32)
+                currentBallPosition.y -= 1;
+            else if (currentBallPosition.y < player.getY() + 48 && currentBallPosition.y < player.getY() + 32)
+                currentBallPosition.y += 1;
+        }
+    }
+
+    public static void togglePlayerBall() {
+        EntiteManager.playedBall = !EntiteManager.playedBall;
+        player.shader = null;
     }
 
     private EntiteManager() {

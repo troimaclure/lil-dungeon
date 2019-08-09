@@ -19,6 +19,7 @@ public class Constantes {
     public final static String WATER = "2";
     public final static String KEY = "3";
     public final static String LOCK = "4";
-    public static String NPC_MOVEMENT_FILTER = Constantes.WALL + Constantes.EMPTY + Constantes.WATER;
+    public final static String GUARD = "5";
+    public static String NPC_MOVEMENT_FILTER = Constantes.KEY + Constantes.EMPTY + Constantes.GUARD;
 
 }
