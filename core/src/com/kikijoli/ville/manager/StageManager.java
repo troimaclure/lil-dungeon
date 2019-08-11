@@ -32,23 +32,27 @@ public class StageManager {
             String[] cols = row.split(EMPTY);
             for (String col : cols) {
                 GridManager.setState(col, i, r++);
+                int x = (r - 1) * Constantes.TILESIZE;
+                int y = Math.abs(i - cols.length + 1) * Constantes.TILESIZE;
                 switch (col) {
                     case Constantes.WATER:
-                        WaterManager.addWater(new Water((r - 1) * Constantes.TILESIZE, Math.abs(i - cols.length) * Constantes.TILESIZE));
+                        WaterManager.addWater(new Water(x, y));
                         break;
                     case Constantes.LOCK:
-                        LockManager.addLock((r - 1) * Constantes.TILESIZE, Math.abs(i - cols.length) * Constantes.TILESIZE);
-                        Tmap.addBox((r - 1) * Constantes.TILESIZE, Math.abs(i - cols.length) * Constantes.TILESIZE);
-
+                        LockManager.addLock(x, y);
+                        Tmap.addBox(x, y);
                         break;
                     case Constantes.KEY:
-                        LockManager.addKey((r - 1) * Constantes.TILESIZE, Math.abs(i - cols.length) * Constantes.TILESIZE);
+                        LockManager.addKey(x, y);
                         break;
                     case Constantes.GUARD:
-                        EntiteManager.addEntite(new Guard((r - 1) * Constantes.TILESIZE, Math.abs(i - cols.length) * Constantes.TILESIZE));
+                        EntiteManager.addEntite(new Guard(x, y));
+                        break;
+                    case Constantes.PLAYER:
+                        EntiteManager.player.setPosition(x, y);
                         break;
                     case Constantes.WALL:
-                        Tmap.addBox((r - 1) * Constantes.TILESIZE, Math.abs(i - cols.length) * Constantes.TILESIZE);
+                        Tmap.addBox(x, y);
                         break;
                 }
             }

@@ -34,7 +34,6 @@ public class WaterManager {
                 Tmap.spriteBatchDefaultColor.setShader(entite.shader);
             }
             entite.draw(Tmap.spriteBatchDefaultColor);
-            entite.action.act();
             Tmap.spriteBatchDefaultColor.setShader(shader);
         });
         Tmap.spriteBatchDefaultColor.flush();

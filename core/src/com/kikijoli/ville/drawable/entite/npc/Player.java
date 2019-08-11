@@ -5,6 +5,7 @@
  */
 package com.kikijoli.ville.drawable.entite.npc;
 
+import com.kikijoli.ville.business.PlayerBuisiness;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.kikijoli.ville.drawable.entite.Entite;
 import com.kikijoli.ville.util.Constantes;
@@ -13,19 +14,18 @@ import com.kikijoli.ville.util.Constantes;
  *
  * @author troïmaclure
  */
-public class Npc extends Entite {
+public class Player extends Entite {
 
     private static final String SPRITESIMPLEPNG = "sprite/simple.png";
 
-    public int speed = 2;
-
-    public Npc(int srcX, int srcY) {
+    public Player(int srcX, int srcY) {
         super(SPRITESIMPLEPNG, srcX, srcY, Constantes.TILESIZE / 4, Constantes.TILESIZE / 2);
+        this.buisiness = new PlayerBuisiness();
     }
 
     @Override
     public void draw(SpriteBatch batch) {
         super.draw(batch);
-
     }
+
 }

@@ -12,14 +12,16 @@ package com.kikijoli.ville.util;
 public class Constantes {
 
     public static int TILESIZE = 64;
-    public static int SCREENWIDTH = 1600;
-    public static int SCREENHEIGHT = 900;
+    public static int SCREENWIDTH = 600;
+    public static int SCREENHEIGHT = 800;
     public final static String EMPTY = "0";
     public final static String WALL = "1";
     public final static String WATER = "2";
     public final static String KEY = "3";
     public final static String LOCK = "4";
     public final static String GUARD = "5";
-    public static String NPC_MOVEMENT_FILTER = Constantes.KEY + Constantes.EMPTY + Constantes.GUARD;
+    public final static String PLAYER = "6";
+    public static String NPC_MOVEMENT_OK = Constantes.KEY + Constantes.EMPTY + Constantes.GUARD + Constantes.PLAYER;
+    public static String NPCFILTERBUILD = Constantes.WALL + Constantes.LOCK + Constantes.WATER;
 
 }

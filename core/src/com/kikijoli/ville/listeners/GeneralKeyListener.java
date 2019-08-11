@@ -5,11 +5,11 @@
  */
 package com.kikijoli.ville.listeners;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputAdapter;
 import com.kikijoli.ville.abstracts.AbstractAction;
+import com.kikijoli.ville.business.PlayerBuisiness;
 import com.kikijoli.ville.manager.CameraManager;
 import com.kikijoli.ville.manager.ColorManager;
 import com.kikijoli.ville.manager.EntiteManager;
@@ -31,7 +31,6 @@ public class GeneralKeyListener extends InputAdapter {
         switch (keycode) {
             case Keys.LEFT:
             case Keys.Q:
-            case Keys.A:
                 KeyLeft = true;
                 break;
             case Keys.UP:
@@ -43,7 +42,6 @@ public class GeneralKeyListener extends InputAdapter {
                 KeyDown = true;
                 break;
             case Keys.RIGHT:
-            case Keys.E:
             case Keys.D:
                 KeyRight = true;
                 break;
@@ -51,8 +49,9 @@ public class GeneralKeyListener extends InputAdapter {
                 ColorManager.toggle();
                 break;
             case Keys.F:
-                EntiteManager.togglePlayerBall(); 
+                EntiteManager.togglePlayerBall();
                 break;
+
         }
 
         return super.keyDown(keycode);
@@ -63,7 +62,6 @@ public class GeneralKeyListener extends InputAdapter {
         switch (keycode) {
             case Keys.LEFT:
             case Keys.Q:
-            case Keys.A:
                 KeyLeft = false;
                 break;
             case Keys.UP:
@@ -75,7 +73,6 @@ public class GeneralKeyListener extends InputAdapter {
                 KeyDown = false;
                 break;
             case Keys.RIGHT:
-            case Keys.E:
             case Keys.D:
                 KeyRight = false;
                 break;
@@ -97,6 +94,9 @@ public class GeneralKeyListener extends InputAdapter {
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 
         rightButton = button == Input.Buttons.RIGHT;
+        if (rightButton) {
+            ((PlayerBuisiness) EntiteManager.player.buisiness).dash();
+        }
         return super.touchDown(screenX, screenY, pointer, button); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -115,7 +115,6 @@ public class GeneralKeyListener extends InputAdapter {
 
     @Override
     public boolean mouseMoved(int screenX, int screenY) {
-
         return super.mouseMoved(screenX, screenY);
     }
 

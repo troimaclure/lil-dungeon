@@ -8,7 +8,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.kikijoli.ville.drawable.entite.Entite;
 import com.kikijoli.ville.drawable.entite.build.Key;
 import com.kikijoli.ville.drawable.entite.build.Lock;
-import com.kikijoli.ville.drawable.entite.npc.Npc;
+import com.kikijoli.ville.drawable.entite.npc.Player;
 import com.kikijoli.ville.listeners.GeneralKeyListener;
 import com.kikijoli.ville.maps.Tmap;
 import static com.kikijoli.ville.maps.Tmap.spriteBatch;
@@ -24,7 +24,7 @@ import java.util.ArrayList;
  */
 public class EntiteManager {
 
-    public static Npc player = new Npc(100, 100);
+    public static Player player = new Player(100, 100);
     public static ArrayList<Entite> entites = new ArrayList<>();
     public static ParticleEffect ball;
     public static ArrayList<Rectangle> walls = new ArrayList<Rectangle>();
@@ -54,17 +54,12 @@ public class EntiteManager {
 
     private static void renderEntity(Entite entite) {
         spriteBatch.setColor(ColorManager.getTextureColor());
-
         spriteBatch.setShader(entite.shader);
-
-        if (entite.visible) {
-            entite.draw(spriteBatch);
-        }
-        if (entite.action != null) {
-            entite.action.act();
-        }
         if (entite.buisiness != null) {
             entite.buisiness.act();
+        }
+        if (entite.visible) {
+            entite.draw(spriteBatch);
         }
         spriteBatch.setShader(ShaderManager.defaultShader);
     }
@@ -139,7 +134,7 @@ public class EntiteManager {
     private static void handleDoor() {
         if (keys.isEmpty()) return;
         for (Lock lock : LockManager.locks) {
-            if (Intersector.overlaps(lock.anchor, player.getBoundingRectangle())) {
+            if (Intersector.overlaps(player.anchor, lock.getBoundingRectangle())) {
                 doorOpen(lock);
                 break;
             }
@@ -170,14 +165,14 @@ public class EntiteManager {
 
     public static void moveBall() {
         if (playedBall) return;
-        if (GeneralKeyListener.dragged && !GeneralKeyListener.rightButton) {
-            ball.setPosition(worldCoordinates.x, worldCoordinates.y);
-            currentBallPosition.x = worldCoordinates.x;
-            currentBallPosition.y = worldCoordinates.y;
-        } else {
-            calculateBallMovement();
-            ball.setPosition(currentBallPosition.x, currentBallPosition.y);
-        }
+//        if (GeneralKeyListener.dragged && !GeneralKeyListener.rightButton) {
+        ball.setPosition(worldCoordinates.x, worldCoordinates.y);
+        currentBallPosition.x = worldCoordinates.x;
+        currentBallPosition.y = worldCoordinates.y;
+//        } else {
+//            calculateBallMovement();
+//            ball.setPosition(currentBallPosition.x, currentBallPosition.y);
+//        }
     }
 
     private static void calculateBallMovement() {
@@ -200,5 +195,6 @@ public class EntiteManager {
 
     private EntiteManager() {
     }
+    
 
 }

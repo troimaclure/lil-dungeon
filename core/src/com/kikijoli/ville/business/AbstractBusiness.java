@@ -20,7 +20,7 @@ public abstract class AbstractBusiness extends AbstractAction {
 
     @Override
     public void act() {
-        actions.values().stream().forEach((action) -> {
+        ((HashMap<String, AbstractAction>) actions.clone()).values().stream().forEach((action) -> {
             action.act();
         });
         if (current == null) {

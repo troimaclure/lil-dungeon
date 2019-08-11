@@ -126,7 +126,7 @@ public class GridManager {
     public static boolean isClearZone(Rectangle entite) {
         for (Tile[] grille1 : grid) {
             for (Tile g : grille1) {
-                if (!Constantes.NPC_MOVEMENT_FILTER.contains(g.state) && Intersector.overlaps(g.getBoundingRectangle(), entite)) {
+                if (!Constantes.NPC_MOVEMENT_OK.contains(g.state) && Intersector.overlaps(g.getBoundingRectangle(), entite)) {
                     return false;
                 }
             }

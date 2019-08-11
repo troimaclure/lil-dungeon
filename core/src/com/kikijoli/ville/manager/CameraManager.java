@@ -5,9 +5,9 @@
  */
 package com.kikijoli.ville.manager;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import static com.kikijoli.ville.maps.Tmap.worldCoordinates;
-import com.kikijoli.ville.util.Constantes;
 
 /**
  *
@@ -15,7 +15,7 @@ import com.kikijoli.ville.util.Constantes;
  */
 public class CameraManager {
 
-    public static OrthographicCamera camera = new OrthographicCamera(Constantes.SCREENWIDTH, Constantes.SCREENHEIGHT);
+    public static OrthographicCamera camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
     public static void initialize(int x, int y) {
         camera.position.x = x;
@@ -31,4 +31,5 @@ public class CameraManager {
             camera.position.set(EntiteManager.currentBallPosition.x, EntiteManager.currentBallPosition.y, 0);
         camera.update();
     }
+
 }

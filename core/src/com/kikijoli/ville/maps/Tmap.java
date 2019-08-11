@@ -26,6 +26,8 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
+import com.kikijoli.ville.automation.GoTo;
+import com.kikijoli.ville.drawable.entite.Entite;
 import com.kikijoli.ville.listeners.GeneralKeyListener;
 import com.kikijoli.ville.manager.CameraManager;
 import static com.kikijoli.ville.manager.CameraManager.camera;
@@ -37,6 +39,7 @@ import com.kikijoli.ville.manager.WaterManager;
 import com.kikijoli.ville.manager.ShaderManager;
 import com.kikijoli.ville.manager.StageManager;
 import com.kikijoli.ville.pathfind.GridManager;
+import com.kikijoli.ville.pathfind.Tile;
 import com.kikijoli.ville.util.Constantes;
 import java.util.ArrayList;
 
@@ -107,6 +110,7 @@ public class Tmap implements Screen {
 
     @Override
     public void show() {
+        Gdx.input.setCursorCatched(true);
         fps = new FPSLogger();
         shapeRenderer = new ShapeRenderer();
         shapeRenderer.setAutoShapeType(true);
@@ -148,8 +152,23 @@ public class Tmap implements Screen {
                 camera.viewportWidth * camera.zoom,
                 camera.viewportHeight * camera.zoom);
         getRay().update();
-        debugRenderer.render(world, camera.combined);
+        debug();
+    }
 
+    private void debug() {
+        debugRenderer.render(world, camera.combined);
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+        shapeRenderer.setColor(Color.RED);
+        if (GoTo.path != null) {
+            GoTo.path.forEach((t) -> {
+                shapeRenderer.rect(t.getX(), t.getY(), t.getWidth(), t.getHeight());
+            });
+        }
+        EntiteManager.entites.forEach((entite) -> {
+            shapeRenderer.circle(entite.anchor.x, entite.anchor.y, entite.anchor.radius);
+        });
+        shapeRenderer.flush();
+        shapeRenderer.end();
     }
 
     private void road() {

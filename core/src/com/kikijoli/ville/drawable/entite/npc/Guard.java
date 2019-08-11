@@ -9,6 +9,7 @@ import box2dLight.PointLight;
 import com.badlogic.gdx.graphics.Color;
 import com.kikijoli.ville.business.GuardBuisiness;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Circle;
 import com.kikijoli.ville.drawable.entite.Entite;
 import com.kikijoli.ville.maps.Tmap;
 import com.kikijoli.ville.util.Constantes;
