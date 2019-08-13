@@ -2,6 +2,7 @@ package com.kikijoli.ville.manager;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
+import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -50,6 +51,7 @@ public class EntiteManager {
         });
         spriteBatch.setColor(c);
         moveBall();
+        removeDead();
     }
 
     private static void renderEntity(Entite entite) {
@@ -76,11 +78,9 @@ public class EntiteManager {
     }
 
     private static void playerMove(boolean move) {
-        if (move) {
-            if (!(player.shader instanceof WalkShader)) {
-                player.shader = new WalkShader(player);
-            }
-        } else {
+        if (player.shader == null && move) {
+            player.shader = new WalkShader(player);
+        } else if (player.shader instanceof WalkShader && !move) {
             player.shader = null;
         }
     }
@@ -193,8 +193,31 @@ public class EntiteManager {
         player.shader = null;
     }
 
+    public static void attack(Entite entite) {
+        Circle c = entite.anchor;
+        entites.stream().filter((target) -> (target != entite && Intersector.overlaps(c, target.getBoundingRectangle()))).forEachOrdered((target) -> {
+            HitManager.hit(entite, target);
+        });
+
+    }
+
+    private static void removeDead() {
+        ArrayList<Entite> deads = new ArrayList<>();
+        entites.stream().filter((entite) -> (entite.pv <= 0)).forEachOrdered((entite) -> {
+            deads.add(entite);
+        });
+        entites.removeAll(deads);
+    }
+//
+//    public static void select() {
+//        for (Entite entite : entites) {
+//            if(entite != player){
+//                entiteSelected = entite; 
+//            }
+//        }
+//    }
+
     private EntiteManager() {
     }
-    
 
 }

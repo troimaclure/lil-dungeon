@@ -28,4 +28,9 @@ public class Player extends Entite {
         super.draw(batch);
     }
 
+    @Override
+    public float getAnchorSize() {
+        return Constantes.TILESIZE / 2 + getWidth();
+    }
+
 }

@@ -6,6 +6,7 @@
 package com.kikijoli.ville.business;
 
 import com.kikijoli.ville.abstracts.AbstractAction;
+import com.kikijoli.ville.automation.Attack;
 import com.kikijoli.ville.automation.Dash;
 import com.kikijoli.ville.automation.None;
 import com.kikijoli.ville.manager.EntiteManager;
@@ -25,13 +26,26 @@ public class PlayerBuisiness extends AbstractBusiness {
     }
 
     public void dash() {
-        if (!actions.containsKey("Dash"))
-            actions.put("Dash", new Dash(EntiteManager.player) {
-                @Override
-                public void onFinish() {
-                    actions.remove("Dash");
-                }
-            });
+        putAction("Dash", new Dash(EntiteManager.player) {
+            @Override
+            public void onFinish() {
+                actions.remove("Dash");
+            }
+        });
+    }
+
+    public void attack() {
+        putAction("Attack", new Attack(EntiteManager.player) {
+            @Override
+            public void onFinish() {
+                actions.remove("Attack");
+            }
+        });
+    }
+
+    private void putAction(String name, AbstractAction a) {
+        if (!actions.containsKey(name))
+            actions.put(name, a);
     }
 
 }

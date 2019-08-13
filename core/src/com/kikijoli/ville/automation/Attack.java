@@ -7,31 +7,26 @@ package com.kikijoli.ville.automation;
 
 import com.kikijoli.ville.abstracts.AbstractAction;
 import com.kikijoli.ville.drawable.entite.Entite;
+import com.kikijoli.ville.manager.EntiteManager;
+import com.kikijoli.ville.shader.ClickShader;
 
 /**
  *
  * @author Arthur
  */
-public abstract class Hit extends AbstractAction {
+public abstract class Attack extends AbstractAction {
 
-    Entite entite;
-    public int boost = 10;
     public int count = 0;
     public int delay = 10;
-    public int oldSpeed = 0;
 
-    public Hit(Entite entite) {
-        this.entite = entite;
-        oldSpeed = entite.speed;
-        this.entite.speed += boost;
+    public Attack(Entite entite) {
+        entite.shader = new ClickShader(entite, null);
+        EntiteManager.attack(entite);
     }
 
     @Override
     public void act() {
-        if (count++ < delay) return;
-        if (entite.speed > oldSpeed) {
-            entite.speed--;
-        } else onFinish();
+        if (count++ > delay) onFinish();
     }
 
     public abstract void onFinish();

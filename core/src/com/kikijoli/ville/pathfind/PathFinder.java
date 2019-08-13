@@ -26,6 +26,7 @@ public class PathFinder {
      *
      * @param source
      * @param target
+     * @param filters
      * @return
      */
     public ArrayList<Tile> getPathFor(Tile source, Tile target, String filters) {
@@ -77,7 +78,6 @@ public class PathFinder {
 
             indexes.clear();
             incremental++;
-
             constructPath(fin, searchs);
 
         }
@@ -127,16 +127,13 @@ public class PathFinder {
                 childs.add(searchs[current.c.col][current.c.row + 1]);
             }
         }
-
         if (current.c.row - 1 >= 0) {
             if (searchs[current.c.col][current.c.row - 1].index == current.index - 1 && !searchs[current.c.col][current.c.row - 1].close) {
                 childs.add(searchs[current.c.col][current.c.row - 1]);
             }
         }
     }
-//    private Index LookFor(int index, Search current) {
-//
-//    }
+
 
     /**
      *

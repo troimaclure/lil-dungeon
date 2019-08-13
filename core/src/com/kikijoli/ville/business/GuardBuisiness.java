@@ -44,6 +44,7 @@ public class GuardBuisiness extends AbstractBusiness {
                 }
                 if (count++ >= delay) {
                     guard.shader = new ClickShader(guard, null);
+                    EntiteManager.attack(guard);
                     count = 0;
                 }
             } else {

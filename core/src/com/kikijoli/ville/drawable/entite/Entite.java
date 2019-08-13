@@ -28,6 +28,8 @@ public class Entite extends Sprite implements IDrawable {
     public boolean visible = true;
     public AbstractBusiness buisiness;
     public int speed = 2;
+    public int strenght = 2;
+    public int pv = 5;
 
     public Entite(String path, int srcX, int srcY, int srcWidth, int srcHeight) {
         super(TextureUtil.getTexture(path), srcX, srcY, srcWidth, srcHeight);
@@ -51,7 +53,7 @@ public class Entite extends Sprite implements IDrawable {
         this.anchor = new Circle(center, getAnchorSize());
     }
 
-    private float getAnchorSize() {
+    public float getAnchorSize() {
         return Constantes.TILESIZE / 2;
     }
 

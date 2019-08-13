@@ -51,6 +51,9 @@ public class GeneralKeyListener extends InputAdapter {
             case Keys.F:
                 EntiteManager.togglePlayerBall();
                 break;
+            case Keys.TAB:
+//                EntiteManager.select();
+                break;
 
         }
 
@@ -96,6 +99,9 @@ public class GeneralKeyListener extends InputAdapter {
         rightButton = button == Input.Buttons.RIGHT;
         if (rightButton) {
             ((PlayerBuisiness) EntiteManager.player.buisiness).dash();
+        }
+        else {
+            ((PlayerBuisiness) EntiteManager.player.buisiness).attack();
         }
         return super.touchDown(screenX, screenY, pointer, button); //To change body of generated methods, choose Tools | Templates.
     }
