@@ -52,7 +52,7 @@ public class GeneralKeyListener extends InputAdapter {
                 EntiteManager.togglePlayerBall();
                 break;
             case Keys.TAB:
-//                EntiteManager.select();
+                EntiteManager.select();
                 break;
 
         }

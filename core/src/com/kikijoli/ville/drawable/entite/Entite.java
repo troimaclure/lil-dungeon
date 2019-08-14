@@ -12,6 +12,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.kikijoli.ville.business.AbstractBusiness;
 import com.kikijoli.ville.interfaces.IDrawable;
+import com.kikijoli.ville.manager.EntiteManager;
 import com.kikijoli.ville.shader.AbstractShader;
 import com.kikijoli.ville.util.Constantes;
 import com.kikijoli.ville.util.TextureUtil;
@@ -42,8 +43,7 @@ public class Entite extends Sprite implements IDrawable {
     public void draw(SpriteBatch batch) {
         calculateAnchors();
         Rectangle r = this.getBoundingRectangle();
-        batch.draw(this.getTexture(), r.x, r.y, r.width, r.height);
-
+        batch.draw(getTexture(), r.x, r.y, getTexture().getWidth() / 2, getTexture().getHeight() / 2, r.width, r.height, 1, 1, getRotation(), (int) 0, (int) 0, (int) getTexture().getWidth(), (int) getTexture().getHeight(), false, false);
     }
 
     private void calculateAnchors() {

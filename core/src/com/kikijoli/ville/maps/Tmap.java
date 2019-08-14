@@ -13,6 +13,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Intersector;
@@ -27,10 +28,10 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
 import com.kikijoli.ville.automation.GoTo;
-import com.kikijoli.ville.drawable.entite.Entite;
 import com.kikijoli.ville.listeners.GeneralKeyListener;
 import com.kikijoli.ville.manager.CameraManager;
 import static com.kikijoli.ville.manager.CameraManager.camera;
+import com.kikijoli.ville.manager.DrawManager;
 import com.kikijoli.ville.manager.EntiteManager;
 import com.kikijoli.ville.manager.LockManager;
 import com.kikijoli.ville.manager.MessageManager;
@@ -39,7 +40,6 @@ import com.kikijoli.ville.manager.WaterManager;
 import com.kikijoli.ville.manager.ShaderManager;
 import com.kikijoli.ville.manager.StageManager;
 import com.kikijoli.ville.pathfind.GridManager;
-import com.kikijoli.ville.pathfind.Tile;
 import com.kikijoli.ville.util.Constantes;
 import java.util.ArrayList;
 
@@ -110,7 +110,7 @@ public class Tmap implements Screen {
 
     @Override
     public void show() {
-        Gdx.input.setCursorCatched(true);
+//        Gdx.input.setCursorCatched(true);
         fps = new FPSLogger();
         shapeRenderer = new ShapeRenderer();
         shapeRenderer.setAutoShapeType(true);
@@ -143,7 +143,9 @@ public class Tmap implements Screen {
         LockManager.tour();
         EntiteManager.tour();
         ParticleManager.tour(delta);
-
+        DrawManager.tour();
+        drawSelected();
+        
         spriteBatch.flush();
         spriteBatch.end();
 
@@ -153,6 +155,13 @@ public class Tmap implements Screen {
                 camera.viewportHeight * camera.zoom);
         getRay().update();
         debug();
+    }
+
+    private void drawSelected() {
+        spriteBatch.setColor(Color.RED);
+        if (EntiteManager.entiteSelected != null) {
+            EntiteManager.entiteSelected.draw(spriteBatch);
+        }
     }
 
     private void debug() {
@@ -215,5 +224,7 @@ public class Tmap implements Screen {
     private void test() {
 
     }
+
+ 
 
 }

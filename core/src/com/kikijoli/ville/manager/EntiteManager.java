@@ -32,6 +32,7 @@ public class EntiteManager {
     private static final ArrayList<Key> keys = new ArrayList<>();
     public static boolean playedBall = false;
     public static Vector2 currentBallPosition = new Vector2();
+    public static Entite entiteSelected;
 
     public static ArrayList<Entite> getEntites() {
         return (ArrayList<Entite>) entites.clone();
@@ -208,14 +209,12 @@ public class EntiteManager {
         });
         entites.removeAll(deads);
     }
-//
-//    public static void select() {
-//        for (Entite entite : entites) {
-//            if(entite != player){
-//                entiteSelected = entite; 
-//            }
-//        }
-//    }
+
+    public static void select() {
+        entites.stream().filter((entite) -> (entite != player)).forEachOrdered((entite) -> {
+            entiteSelected = entite;
+        });
+    }
 
     private EntiteManager() {
     }
