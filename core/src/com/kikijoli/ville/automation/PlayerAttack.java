@@ -5,6 +5,8 @@
  */
 package com.kikijoli.ville.automation;
 
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.kikijoli.ville.abstracts.AbstractAction;
 import com.kikijoli.ville.drawable.entite.Entite;
 import com.kikijoli.ville.drawable.entite.simple.Bow;
@@ -24,16 +26,15 @@ public abstract class PlayerAttack extends AbstractAction {
 
     public PlayerAttack(Entite entite) {
         this.entite = entite;
-        if (EntiteManager.entiteSelected == null) return;
-
     }
 
     @Override
     public void act() {
-
+        if (EntiteManager.entiteSelected == null) return;
         addBow();
-        bow.setX(entite.getX());
-        bow.setY(entite.getY());
+
+        bow.setX((float) (entite.getX() - (entite.getWidth() * 1.5)));
+        bow.setY(entite.getY() - entite.getHeight() / 2);
         double degrees = Math.atan2(
                 entite.getY() - EntiteManager.entiteSelected.getY(),
                 entite.getX() - EntiteManager.entiteSelected.getX()
@@ -45,8 +46,8 @@ public abstract class PlayerAttack extends AbstractAction {
     private void addBow() {
         if (bow != null) return;
         bow = new Bow(
-                (int) (entite.getX() - entite.getWidth() * 1.5),
-                (int) (entite.getY() - entite.getHeight() / 2)
+                (int) (entite.getX()),
+                (int) (entite.getY())
         );
 
         DrawManager.sprites.add(bow);

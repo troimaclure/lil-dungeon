@@ -7,12 +7,12 @@ package com.kikijoli.ville.drawable.entite;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.kikijoli.ville.business.AbstractBusiness;
 import com.kikijoli.ville.interfaces.IDrawable;
-import com.kikijoli.ville.manager.EntiteManager;
 import com.kikijoli.ville.shader.AbstractShader;
 import com.kikijoli.ville.util.Constantes;
 import com.kikijoli.ville.util.TextureUtil;
@@ -31,19 +31,37 @@ public class Entite extends Sprite implements IDrawable {
     public int speed = 2;
     public int strenght = 2;
     public int pv = 5;
+    Vector2 centerOrigin;
+    int width;
+    int height;
 
     public Entite(String path, int srcX, int srcY, int srcWidth, int srcHeight) {
         super(TextureUtil.getTexture(path), srcX, srcY, srcWidth, srcHeight);
         this.setX(srcX);
         this.setY(srcY);
         calculateAnchors();
+        Rectangle r = new Rectangle(0, 0, srcWidth, srcHeight);
+        centerOrigin = new Vector2();
+        r.getCenter(centerOrigin);
+        width = srcWidth;
+        height = srcHeight;
     }
 
     @Override
     public void draw(SpriteBatch batch) {
         calculateAnchors();
-        Rectangle r = this.getBoundingRectangle();
-        batch.draw(getTexture(), r.x, r.y, getTexture().getWidth() / 2, getTexture().getHeight() / 2, r.width, r.height, 1, 1, getRotation(), (int) 0, (int) 0, (int) getTexture().getWidth(), (int) getTexture().getHeight(), false, false);
+//        Rectangle r = this.getBoundingRectangle();
+        batch.draw(getTexture(),
+                getX(), getY(),
+                centerOrigin.x,
+                centerOrigin.y,
+                (int) width, (int) height,
+                1, 1,
+                getRotation(),
+                (int) 0,
+                (int) 0,
+                (int) getTexture().getWidth(), (int) getTexture().getHeight(),
+                false, false);
     }
 
     private void calculateAnchors() {

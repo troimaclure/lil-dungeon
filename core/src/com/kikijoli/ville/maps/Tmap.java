@@ -13,7 +13,6 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Intersector;
@@ -145,7 +144,7 @@ public class Tmap implements Screen {
         ParticleManager.tour(delta);
         DrawManager.tour();
         drawSelected();
-        
+
         spriteBatch.flush();
         spriteBatch.end();
 
@@ -175,6 +174,11 @@ public class Tmap implements Screen {
         }
         EntiteManager.entites.forEach((entite) -> {
             shapeRenderer.circle(entite.anchor.x, entite.anchor.y, entite.anchor.radius);
+        });
+        DrawManager.sprites.forEach((entite) -> {
+            Rectangle r = entite.getBoundingRectangle();
+            shapeRenderer.rect(r.getX(), r.getY(), r.getWidth(), r.getHeight());
+
         });
         shapeRenderer.flush();
         shapeRenderer.end();
@@ -224,7 +228,5 @@ public class Tmap implements Screen {
     private void test() {
 
     }
-
- 
 
 }
