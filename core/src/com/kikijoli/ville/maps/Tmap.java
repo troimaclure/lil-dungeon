@@ -28,6 +28,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
 import com.kikijoli.ville.automation.GoTo;
 import com.kikijoli.ville.listeners.GeneralKeyListener;
+import com.kikijoli.ville.manager.BulletManager;
 import com.kikijoli.ville.manager.CameraManager;
 import static com.kikijoli.ville.manager.CameraManager.camera;
 import com.kikijoli.ville.manager.DrawManager;
@@ -143,6 +144,7 @@ public class Tmap implements Screen {
         EntiteManager.tour();
         ParticleManager.tour(delta);
         DrawManager.tour();
+        BulletManager.tour();
         drawSelected();
 
         spriteBatch.flush();

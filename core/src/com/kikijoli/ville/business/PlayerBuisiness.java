@@ -6,7 +6,7 @@
 package com.kikijoli.ville.business;
 
 import com.kikijoli.ville.abstracts.AbstractAction;
-import com.kikijoli.ville.automation.PlayerAttack;
+import com.kikijoli.ville.automation.PlayerAttackBow;
 import com.kikijoli.ville.automation.Dash;
 import com.kikijoli.ville.automation.None;
 import com.kikijoli.ville.manager.EntiteManager;
@@ -35,7 +35,7 @@ public class PlayerBuisiness extends AbstractBusiness {
     }
 
     public void attack() {
-        putAction("Attack", new PlayerAttack(EntiteManager.player) {
+        putAction("Attack", new PlayerAttackBow(EntiteManager.player) {
             @Override
             public void onFinish() {
                 actions.remove("Attack");
