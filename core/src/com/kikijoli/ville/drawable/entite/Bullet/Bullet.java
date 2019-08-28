@@ -9,13 +9,15 @@ import com.kikijoli.ville.drawable.entite.Entite;
  */
 public abstract class Bullet extends Entite {
 
-    public Vector2 destination;
-    public int scope;
-    public int distance = 0;
+	public Vector2 destination;
+	public int scope;
+	public int distance = 0;
+	public Entite author;
 
-    public Bullet(String path, int srcX, int srcY, int srcWidth, int srcHeight, Vector2 destination) {
-        super(path, srcX, srcY, srcWidth, srcHeight);
-        this.destination = destination;
-    }
+	public Bullet(String path, int srcX, int srcY, int srcWidth, int srcHeight, Vector2 destination, Entite author) {
+		super(path, srcX, srcY, srcWidth, srcHeight);
+		this.destination = destination;
+		this.author = author;
+	}
 
 }

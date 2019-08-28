@@ -49,186 +49,186 @@ import java.util.ArrayList;
  */
 public class Tmap implements Screen {
 
-    public static World world;
-    public static RayHandler ray;
-    public static ArrayList<Light> lights = new ArrayList<>();
-    public static ShapeRenderer shapeRenderer;
-    public static SpriteBatch spriteBatch;
-    public static SpriteBatch spriteBatchDefaultColor;
-    public static Vector3 worldCoordinates = new Vector3();
-    public static Stage stage;
-    public static FPSLogger fps;
-    Box2DDebugRenderer debugRenderer = new Box2DDebugRenderer();
+	public static World world;
+	public static RayHandler ray;
+	public static ArrayList<Light> lights = new ArrayList<>();
+	public static ShapeRenderer shapeRenderer;
+	public static SpriteBatch spriteBatch;
+	public static SpriteBatch spriteBatchDefaultColor;
+	public static Vector3 worldCoordinates = new Vector3();
+	public static Stage stage;
+	public static FPSLogger fps;
+	Box2DDebugRenderer debugRenderer = new Box2DDebugRenderer();
 
-    public static RayHandler getRay() {
-        if (ray == null) {
-            ray = new RayHandler(getWorld());
-        }
-        return ray;
-    }
+	public static RayHandler getRay() {
+		if (ray == null) {
+			ray = new RayHandler(getWorld());
+		}
+		return ray;
+	}
 
-    public static World getWorld() {
-        if (world == null) {
-            world = new World(new Vector2(0, 0), true);
-        }
-        return world;
-    }
+	public static World getWorld() {
+		if (world == null) {
+			world = new World(new Vector2(0, 0), true);
+		}
+		return world;
+	}
 
-    public static void removeBoxs(Rectangle rectangle) {
-        Array<Body> bodies = new Array<>();
-        getWorld().getBodies(bodies);
-        Body destroy = null;
-        for (Body body : bodies) {
-            if (Intersector.overlaps((Rectangle) body.getUserData(), rectangle)) {
-                destroy = body;
-                break;
+	public static void removeBoxs(Rectangle rectangle) {
+		Array<Body> bodies = new Array<>();
+		getWorld().getBodies(bodies);
+		Body destroy = null;
+		for (Body body : bodies) {
+			if (Intersector.overlaps((Rectangle) body.getUserData(), rectangle)) {
+				destroy = body;
+				break;
 
-            }
-        }
-        getWorld().destroyBody(destroy);
-        destroy.setUserData(null);
-        destroy = null;
-    }
+			}
+		}
+		getWorld().destroyBody(destroy);
+		destroy.setUserData(null);
+		destroy = null;
+	}
 
-    public static void addBox(int x, int y) {
-        BodyDef groundBodyDef = new BodyDef();
-        groundBodyDef.position.set(new Vector2(x + 32, y + 32));
+	public static void addBox(int x, int y) {
+		BodyDef groundBodyDef = new BodyDef();
+		groundBodyDef.position.set(new Vector2(x + 32, y + 32));
 
-        Body groundBody = getWorld().createBody(groundBodyDef);
+		Body groundBody = getWorld().createBody(groundBodyDef);
 
-        PolygonShape groundBox = new PolygonShape();
-        groundBox.setAsBox(32, 32);
-        groundBody.createFixture(groundBox, 0.0f);
-        groundBox.dispose();
-        groundBody.setUserData(new Rectangle(x, y, Constantes.TILESIZE, Constantes.TILESIZE));
-    }
+		PolygonShape groundBox = new PolygonShape();
+		groundBox.setAsBox(32, 32);
+		groundBody.createFixture(groundBox, 0.0f);
+		groundBox.dispose();
+		groundBody.setUserData(new Rectangle(x, y, Constantes.TILESIZE, Constantes.TILESIZE));
+	}
 
-    public Tmap() {
-        StageManager.load(1);
+	public Tmap() {
+		StageManager.load(1);
 //        GridManager.initialize(100, 100, Constantes.TILESIZE);
-    }
+	}
 
-    @Override
-    public void show() {
+	@Override
+	public void show() {
 //        Gdx.input.setCursorCatched(true);
-        fps = new FPSLogger();
-        shapeRenderer = new ShapeRenderer();
-        shapeRenderer.setAutoShapeType(true);
-        spriteBatch = new SpriteBatch();
-        spriteBatchDefaultColor = new SpriteBatch();
-        Gdx.input.setInputProcessor(new InputMultiplexer(new GeneralKeyListener()));
-        CameraManager.initialize(Constantes.TILESIZE * 15, Constantes.TILESIZE * 10);
-        EntiteManager.initialize();
-        test();
-    }
+		fps = new FPSLogger();
+		shapeRenderer = new ShapeRenderer();
+		shapeRenderer.setAutoShapeType(true);
+		spriteBatch = new SpriteBatch();
+		spriteBatchDefaultColor = new SpriteBatch();
+		Gdx.input.setInputProcessor(new InputMultiplexer(new GeneralKeyListener()));
+		CameraManager.initialize(Constantes.TILESIZE * 15, Constantes.TILESIZE * 10);
+		EntiteManager.initialize();
+		test();
+	}
 
-    @Override
-    public void render(float delta) {
-        fps.log();
-        ShaderManager.step();
-        Gdx.gl.glClearColor(Color.BLACK.r, Color.BLACK.g, Color.BLACK.b, Color.BLACK.a);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        worldCoordinates = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
-        CameraManager.tour();
+	@Override
+	public void render(float delta) {
+		fps.log();
+		ShaderManager.step();
+		Gdx.gl.glClearColor(Color.BLACK.r, Color.BLACK.g, Color.BLACK.b, Color.BLACK.a);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		worldCoordinates = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
+		CameraManager.tour();
 
-        spriteBatch.setProjectionMatrix(camera.combined);
-        spriteBatchDefaultColor.setProjectionMatrix(camera.combined);
-        shapeRenderer.setProjectionMatrix(camera.combined);
-        background();
-        road();
-        water();
+		spriteBatch.setProjectionMatrix(camera.combined);
+		spriteBatchDefaultColor.setProjectionMatrix(camera.combined);
+		shapeRenderer.setProjectionMatrix(camera.combined);
+		background();
+		road();
+		water();
 
-        spriteBatch.begin();
-        MessageManager.drawIndicators();
-        LockManager.tour();
-        EntiteManager.tour();
-        ParticleManager.tour(delta);
-        DrawManager.tour();
-        BulletManager.tour();
-        drawSelected();
+		spriteBatch.begin();
+		MessageManager.drawIndicators();
+		LockManager.tour();
+		EntiteManager.tour();
+		ParticleManager.tour(delta);
+		DrawManager.tour();
+		BulletManager.tour();
+		drawSelected();
 
-        spriteBatch.flush();
-        spriteBatch.end();
+		spriteBatch.flush();
+		spriteBatch.end();
 
-        getRay().setCombinedMatrix(camera.combined,
-                camera.position.x, camera.position.y,
-                camera.viewportWidth * camera.zoom,
-                camera.viewportHeight * camera.zoom);
-        getRay().update();
-        debug();
-    }
+		getRay().setCombinedMatrix(camera.combined,
+				camera.position.x, camera.position.y,
+				camera.viewportWidth * camera.zoom,
+				camera.viewportHeight * camera.zoom);
+		getRay().update();
+		debug();
+	}
 
-    private void drawSelected() {
-        spriteBatch.setColor(Color.RED);
-        if (EntiteManager.entiteSelected != null) {
-            EntiteManager.entiteSelected.draw(spriteBatch);
-        }
-    }
+	private void drawSelected() {
+		spriteBatch.setColor(Color.RED);
+		if (EntiteManager.entiteSelected != null) {
+			EntiteManager.entiteSelected.draw(spriteBatch);
+		}
+	}
 
-    private void debug() {
-        debugRenderer.render(world, camera.combined);
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-        shapeRenderer.setColor(Color.RED);
-        if (GoTo.path != null) {
-            GoTo.path.forEach((t) -> {
-                shapeRenderer.rect(t.getX(), t.getY(), t.getWidth(), t.getHeight());
-            });
-        }
-        EntiteManager.entites.forEach((entite) -> {
-            shapeRenderer.circle(entite.anchor.x, entite.anchor.y, entite.anchor.radius);
-        });
-        DrawManager.sprites.forEach((entite) -> {
-            Rectangle r = entite.getBoundingRectangle();
-            shapeRenderer.rect(r.getX(), r.getY(), r.getWidth(), r.getHeight());
+	private void debug() {
+		debugRenderer.render(world, camera.combined);
+		shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+		shapeRenderer.setColor(Color.RED);
+		if (GoTo.path != null) {
+			GoTo.path.forEach((t) -> {
+				shapeRenderer.rect(t.getX(), t.getY(), t.getWidth(), t.getHeight());
+			});
+		}
+		EntiteManager.entites.forEach((entite) -> {
+			shapeRenderer.circle(entite.anchor.x, entite.anchor.y, entite.anchor.radius);
+		});
+		DrawManager.sprites.forEach((entite) -> {
+			Rectangle r = entite.getBoundingRectangle();
+			shapeRenderer.rect(r.getX(), r.getY(), r.getWidth(), r.getHeight());
 
-        });
-        shapeRenderer.flush();
-        shapeRenderer.end();
-    }
+		});
+		shapeRenderer.flush();
+		shapeRenderer.end();
+	}
 
-    private void road() {
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        WaterManager.tour();
-        shapeRenderer.flush();
-        shapeRenderer.end();
-    }
+	private void road() {
+		shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+		WaterManager.tour();
+		shapeRenderer.flush();
+		shapeRenderer.end();
+	}
 
-    private void water() {
+	private void water() {
 
-        WaterManager.drawWater();
+		WaterManager.drawWater();
 
-    }
+	}
 
-    private void background() {
+	private void background() {
 
-        spriteBatch.begin();
-        GridManager.tour();
-        spriteBatch.flush();
-        spriteBatch.end();
-    }
+		spriteBatch.begin();
+		GridManager.tour();
+		spriteBatch.flush();
+		spriteBatch.end();
+	}
 
-    @Override
-    public void resize(int width, int height) {
-    }
+	@Override
+	public void resize(int width, int height) {
+	}
 
-    @Override
-    public void pause() {
-    }
+	@Override
+	public void pause() {
+	}
 
-    @Override
-    public void resume() {
-    }
+	@Override
+	public void resume() {
+	}
 
-    @Override
-    public void hide() {
-    }
+	@Override
+	public void hide() {
+	}
 
-    @Override
-    public void dispose() {
-    }
+	@Override
+	public void dispose() {
+	}
 
-    private void test() {
+	private void test() {
 
-    }
+	}
 
 }

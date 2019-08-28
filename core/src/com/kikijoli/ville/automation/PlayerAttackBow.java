@@ -13,6 +13,7 @@ import com.kikijoli.ville.drawable.entite.simple.Bow;
 import com.kikijoli.ville.manager.BulletManager;
 import com.kikijoli.ville.manager.DrawManager;
 import com.kikijoli.ville.manager.EntiteManager;
+import com.kikijoli.ville.util.MathUtils;
 
 /**
  *
@@ -20,62 +21,53 @@ import com.kikijoli.ville.manager.EntiteManager;
  */
 public abstract class PlayerAttackBow extends AbstractAction {
 
-    public int count = 0;
-    public int countArrow = 0;
-    public int delayArrow = 50;
-    public int delay = 200;
-    Bow bow;
-    Entite entite;
+	public int count = 0;
+	public int countArrow = 50;
+	public int delayArrow = 50;
+	public int delay = 30;
+	Bow bow;
+	Entite entite;
 
-    public PlayerAttackBow(Entite entite) {
-        this.entite = entite;
-    }
+	public PlayerAttackBow(Entite entite) {
+		this.entite = entite;
+	}
 
-    @Override
-    public void act() {
-        if (EntiteManager.entiteSelected == null) return;
-        addBow();
+	@Override
+	public void act() {
+		if (EntiteManager.entiteSelected == null) {
+			end();
+			return;
+		}
+		addBowIfNotExist();
+		bow.setX((float) (entite.getX() - (entite.getWidth() * 1.5)));
+		bow.setY(entite.getY() - entite.getHeight() / 2);
+		bow.setRotation(90 + MathUtils.getRotation(entite.getX(), entite.getY(), EntiteManager.entiteSelected.getX(), EntiteManager.entiteSelected.getY()));
+		if (countArrow++ >= delayArrow) shoot();
+		if (count++ > delay) end();
+	}
 
-        bow.setX((float) (entite.getX() - (entite.getWidth() * 1.5)));
-        bow.setY(entite.getY() - entite.getHeight() / 2);
-        double degrees = Math.atan2(
-                entite.getY() - EntiteManager.entiteSelected.getY(),
-                entite.getX() - EntiteManager.entiteSelected.getX()
-        ) * 180.0d / Math.PI;
-        bow.setRotation(90 + (float) degrees);
-        if (countArrow++ >= delayArrow) shoot();
-        if (count++ > delay) end();
-    }
+	private void addBowIfNotExist() {
+		if (bow != null) return;
+		bow = new Bow((int) (entite.getX()), (int) (entite.getY()));
+		DrawManager.sprites.add(bow);
+		EntiteManager.attack(entite);
+	}
 
-    private void addBow() {
-        if (bow != null) return;
-        bow = new Bow(
-                (int) (entite.getX()),
-                (int) (entite.getY())
-        );
+	public abstract void onFinish();
 
-        DrawManager.sprites.add(bow);
-        EntiteManager.attack(entite);
-    }
+	private void end() {
+		if (bow != null)
+			DrawManager.sprites.remove(bow);
+		onFinish();
+	}
 
-    public abstract void onFinish();
-
-    private void end() {
-        DrawManager.sprites.remove(bow);
-        onFinish();
-    }
-
-    private void shoot() {
-        countArrow = 0;
-        double degrees = Math.atan2(
-                entite.getY() - EntiteManager.entiteSelected.getY(),
-                entite.getX() - EntiteManager.entiteSelected.getX()
-        ) * 180.0d / Math.PI;
-        bow.setRotation(90 + (float) degrees);
-        Arrow arrow = new Arrow((int) bow.getX(), (int) bow.getY(), new Vector2(EntiteManager.entiteSelected.getX(), EntiteManager.entiteSelected.getY()));
-        arrow.setRotation(90 + (float) degrees);
-        BulletManager.bullets.add(arrow);
-
-    }
+	private void shoot() {
+		countArrow = 0;
+		Vector2 center = new Vector2();
+		bow.getBoundingRectangle().getCenter(center);
+		Arrow arrow = new Arrow((int) center.x, (int) center.y, new Vector2(EntiteManager.entiteSelected.getX(), EntiteManager.entiteSelected.getY()), entite);
+		arrow.setRotation(90 + MathUtils.getRotation(entite.getX(), entite.getY(), EntiteManager.entiteSelected.getX(), EntiteManager.entiteSelected.getY()));
+		BulletManager.bullets.add(arrow);
+	}
 
 }
