@@ -17,35 +17,43 @@ import com.kikijoli.ville.manager.EntiteManager;
  */
 public class PlayerBuisiness extends AbstractBusiness {
 
-    public PlayerBuisiness() {
-    }
+	private static final String DASH = "Dash";
+	private static final String ATTACK = "Attack";
 
-    @Override
-    public AbstractAction getDefault() {
-        return new None();
-    }
+	public PlayerBuisiness() {
+	}
 
-    public void dash() {
-        putAction("Dash", new Dash(EntiteManager.player) {
-            @Override
-            public void onFinish() {
-                actions.remove("Dash");
-            }
-        });
-    }
+	@Override
+	public AbstractAction getDefault() {
+		return new None();
+	}
 
-    public void attack() {
-        putAction("Attack", new PlayerAttackBow(EntiteManager.player) {
-            @Override
-            public void onFinish() {
-                actions.remove("Attack");
-            }
-        });
-    }
+	public void dash() {
+		putAction(DASH, new Dash(EntiteManager.player) {
 
-    private void putAction(String name, AbstractAction a) {
-        if (!actions.containsKey(name))
-            actions.put(name, a);
-    }
+			@Override
+			public void onFinish() {
+				System.out.println("remove dash");
+				actions.remove(DASH);
+			}
+		});
+	}
+
+	public void attack() {
+		putAction(ATTACK, new PlayerAttackBow(EntiteManager.player) {
+			@Override
+			public void onFinish() {
+				actions.remove(ATTACK);
+			}
+		});
+	}
+
+	private void putAction(String name, AbstractAction a) {
+		if (!actions.containsKey(name)) {
+			System.out.println("push " + name);
+			actions.put(name, a);
+		}
+
+	}
 
 }

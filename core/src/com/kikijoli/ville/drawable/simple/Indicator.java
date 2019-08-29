@@ -7,15 +7,15 @@ package com.kikijoli.ville.drawable.simple;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.kikijoli.ville.interfaces.IDrawable;
 import com.kikijoli.ville.manager.MessageManager;
 import com.kikijoli.ville.util.Constantes;
+import com.kikijoli.ville.interfaces.ISpriteDrawable;
 
 /**
  *
  * @author troïmaclure
  */
-public class Indicator implements IDrawable {
+public class Indicator implements ISpriteDrawable {
 
     String message;
     Texture texture;

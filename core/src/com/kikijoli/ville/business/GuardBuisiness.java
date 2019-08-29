@@ -19,52 +19,52 @@ import com.kikijoli.ville.shader.WalkShader;
  */
 public class GuardBuisiness extends AbstractBusiness {
 
-    Guard guard;
+	Guard guard;
 
-    public GuardBuisiness(Guard guard) {
-        this.guard = guard;
-    }
+	public GuardBuisiness(Guard guard) {
+		this.guard = guard;
+	}
 
-    @Override
-    public AbstractAction getDefault() {
-        return new WaitPlayer();
-    }
+	@Override
+	public AbstractAction getDefault() {
+		return new WaitPlayer();
+	}
 
-    private class AttackPlayer extends AbstractAction {
+	private class AttackPlayer extends AbstractAction {
 
-        int count = 50;
-        int delay = 50;
+		int count = 50;
+		int delay = 50;
 
-        @Override
-        public void act() {
-            if (Intersector.overlaps(guard.anchor, EntiteManager.player.getBoundingRectangle())) {
-                actions.clear();
-                if (!(guard.shader instanceof ClickShader)) {
-                    guard.shader = null;
-                }
-                if (count++ >= delay) {
-                    guard.shader = new ClickShader(guard, null);
-                    EntiteManager.attack(guard);
-                    count = 0;
-                }
-            } else {
-                if (!actions.containsKey("GoTo"))
-                    actions.put("GoTo", new GoTo(guard, EntiteManager.player));
-                if (!(guard.shader instanceof WalkShader))
-                    guard.shader = new WalkShader(guard);
-            }
-        }
-    }
+		@Override
+		public void act() {
+			if (Intersector.overlaps(guard.anchor, EntiteManager.player.getBoundingRectangle())) {
+				actions.clear();
+				if (!(guard.shader instanceof ClickShader)) {
+					guard.shader = null;
+				}
+				if (count++ >= delay) {
+					guard.shader = new ClickShader(guard, null);
+					EntiteManager.attack(guard);
+					count = 0;
+				}
+			} else {
+				if (!actions.containsKey("GoTo"))
+					actions.put("GoTo", new GoTo(guard, EntiteManager.player));
+				if (!(guard.shader instanceof WalkShader))
+					guard.shader = new WalkShader(guard);
+			}
+		}
+	}
 
-    public class WaitPlayer extends AbstractAction {
+	public class WaitPlayer extends AbstractAction {
 
-        @Override
-        public void act() {
-            if (guard.vision.contains(EntiteManager.player.getX(), EntiteManager.player.getY())) {
-                current = new AttackPlayer();
-            }
-        }
+		@Override
+		public void act() {
+			if (guard.vision.contains(EntiteManager.player.getX(), EntiteManager.player.getY())) {
+				current = new AttackPlayer();
+			}
+		}
 
-    }
+	}
 
 }

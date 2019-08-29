@@ -11,6 +11,7 @@ import com.kikijoli.ville.drawable.entite.Entite;
 import com.kikijoli.ville.drawable.entite.build.Key;
 import com.kikijoli.ville.drawable.entite.build.Lock;
 import com.kikijoli.ville.drawable.entite.npc.Player;
+import com.kikijoli.ville.drawable.entite.simple.Blood;
 import com.kikijoli.ville.listeners.GeneralKeyListener;
 import com.kikijoli.ville.maps.Tmap;
 import static com.kikijoli.ville.maps.Tmap.spriteBatch;
@@ -18,6 +19,7 @@ import static com.kikijoli.ville.maps.Tmap.worldCoordinates;
 import com.kikijoli.ville.pathfind.GridManager;
 import com.kikijoli.ville.shader.WalkShader;
 import com.kikijoli.ville.util.Constantes;
+import com.kikijoli.ville.util.MathUtils;
 import java.util.ArrayList;
 
 /**
@@ -34,7 +36,6 @@ public class EntiteManager {
 	private static final ArrayList<Key> keys = new ArrayList<>();
 	public static boolean playedBall = false;
 	public static Vector2 currentBallPosition = new Vector2();
-	public static Entite entiteSelected;
 
 	public static ArrayList<Entite> getEntites() {
 		return (ArrayList<Entite>) entites.clone();
@@ -199,31 +200,27 @@ public class EntiteManager {
 	public static void attack(Entite entite) {
 		Circle c = entite.anchor;
 		entites.stream().filter((target) -> (target != entite && Intersector.overlaps(c, target.getBoundingRectangle()))).forEachOrdered((target) -> {
-			HitManager.hit(entite, target);
+			//do attack stuff
 		});
 
-	}
-
-	public static void select() {
-		entites.stream().filter((entite) -> (entite != player)).forEachOrdered((entite) -> {
-			entiteSelected = entite;
-		});
 	}
 
 	public static void touch(Entite entite, Bullet bullet) {
 		deads.add(entite);
-		if (entiteSelected == entite) entiteSelected = null;
 		ParticleManager.addParticle("particle/blood.p", entite.getX(), entite.getY() + entite.getWidth(), 0.5f);
 		entite.buisiness = null;
+		Vector2 center = MathUtils.getCenter(entite.getBoundingRectangle());
+		DrawManager.sprites.add(new Blood(new Rectangle(center.x, entite.getY(), entite.getWidth(), entite.getHeight())));
 		entites.remove(entite);
 	}
 
 	private static void deadsHandle() {
-		deads.stream().filter((dead) -> (dead.getRotation() < 90)).forEachOrdered((dead) -> {
-			dead.setRotation(dead.getRotation() + 5);
+		deads.stream().forEachOrdered((dead) -> {
+			if (dead.getRotation() < 90) {
+				dead.setRotation(dead.getRotation() + 5);
+			}
 			dead.draw(spriteBatch);
 		});
-
 	}
 
 	private EntiteManager() {

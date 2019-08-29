@@ -13,7 +13,7 @@ public class Arrow extends Bullet {
 	public Arrow(int srcX, int srcY, Vector2 destination, Entite author) {
 		super("sprite/arrow.png", srcX, srcY, Constantes.TILESIZE / 4, Constantes.TILESIZE / 2, destination, author);
 		this.speed = 5;
-		this.scope = 600;
+		this.scope = 1000;
 	}
 
 }

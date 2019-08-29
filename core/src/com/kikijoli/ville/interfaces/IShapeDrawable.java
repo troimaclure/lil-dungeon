@@ -5,13 +5,13 @@
  */
 package com.kikijoli.ville.interfaces;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 /**
  *
  * @author troïmaclure
  */
-public interface IDrawable {
+public interface IShapeDrawable {
 
-    public void draw(SpriteBatch batch);
+    public void draw(ShapeRenderer batch);
 }

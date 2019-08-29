@@ -137,7 +137,19 @@ public class Tmap implements Screen {
 		background();
 		road();
 		water();
+		drawShapes();
+		drawSprites(delta);
 
+		shapeRenderer.end();
+		getRay().setCombinedMatrix(camera.combined,
+				camera.position.x, camera.position.y,
+				camera.viewportWidth * camera.zoom,
+				camera.viewportHeight * camera.zoom);
+		getRay().update();
+//		debug();
+	}
+
+	private void drawSprites(float delta) {
 		spriteBatch.begin();
 		MessageManager.drawIndicators();
 		LockManager.tour();
@@ -145,24 +157,15 @@ public class Tmap implements Screen {
 		ParticleManager.tour(delta);
 		DrawManager.tour();
 		BulletManager.tour();
-		drawSelected();
 
 		spriteBatch.flush();
 		spriteBatch.end();
-
-		getRay().setCombinedMatrix(camera.combined,
-				camera.position.x, camera.position.y,
-				camera.viewportWidth * camera.zoom,
-				camera.viewportHeight * camera.zoom);
-		getRay().update();
-		debug();
 	}
 
-	private void drawSelected() {
-		spriteBatch.setColor(Color.RED);
-		if (EntiteManager.entiteSelected != null) {
-			EntiteManager.entiteSelected.draw(spriteBatch);
-		}
+	private void drawShapes() {
+		shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+		DrawManager.drawShape();
+		shapeRenderer.flush();
 	}
 
 	private void debug() {
@@ -177,7 +180,7 @@ public class Tmap implements Screen {
 		EntiteManager.entites.forEach((entite) -> {
 			shapeRenderer.circle(entite.anchor.x, entite.anchor.y, entite.anchor.radius);
 		});
-		DrawManager.sprites.forEach((entite) -> {
+		DrawManager.entites.forEach((entite) -> {
 			Rectangle r = entite.getBoundingRectangle();
 			shapeRenderer.rect(r.getX(), r.getY(), r.getWidth(), r.getHeight());
 

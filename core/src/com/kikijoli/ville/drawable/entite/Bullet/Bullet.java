@@ -14,10 +14,23 @@ public abstract class Bullet extends Entite {
 	public int distance = 0;
 	public Entite author;
 
+	private Vector2 vel;
+
 	public Bullet(String path, int srcX, int srcY, int srcWidth, int srcHeight, Vector2 destination, Entite author) {
-		super(path, srcX, srcY, srcWidth, srcHeight);
+		super(path, srcX, srcY - 15, srcWidth, srcHeight);
 		this.destination = destination;
+		this.destination.y -= 20;
 		this.author = author;
+	}
+
+	public void move() {
+		if (vel == null) {
+			vel = new Vector2().set(this.destination).sub(new Vector2(this.getX(), this.getY())).nor();
+		}
+		this.setX(this.getX() + vel.x * this.speed);
+		this.setY(this.getY() + vel.y * this.speed);
+		this.distance += this.speed;
+
 	}
 
 }

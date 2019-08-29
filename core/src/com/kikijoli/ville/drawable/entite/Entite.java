@@ -12,16 +12,16 @@ import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.kikijoli.ville.business.AbstractBusiness;
-import com.kikijoli.ville.interfaces.IDrawable;
 import com.kikijoli.ville.shader.AbstractShader;
 import com.kikijoli.ville.util.Constantes;
 import com.kikijoli.ville.util.TextureUtil;
+import com.kikijoli.ville.interfaces.ISpriteDrawable;
 
 /**
  *
  * @author troïmaclure
  */
-public class Entite extends Sprite implements IDrawable {
+public class Entite extends Sprite implements ISpriteDrawable {
 
     public Circle anchor;
 

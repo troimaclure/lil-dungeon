@@ -20,108 +20,104 @@ import com.kikijoli.ville.manager.EntiteManager;
  */
 public class GeneralKeyListener extends InputAdapter {
 
-    public static boolean KeyLeft, KeyUp, KeyDown, KeyRight;
-    public static AbstractAction onTouchAction;
-    public static boolean dragged;
-    public static boolean rightButton;
+	public static boolean KeyLeft, KeyUp, KeyDown, KeyRight;
+	public static AbstractAction onTouchAction;
+	public static boolean dragged;
+	public static boolean rightButton;
 
-    @Override
-    public boolean keyDown(int keycode) {
+	@Override
+	public boolean keyDown(int keycode) {
 
-        switch (keycode) {
-            case Keys.LEFT:
-            case Keys.Q:
-                KeyLeft = true;
-                break;
-            case Keys.UP:
-            case Keys.Z:
-                KeyUp = true;
-                break;
-            case Keys.DOWN:
-            case Keys.S:
-                KeyDown = true;
-                break;
-            case Keys.RIGHT:
-            case Keys.D:
-                KeyRight = true;
-                break;
-            case Keys.T:
-                ColorManager.toggle();
-                break;
-            case Keys.F:
-                EntiteManager.togglePlayerBall();
-                break;
-            case Keys.TAB:
-                EntiteManager.select();
-                break;
+		switch (keycode) {
+			case Keys.LEFT:
+			case Keys.Q:
+				KeyLeft = true;
+				break;
+			case Keys.UP:
+			case Keys.Z:
+				KeyUp = true;
+				break;
+			case Keys.DOWN:
+			case Keys.S:
+				KeyDown = true;
+				break;
+			case Keys.RIGHT:
+			case Keys.D:
+				KeyRight = true;
+				break;
+			case Keys.T:
+				ColorManager.toggle();
+				break;
+			case Keys.F:
+				EntiteManager.togglePlayerBall();
+				break;
 
-        }
+		}
 
-        return super.keyDown(keycode);
-    }
+		return super.keyDown(keycode);
+	}
 
-    @Override
-    public boolean keyUp(int keycode) {
-        switch (keycode) {
-            case Keys.LEFT:
-            case Keys.Q:
-                KeyLeft = false;
-                break;
-            case Keys.UP:
-            case Keys.Z:
-                KeyUp = false;
-                break;
-            case Keys.DOWN:
-            case Keys.S:
-                KeyDown = false;
-                break;
-            case Keys.RIGHT:
-            case Keys.D:
-                KeyRight = false;
-                break;
-        }
+	@Override
+	public boolean keyUp(int keycode) {
+		switch (keycode) {
+			case Keys.LEFT:
+			case Keys.Q:
+				KeyLeft = false;
+				break;
+			case Keys.UP:
+			case Keys.Z:
+				KeyUp = false;
+				break;
+			case Keys.DOWN:
+			case Keys.S:
+				KeyDown = false;
+				break;
+			case Keys.RIGHT:
+			case Keys.D:
+				KeyRight = false;
+				break;
+		}
 
-        return super.keyUp(keycode);
-    }
+		return super.keyUp(keycode);
+	}
 
-    @Override
-    public boolean scrolled(int amount) {
-        if ((CameraManager.camera.zoom + ((float) amount / 5) > 0.5f && CameraManager.camera.zoom + ((float) amount / 5) < 6.5f)) {
-            CameraManager.camera.zoom += ((float) amount / 5);
-            CameraManager.camera.update();
-        }
-        return super.scrolled(amount);
-    }
+	@Override
+	public boolean scrolled(int amount) {
+		if ((CameraManager.camera.zoom + ((float) amount / 5) > 0.5f && CameraManager.camera.zoom + ((float) amount / 5) < 6.5f)) {
+			CameraManager.camera.zoom += ((float) amount / 5);
+			CameraManager.camera.update();
+		}
+		return super.scrolled(amount);
+	}
 
-    @Override
-    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+	@Override
+	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 
-        rightButton = button == Input.Buttons.RIGHT;
-        if (rightButton) {
-            ((PlayerBuisiness) EntiteManager.player.buisiness).dash();
-        }
-        else {
-            ((PlayerBuisiness) EntiteManager.player.buisiness).attack();
-        }
-        return super.touchDown(screenX, screenY, pointer, button); //To change body of generated methods, choose Tools | Templates.
-    }
+		rightButton = button == Input.Buttons.RIGHT;
+		if (rightButton) {
+			((PlayerBuisiness) EntiteManager.player.buisiness).dash();
+		} else {
+			((PlayerBuisiness) EntiteManager.player.buisiness).attack();
+		}
+		return super.touchDown(screenX, screenY, pointer, button); //To change body of generated methods, choose Tools | Templates.
+	}
 
-    @Override
-    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        rightButton = false;
-        dragged = false;
-        return super.touchDown(screenX, screenY, pointer, button); //To change body of generated methods, choose Tools | Templates.
-    }
+	@Override
+	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+		rightButton = false;
+		dragged = false;
+		return super.touchDown(screenX, screenY, pointer, button); //To change body of generated methods, choose Tools | Templates.
+	}
 
-    @Override
-    public boolean touchDragged(int screenX, int screenY, int pointer) {
-        dragged = true;
-        return super.touchDragged(screenX, screenY, pointer);
-    }
+	@Override
+	public boolean touchDragged(int screenX, int screenY, int pointer) {
+		dragged = true;
+		return super.touchDragged(screenX, screenY, pointer);
+	}
 
-    @Override
-    public boolean mouseMoved(int screenX, int screenY) {
-        return super.mouseMoved(screenX, screenY);
-    }
+	@Override
+	public boolean mouseMoved(int screenX, int screenY) {
+		return super.mouseMoved(screenX, screenY);
+	}
 
 }

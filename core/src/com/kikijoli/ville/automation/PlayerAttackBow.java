@@ -13,7 +13,9 @@ import com.kikijoli.ville.drawable.entite.simple.Bow;
 import com.kikijoli.ville.manager.BulletManager;
 import com.kikijoli.ville.manager.DrawManager;
 import com.kikijoli.ville.manager.EntiteManager;
+import com.kikijoli.ville.maps.Tmap;
 import com.kikijoli.ville.util.MathUtils;
+import com.kotcrab.vis.ui.util.CursorManager;
 
 /**
  *
@@ -34,14 +36,11 @@ public abstract class PlayerAttackBow extends AbstractAction {
 
 	@Override
 	public void act() {
-		if (EntiteManager.entiteSelected == null) {
-			end();
-			return;
-		}
+
 		addBowIfNotExist();
 		bow.setX((float) (entite.getX() - (entite.getWidth() * 1.5)));
 		bow.setY(entite.getY() - entite.getHeight() / 2);
-		bow.setRotation(90 + MathUtils.getRotation(entite.getX(), entite.getY(), EntiteManager.entiteSelected.getX(), EntiteManager.entiteSelected.getY()));
+		bow.setRotation(90 + MathUtils.getRotation(entite.getX(), entite.getY(), Tmap.worldCoordinates.x, Tmap.worldCoordinates.y));
 		if (countArrow++ >= delayArrow) shoot();
 		if (count++ > delay) end();
 	}
@@ -49,7 +48,7 @@ public abstract class PlayerAttackBow extends AbstractAction {
 	private void addBowIfNotExist() {
 		if (bow != null) return;
 		bow = new Bow((int) (entite.getX()), (int) (entite.getY()));
-		DrawManager.sprites.add(bow);
+		DrawManager.entites.add(bow);
 		EntiteManager.attack(entite);
 	}
 
@@ -57,16 +56,15 @@ public abstract class PlayerAttackBow extends AbstractAction {
 
 	private void end() {
 		if (bow != null)
-			DrawManager.sprites.remove(bow);
+			DrawManager.entites.remove(bow);
 		onFinish();
 	}
 
 	private void shoot() {
 		countArrow = 0;
-		Vector2 center = new Vector2();
-		bow.getBoundingRectangle().getCenter(center);
-		Arrow arrow = new Arrow((int) center.x, (int) center.y, new Vector2(EntiteManager.entiteSelected.getX(), EntiteManager.entiteSelected.getY()), entite);
-		arrow.setRotation(90 + MathUtils.getRotation(entite.getX(), entite.getY(), EntiteManager.entiteSelected.getX(), EntiteManager.entiteSelected.getY()));
+		Vector2 center = MathUtils.getCenter(bow.getBoundingRectangle());
+		Arrow arrow = new Arrow((int) center.x, (int) center.y, new Vector2(Tmap.worldCoordinates.x, Tmap.worldCoordinates.y), entite);
+		arrow.setRotation(90 + MathUtils.getRotation(entite.getX(), entite.getY(), Tmap.worldCoordinates.x, Tmap.worldCoordinates.y));
 		BulletManager.bullets.add(arrow);
 	}
 

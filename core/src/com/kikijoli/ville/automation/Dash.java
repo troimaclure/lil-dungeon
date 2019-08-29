@@ -14,26 +14,31 @@ import com.kikijoli.ville.drawable.entite.Entite;
  */
 public abstract class Dash extends AbstractAction {
 
-    Entite entite;
-    public int boost = 10;
-    public int count = 0;
-    public int delay = 10;
-    public int oldSpeed = 0;
+	Entite entite;
+	public int boost = 10;
+	public int count = 0;
+	public int delay = 10;
+	public int oldSpeed = 0;
+	private boolean begin;
 
-    public Dash(Entite entite) {
-        this.entite = entite;
-        oldSpeed = entite.speed;
-        this.entite.speed += boost;
-    }
+	public Dash(Entite entite) {
+		this.entite = entite;
+		oldSpeed = entite.speed;
 
-    @Override
-    public void act() {
-        if (count++ < delay) return;
-        if (entite.speed > oldSpeed) {
-            entite.speed--;
-        } else onFinish();
-    }
+	}
 
-    public abstract void onFinish();
+	@Override
+	public void act() {
+		if (!begin) {
+			this.entite.speed += boost;
+			begin = true;
+		}
+		if (count++ < delay) return;
+		if (entite.speed > oldSpeed) {
+			entite.speed--;
+		} else onFinish();
+	}
+
+	public abstract void onFinish();
 
 }
