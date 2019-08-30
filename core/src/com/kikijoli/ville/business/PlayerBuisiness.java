@@ -6,10 +6,12 @@
 package com.kikijoli.ville.business;
 
 import com.kikijoli.ville.abstracts.AbstractAction;
-import com.kikijoli.ville.automation.PlayerAttackBow;
+import com.kikijoli.ville.automation.AttackBow;
 import com.kikijoli.ville.automation.Dash;
 import com.kikijoli.ville.automation.None;
+import com.kikijoli.ville.automation.AttackSword;
 import com.kikijoli.ville.manager.EntiteManager;
+import com.kikijoli.ville.util.Mode;
 
 /**
  *
@@ -33,24 +35,38 @@ public class PlayerBuisiness extends AbstractBusiness {
 
 			@Override
 			public void onFinish() {
-				System.out.println("remove dash");
 				actions.remove(DASH);
 			}
 		});
 	}
 
 	public void attack() {
-		putAction(ATTACK, new PlayerAttackBow(EntiteManager.player) {
-			@Override
-			public void onFinish() {
-				actions.remove(ATTACK);
-			}
-		});
+		AbstractAction abstractAction = null;
+		switch (EntiteManager.player.mode) {
+			case Mode.BOW:
+				abstractAction = new AttackBow(EntiteManager.player) {
+					@Override
+					public void onFinish() {
+						actions.remove(ATTACK);
+					}
+				};
+				break;
+			case Mode.SWORD:
+				dash();
+				abstractAction = new AttackSword(EntiteManager.player) {
+					@Override
+					public void onFinish() {
+						actions.remove(ATTACK);
+					}
+				};
+				break;
+		}
+
+		putAction(ATTACK, abstractAction);
 	}
 
 	private void putAction(String name, AbstractAction a) {
 		if (!actions.containsKey(name)) {
-			System.out.println("push " + name);
 			actions.put(name, a);
 		}
 

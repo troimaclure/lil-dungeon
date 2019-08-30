@@ -39,7 +39,7 @@ public class BulletManager {
 		for (Entite entite : EntiteManager.entites) {
 			if (!entite.equals(bullet.author))
 				if (entite.getBoundingRectangle().contains(MathUtils.getCenter(bullet.getBoundingRectangle()))) {
-					EntiteManager.touch(entite, bullet);
+					EntiteManager.touch(entite);
 					removes.add(bullet);
 					break;
 				}

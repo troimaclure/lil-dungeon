@@ -24,7 +24,6 @@ public abstract class Dash extends AbstractAction {
 	public Dash(Entite entite) {
 		this.entite = entite;
 		oldSpeed = entite.speed;
-
 	}
 
 	@Override
@@ -37,6 +36,7 @@ public abstract class Dash extends AbstractAction {
 		if (entite.speed > oldSpeed) {
 			entite.speed--;
 		} else onFinish();
+
 	}
 
 	public abstract void onFinish();

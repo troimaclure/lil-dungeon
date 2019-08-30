@@ -2,6 +2,7 @@ package com.kikijoli.ville.drawable.entite.Bullet;
 
 import com.badlogic.gdx.math.Vector2;
 import com.kikijoli.ville.drawable.entite.Entite;
+import com.kikijoli.ville.util.MathUtils;
 
 /**
  *
@@ -25,7 +26,7 @@ public abstract class Bullet extends Entite {
 
 	public void move() {
 		if (vel == null) {
-			vel = new Vector2().set(this.destination).sub(new Vector2(this.getX(), this.getY())).nor();
+			vel = MathUtils.destination(this.destination, new Vector2(this.getX(), this.getY()));
 		}
 		this.setX(this.getX() + vel.x * this.speed);
 		this.setY(this.getY() + vel.y * this.speed);

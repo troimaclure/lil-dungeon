@@ -30,6 +30,7 @@ public class EntiteManager {
 
 	public static Player player = new Player(100, 100);
 	public static ArrayList<Entite> entites = new ArrayList<>();
+	public static ArrayList<Entite> removes = new ArrayList<>();
 	public static ArrayList<Entite> deads = new ArrayList<>();
 	public static ParticleEffect ball;
 	public static ArrayList<Rectangle> walls = new ArrayList<Rectangle>();
@@ -37,13 +38,8 @@ public class EntiteManager {
 	public static boolean playedBall = false;
 	public static Vector2 currentBallPosition = new Vector2();
 
-	public static ArrayList<Entite> getEntites() {
-		return (ArrayList<Entite>) entites.clone();
-	}
-
 	public static void addEntite(Entite entite) {
 		entites.add(entite);
-
 	}
 
 	public static void tour() {
@@ -56,6 +52,7 @@ public class EntiteManager {
 		spriteBatch.setColor(c);
 		moveBall();
 		deadsHandle();
+		entites.removeAll(removes);
 	}
 
 	private static void renderEntity(Entite entite) {
@@ -73,12 +70,18 @@ public class EntiteManager {
 	private static void handlePlayer() {
 		if (playedBall) return;
 		for (int i = 0; i < player.speed; i++) {
-			boolean move = handleY();
-			move = handleX() || move;
-			playerMove(move);
+			if (isPlayerDead()) {
+				boolean move = handleY();
+				move = handleX() || move;
+				playerMove(move);
+			}
 			handleGet();
 			handleDoor();
 		}
+	}
+
+	private static boolean isPlayerDead() {
+		return player.buisiness != null;
 	}
 
 	private static void playerMove(boolean move) {
@@ -169,27 +172,10 @@ public class EntiteManager {
 
 	public static void moveBall() {
 		if (playedBall) return;
-//        if (GeneralKeyListener.dragged && !GeneralKeyListener.rightButton) {
 		ball.setPosition(worldCoordinates.x, worldCoordinates.y);
 		currentBallPosition.x = worldCoordinates.x;
 		currentBallPosition.y = worldCoordinates.y;
-//        } else {
-//            calculateBallMovement();
-//            ball.setPosition(currentBallPosition.x, currentBallPosition.y);
-//        }
-	}
 
-	private static void calculateBallMovement() {
-		for (int i = 0; i <= player.speed + 1; i++) {
-			if (currentBallPosition.x > player.getX() - 15 && currentBallPosition.x > player.getX() + 35)
-				currentBallPosition.x -= 1;
-			else if (currentBallPosition.x < player.getX() - 15 && currentBallPosition.x < player.getX() + 35)
-				currentBallPosition.x += 1;
-			if (currentBallPosition.y > player.getY() + 48 && currentBallPosition.y > player.getY() + 32)
-				currentBallPosition.y -= 1;
-			else if (currentBallPosition.y < player.getY() + 48 && currentBallPosition.y < player.getY() + 32)
-				currentBallPosition.y += 1;
-		}
 	}
 
 	public static void togglePlayerBall() {
@@ -198,20 +184,18 @@ public class EntiteManager {
 	}
 
 	public static void attack(Entite entite) {
-		Circle c = entite.anchor;
-		entites.stream().filter((target) -> (target != entite && Intersector.overlaps(c, target.getBoundingRectangle()))).forEachOrdered((target) -> {
-			//do attack stuff
+		entites.stream().filter((target) -> (target != entite && target.good != entite.good && target.getBoundingRectangle().contains(MathUtils.getCenter(entite.getBoundingRectangle())))).forEachOrdered((target) -> {
+			touch(target);
 		});
-
 	}
 
-	public static void touch(Entite entite, Bullet bullet) {
+	public static void touch(Entite entite) {
 		deads.add(entite);
 		ParticleManager.addParticle("particle/blood.p", entite.getX(), entite.getY() + entite.getWidth(), 0.5f);
 		entite.buisiness = null;
 		Vector2 center = MathUtils.getCenter(entite.getBoundingRectangle());
 		DrawManager.sprites.add(new Blood(new Rectangle(center.x, entite.getY(), entite.getWidth(), entite.getHeight())));
-		entites.remove(entite);
+		removes.add(entite);
 	}
 
 	private static void deadsHandle() {

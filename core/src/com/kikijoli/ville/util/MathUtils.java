@@ -25,4 +25,8 @@ public class MathUtils {
 		tmp = r.getCenter(tmp);
 		return tmp;
 	}
+
+	public static Vector2 destination(Vector2 destination, Vector2 v) {
+		return new Vector2().set(destination).sub(new Vector2(v.x, v.y)).nor();
+	}
 }

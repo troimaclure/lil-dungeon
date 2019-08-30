@@ -15,13 +15,12 @@ import com.kikijoli.ville.manager.DrawManager;
 import com.kikijoli.ville.manager.EntiteManager;
 import com.kikijoli.ville.maps.Tmap;
 import com.kikijoli.ville.util.MathUtils;
-import com.kotcrab.vis.ui.util.CursorManager;
 
 /**
  *
  * @author Arthur
  */
-public abstract class PlayerAttackBow extends AbstractAction {
+public abstract class AttackBow extends AbstractAction {
 
 	public int count = 0;
 	public int countArrow = 50;
@@ -30,7 +29,7 @@ public abstract class PlayerAttackBow extends AbstractAction {
 	Bow bow;
 	Entite entite;
 
-	public PlayerAttackBow(Entite entite) {
+	public AttackBow(Entite entite) {
 		this.entite = entite;
 	}
 

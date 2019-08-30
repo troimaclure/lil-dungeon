@@ -23,64 +23,64 @@ import java.util.ArrayList;
  */
 public class GoTo extends AbstractAction {
 
-    private final Entite entite;
-    private final Entite target;
-    public static ArrayList<Tile> path = null;
-    private Vector2 goal = new Vector2();
-    private int index = 0;
-    private int count = 50;
-    private int delay = 50;
-    private AbstractShader old;
+	private final Entite entite;
+	private final Entite target;
+	public static ArrayList<Tile> path = null;
+	private Vector2 goal = new Vector2();
+	private int index = 0;
+	private int count = 50;
+	private int delay = 50;
+	private AbstractShader old;
 
-    public GoTo(Entite entite, Entite target) {
-        this.entite = entite;
-        this.target = target;
-        old = entite.shader;
-    }
+	public GoTo(Entite entite, Entite target) {
+		this.entite = entite;
+		this.target = target;
+		old = entite.shader;
+	}
 
-    @Override
-    public void act() {
+	@Override
+	public void act() {
 
-        if (checkPath()) {
-            getGoal();
-            goToGoal();
-            checkGoal();
-        }
-    }
+		if (checkPath()) {
+			getGoal();
+			goToGoal();
+			checkGoal();
+		}
+	}
 
-    private boolean checkPath() {
-        count++;
+	private boolean checkPath() {
+		count++;
 
-        if (count >= delay) {
-            count = 0;
-            index = 0;
-            path = PathFinderManager.getPath(entite, target, Constantes.NPCFILTERBUILD);
-        }
-        return path != null;
-    }
+		if (count >= delay) {
+			count = 0;
+			index = 0;
+			path = PathFinderManager.getPath(entite, target, Constantes.NPCFILTERBUILD);
+		}
+		return path != null;
+	}
 
-    private void getGoal() {
-        if (index < path.size()) {
-            goal = path.get(index).getBoundingRectangle().getCenter(goal);
-        }
-    }
+	private void getGoal() {
+		if (index < path.size()) {
+			goal = path.get(index).getBoundingRectangle().getCenter(goal);
+		}
+	}
 
-    private void goToGoal() {
+	private void goToGoal() {
 
-        Vector2 center = new Vector2();
-        center = entite.getBoundingRectangle().getCenter(center);
-        entite.setX(entite.getX() + (goal.x < center.x ? (-1) : center.x == goal.x ? 0 : 1));
-        entite.setY(entite.getY() + (goal.y < entite.getY() ? (-1) : entite.getY() == goal.y ? 0 : 1));
-        if (Intersector.overlaps(target.getBoundingRectangle(), entite.getBoundingRectangle())) {
-            path = null;
-        }
-    }
+		Vector2 center = new Vector2();
+		center = entite.getBoundingRectangle().getCenter(center);
+		entite.setX(entite.getX() + (goal.x < center.x ? (-entite.speed) : center.x == goal.x ? 0 : entite.speed));
+		entite.setY(entite.getY() + (goal.y < entite.getY() ? (-entite.speed) : entite.getY() == goal.y ? 0 : entite.speed));
+		if (Intersector.overlaps(target.getBoundingRectangle(), entite.getBoundingRectangle())) {
+			path = null;
+		}
+	}
 
-    private void checkGoal() {
-        if (entite.getBoundingRectangle().overlaps(new Rectangle(goal.x, goal.y, Constantes.TILESIZE, Constantes.TILESIZE))) {
-            index++;
-        }
+	private void checkGoal() {
+		if (entite.getBoundingRectangle().overlaps(new Rectangle(goal.x, goal.y, Constantes.TILESIZE, Constantes.TILESIZE))) {
+			index++;
+		}
 
-    }
+	}
 
 }
