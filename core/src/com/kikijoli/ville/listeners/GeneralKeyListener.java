@@ -13,6 +13,7 @@ import com.kikijoli.ville.business.PlayerBuisiness;
 import com.kikijoli.ville.manager.CameraManager;
 import com.kikijoli.ville.manager.ColorManager;
 import com.kikijoli.ville.manager.EntiteManager;
+import com.kikijoli.ville.manager.HudManager;
 
 /**
  *
@@ -31,6 +32,7 @@ public class GeneralKeyListener extends InputAdapter {
 		switch (keycode) {
 			case Keys.LEFT:
 			case Keys.Q:
+			case Keys.A:
 				KeyLeft = true;
 				break;
 			case Keys.UP:
@@ -41,8 +43,8 @@ public class GeneralKeyListener extends InputAdapter {
 			case Keys.S:
 				KeyDown = true;
 				break;
-			case Keys.RIGHT:
 			case Keys.D:
+			case Keys.E:
 				KeyRight = true;
 				break;
 			case Keys.T:
@@ -50,6 +52,13 @@ public class GeneralKeyListener extends InputAdapter {
 				break;
 			case Keys.F:
 				EntiteManager.togglePlayerBall();
+				break;
+			case Keys.NUM_1:
+
+				HudManager.tiles.get(0).action();
+				break;
+			case Keys.NUM_2:
+				HudManager.tiles.get(1).action();
 				break;
 
 		}
@@ -62,6 +71,7 @@ public class GeneralKeyListener extends InputAdapter {
 		switch (keycode) {
 			case Keys.LEFT:
 			case Keys.Q:
+			case Keys.A:
 				KeyLeft = false;
 				break;
 			case Keys.UP:
@@ -72,8 +82,8 @@ public class GeneralKeyListener extends InputAdapter {
 			case Keys.S:
 				KeyDown = false;
 				break;
-			case Keys.RIGHT:
 			case Keys.D:
+			case Keys.E:
 				KeyRight = false;
 				break;
 		}
@@ -83,10 +93,12 @@ public class GeneralKeyListener extends InputAdapter {
 
 	@Override
 	public boolean scrolled(int amount) {
-		if ((CameraManager.camera.zoom + ((float) amount / 5) > 0.5f && CameraManager.camera.zoom + ((float) amount / 5) < 6.5f)) {
-			CameraManager.camera.zoom += ((float) amount / 5);
-			CameraManager.camera.update();
-		}
+//		if ((CameraManager.camera.zoom + ((float) amount / 5) > 0.5f && CameraManager.camera.zoom + ((float) amount / 5) < 6.5f)) {
+//			CameraManager.camera.zoom += ((float) amount / 5);
+//			CameraManager.camera.update();
+//		}
+
+		HudManager.setSelected(-amount);
 		return super.scrolled(amount);
 	}
 

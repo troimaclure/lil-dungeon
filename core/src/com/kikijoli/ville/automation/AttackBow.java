@@ -28,9 +28,11 @@ public abstract class AttackBow extends AbstractAction {
 	public int delay = 30;
 	Bow bow;
 	Entite entite;
+	Vector2 destination;
 
-	public AttackBow(Entite entite) {
+	public AttackBow(Entite entite, Vector2 destination) {
 		this.entite = entite;
+		this.destination = destination;
 	}
 
 	@Override
@@ -39,7 +41,7 @@ public abstract class AttackBow extends AbstractAction {
 		addBowIfNotExist();
 		bow.setX((float) (entite.getX() - (entite.getWidth() * 1.5)));
 		bow.setY(entite.getY() - entite.getHeight() / 2);
-		bow.setRotation(90 + MathUtils.getRotation(entite.getX(), entite.getY(), Tmap.worldCoordinates.x, Tmap.worldCoordinates.y));
+		bow.setRotation(90 + MathUtils.getRotation(entite.getX(), entite.getY(), destination.x, destination.y));
 		if (countArrow++ >= delayArrow) shoot();
 		if (count++ > delay) end();
 	}
@@ -62,8 +64,8 @@ public abstract class AttackBow extends AbstractAction {
 	private void shoot() {
 		countArrow = 0;
 		Vector2 center = MathUtils.getCenter(bow.getBoundingRectangle());
-		Arrow arrow = new Arrow((int) center.x, (int) center.y, new Vector2(Tmap.worldCoordinates.x, Tmap.worldCoordinates.y), entite);
-		arrow.setRotation(90 + MathUtils.getRotation(entite.getX(), entite.getY(), Tmap.worldCoordinates.x, Tmap.worldCoordinates.y));
+		Arrow arrow = new Arrow((int) center.x, (int) center.y, new Vector2(destination.x, destination.y), entite);
+		arrow.setRotation(90 + MathUtils.getRotation(entite.getX(), entite.getY(), destination.x, destination.y));
 		BulletManager.bullets.add(arrow);
 	}
 

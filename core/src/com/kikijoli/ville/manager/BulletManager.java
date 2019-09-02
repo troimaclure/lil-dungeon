@@ -37,7 +37,7 @@ public class BulletManager {
 	private static void testCollision(Bullet bullet) {
 		if (!GridManager.isClearZone(MathUtils.getCenter(bullet.getBoundingRectangle()), Constantes.BULLET_MOVEMENT_OK)) removes.add(bullet);
 		for (Entite entite : EntiteManager.entites) {
-			if (!entite.equals(bullet.author))
+			if (!entite.equals(bullet.author) && entite.good != bullet.author.good)
 				if (entite.getBoundingRectangle().contains(MathUtils.getCenter(bullet.getBoundingRectangle()))) {
 					EntiteManager.touch(entite);
 					removes.add(bullet);

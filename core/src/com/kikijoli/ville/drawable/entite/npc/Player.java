@@ -17,7 +17,7 @@ import com.kikijoli.ville.util.Mode;
  */
 public class Player extends Entite {
 
-	public final int mode = Mode.SWORD;
+	public int mode = Mode.SWORD;
 	private static final String SPRITESIMPLEPNG = "sprite/simple.png";
 
 	public Player(int srcX, int srcY) {

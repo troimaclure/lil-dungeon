@@ -5,12 +5,14 @@
  */
 package com.kikijoli.ville.business;
 
+import com.badlogic.gdx.math.Vector2;
 import com.kikijoli.ville.abstracts.AbstractAction;
 import com.kikijoli.ville.automation.AttackBow;
 import com.kikijoli.ville.automation.Dash;
 import com.kikijoli.ville.automation.None;
 import com.kikijoli.ville.automation.AttackSword;
 import com.kikijoli.ville.manager.EntiteManager;
+import com.kikijoli.ville.maps.Tmap;
 import com.kikijoli.ville.util.Mode;
 
 /**
@@ -44,7 +46,7 @@ public class PlayerBuisiness extends AbstractBusiness {
 		AbstractAction abstractAction = null;
 		switch (EntiteManager.player.mode) {
 			case Mode.BOW:
-				abstractAction = new AttackBow(EntiteManager.player) {
+				abstractAction = new AttackBow(EntiteManager.player, new Vector2(Tmap.worldCoordinates.x, Tmap.worldCoordinates.y)) {
 					@Override
 					public void onFinish() {
 						actions.remove(ATTACK);
