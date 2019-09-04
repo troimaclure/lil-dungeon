@@ -15,6 +15,7 @@ import com.kikijoli.ville.shader.AbstractShader;
 import com.kikijoli.ville.util.Constantes;
 import com.kikijoli.ville.util.TextureUtil;
 import com.kikijoli.ville.interfaces.ISpriteDrawable;
+import com.kikijoli.ville.util.MathUtils;
 
 /**
  *
@@ -39,9 +40,7 @@ public class Entite extends Sprite implements ISpriteDrawable {
 		this.setX(srcX);
 		this.setY(srcY);
 		calculateAnchors();
-		Rectangle r = new Rectangle(0, 0, srcWidth, srcHeight);
-		centerOrigin = new Vector2();
-		r.getCenter(centerOrigin);
+		centerOrigin = MathUtils.getCenter(new Rectangle(0, 0, srcWidth, srcHeight));
 		width = srcWidth;
 		height = srcHeight;
 	}

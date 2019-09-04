@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.kikijoli.ville.drawable.entite.Bullet.Bullet;
+import com.kikijoli.ville.drawable.entite.projectile.Bullet.Bullet;
 import com.kikijoli.ville.drawable.entite.Entite;
 import com.kikijoli.ville.drawable.entite.build.Key;
 import com.kikijoli.ville.drawable.entite.build.Lock;

@@ -11,6 +11,7 @@ import com.kikijoli.ville.automation.AttackBow;
 import com.kikijoli.ville.automation.Dash;
 import com.kikijoli.ville.automation.None;
 import com.kikijoli.ville.automation.AttackSword;
+import com.kikijoli.ville.automation.AttackWandPoison;
 import com.kikijoli.ville.manager.EntiteManager;
 import com.kikijoli.ville.maps.Tmap;
 import com.kikijoli.ville.util.Mode;
@@ -33,7 +34,8 @@ public class PlayerBuisiness extends AbstractBusiness {
 	}
 
 	public void dash() {
-		putAction(DASH, new Dash(EntiteManager.player) {
+		if (actions.containsKey(DASH)) return;
+		actions.put(DASH, new Dash(EntiteManager.player) {
 
 			@Override
 			public void onFinish() {
@@ -43,6 +45,7 @@ public class PlayerBuisiness extends AbstractBusiness {
 	}
 
 	public void attack() {
+		if (actions.containsKey(ATTACK)) return;
 		AbstractAction abstractAction = null;
 		switch (EntiteManager.player.mode) {
 			case Mode.BOW:
@@ -62,16 +65,17 @@ public class PlayerBuisiness extends AbstractBusiness {
 					}
 				};
 				break;
+			case Mode.WAND:
+				abstractAction = new AttackWandPoison(EntiteManager.player, new Vector2(Tmap.worldCoordinates.x, Tmap.worldCoordinates.y)) {
+					@Override
+					public void onFinish() {
+						actions.remove(ATTACK);
+					}
+				};
+				break;
 		}
 
-		putAction(ATTACK, abstractAction);
-	}
-
-	private void putAction(String name, AbstractAction a) {
-		if (!actions.containsKey(name)) {
-			actions.put(name, a);
-		}
-
+		actions.put(ATTACK, abstractAction);
 	}
 
 }

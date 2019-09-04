@@ -7,10 +7,10 @@ import com.kikijoli.ville.util.Constantes;
  *
  * @author ajosse
  */
-public class Bow extends Entite {
+public class Wand extends Entite {
 
-	public Bow(int srcX, int srcY) {
-		super("sprite/bow.png", srcX, srcY, Constantes.TILESIZE, Constantes.TILESIZE);
+	public Wand(int srcX, int srcY) {
+		super("sprite/wand.png", srcX, srcY, Constantes.TILESIZE, Constantes.TILESIZE);
 	}
 
 }

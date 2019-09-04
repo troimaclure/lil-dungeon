@@ -7,13 +7,12 @@ package com.kikijoli.ville.automation;
 
 import com.badlogic.gdx.math.Vector2;
 import com.kikijoli.ville.abstracts.AbstractAction;
-import com.kikijoli.ville.drawable.entite.Bullet.Arrow;
+import com.kikijoli.ville.drawable.entite.projectile.Bullet.Arrow;
 import com.kikijoli.ville.drawable.entite.Entite;
 import com.kikijoli.ville.drawable.entite.simple.Bow;
-import com.kikijoli.ville.manager.BulletManager;
+import com.kikijoli.ville.manager.ProjectileManager;
 import com.kikijoli.ville.manager.DrawManager;
 import com.kikijoli.ville.manager.EntiteManager;
-import com.kikijoli.ville.maps.Tmap;
 import com.kikijoli.ville.util.MathUtils;
 
 /**
@@ -65,8 +64,8 @@ public abstract class AttackBow extends AbstractAction {
 		countArrow = 0;
 		Vector2 center = MathUtils.getCenter(bow.getBoundingRectangle());
 		Arrow arrow = new Arrow((int) center.x, (int) center.y, new Vector2(destination.x, destination.y), entite);
-		arrow.setRotation(90 + MathUtils.getRotation(entite.getX(), entite.getY(), destination.x, destination.y));
-		BulletManager.bullets.add(arrow);
+		arrow.sprite.setRotation(90 + MathUtils.getRotation(entite.getX(), entite.getY(), destination.x, destination.y));
+		ProjectileManager.projectiles.add(arrow);
 	}
 
 }

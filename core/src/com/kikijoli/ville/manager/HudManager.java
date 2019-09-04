@@ -4,10 +4,10 @@ import com.badlogic.gdx.graphics.Color;
 import com.kikijoli.ville.drawable.hud.BowTile;
 import com.kikijoli.ville.drawable.hud.SwordTile;
 import com.kikijoli.ville.drawable.hud.Tile;
+import com.kikijoli.ville.drawable.hud.WandTile;
 import com.kikijoli.ville.maps.Tmap;
 import com.kikijoli.ville.util.Constantes;
 import java.util.ArrayList;
-import java.util.Optional;
 
 /**
  *
@@ -20,6 +20,7 @@ public class HudManager {
 	static {
 		tiles.add(new BowTile(100, 100));
 		tiles.add(new SwordTile(100 + Constantes.TILESIZE, 100));
+		tiles.add(new WandTile(100 + Constantes.TILESIZE * 2, 100));
 		tiles.get(0).action();
 	}
 
