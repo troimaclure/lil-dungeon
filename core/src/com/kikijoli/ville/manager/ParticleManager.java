@@ -20,7 +20,7 @@ import java.util.HashMap;
 public class ParticleManager {
 
 	private static final HashMap<String, ParticleEffect> particles = new HashMap<>();
-	private static final ArrayList<ParticleEffect> particleEffects = new ArrayList<>();
+	public static final ArrayList<ParticleEffect> particleEffects = new ArrayList<>();
 
 	public static ParticleEffect addParticle(String path, float x, float y, float scale) {
 		ParticleEffect efft = null;

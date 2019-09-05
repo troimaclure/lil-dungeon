@@ -11,11 +11,13 @@ import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.kikijoli.ville.business.AbstractBusiness;
+import com.kikijoli.ville.effect.AbstractEffect;
 import com.kikijoli.ville.shader.AbstractShader;
 import com.kikijoli.ville.util.Constantes;
 import com.kikijoli.ville.util.TextureUtil;
 import com.kikijoli.ville.interfaces.ISpriteDrawable;
 import com.kikijoli.ville.util.MathUtils;
+import java.util.ArrayList;
 
 /**
  *
@@ -34,6 +36,7 @@ public class Entite extends Sprite implements ISpriteDrawable {
 	Vector2 centerOrigin;
 	int width;
 	int height;
+	public ArrayList<AbstractEffect> effects = new ArrayList<>();
 
 	public Entite(String path, int srcX, int srcY, int srcWidth, int srcHeight) {
 		super(TextureUtil.getTexture(path), srcX, srcY, srcWidth, srcHeight);
@@ -50,16 +53,16 @@ public class Entite extends Sprite implements ISpriteDrawable {
 		calculateAnchors();
 //        Rectangle r = this.getBoundingRectangle();
 		batch.draw(getTexture(),
-				getX(), getY(),
-				centerOrigin.x,
-				centerOrigin.y,
-				(int) width, (int) height,
-				1, 1,
-				getRotation(),
-				(int) 0,
-				(int) 0,
-				(int) getTexture().getWidth(), (int) getTexture().getHeight(),
-				false, false);
+			getX(), getY(),
+			centerOrigin.x,
+			centerOrigin.y,
+			(int) width, (int) height,
+			1, 1,
+			getRotation(),
+			(int) 0,
+			(int) 0,
+			(int) getTexture().getWidth(), (int) getTexture().getHeight(),
+			false, false);
 	}
 
 	private void calculateAnchors() {

@@ -11,11 +11,13 @@ import com.badlogic.gdx.math.Vector2;
 import com.kikijoli.ville.abstracts.AbstractAction;
 import com.kikijoli.ville.drawable.entite.Entite;
 import com.kikijoli.ville.manager.PathFinderManager;
+import com.kikijoli.ville.pathfind.GridManager;
 import com.kikijoli.ville.pathfind.Tile;
 import com.kikijoli.ville.shader.AbstractShader;
 import com.kikijoli.ville.shader.WalkShader;
 import com.kikijoli.ville.util.Constantes;
 import java.util.ArrayList;
+import net.dermetfan.gdx.math.MathUtils;
 
 /**
  *
@@ -69,11 +71,13 @@ public class GoTo extends AbstractAction {
 
 		Vector2 center = new Vector2();
 		center = entite.getBoundingRectangle().getCenter(center);
-		entite.setX(entite.getX() + (goal.x < center.x ? (-entite.speed) : center.x == goal.x ? 0 : entite.speed));
-		entite.setY(entite.getY() + (goal.y < entite.getY() ? (-entite.speed) : entite.getY() == goal.y ? 0 : entite.speed));
+		if (!GridManager.isClearZone(goal, Constantes.NPC_MOVEMENT_OK)) return;
+		if (!com.badlogic.gdx.math.MathUtils.isEqual(entite.getX(), goal.x, 5)) entite.setX(entite.getX() + (goal.x < center.x ? (-entite.speed) : center.x == goal.x ? 0 : entite.speed));
+		if (!com.badlogic.gdx.math.MathUtils.isEqual(entite.getY(), goal.y, 5)) entite.setY(entite.getY() + (goal.y < entite.getY() ? (-entite.speed) : entite.getY() == goal.y ? 0 : entite.speed));
 		if (Intersector.overlaps(target.getBoundingRectangle(), entite.getBoundingRectangle())) {
 			path = null;
 		}
+
 	}
 
 	private void checkGoal() {

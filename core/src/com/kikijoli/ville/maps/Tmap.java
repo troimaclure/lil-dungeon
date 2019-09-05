@@ -27,6 +27,8 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
 import com.kikijoli.ville.automation.GoTo;
+import com.kikijoli.ville.drawable.entite.projectile.Projectile;
+import com.kikijoli.ville.drawable.entite.projectile.Spell.Spell;
 import com.kikijoli.ville.listeners.GeneralKeyListener;
 import com.kikijoli.ville.manager.ProjectileManager;
 import com.kikijoli.ville.manager.CameraManager;
@@ -42,6 +44,7 @@ import com.kikijoli.ville.manager.StageManager;
 import com.kikijoli.ville.manager.HudManager;
 import com.kikijoli.ville.pathfind.GridManager;
 import com.kikijoli.ville.util.Constantes;
+import com.kikijoli.ville.util.MathUtils;
 import java.util.ArrayList;
 
 /**
@@ -148,9 +151,9 @@ public class Tmap implements Screen {
 		drawHud();
 
 		getRay().setCombinedMatrix(camera.combined,
-				camera.position.x, camera.position.y,
-				camera.viewportWidth * camera.zoom,
-				camera.viewportHeight * camera.zoom);
+			camera.position.x, camera.position.y,
+			camera.viewportWidth * camera.zoom,
+			camera.viewportHeight * camera.zoom);
 		getRay().update();
 //		debug();
 	}
@@ -208,6 +211,13 @@ public class Tmap implements Screen {
 		DrawManager.entites.forEach((entite) -> {
 			Rectangle r = entite.getBoundingRectangle();
 			shapeRenderer.rect(r.getX(), r.getY(), r.getWidth(), r.getHeight());
+		});
+		ProjectileManager.projectiles.forEach((t) -> {
+			if (t instanceof Spell) {
+				Spell spell = (Spell) t;
+				Rectangle r = spell.anchors;
+				shapeRenderer.rect(r.getX(), r.getY(), r.getWidth(), r.getHeight());
+			}
 
 		});
 		shapeRenderer.flush();

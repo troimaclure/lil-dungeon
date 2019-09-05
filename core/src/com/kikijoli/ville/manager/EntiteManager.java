@@ -2,16 +2,16 @@ package com.kikijoli.ville.manager;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
-import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.kikijoli.ville.drawable.entite.projectile.Bullet.Bullet;
 import com.kikijoli.ville.drawable.entite.Entite;
 import com.kikijoli.ville.drawable.entite.build.Key;
 import com.kikijoli.ville.drawable.entite.build.Lock;
 import com.kikijoli.ville.drawable.entite.npc.Player;
+import com.kikijoli.ville.drawable.entite.projectile.Spell.Spell;
 import com.kikijoli.ville.drawable.entite.simple.Blood;
+import com.kikijoli.ville.effect.AbstractEffect;
 import com.kikijoli.ville.listeners.GeneralKeyListener;
 import com.kikijoli.ville.maps.Tmap;
 import static com.kikijoli.ville.maps.Tmap.spriteBatch;
@@ -48,10 +48,19 @@ public class EntiteManager {
 		handleBall();
 		entites.stream().forEach((Entite entite) -> {
 			renderEntity(entite);
+			entite.effects.forEach((effect) -> {
+				effect.tour(entite);
+			});
 		});
 		spriteBatch.setColor(c);
 		moveBall();
-		deadsHandle();
+		handleDeads();
+		for (Entite remove : removes) {
+			remove.effects.forEach((effect) -> {
+				ParticleManager.particleEffects.remove(effect.effect);
+			});
+			remove.effects.clear();
+		}
 		entites.removeAll(removes);
 	}
 
@@ -198,13 +207,18 @@ public class EntiteManager {
 		removes.add(entite);
 	}
 
-	private static void deadsHandle() {
+	private static void handleDeads() {
 		deads.stream().forEachOrdered((dead) -> {
 			if (dead.getRotation() < 90) {
 				dead.setRotation(dead.getRotation() + 5);
 			}
 			dead.draw(spriteBatch);
 		});
+	}
+
+	public static void spellEffect(Entite entite, Spell spell) {
+		if (entite.effects.stream().anyMatch(e -> e.getClass() == spell.getEffectType())) return;
+		entite.effects.add(spell.getEffect(entite.getX(), entite.getY()));
 	}
 
 	private EntiteManager() {

@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.kikijoli.ville.drawable.entite.Entite;
 import com.kikijoli.ville.manager.ColorManager;
 import com.kikijoli.ville.maps.Tmap;
 import com.kikijoli.ville.util.Constantes;
@@ -144,5 +145,11 @@ public class GridManager {
 			}
 		}
 		return true;
+	}
+
+	public static void removeBuild(Entite entite) {
+		Tile t = getCaseFor(entite.getBoundingRectangle());
+		if (t == null) return;
+		t.state = Constantes.EMPTY;
 	}
 }
