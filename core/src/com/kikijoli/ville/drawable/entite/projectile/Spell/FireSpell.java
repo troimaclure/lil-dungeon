@@ -3,26 +3,27 @@ package com.kikijoli.ville.drawable.entite.projectile.Spell;
 import com.badlogic.gdx.math.Vector2;
 import com.kikijoli.ville.drawable.entite.Entite;
 import com.kikijoli.ville.effect.AbstractEffect;
-import com.kikijoli.ville.effect.PoisonEffect;
+import com.kikijoli.ville.effect.FireEffect;
 
 /**
  *
  * @author ajosse
  */
-public class PoisonSpell extends Spell {
+public class FireSpell extends Spell {
 
-	public PoisonSpell(Vector2 destination, Entite author, float x, float y) {
-		super("particle/poison.p", destination, 1000, author, x, y);
+	public FireSpell(Vector2 destination, Entite author) {
+		super("particle/fire.p", destination, 150, author, destination.x, destination.y);
+		this.speed = 0;
 	}
 
 	@Override
 	public AbstractEffect getEffect(float x, float y) {
-		return new PoisonEffect(x, y, this);
+		return new FireEffect(x, y, this);
 	}
 
 	@Override
 	public Class getEffectType() {
-		return PoisonEffect.class;
+		return FireEffect.class;
 	}
 
 }

@@ -14,8 +14,6 @@ import com.kikijoli.ville.automation.GoTo;
 import com.kikijoli.ville.automation.AttackSword;
 import com.kikijoli.ville.drawable.entite.npc.Guard;
 import com.kikijoli.ville.manager.EntiteManager;
-import com.kikijoli.ville.maps.Tmap;
-import com.kikijoli.ville.pathfind.GridManager;
 import com.kikijoli.ville.shader.ClickShader;
 import com.kikijoli.ville.shader.WalkShader;
 

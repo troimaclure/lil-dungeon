@@ -11,6 +11,7 @@ import com.kikijoli.ville.automation.AttackBow;
 import com.kikijoli.ville.automation.Dash;
 import com.kikijoli.ville.automation.None;
 import com.kikijoli.ville.automation.AttackSword;
+import com.kikijoli.ville.automation.AttackWandFire;
 import com.kikijoli.ville.automation.AttackWandPoison;
 import com.kikijoli.ville.manager.EntiteManager;
 import com.kikijoli.ville.maps.Tmap;
@@ -67,6 +68,14 @@ public class PlayerBuisiness extends AbstractBusiness {
 				break;
 			case Mode.WAND:
 				abstractAction = new AttackWandPoison(EntiteManager.player, new Vector2(Tmap.worldCoordinates.x, Tmap.worldCoordinates.y)) {
+					@Override
+					public void onFinish() {
+						actions.remove(ATTACK);
+					}
+				};
+				break;
+			case Mode.WANDFIRE:
+				abstractAction = new AttackWandFire(EntiteManager.player, new Vector2(Tmap.worldCoordinates.x, Tmap.worldCoordinates.y)) {
 					@Override
 					public void onFinish() {
 						actions.remove(ATTACK);

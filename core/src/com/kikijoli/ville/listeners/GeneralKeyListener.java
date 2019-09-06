@@ -54,16 +54,41 @@ public class GeneralKeyListener extends InputAdapter {
 				EntiteManager.togglePlayerBall();
 				break;
 			case Keys.NUM_1:
-
-				HudManager.tiles.get(0).action();
+				tilesAction(0);
 				break;
 			case Keys.NUM_2:
-				HudManager.tiles.get(1).action();
+				tilesAction(1);
+				break;
+			case Keys.NUM_3:
+				tilesAction(2);
+				break;
+			case Keys.NUM_4:
+				tilesAction(3);
+				break;
+			case Keys.NUM_5:
+				tilesAction(4);
+				break;
+			case Keys.NUM_6:
+				tilesAction(5);
+				break;
+			case Keys.NUM_7:
+				tilesAction(6);
+				break;
+			case Keys.NUM_8:
+				tilesAction(7);
+				break;
+			case Keys.NUM_9:
+				tilesAction(8);
 				break;
 
 		}
 
 		return super.keyDown(keycode);
+	}
+
+	private void tilesAction(int index) {
+		if (index > HudManager.tiles.size() - 1) return;
+		HudManager.tiles.get(index).action();
 	}
 
 	@Override

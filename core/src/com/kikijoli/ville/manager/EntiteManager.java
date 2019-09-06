@@ -61,6 +61,11 @@ public class EntiteManager {
 			});
 			remove.effects.clear();
 		}
+		entites.forEach((entite) -> {
+			entite.effects.stream().filter((effect) -> (effect.end)).forEachOrdered((effect) -> {
+				ParticleManager.particleEffects.remove(effect.effect);
+			});
+		});
 		entites.removeAll(removes);
 	}
 
