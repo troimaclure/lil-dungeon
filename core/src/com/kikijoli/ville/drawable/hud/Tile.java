@@ -26,7 +26,6 @@ public abstract class Tile extends Rectangle implements ISpriteDrawable, IShapeD
 
 	public void action() {
 		HudManager.tiles.forEach((tile) -> tile.selected = false);
-		System.out.println("zdlakjdz");
 		this.selected = true;
 	}
 

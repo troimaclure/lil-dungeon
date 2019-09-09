@@ -23,57 +23,57 @@ import java.util.ArrayList;
  *
  * @author troïmaclure
  */
-public class Entite extends Sprite implements ISpriteDrawable {
+public abstract class Entite extends Sprite implements ISpriteDrawable {
 
-	public Circle anchor;
-	public boolean good;
-	public AbstractShader shader;
-	public boolean visible = true;
-	public AbstractBusiness buisiness;
-	public int speed = 2;
-	public int strenght = 2;
-	public int pv = 5;
-	Vector2 centerOrigin;
-	int width;
-	int height;
-	public ArrayList<AbstractEffect> effects = new ArrayList<>();
+    public Circle anchor;
+    public boolean good;
+    public AbstractShader shader;
+    public boolean visible = true;
+    public AbstractBusiness buisiness;
+    public int speed = 2;
+    public int strenght = 2;
+    public int pv = 5;
+    Vector2 centerOrigin;
+    int width;
+    int height;
+    public ArrayList<AbstractEffect> effects = new ArrayList<>();
 
-	public Entite(String path, int srcX, int srcY, int srcWidth, int srcHeight) {
-		super(TextureUtil.getTexture(path), srcX, srcY, srcWidth, srcHeight);
-		this.setX(srcX);
-		this.setY(srcY);
-		calculateAnchors();
-		centerOrigin = MathUtils.getCenter(new Rectangle(0, 0, srcWidth, srcHeight));
-		width = srcWidth;
-		height = srcHeight;
-	}
+    public Entite(String path, int srcX, int srcY, int srcWidth, int srcHeight) {
+        super(TextureUtil.getTexture(path), srcX, srcY, srcWidth, srcHeight);
+        this.setX(srcX);
+        this.setY(srcY);
+        calculateAnchors();
+        centerOrigin = MathUtils.getCenter(new Rectangle(0, 0, srcWidth, srcHeight));
+        width = srcWidth;
+        height = srcHeight;
+    }
 
-	@Override
-	public void draw(SpriteBatch batch) {
-		calculateAnchors();
+    @Override
+    public void draw(SpriteBatch batch) {
+        calculateAnchors();
 //        Rectangle r = this.getBoundingRectangle();
-		batch.draw(getTexture(),
-			getX(), getY(),
-			centerOrigin.x,
-			centerOrigin.y,
-			(int) width, (int) height,
-			1, 1,
-			getRotation(),
-			(int) 0,
-			(int) 0,
-			(int) getTexture().getWidth(), (int) getTexture().getHeight(),
-			false, false);
-	}
+        batch.draw(getTexture(),
+            getX(), getY(),
+            centerOrigin.x,
+            centerOrigin.y,
+            (int) width, (int) height,
+            1, 1,
+            getRotation(),
+            (int) 0,
+            (int) 0,
+            (int) getTexture().getWidth(), (int) getTexture().getHeight(),
+            false, false);
+    }
 
-	private void calculateAnchors() {
-		Rectangle r = this.getBoundingRectangle();
-		Vector2 center = new Vector2();
-		r.getCenter(center);
-		this.anchor = new Circle(center, getAnchorSize());
-	}
+    private void calculateAnchors() {
+        Rectangle r = this.getBoundingRectangle();
+        Vector2 center = new Vector2();
+        r.getCenter(center);
+        this.anchor = new Circle(center, getAnchorSize());
+    }
 
-	public float getAnchorSize() {
-		return Constantes.TILESIZE / 2;
-	}
+    public float getAnchorSize() {
+        return Constantes.TILESIZE / 2;
+    }
 
 }

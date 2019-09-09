@@ -12,6 +12,7 @@ import com.kikijoli.ville.drawable.entite.projectile.Spell.PoisonSpell;
 import com.kikijoli.ville.drawable.entite.simple.Wand;
 import com.kikijoli.ville.manager.ProjectileManager;
 import com.kikijoli.ville.manager.DrawManager;
+import com.kikijoli.ville.manager.SpellManager;
 import com.kikijoli.ville.util.MathUtils;
 
 /**
@@ -20,48 +21,47 @@ import com.kikijoli.ville.util.MathUtils;
  */
 public abstract class AttackWandPoison extends AbstractAction {
 
-	public int count = 0;
-	public int delay = 100;
+    public int count = 0;
+    public int delay = 100;
 
-	Wand wand;
-	Entite entite;
-	Vector2 destination;
+    Wand wand;
+    Entite entite;
+    Vector2 destination;
 
-	public AttackWandPoison(Entite entite, Vector2 destination) {
-		this.entite = entite;
-		this.destination = destination;
-	}
+    public AttackWandPoison(Entite entite, Vector2 destination) {
+        this.entite = entite;
+        this.destination = destination;
+    }
 
-	@Override
-	public void act() {
+    @Override
+    public void act() {
 
-		addWandIfNotExist();
-		wand.setX((float) (entite.getX() - (entite.getWidth() * 1.5)));
-		wand.setY(entite.getY() - entite.getHeight() / 2);
-		wand.setRotation(90 + MathUtils.getRotation(entite.getX(), entite.getY(), destination.x, destination.y));
-		if (count++ > delay) end();
-	}
+        addWandIfNotExist();
+        wand.setX((float) (entite.getX() - (entite.getWidth() * 1.5)));
+        wand.setY(entite.getY() - entite.getHeight() / 2);
+        wand.setRotation(90 + MathUtils.getRotation(entite.getX(), entite.getY(), destination.x, destination.y));
+        if (count++ > delay) end();
+    }
 
-	private void addWandIfNotExist() {
-		if (wand != null) return;
-		wand = new Wand((int) (entite.getX()), (int) (entite.getY()));
-		DrawManager.entites.add(wand);
-		shoot();
-	}
+    private void addWandIfNotExist() {
+        if (wand != null) return;
+        wand = new Wand((int) (entite.getX()), (int) (entite.getY()));
+        DrawManager.entites.add(wand);
+        shoot();
+    }
 
-	public abstract void onFinish();
+    public abstract void onFinish();
 
-	private void end() {
-		if (wand != null)
-			DrawManager.entites.remove(wand);
-		onFinish();
-	}
+    private void end() {
+        if (wand != null)
+            DrawManager.entites.remove(wand);
+        onFinish();
+    }
 
-	protected void shoot() {
-		Vector2 center = MathUtils.getCenter(wand.getBoundingRectangle());
-//		PoisonSpell arrow = new PoisonSpell((int) center.x, (int) center.y, new Vector2(destination.x, destination.y), entite);
-		PoisonSpell poison = new PoisonSpell(new Vector2(destination.x, destination.y), entite, (int) center.x, (int) center.y);
-		ProjectileManager.projectiles.add(poison);
-	}
+    protected void shoot() {
+        Vector2 center = MathUtils.getCenter(wand.getBoundingRectangle());
+        PoisonSpell poison = new PoisonSpell(new Vector2(destination.x, destination.y), entite, (int) center.x, (int) center.y);
+        SpellManager.spells.add(poison);
+    }
 
 }

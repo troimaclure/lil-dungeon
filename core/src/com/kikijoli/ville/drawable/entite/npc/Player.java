@@ -7,7 +7,9 @@ package com.kikijoli.ville.drawable.entite.npc;
 
 import com.kikijoli.ville.business.PlayerBuisiness;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.kikijoli.ville.business.AbstractBusiness;
 import com.kikijoli.ville.drawable.entite.Entite;
+import com.kikijoli.ville.interfaces.IBusiness;
 import com.kikijoli.ville.util.Constantes;
 import com.kikijoli.ville.util.Mode;
 
@@ -15,25 +17,30 @@ import com.kikijoli.ville.util.Mode;
  *
  * @author troïmaclure
  */
-public class Player extends Entite {
+public final class Player extends Entite implements IBusiness {
 
-	public int mode = Mode.SWORD;
-	private static final String SPRITESIMPLEPNG = "sprite/simple.png";
+    public int mode = Mode.SWORD;
+    private static final String SPRITESIMPLEPNG = "sprite/simple.png";
 
-	public Player(int srcX, int srcY) {
-		super(SPRITESIMPLEPNG, srcX, srcY, Constantes.TILESIZE / 4, Constantes.TILESIZE / 2);
-		this.buisiness = new PlayerBuisiness();
-		good = true;
-	}
+    public Player(int srcX, int srcY) {
+        super(SPRITESIMPLEPNG, srcX, srcY, Constantes.TILESIZE / 4, Constantes.TILESIZE / 2);
+        this.buisiness = this.getDefault();
+        good = true;
+    }
 
-	@Override
-	public void draw(SpriteBatch batch) {
-		super.draw(batch);
-	}
+    @Override
+    public void draw(SpriteBatch batch) {
+        super.draw(batch);
+    }
 
-	@Override
-	public float getAnchorSize() {
-		return Constantes.TILESIZE / 2 + getWidth();
-	}
+    @Override
+    public float getAnchorSize() {
+        return Constantes.TILESIZE / 2 + getWidth();
+    }
+
+    @Override
+    public AbstractBusiness getDefault() {
+        return new PlayerBuisiness();
+    }
 
 }

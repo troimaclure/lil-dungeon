@@ -4,12 +4,10 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.kikijoli.ville.abstracts.AbstractAction;
 import com.kikijoli.ville.drawable.entite.Entite;
-import com.kikijoli.ville.drawable.entite.projectile.Spell.Spell;
-import com.kikijoli.ville.effect.FireEffect;
+import com.kikijoli.ville.manager.EntiteManager;
 import com.kikijoli.ville.pathfind.GridManager;
 import com.kikijoli.ville.util.Constantes;
 import com.kikijoli.ville.util.MathUtils;
-import com.sun.corba.se.impl.orbutil.closure.Constant;
 
 /**
  *
@@ -17,33 +15,31 @@ import com.sun.corba.se.impl.orbutil.closure.Constant;
  */
 public class InFireBuisiness extends AbstractBusiness {
 
-	public Rectangle fireSource;
-	Entite entite;
+    Entite entite;
 
-	public InFireBuisiness(Rectangle fireSource, Entite entite) {
-		this.fireSource = fireSource;
-		this.entite = entite;
-	}
+    public InFireBuisiness(Entite entite) {
+        this.entite = entite;
+    }
 
-	@Override
-	public AbstractAction getDefault() {
-		return new FireFear();
-	}
+    @Override
+    public AbstractAction getDefault() {
+        return new FireFear();
+    }
 
-	private class FireFear extends AbstractAction {
+    private class FireFear extends AbstractAction {
 
-		Vector2 vel;
+        Vector2 vel;
 
-		@Override
-		public void act() {
-			if (vel == null) {
-				vel = MathUtils.destination(MathUtils.getCenter(fireSource), new Vector2(entite.getX(), entite.getY()));
-			}
-			Vector2 goal = new Vector2(entite.getX() - vel.x * entite.speed + 1, entite.getY() - vel.y * entite.speed + 1);
-			if (!GridManager.isClearZone(goal, Constantes.NPC_MOVEMENT_OK)) return;
-			entite.setX(entite.getX() - vel.x * entite.speed + 1);
-			entite.setX(entite.getY() - vel.y * entite.speed + 1);
-		}
-	}
+        @Override
+        public void act() {
+            if (vel == null) {
+                vel = MathUtils.destination(MathUtils.getCenter(EntiteManager.player.getBoundingRectangle()), new Vector2(entite.getX(), entite.getY()));
+            }
+            Vector2 goal = new Vector2(entite.getX() - vel.x * (entite.speed + 1), entite.getY() - vel.y * (entite.speed + 1));
+            if (!GridManager.isClearZone(new Rectangle(goal.x, goal.y, entite.getWidth(), entite.getHeight()), Constantes.NPC_MOVEMENT_OK)) return;
+            entite.setX(goal.x);
+            entite.setY(goal.y);
+        }
+    }
 
 }

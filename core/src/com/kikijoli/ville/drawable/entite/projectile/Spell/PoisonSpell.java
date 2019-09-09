@@ -9,20 +9,20 @@ import com.kikijoli.ville.effect.PoisonEffect;
  *
  * @author ajosse
  */
-public class PoisonSpell extends Spell {
+public class PoisonSpell extends MoveSpell {
 
-	public PoisonSpell(Vector2 destination, Entite author, float x, float y) {
-		super("particle/poison.p", destination, 1000, author, x, y);
-	}
+    public PoisonSpell(Vector2 destination, Entite author, float x, float y) {
+        super("particle/poison.p", destination, 1000, author, x, y);
+    }
 
-	@Override
-	public AbstractEffect getEffect(float x, float y) {
-		return new PoisonEffect(x, y, this);
-	}
+    @Override
+    public AbstractEffect getEffect(float x, float y) {
+        return new PoisonEffect(x, y);
+    }
 
-	@Override
-	public Class getEffectType() {
-		return PoisonEffect.class;
-	}
+    @Override
+    public Class getEffectType() {
+        return PoisonEffect.class;
+    }
 
 }

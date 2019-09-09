@@ -9,6 +9,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.kikijoli.ville.drawable.entite.Entite;
 import com.kikijoli.ville.drawable.entite.projectile.Spell.FireSpell;
 import com.kikijoli.ville.manager.ProjectileManager;
+import com.kikijoli.ville.manager.SpellManager;
 
 /**
  *
@@ -16,20 +17,20 @@ import com.kikijoli.ville.manager.ProjectileManager;
  */
 public abstract class AttackWandFire extends AttackWandPoison {
 
-	public AttackWandFire(Entite entite, Vector2 destination) {
-		super(entite, destination);
-	}
+    public AttackWandFire(Entite entite, Vector2 destination) {
+        super(entite, destination);
+    }
 
-	@Override
-	public void act() {
+    @Override
+    public void act() {
 
-		super.act();
-	}
+        super.act();
+    }
 
-	@Override
-	protected void shoot() {
-		FireSpell fire = new FireSpell(new Vector2(destination.x, destination.y), entite);
-		ProjectileManager.projectiles.add(fire);
-	}
+    @Override
+    protected void shoot() {
+        FireSpell fire = new FireSpell(destination.x, destination.y, entite);
+        SpellManager.spells.add(fire);
+    }
 
 }

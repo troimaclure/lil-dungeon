@@ -23,68 +23,76 @@ import com.kikijoli.ville.util.Mode;
  */
 public class PlayerBuisiness extends AbstractBusiness {
 
-	private static final String DASH = "Dash";
-	private static final String ATTACK = "Attack";
+    private static final String DASH = "Dash";
+    private static final String ATTACK = "Attack";
 
-	public PlayerBuisiness() {
-	}
+    public PlayerBuisiness() {
+    }
 
-	@Override
-	public AbstractAction getDefault() {
-		return new None();
-	}
+    @Override
+    public AbstractAction getDefault() {
+        return new None();
+    }
 
-	public void dash() {
-		if (actions.containsKey(DASH)) return;
-		actions.put(DASH, new Dash(EntiteManager.player) {
+    public void dash() {
+        if (actions.containsKey(DASH)) return;
+        actions.put(DASH, new Dash(EntiteManager.player) {
 
-			@Override
-			public void onFinish() {
-				actions.remove(DASH);
-			}
-		});
-	}
+            @Override
+            public void onFinish() {
+                actions.remove(DASH);
+            }
+        });
+    }
 
-	public void attack() {
-		if (actions.containsKey(ATTACK)) return;
-		AbstractAction abstractAction = null;
-		switch (EntiteManager.player.mode) {
-			case Mode.BOW:
-				abstractAction = new AttackBow(EntiteManager.player, new Vector2(Tmap.worldCoordinates.x, Tmap.worldCoordinates.y)) {
-					@Override
-					public void onFinish() {
-						actions.remove(ATTACK);
-					}
-				};
-				break;
-			case Mode.SWORD:
-				dash();
-				abstractAction = new AttackSword(EntiteManager.player) {
-					@Override
-					public void onFinish() {
-						actions.remove(ATTACK);
-					}
-				};
-				break;
-			case Mode.WAND:
-				abstractAction = new AttackWandPoison(EntiteManager.player, new Vector2(Tmap.worldCoordinates.x, Tmap.worldCoordinates.y)) {
-					@Override
-					public void onFinish() {
-						actions.remove(ATTACK);
-					}
-				};
-				break;
-			case Mode.WANDFIRE:
-				abstractAction = new AttackWandFire(EntiteManager.player, new Vector2(Tmap.worldCoordinates.x, Tmap.worldCoordinates.y)) {
-					@Override
-					public void onFinish() {
-						actions.remove(ATTACK);
-					}
-				};
-				break;
-		}
+    public void attack() {
 
-		actions.put(ATTACK, abstractAction);
-	}
+        AbstractAction abstractAction = null;
+        switch (EntiteManager.player.mode) {
+            case Mode.BOW:
+                if (actions.containsKey(Integer.toString(Mode.BOW))) return;
+
+                abstractAction = new AttackBow(EntiteManager.player, new Vector2(Tmap.worldCoordinates.x, Tmap.worldCoordinates.y)) {
+                    @Override
+                    public void onFinish() {
+                        actions.remove(Integer.toString(Mode.BOW));
+                    }
+                };
+                actions.put(Integer.toString(Mode.BOW), abstractAction);
+                break;
+            case Mode.SWORD:
+                if (actions.containsKey(Integer.toString(Mode.SWORD))) return;
+                dash();
+                abstractAction = new AttackSword(EntiteManager.player) {
+                    @Override
+                    public void onFinish() {
+                        actions.remove(Integer.toString(Mode.SWORD));
+                    }
+                };
+                actions.put(Integer.toString(Mode.SWORD), abstractAction);
+                break;
+            case Mode.WAND:
+                if (actions.containsKey(Integer.toString(Mode.WAND))) return;
+                abstractAction = new AttackWandPoison(EntiteManager.player, new Vector2(Tmap.worldCoordinates.x, Tmap.worldCoordinates.y)) {
+                    @Override
+                    public void onFinish() {
+                        actions.remove(Integer.toString(Mode.WAND));
+                    }
+                };
+                actions.put(Integer.toString(Mode.WAND), abstractAction);
+                break;
+            case Mode.WANDFIRE:
+                if (actions.containsKey(Integer.toString(Mode.WANDFIRE))) return;
+                abstractAction = new AttackWandFire(EntiteManager.player, new Vector2(Tmap.worldCoordinates.x, Tmap.worldCoordinates.y)) {
+                    @Override
+                    public void onFinish() {
+                        actions.remove(Integer.toString(Mode.WANDFIRE));
+                    }
+                };
+                actions.put(Integer.toString(Mode.WANDFIRE), abstractAction);
+                break;
+        }
+
+    }
 
 }

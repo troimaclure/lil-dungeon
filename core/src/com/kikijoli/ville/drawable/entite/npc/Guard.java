@@ -9,7 +9,9 @@ import box2dLight.PointLight;
 import com.badlogic.gdx.graphics.Color;
 import com.kikijoli.ville.business.GuardBuisiness;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.kikijoli.ville.business.AbstractBusiness;
 import com.kikijoli.ville.drawable.entite.Entite;
+import com.kikijoli.ville.interfaces.IBusiness;
 import com.kikijoli.ville.maps.Tmap;
 import com.kikijoli.ville.util.Constantes;
 
@@ -17,21 +19,26 @@ import com.kikijoli.ville.util.Constantes;
  *
  * @author troïmaclure
  */
-public class Guard extends Entite {
+public final class Guard extends Entite implements IBusiness {
 
-	private static final String GUARD = "sprite/guard.png";
+    private static final String GUARD = "sprite/guard.png";
 
-	public PointLight vision;
+    public PointLight vision;
 
-	public Guard(int srcX, int srcY) {
-		super(GUARD, srcX, srcY, Constantes.TILESIZE / 4, Constantes.TILESIZE / 2);
-		this.buisiness = new GuardBuisiness(this);
-		this.vision = new PointLight(Tmap.getRay(), 20, Color.BLACK, 500, this.getX(), this.getY());
-	}
+    public Guard(int srcX, int srcY) {
+        super(GUARD, srcX, srcY, Constantes.TILESIZE / 4, Constantes.TILESIZE / 2);
+        this.buisiness = this.getDefault();
+        this.vision = new PointLight(Tmap.getRay(), 20, Color.BLACK, 500, this.getX(), this.getY());
+    }
 
-	@Override
-	public void draw(SpriteBatch batch) {
-		this.vision.setPosition(this.getX(), this.getY());
-		super.draw(batch);
-	}
+    @Override
+    public void draw(SpriteBatch batch) {
+        this.vision.setPosition(this.getX(), this.getY());
+        super.draw(batch);
+    }
+
+    @Override
+    public AbstractBusiness getDefault() {
+        return new GuardBuisiness(this);
+    }
 }

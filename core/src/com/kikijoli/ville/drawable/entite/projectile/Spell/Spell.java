@@ -2,36 +2,22 @@ package com.kikijoli.ville.drawable.entite.projectile.Spell;
 
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector2;
 import com.kikijoli.ville.drawable.entite.Entite;
-import com.kikijoli.ville.drawable.entite.projectile.Projectile;
 import com.kikijoli.ville.effect.AbstractEffect;
-import com.kikijoli.ville.manager.ParticleManager;
-import com.kikijoli.ville.util.MathUtils;
 
 /**
  *
  * @author ajosse
  */
-public abstract class Spell extends Projectile {
+public interface Spell {
 
-	public ParticleEffect effect;
-	public Rectangle anchors;
+    public Class getEffectType();
 
-	public Spell(String path, Vector2 destination, int scope, Entite author, float x, float y) {
-		super(destination, scope, author, x, y, 50, 50);
-		effect = ParticleManager.addParticle(path, x, y, 1);
-		this.speed = 2;
-		this.anchors = new Rectangle(0, 0, width, height);
-	}
+    public AbstractEffect getEffect(float x, float y);
 
-	@Override
-	public void move() {
-		super.move();
-		effect.setPosition(this.getX(), this.getY());
-		this.anchors.setPosition(x - width / 2, y - height / 2);
-	}
+    public Rectangle getAnchors();
 
-	public abstract Class getEffectType(); 
-	public abstract AbstractEffect getEffect(float x, float y);
+    public Entite getAuthor();
+
+    public ParticleEffect getParticleEffect();
 }

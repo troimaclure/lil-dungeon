@@ -146,6 +146,16 @@ public class GridManager {
 		}
 		return true;
 	}
+	public static boolean isClearZone(Rectangle v, String filter) {
+		for (Tile[] grille1 : grid) {
+			for (Tile g : grille1) {
+				if (!filter.contains(g.state) && g.getBoundingRectangle().overlaps(v)) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
 
 	public static void removeBuild(Entite entite) {
 		Tile t = getCaseFor(entite.getBoundingRectangle());

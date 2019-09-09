@@ -2,7 +2,7 @@ package com.kikijoli.ville.effect;
 
 import com.badlogic.gdx.math.Vector2;
 import com.kikijoli.ville.drawable.entite.Entite;
-import com.kikijoli.ville.drawable.entite.projectile.Spell.Spell;
+import com.kikijoli.ville.drawable.entite.projectile.Spell.MoveSpell;
 import com.kikijoli.ville.manager.EntiteManager;
 import com.kikijoli.ville.manager.ParticleManager;
 import com.kikijoli.ville.util.MathUtils;
@@ -13,21 +13,21 @@ import com.kikijoli.ville.util.MathUtils;
  */
 public class PoisonEffect extends AbstractEffect {
 
-	private int count = 60 * 3;
+    private int count = 60 * 3;
 
-	public PoisonEffect(float x, float y, Spell spell) {
-		super(ParticleManager.addParticle("particle/poison.p", x, y, 0.5f), spell);
-	}
+    public PoisonEffect(float x, float y) {
+        super(ParticleManager.addParticle("particle/poison.p", x, y, 0.5f));
+    }
 
-	@Override
-	public void tour(Entite entite) {
-		Vector2 center = MathUtils.getCenter(entite.getBoundingRectangle());
-		this.effect.setPosition(center.x, center.y);
-		this.count--;
-		if (this.count <= 0) {
-			EntiteManager.touch(entite);
+    @Override
+    public void tour(Entite entite) {
+        Vector2 center = MathUtils.getCenter(entite.getBoundingRectangle());
+        this.effect.setPosition(center.x, center.y);
+        this.count--;
+        if (this.count <= 0) {
+            EntiteManager.touch(entite);
 
-		}
-	}
+        }
+    }
 
 }
