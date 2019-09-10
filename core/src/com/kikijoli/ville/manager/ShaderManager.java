@@ -19,24 +19,24 @@ import java.util.HashMap;
  */
 public class ShaderManager {
 
-	public static AbstractShader waveShader = new WaveShader();
+    public static AbstractShader waveShader = new WaveShader();
 //    public static AbstractShader windShader = new WindShader();
 
-	public static void step() {
-		final float dt = Gdx.graphics.getRawDeltaTime();
-		EntiteManager.entites.stream().filter((entite) -> (entite.shader != null && !entite.shader.global)).forEach((entite) -> {
-			entite.shader.step(dt);
-		});
-		//shared global shader step
-		waveShader.step(dt);
+    public static void step() {
+        final float dt = Gdx.graphics.getRawDeltaTime();
+        EntiteManager.entites.stream().filter((entite) -> (entite.shader != null && !entite.shader.global)).forEach((entite) -> {
+            entite.shader.step(dt);
+        });
+        //shared global shader step
+        waveShader.step(dt);
 //        windShader.step(dt);
-	}
+    }
 
-	public static ShaderProgram defaultShader = SpriteBatch.createDefaultShader();
-	public static HashMap<String, FileHandle> shadersFiles = new HashMap<String, FileHandle>();
+    public static ShaderProgram defaultShader = SpriteBatch.createDefaultShader();
+    public static HashMap<String, FileHandle> shadersFiles = new HashMap<String, FileHandle>();
 
-	public static ShaderProgram getDefault() {
-		return defaultShader;
-	}
+    public static ShaderProgram getDefault() {
+        return defaultShader;
+    }
 
 }

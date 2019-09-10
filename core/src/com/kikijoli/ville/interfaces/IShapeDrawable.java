@@ -13,5 +13,5 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
  */
 public interface IShapeDrawable {
 
-	public void draw(ShapeRenderer batch);
+    public void draw(ShapeRenderer batch);
 }

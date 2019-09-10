@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.kikijoli.ville.automation;
+package com.kikijoli.ville.automation.common;
 
 import com.kikijoli.ville.abstracts.AbstractAction;
 

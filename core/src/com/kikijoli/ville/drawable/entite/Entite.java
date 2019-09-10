@@ -32,14 +32,13 @@ public abstract class Entite extends Sprite implements ISpriteDrawable {
     public AbstractBusiness buisiness;
     public int speed = 2;
     public int strenght = 2;
-    public int pv = 5;
     Vector2 centerOrigin;
     int width;
     int height;
     public ArrayList<AbstractEffect> effects = new ArrayList<>();
 
-    public Entite(String path, int srcX, int srcY, int srcWidth, int srcHeight) {
-        super(TextureUtil.getTexture(path), srcX, srcY, srcWidth, srcHeight);
+    public Entite(String path, float srcX, float srcY, int srcWidth, int srcHeight) {
+        super(TextureUtil.getTexture(path), (int) srcX, (int) srcY, srcWidth, srcHeight);
         this.setX(srcX);
         this.setY(srcY);
         calculateAnchors();

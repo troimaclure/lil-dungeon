@@ -14,6 +14,7 @@ import com.kikijoli.ville.util.Constantes;
 public class Lock extends Build {
 
     private static final String SPRITELOCKPNG = "sprite/lock.png";
+
     public Lock(int srcX, int srcY) {
         super(SPRITELOCKPNG, srcX, srcY, Constantes.TILESIZE, Constantes.TILESIZE);
     }

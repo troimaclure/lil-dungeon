@@ -134,7 +134,6 @@ public class PathFinder {
         }
     }
 
-
     /**
      *
      * @param current

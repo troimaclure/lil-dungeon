@@ -10,10 +10,10 @@ import com.kikijoli.ville.util.Constantes;
  */
 public class Arrow extends Bullet {
 
-	public Arrow(int srcX, int srcY, Vector2 destination, Entite author) {
-		super("sprite/arrow.png", destination, 1000, author, srcX, srcY, Constantes.TILESIZE / 4, Constantes.TILESIZE / 2);
-		this.speed = 5;
+    public Arrow(int srcX, int srcY, Vector2 destination, Entite author) {
+        super("sprite/arrow.png", destination, 1000, author, srcX, srcY, Constantes.TILESIZE / 4, Constantes.TILESIZE / 2);
+        this.speed = 5;
 
-	}
+    }
 
 }

@@ -13,14 +13,14 @@ import com.kikijoli.ville.util.Mode;
  */
 public class BowTile extends Tile {
 
-	public BowTile(int srcX, int srcY) {
-		super(srcX, srcY, new Bow(0, 0));
-	}
+    public BowTile(int srcX, int srcY) {
+        super(srcX, srcY, new Bow(0, 0));
+    }
 
-	@Override
-	public void action() {
-		super.action();
-		EntiteManager.player.mode = Mode.BOW;
-	}
+    @Override
+    public void action() {
+        super.action();
+        EntiteManager.player.mode = Mode.BOW;
+    }
 
 }

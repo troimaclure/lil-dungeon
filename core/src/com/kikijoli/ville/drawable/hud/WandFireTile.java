@@ -10,14 +10,14 @@ import com.kikijoli.ville.util.Mode;
  */
 public class WandFireTile extends Tile {
 
-	public WandFireTile(int srcX, int srcY) {
-		super(srcX, srcY, new Wand(0, 0));
-	}
+    public WandFireTile(int srcX, int srcY) {
+        super(srcX, srcY, new Wand(0, 0));
+    }
 
-	@Override
-	public void action() {
-		super.action();
-		EntiteManager.player.mode = Mode.WANDFIRE;
-	}
+    @Override
+    public void action() {
+        super.action();
+        EntiteManager.player.mode = Mode.WANDFIRE;
+    }
 
 }

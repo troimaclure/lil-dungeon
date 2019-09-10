@@ -7,12 +7,12 @@ package com.kikijoli.ville.business;
 
 import com.badlogic.gdx.math.Vector2;
 import com.kikijoli.ville.abstracts.AbstractAction;
-import com.kikijoli.ville.automation.AttackBow;
-import com.kikijoli.ville.automation.Dash;
-import com.kikijoli.ville.automation.None;
-import com.kikijoli.ville.automation.AttackSword;
-import com.kikijoli.ville.automation.AttackWandFire;
-import com.kikijoli.ville.automation.AttackWandPoison;
+import com.kikijoli.ville.automation.player.AttackBow;
+import com.kikijoli.ville.automation.player.Dash;
+import com.kikijoli.ville.automation.common.None;
+import com.kikijoli.ville.automation.player.AttackSword;
+import com.kikijoli.ville.automation.player.AttackWandFire;
+import com.kikijoli.ville.automation.player.AttackWandPoison;
 import com.kikijoli.ville.manager.EntiteManager;
 import com.kikijoli.ville.maps.Tmap;
 import com.kikijoli.ville.util.Mode;

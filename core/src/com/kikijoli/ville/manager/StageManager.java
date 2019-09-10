@@ -23,6 +23,7 @@ public class StageManager {
     private static final String EMPTY = "";
 
     public static void load(int level) {
+
         FileHandle internal = Gdx.files.internal("stage/" + level + ".txt");
         String[] contentSplit = internal.readString().split(SEPARATOR);
         GridManager.initialize(contentSplit.length, contentSplit[0].split(EMPTY).length, Constantes.TILESIZE);
@@ -59,6 +60,15 @@ public class StageManager {
             i++;
         }
 
+    }
+
+    public static void setLevel(int level) {
+        EntiteManager.entites.removeIf(e -> e != EntiteManager.player);
+        DrawManager.entites.clear();
+        DrawManager.sprites.clear();
+        ProjectileManager.projectiles.clear();
+        Tmap.getRay().removeAll();
+        load(level);
     }
 
 }

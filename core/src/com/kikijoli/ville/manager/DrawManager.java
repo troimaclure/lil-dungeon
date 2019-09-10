@@ -11,22 +11,22 @@ import java.util.ArrayList;
  */
 public class DrawManager {
 
-	private DrawManager() {
-	}
+    private DrawManager() {
+    }
 
-	public static ArrayList<Entite> entites = new ArrayList<>();
-	public static ArrayList<IShapeDrawable> sprites = new ArrayList<>();
+    public static ArrayList<Entite> entites = new ArrayList<>();
+    public static ArrayList<IShapeDrawable> sprites = new ArrayList<>();
 
-	public static void tour() {
-		entites.forEach((sprite) -> {
-			sprite.draw(Tmap.spriteBatch);
-		});
+    public static void tour() {
+        entites.forEach((sprite) -> {
+            sprite.draw(Tmap.spriteBatch);
+        });
 
-	}
+    }
 
-	public static void drawShape() {
-		sprites.forEach((sprite) -> {
-			sprite.draw(Tmap.shapeRenderer);
-		});
-	}
+    public static void drawShape() {
+        sprites.forEach((sprite) -> {
+            sprite.draw(Tmap.shapeRenderer);
+        });
+    }
 }

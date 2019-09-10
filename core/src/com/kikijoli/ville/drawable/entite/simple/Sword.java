@@ -9,8 +9,8 @@ import com.kikijoli.ville.util.Constantes;
  */
 public class Sword extends Entite {
 
-	public Sword(int srcX, int srcY) {
-		super("sprite/sword.png", srcX, srcY, Constantes.TILESIZE, Constantes.TILESIZE);
-	}
+    public Sword(float srcX, float srcY) {
+        super("sprite/sword.png", srcX, srcY, Constantes.TILESIZE, Constantes.TILESIZE);
+    }
 
 }

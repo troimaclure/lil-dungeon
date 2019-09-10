@@ -11,7 +11,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  *
  * @author troïmaclure
  */
-public interface ISpriteDrawable{ 
+public interface ISpriteDrawable {
 
     public void draw(SpriteBatch batch);
 }

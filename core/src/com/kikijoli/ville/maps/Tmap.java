@@ -26,8 +26,7 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
-import com.kikijoli.ville.automation.GoTo;
-import com.kikijoli.ville.drawable.entite.projectile.Spell.MoveSpell;
+import com.kikijoli.ville.automation.common.GoTo;
 import com.kikijoli.ville.listeners.GeneralKeyListener;
 import com.kikijoli.ville.manager.ProjectileManager;
 import com.kikijoli.ville.manager.CameraManager;
@@ -44,6 +43,7 @@ import com.kikijoli.ville.manager.HudManager;
 import com.kikijoli.ville.manager.SpellManager;
 import com.kikijoli.ville.pathfind.GridManager;
 import com.kikijoli.ville.util.Constantes;
+import com.kikijoli.ville.util.SetLevel;
 import java.util.ArrayList;
 
 /**
@@ -63,7 +63,10 @@ public class Tmap implements Screen {
     public static Vector3 worldCoordinates = new Vector3();
     public static Stage stage;
     public static FPSLogger fps;
+    public static float LINE_WIDTH = 1;
+    public static SetLevel setLevel = null;
     Box2DDebugRenderer debugRenderer = new Box2DDebugRenderer();
+    public static boolean settingLevel;
 
     public static RayHandler getRay() {
         if (ray == null) {
@@ -132,6 +135,11 @@ public class Tmap implements Screen {
 
     @Override
     public void render(float delta) {
+        Gdx.gl.glLineWidth(LINE_WIDTH);
+        if (settingLevel) {
+            setLevel();
+            return;
+        }
         fps.log();
         ShaderManager.step();
         Gdx.gl.glClearColor(Color.BLACK.r, Color.BLACK.g, Color.BLACK.b, Color.BLACK.a);
@@ -154,7 +162,9 @@ public class Tmap implements Screen {
             camera.viewportWidth * camera.zoom,
             camera.viewportHeight * camera.zoom);
         getRay().update();
-        debug();
+        if (setLevel != null) {
+            settingLevel = true;
+        }
     }
 
     private void drawSprites(float delta) {
@@ -262,6 +272,16 @@ public class Tmap implements Screen {
 
     private void test() {
 
+    }
+
+    private void setLevel() {
+
+        hudShapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        hudShapeRenderer.setColor(Color.BLACK);
+        hudShapeRenderer.rect(setLevel.rectangle.x, setLevel.rectangle.y, setLevel.rectangle.width, setLevel.rectangle.height);
+        hudShapeRenderer.flush();
+        hudShapeRenderer.end();
+        setLevel.setting();
     }
 
 }

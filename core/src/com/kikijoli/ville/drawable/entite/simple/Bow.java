@@ -9,8 +9,8 @@ import com.kikijoli.ville.util.Constantes;
  */
 public class Bow extends Entite {
 
-	public Bow(int srcX, int srcY) {
-		super("sprite/bow.png", srcX, srcY, Constantes.TILESIZE, Constantes.TILESIZE);
-	}
+    public Bow(float srcX, float srcY) {
+        super("sprite/bow.png", srcX, srcY, Constantes.TILESIZE, Constantes.TILESIZE);
+    }
 
 }

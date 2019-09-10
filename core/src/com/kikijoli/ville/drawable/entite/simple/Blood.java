@@ -11,17 +11,17 @@ import com.kikijoli.ville.interfaces.IShapeDrawable;
  */
 public class Blood implements IShapeDrawable {
 
-	Rectangle bounds;
-	int radius;
+    Rectangle bounds;
+    int radius;
 
-	public Blood(Rectangle bounds) {
-		this.bounds = bounds;
-	}
+    public Blood(Rectangle bounds) {
+        this.bounds = bounds;
+    }
 
-	@Override
-	public void draw(ShapeRenderer batch) {
-		batch.setColor(Color.RED);
-		batch.ellipse(bounds.x + bounds.width - radius, bounds.y + 5, radius > bounds.width * 2 ? radius : radius++, 10);
-	}
+    @Override
+    public void draw(ShapeRenderer batch) {
+        batch.setColor(Color.RED);
+        batch.ellipse(bounds.x + bounds.width - radius, bounds.y + 5, radius > bounds.width * 2 ? radius : radius++, 10);
+    }
 
 }

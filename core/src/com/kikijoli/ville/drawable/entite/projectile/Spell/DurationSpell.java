@@ -23,7 +23,6 @@ public abstract class DurationSpell extends Rectangle implements Spell {
         this.author = author;
     }
 
-
     @Override
     public Entite getAuthor() {
         return this.author;

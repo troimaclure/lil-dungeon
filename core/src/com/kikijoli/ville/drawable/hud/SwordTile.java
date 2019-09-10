@@ -15,14 +15,14 @@ import com.kikijoli.ville.util.Mode;
  */
 public class SwordTile extends Tile implements ISpriteDrawable, IShapeDrawable {
 
-	public SwordTile(int srcX, int srcY) {
-		super(srcX, srcY, new Sword(0, 0));
-	}
+    public SwordTile(int srcX, int srcY) {
+        super(srcX, srcY, new Sword(0, 0));
+    }
 
-	@Override
-	public void action() {
-		super.action();
-		EntiteManager.player.mode = Mode.SWORD;
-	}
+    @Override
+    public void action() {
+        super.action();
+        EntiteManager.player.mode = Mode.SWORD;
+    }
 
 }

@@ -16,28 +16,28 @@ import com.kikijoli.ville.util.Constantes;
  */
 public abstract class Tile extends Rectangle implements ISpriteDrawable, IShapeDrawable {
 
-	public Entite draw;
-	public boolean selected;
+    public Entite draw;
+    public boolean selected;
 
-	public Tile(int srcX, int srcY, Entite entite) {
-		super(srcX, srcY, Constantes.TILESIZE, Constantes.TILESIZE);
-		this.draw = entite;
-	}
+    public Tile(int srcX, int srcY, Entite entite) {
+        super(srcX, srcY, Constantes.TILESIZE, Constantes.TILESIZE);
+        this.draw = entite;
+    }
 
-	public void action() {
-		HudManager.tiles.forEach((tile) -> tile.selected = false);
-		this.selected = true;
-	}
+    public void action() {
+        HudManager.tiles.forEach((tile) -> tile.selected = false);
+        this.selected = true;
+    }
 
-	@Override
-	public void draw(SpriteBatch batch) {
-		this.draw.setX(x);
-		this.draw.setY(y - Constantes.TILESIZE / 4);
-		this.draw.draw(batch);
-	}
+    @Override
+    public void draw(SpriteBatch batch) {
+        this.draw.setX(x);
+        this.draw.setY(y - Constantes.TILESIZE / 4);
+        this.draw.draw(batch);
+    }
 
-	@Override
-	public void draw(ShapeRenderer batch) {
-		batch.rect(x, y, width, height);
-	}
+    @Override
+    public void draw(ShapeRenderer batch) {
+        batch.rect(x, y, width, height);
+    }
 }
