@@ -6,6 +6,7 @@
 package com.kikijoli.ville.business;
 
 import com.kikijoli.ville.abstracts.AbstractAction;
+import com.kikijoli.ville.maps.Tmap;
 import java.util.HashMap;
 
 /**
@@ -20,6 +21,7 @@ public abstract class AbstractBusiness extends AbstractAction {
 
     @Override
     public void act() {
+        if (Tmap.settingLevel) return;
         ((HashMap<String, AbstractAction>) actions.clone()).values().stream().forEach((action) -> {
             action.act();
         });

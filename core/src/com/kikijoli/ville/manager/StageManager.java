@@ -64,9 +64,12 @@ public class StageManager {
 
     public static void setLevel(int level) {
         EntiteManager.entites.removeIf(e -> e != EntiteManager.player);
+        ParticleManager.particleEffects.removeIf(e -> e != EntiteManager.ball);
+        EntiteManager.deads.clear();
         DrawManager.entites.clear();
         DrawManager.sprites.clear();
         ProjectileManager.projectiles.clear();
+        SpellManager.spells.clear();
         Tmap.getRay().removeAll();
         load(level);
     }

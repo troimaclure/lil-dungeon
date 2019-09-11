@@ -13,21 +13,30 @@ public class SetLevel {
 
     public int level;
     private int count = 0;
-    private int delay = 60;
+    private int countX = 0;
+    private int delay = 50;
+    private boolean end;
     public Rectangle rectangle = new Rectangle(0, 0, 0, 0);
 
     public SetLevel(int level) {
         this.level = level;
-
     }
 
     public void setting() {
-        if (count++ >= delay) {
-            StageManager.setLevel(setLevel.level);
-            setLevel = null;
-            Tmap.settingLevel = false;
+        if (end == false) {
+            if (count++ >= delay) {
+                end = true;
+                StageManager.setLevel(setLevel.level);
+            }
+            rectangle.setWidth(count * 50);
+            rectangle.setHeight(count * 50);
+        } else {
+            if (count-- <= 0) {
+                setLevel = null;
+                Tmap.settingLevel = false;
+            }
+            rectangle.setX(countX++ * 50);
+            rectangle.setY(countX * 50);
         }
-        rectangle.setWidth(count * 30);
-        rectangle.setHeight(count * 30);
     }
 }

@@ -136,10 +136,7 @@ public class Tmap implements Screen {
     @Override
     public void render(float delta) {
         Gdx.gl.glLineWidth(LINE_WIDTH);
-        if (settingLevel) {
-            setLevel();
-            return;
-        }
+
         fps.log();
         ShaderManager.step();
         Gdx.gl.glClearColor(Color.BLACK.r, Color.BLACK.g, Color.BLACK.b, Color.BLACK.a);
@@ -164,6 +161,9 @@ public class Tmap implements Screen {
         getRay().update();
         if (setLevel != null) {
             settingLevel = true;
+        }
+        if (settingLevel) {
+            setLevel();
         }
     }
 
@@ -237,9 +237,7 @@ public class Tmap implements Screen {
     }
 
     private void water() {
-
         WaterManager.drawWater();
-
     }
 
     private void background() {
@@ -248,6 +246,15 @@ public class Tmap implements Screen {
         GridManager.tour();
         spriteBatch.flush();
         spriteBatch.end();
+    }
+
+    private void setLevel() {
+        hudShapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        hudShapeRenderer.setColor(Color.BLACK);
+        hudShapeRenderer.rect(setLevel.rectangle.x, setLevel.rectangle.y, setLevel.rectangle.width, setLevel.rectangle.height);
+        hudShapeRenderer.flush();
+        hudShapeRenderer.end();
+        setLevel.setting();
     }
 
     @Override
@@ -272,16 +279,6 @@ public class Tmap implements Screen {
 
     private void test() {
 
-    }
-
-    private void setLevel() {
-
-        hudShapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        hudShapeRenderer.setColor(Color.BLACK);
-        hudShapeRenderer.rect(setLevel.rectangle.x, setLevel.rectangle.y, setLevel.rectangle.width, setLevel.rectangle.height);
-        hudShapeRenderer.flush();
-        hudShapeRenderer.end();
-        setLevel.setting();
     }
 
 }
