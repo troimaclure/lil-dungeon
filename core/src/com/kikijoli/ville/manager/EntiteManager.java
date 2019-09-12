@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.kikijoli.ville.drawable.entite.Entite;
+import com.kikijoli.ville.drawable.entite.build.Door;
 import com.kikijoli.ville.drawable.entite.build.Key;
 import com.kikijoli.ville.drawable.entite.build.Lock;
 import com.kikijoli.ville.drawable.entite.npc.Player;
@@ -19,6 +20,7 @@ import com.kikijoli.ville.pathfind.GridManager;
 import com.kikijoli.ville.shader.WalkShader;
 import com.kikijoli.ville.util.Constantes;
 import com.kikijoli.ville.util.MathUtils;
+import com.kikijoli.ville.util.SetLevel;
 import java.util.ArrayList;
 
 /**
@@ -156,7 +158,13 @@ public class EntiteManager {
         if (keys.isEmpty()) return;
         for (Lock lock : LockManager.locks) {
             if (Intersector.overlaps(player.anchor, lock.getBoundingRectangle())) {
-                doorOpen(lock);
+                lockOpen(lock);
+                break;
+            }
+        }
+        for (Door door : LockManager.doors) {
+            if (Intersector.overlaps(player.anchor, door.getBoundingRectangle())) {
+                doorOpen(door);
                 break;
             }
         }
@@ -169,10 +177,14 @@ public class EntiteManager {
 
     }
 
-    private static void doorOpen(Lock lock) {
+    private static void lockOpen(Lock lock) {
         LockManager.locks.remove(lock);
         GridManager.setState(Constantes.EMPTY, lock.getBoundingRectangle());
         Tmap.removeBoxs(lock.getBoundingRectangle());
+    }
+
+    private static void doorOpen(Door door) {
+        Tmap.setLevel = new SetLevel(door.data);
     }
 
     public static void handleBall() {

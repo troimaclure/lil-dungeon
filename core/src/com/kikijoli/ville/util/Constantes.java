@@ -21,6 +21,7 @@ public class Constantes {
     public final static String LOCK = "4";
     public final static String GUARD = "5";
     public final static String PLAYER = "6";
+    public final static String DOOR = "7";
     public static String NPC_MOVEMENT_OK = Constantes.KEY + Constantes.EMPTY + Constantes.GUARD + Constantes.PLAYER;
     public static String BULLET_MOVEMENT_OK = Constantes.KEY + Constantes.EMPTY + Constantes.GUARD + Constantes.PLAYER + Constantes.WATER;
     public static String NPCFILTERBUILD = Constantes.WALL + Constantes.LOCK + Constantes.WATER;

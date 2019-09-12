@@ -81,9 +81,9 @@ public class GeneralKeyListener extends InputAdapter {
             case Keys.NUM_9:
                 tilesAction(8);
                 break;
-            case Keys.K:
-                Tmap.setLevel = new SetLevel(2);
-                break;
+//            case Keys.K:
+//                Tmap.setLevel = new SetLevel(2);
+//                break;
 
         }
 

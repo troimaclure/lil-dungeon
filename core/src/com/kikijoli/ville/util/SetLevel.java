@@ -11,14 +11,14 @@ import static com.kikijoli.ville.maps.Tmap.setLevel;
  */
 public class SetLevel {
 
-    public int level;
+    public String level;
     private int count = 0;
     private int countX = 0;
-    private int delay = 50;
+    private final int delay = 50;
     private boolean end;
     public Rectangle rectangle = new Rectangle(0, 0, 0, 0);
 
-    public SetLevel(int level) {
+    public SetLevel(String level) {
         this.level = level;
     }
 

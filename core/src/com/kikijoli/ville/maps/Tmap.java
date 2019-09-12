@@ -112,7 +112,7 @@ public class Tmap implements Screen {
     }
 
     public Tmap() {
-        StageManager.load(1);
+        StageManager.loadFromXml("1");
 //        GridManager.initialize(100, 100, Constantes.TILESIZE);
     }
 
@@ -165,6 +165,7 @@ public class Tmap implements Screen {
         if (settingLevel) {
             setLevel();
         }
+//        debug();
     }
 
     private void drawSprites(float delta) {
@@ -183,10 +184,19 @@ public class Tmap implements Screen {
     }
 
     private void drawHud() {
+        hudShapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        HudManager.drawShape();
+        hudShapeRenderer.flush();
+        hudShapeRenderer.end();
+        hudShapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+        HudManager.drawLines();
+        hudShapeRenderer.flush();
+        hudShapeRenderer.end();
         hudBatch.begin();
         HudManager.drawSprite();
         hudBatch.flush();
         hudBatch.end();
+
     }
 
     private void drawShapes() {
@@ -196,14 +206,6 @@ public class Tmap implements Screen {
         shapeRenderer.flush();
         shapeRenderer.end();
 
-        hudShapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        HudManager.drawShape();
-        hudShapeRenderer.flush();
-        hudShapeRenderer.end();
-        hudShapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-        HudManager.drawLines();
-        hudShapeRenderer.flush();
-        hudShapeRenderer.end();
     }
 
     private void debug() {
@@ -225,6 +227,10 @@ public class Tmap implements Screen {
         SpellManager.spells.forEach((t) -> {
             shapeRenderer.rect(t.getAnchors().getX(), t.getAnchors().getY(), t.getAnchors().getWidth(), t.getAnchors().getHeight());
         });
+        LockManager.doors.forEach((t) -> {
+            shapeRenderer.circle(t.anchor.x, t.anchor.y, t.anchor.radius);
+            shapeRenderer.rect(t.getBoundingRectangle().x, t.getBoundingRectangle().y, t.getBoundingRectangle().width, t.getBoundingRectangle().height);
+        });
         shapeRenderer.flush();
         shapeRenderer.end();
     }
@@ -241,7 +247,6 @@ public class Tmap implements Screen {
     }
 
     private void background() {
-
         spriteBatch.begin();
         GridManager.tour();
         spriteBatch.flush();

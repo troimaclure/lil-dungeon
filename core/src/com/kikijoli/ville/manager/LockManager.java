@@ -5,6 +5,7 @@
  */
 package com.kikijoli.ville.manager;
 
+import com.kikijoli.ville.drawable.entite.build.Door;
 import com.kikijoli.ville.drawable.entite.build.Key;
 import com.kikijoli.ville.drawable.entite.build.Lock;
 import com.kikijoli.ville.maps.Tmap;
@@ -17,6 +18,7 @@ import java.util.ArrayList;
 public class LockManager {
 
     public static ArrayList<Lock> locks = new ArrayList<>();
+    public static ArrayList<Door> doors = new ArrayList<>();
     public static ArrayList<Key> keys = new ArrayList<>();
 
     public static void addLock(int x, int y) {
@@ -36,6 +38,12 @@ public class LockManager {
         keys.forEach((key) -> {
             key.draw(Tmap.spriteBatch);
         });
+        doors.forEach((t) -> {
+            t.draw(Tmap.spriteBatch);
+        });
+    }
 
+    public static void addDoor(int x, int y, String data) {
+        doors.add(new Door(x, y, data));
     }
 }
