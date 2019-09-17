@@ -165,7 +165,7 @@ public class Tmap implements Screen {
         if (settingLevel) {
             setLevel();
         }
-//        debug();
+        debug();
     }
 
     private void drawSprites(float delta) {

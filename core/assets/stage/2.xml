@@ -66,14 +66,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile2"/>
-        <string>7</string>
-       </void>
-      </void>
-      <void class="leveleditor.Tile" method="getField">
-       <string>data</string>
-       <void method="set">
-        <object idref="Tile2"/>
-        <string>3</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -891,7 +884,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile27"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -1086,7 +1079,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile32"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -1125,7 +1118,14 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile33"/>
-        <string>0</string>
+        <string>7</string>
+       </void>
+      </void>
+      <void class="leveleditor.Tile" method="getField">
+       <string>data</string>
+       <void method="set">
+        <object idref="Tile33"/>
+        <string>3</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -1164,7 +1164,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile34"/>
-        <string>3</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -1203,7 +1203,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile35"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -1320,7 +1320,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile38"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -1359,7 +1359,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile39"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -1476,7 +1476,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile42"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -1632,7 +1632,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile46"/>
-        <string>6</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -1785,7 +1785,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile50"/>
-        <string>0</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -1863,7 +1863,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile52"/>
-        <string>0</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -1902,7 +1902,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile53"/>
-        <string>0</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -1941,7 +1941,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile54"/>
-        <string>0</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -1980,7 +1980,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile55"/>
-        <string>0</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -2058,7 +2058,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile57"/>
-        <string>0</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -2097,7 +2097,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile58"/>
-        <string>0</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -2136,7 +2136,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile59"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -2253,7 +2253,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile62"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -2292,7 +2292,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile63"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -2370,7 +2370,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile65"/>
-        <string>0</string>
+        <string>6</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -2409,7 +2409,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile66"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -2757,7 +2757,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile75"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -2835,7 +2835,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile77"/>
-        <string>0</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -2913,7 +2913,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile79"/>
-        <string>0</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -2952,7 +2952,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile80"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -3069,7 +3069,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile83"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -3186,7 +3186,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile86"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -3225,7 +3225,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile87"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -3342,7 +3342,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile90"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -3459,7 +3459,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile93"/>
-        <string>0</string>
+        <string>5</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -3690,7 +3690,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile99"/>
-        <string>1</string>
+        <string>5</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -3768,7 +3768,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile101"/>
-        <string>0</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -3846,7 +3846,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile103"/>
-        <string>0</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -3885,7 +3885,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile104"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -3963,7 +3963,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile106"/>
-        <string>0</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -4041,7 +4041,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile108"/>
-        <string>5</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -4080,7 +4080,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile109"/>
-        <string>0</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -4119,7 +4119,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile110"/>
-        <string>4</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -4158,7 +4158,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile111"/>
-        <string>0</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -4197,7 +4197,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile112"/>
-        <string>0</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -4236,7 +4236,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile113"/>
-        <string>0</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -4545,7 +4545,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile121"/>
-        <string>5</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -4584,7 +4584,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile122"/>
-        <string>5</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -4623,7 +4623,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile123"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -4701,7 +4701,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile125"/>
-        <string>0</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -4779,7 +4779,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile127"/>
-        <string>0</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -4818,7 +4818,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile128"/>
-        <string>4</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -4935,7 +4935,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile131"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -5052,7 +5052,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile134"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -5091,7 +5091,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile135"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -5208,7 +5208,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile138"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -5517,7 +5517,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile146"/>
-        <string>0</string>
+        <string>5</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -5556,7 +5556,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile147"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -5634,7 +5634,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile149"/>
-        <string>0</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -5673,7 +5673,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile150"/>
-        <string>5</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -5712,7 +5712,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile151"/>
-        <string>0</string>
+        <string>4</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -5751,7 +5751,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile152"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -5790,7 +5790,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile153"/>
-        <string>5</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -5868,7 +5868,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile155"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -5985,7 +5985,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile158"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -6024,7 +6024,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile159"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -6063,7 +6063,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile160"/>
-        <string>3</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -6141,7 +6141,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile162"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -6258,7 +6258,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile165"/>
-        <string>2</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -6297,7 +6297,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile166"/>
-        <string>2</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -6411,7 +6411,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile169"/>
-        <string>5</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -6450,7 +6450,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile170"/>
-        <string>5</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -6489,7 +6489,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile171"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -6528,7 +6528,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile172"/>
-        <string>3</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -6567,7 +6567,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile173"/>
-        <string>0</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -6645,7 +6645,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile175"/>
-        <string>0</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -6684,7 +6684,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile176"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -6801,7 +6801,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile179"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -6918,7 +6918,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile182"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -6957,7 +6957,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile183"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -7074,7 +7074,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile186"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -7422,7 +7422,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile195"/>
-        <string>1</string>
+        <string>5</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -7500,7 +7500,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile197"/>
-        <string>0</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -7578,7 +7578,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile199"/>
-        <string>0</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -7617,7 +7617,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile200"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -7734,7 +7734,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile203"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -7812,7 +7812,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile205"/>
-        <string>3</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -7851,7 +7851,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile206"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -7890,7 +7890,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile207"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -7929,7 +7929,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile208"/>
-        <string>5</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -8007,7 +8007,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile210"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -8046,7 +8046,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile211"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -8316,7 +8316,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile218"/>
-        <string>2</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -8355,7 +8355,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile219"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -8433,7 +8433,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile221"/>
-        <string>0</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -8472,7 +8472,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile222"/>
-        <string>5</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -8511,7 +8511,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile223"/>
-        <string>0</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -8589,7 +8589,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile225"/>
-        <string>0</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -8628,7 +8628,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile226"/>
-        <string>0</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -8706,7 +8706,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile228"/>
-        <string>5</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -8745,7 +8745,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile229"/>
-        <string>0</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -8862,7 +8862,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile232"/>
-        <string>0</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -8901,7 +8901,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile233"/>
-        <string>0</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -9018,7 +9018,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile236"/>
-        <string>0</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -9057,7 +9057,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile237"/>
-        <string>0</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -9249,7 +9249,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile242"/>
-        <string>0</string>
+        <string>5</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -9288,7 +9288,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile243"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -9366,7 +9366,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile245"/>
-        <string>0</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -9600,7 +9600,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile251"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -9717,7 +9717,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile254"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -9756,7 +9756,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile255"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -9873,7 +9873,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile258"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -9912,7 +9912,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile259"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -9990,7 +9990,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile261"/>
-        <string>0</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -10029,7 +10029,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile262"/>
-        <string>3</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -10143,7 +10143,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile265"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -10221,7 +10221,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile267"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -10260,7 +10260,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile268"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -10299,7 +10299,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile269"/>
-        <string>4</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -10338,7 +10338,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile270"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -10455,7 +10455,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile273"/>
-        <string>4</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -10494,7 +10494,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile274"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -10533,7 +10533,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile275"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -10611,7 +10611,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile277"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -10650,7 +10650,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile278"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -10689,7 +10689,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile279"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -10728,7 +10728,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile280"/>
-        <string>4</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -10806,7 +10806,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile282"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -10845,7 +10845,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile283"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -10884,7 +10884,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile284"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -10923,7 +10923,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile285"/>
-        <string>0</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -10962,7 +10962,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile286"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -11076,7 +11076,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile289"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -11115,7 +11115,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile290"/>
-        <string>4</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -11154,7 +11154,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile291"/>
-        <string>1</string>
+        <string>5</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -11193,7 +11193,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile292"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -11232,7 +11232,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile293"/>
-        <string>0</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -11271,7 +11271,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile294"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -11310,7 +11310,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile295"/>
-        <string>4</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -11427,7 +11427,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile298"/>
-        <string>1</string>
+        <string>2</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -11466,7 +11466,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile299"/>
-        <string>1</string>
+        <string>2</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -11505,7 +11505,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile300"/>
-        <string>4</string>
+        <string>2</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -11544,7 +11544,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile301"/>
-        <string>1</string>
+        <string>2</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -11583,7 +11583,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile302"/>
-        <string>1</string>
+        <string>2</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -11622,7 +11622,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile303"/>
-        <string>1</string>
+        <string>2</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -11661,7 +11661,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile304"/>
-        <string>0</string>
+        <string>2</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -11739,7 +11739,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile306"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -11778,7 +11778,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile307"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -11817,7 +11817,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile308"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -11856,7 +11856,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile309"/>
-        <string>4</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -11895,7 +11895,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile310"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -12087,7 +12087,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile315"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -12165,7 +12165,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile317"/>
-        <string>0</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -12204,7 +12204,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile318"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -12282,7 +12282,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile320"/>
-        <string>0</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -12399,7 +12399,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile323"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -12516,7 +12516,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile326"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -12633,7 +12633,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile329"/>
-        <string>0</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -12672,7 +12672,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile330"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -12711,7 +12711,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile331"/>
-        <string>1</string>
+        <string>5</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -12789,7 +12789,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile333"/>
-        <string>0</string>
+        <string>5</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -12981,7 +12981,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile338"/>
-        <string>5</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -13020,7 +13020,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile339"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -13098,7 +13098,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile341"/>
-        <string>5</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -13137,7 +13137,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile342"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -13215,7 +13215,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile344"/>
-        <string>0</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -13332,7 +13332,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile347"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -13371,7 +13371,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile348"/>
-        <string>0</string>
+        <string>5</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -13410,7 +13410,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile349"/>
-        <string>0</string>
+        <string>3</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -13449,7 +13449,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile350"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -13488,7 +13488,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile351"/>
-        <string>0</string>
+        <string>5</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -13566,7 +13566,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile353"/>
-        <string>0</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -13605,7 +13605,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile354"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -13644,7 +13644,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile355"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -13953,7 +13953,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile363"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -14031,7 +14031,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile365"/>
-        <string>0</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -14070,7 +14070,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile366"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -14148,7 +14148,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile368"/>
-        <string>0</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -14187,7 +14187,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile369"/>
-        <string>0</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -14226,7 +14226,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile370"/>
-        <string>0</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -14304,7 +14304,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile372"/>
-        <string>5</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -14343,7 +14343,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile373"/>
-        <string>0</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -14421,7 +14421,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile375"/>
-        <string>0</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -14460,7 +14460,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile376"/>
-        <string>2</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -14499,7 +14499,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile377"/>
-        <string>2</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -14616,7 +14616,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile380"/>
-        <string>0</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -14655,7 +14655,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile381"/>
-        <string>5</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -14694,7 +14694,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile382"/>
-        <string>0</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -14808,7 +14808,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile385"/>
-        <string>3</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -14886,7 +14886,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile387"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -14964,7 +14964,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile389"/>
-        <string>0</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -15003,7 +15003,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile390"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -15081,7 +15081,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile392"/>
-        <string>2</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -15120,7 +15120,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile393"/>
-        <string>2</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -15159,7 +15159,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile394"/>
-        <string>2</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -15198,7 +15198,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile395"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -15315,7 +15315,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile398"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -15432,7 +15432,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile401"/>
-        <string>3</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -15471,7 +15471,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile402"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -15510,7 +15510,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile403"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -15780,7 +15780,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile410"/>
-        <string>2</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -15819,7 +15819,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile411"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -15897,7 +15897,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile413"/>
-        <string>0</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -15936,7 +15936,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile414"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -16053,7 +16053,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile417"/>
-        <string>5</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -16092,7 +16092,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile418"/>
-        <string>0</string>
+        <string>5</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -16131,7 +16131,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile419"/>
-        <string>4</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -16248,7 +16248,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile422"/>
-        <string>1</string>
+        <string>5</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -16404,7 +16404,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile426"/>
-        <string>1</string>
+        <string>5</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -16443,7 +16443,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile427"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -16752,7 +16752,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile435"/>
-        <string>4</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -16830,7 +16830,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile437"/>
-        <string>0</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -16869,7 +16869,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile438"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -16986,7 +16986,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile441"/>
-        <string>5</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -17064,7 +17064,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile443"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -17181,7 +17181,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile446"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -17337,7 +17337,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile450"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -17376,7 +17376,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile451"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -17415,7 +17415,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile452"/>
-        <string>3</string>
+        <string>5</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -17493,7 +17493,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile454"/>
-        <string>0</string>
+        <string>5</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -17685,7 +17685,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile459"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -17724,7 +17724,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile460"/>
-        <string>0</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -17763,7 +17763,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile461"/>
-        <string>0</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -17841,7 +17841,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile463"/>
-        <string>0</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -17880,7 +17880,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile464"/>
-        <string>0</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -17919,7 +17919,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile465"/>
-        <string>0</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -17958,7 +17958,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile466"/>
-        <string>0</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -18036,7 +18036,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile468"/>
-        <string>0</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -18075,7 +18075,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile469"/>
-        <string>0</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -18114,7 +18114,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile470"/>
-        <string>1</string>
+        <string>3</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -18153,7 +18153,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile471"/>
-        <string>0</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -18192,7 +18192,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile472"/>
-        <string>0</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -18231,7 +18231,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile473"/>
-        <string>0</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -18348,7 +18348,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile476"/>
-        <string>0</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -18387,7 +18387,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile477"/>
-        <string>0</string>
+        <string>4</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -18426,7 +18426,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile478"/>
-        <string>0</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -18618,7 +18618,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile483"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -18735,7 +18735,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile486"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -18930,7 +18930,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile491"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -19008,7 +19008,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile493"/>
-        <string>0</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -19086,7 +19086,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile495"/>
-        <string>0</string>
+        <string>1</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -19125,7 +19125,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile496"/>
-        <string>5</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -19203,7 +19203,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile498"/>
-        <string>4</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -19551,7 +19551,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile507"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -19629,7 +19629,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile509"/>
-        <string>3</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -19668,7 +19668,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile510"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -19863,7 +19863,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile515"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -19902,7 +19902,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile516"/>
-        <string>3</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -19980,7 +19980,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile518"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -20136,7 +20136,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile522"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -20175,7 +20175,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile523"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -20484,7 +20484,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile531"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -20601,7 +20601,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile534"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -20640,7 +20640,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile535"/>
-        <string>3</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -20796,7 +20796,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile539"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -20835,7 +20835,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile540"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -20874,7 +20874,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile541"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -20913,7 +20913,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile542"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -21069,7 +21069,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile546"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -21108,7 +21108,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile547"/>
-        <string>1</string>
+        <string>0</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">

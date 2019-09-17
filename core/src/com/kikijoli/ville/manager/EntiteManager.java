@@ -155,9 +155,8 @@ public class EntiteManager {
     }
 
     private static void handleDoor() {
-        if (keys.isEmpty()) return;
         for (Lock lock : LockManager.locks) {
-            if (Intersector.overlaps(player.anchor, lock.getBoundingRectangle())) {
+            if (!keys.isEmpty() && Intersector.overlaps(player.anchor, lock.getBoundingRectangle())) {
                 lockOpen(lock);
                 break;
             }
@@ -178,13 +177,15 @@ public class EntiteManager {
     }
 
     private static void lockOpen(Lock lock) {
+        keys.remove(0);
         LockManager.locks.remove(lock);
         GridManager.setState(Constantes.EMPTY, lock.getBoundingRectangle());
         Tmap.removeBoxs(lock.getBoundingRectangle());
     }
 
     private static void doorOpen(Door door) {
-        Tmap.setLevel = new SetLevel(door.data);
+        if (Tmap.setLevel == null)
+            Tmap.setLevel = new SetLevel(door.data);
     }
 
     public static void handleBall() {
