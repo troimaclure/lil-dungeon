@@ -23,8 +23,7 @@ import com.kikijoli.ville.util.Mode;
  */
 public class PlayerBuisiness extends AbstractBusiness {
 
-    private static final String DASH = "Dash";
-    private static final String ATTACK = "Attack";
+    public static final String DASH = "Dash";
 
     public PlayerBuisiness() {
     }

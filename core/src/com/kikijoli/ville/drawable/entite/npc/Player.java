@@ -5,6 +5,7 @@
  */
 package com.kikijoli.ville.drawable.entite.npc;
 
+import com.badlogic.gdx.graphics.Color;
 import com.kikijoli.ville.business.PlayerBuisiness;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.kikijoli.ville.business.AbstractBusiness;
@@ -30,7 +31,12 @@ public final class Player extends Entite implements IBusiness {
 
     @Override
     public void draw(SpriteBatch batch) {
+        if (((PlayerBuisiness) this.buisiness).actions.containsKey(PlayerBuisiness.DASH)) {
+            batch.setColor(new Color(batch.getColor().r, batch.getColor().g, batch.getColor().b, 0.5f));
+        }
         super.draw(batch);
+        batch.setColor(new Color(batch.getColor().r, batch.getColor().g, batch.getColor().b, 1f));
+
     }
 
     @Override

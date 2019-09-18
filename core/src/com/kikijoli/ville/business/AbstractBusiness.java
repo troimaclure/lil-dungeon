@@ -15,7 +15,7 @@ import java.util.HashMap;
  */
 public abstract class AbstractBusiness extends AbstractAction {
 
-    protected HashMap<String, AbstractAction> actions = new HashMap<>();
+    public HashMap<String, AbstractAction> actions = new HashMap<>();
 
     protected AbstractAction current;
 

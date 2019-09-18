@@ -19,7 +19,6 @@ import com.kikijoli.ville.drawable.entite.simple.Sword;
 import com.kikijoli.ville.manager.EntiteManager;
 import com.kikijoli.ville.shader.ClickShader;
 import com.kikijoli.ville.shader.WalkShader;
-import com.kikijoli.ville.util.Constantes;
 import com.kikijoli.ville.util.MathUtils;
 
 /**
@@ -52,7 +51,7 @@ public class GuardBuisiness extends AbstractBusiness {
         int dashDelay = 150;
         int countDash = 0;
         int bowDelay = 150;
-        int countBow = 50;
+        int countBow = 150;
 
         @Override
         public void act() {

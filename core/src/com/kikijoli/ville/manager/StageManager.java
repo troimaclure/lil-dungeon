@@ -9,6 +9,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.kikijoli.ville.drawable.entite.decor.Water;
 import com.kikijoli.ville.drawable.entite.npc.Guard;
+import com.kikijoli.ville.drawable.entite.npc.Turret;
 import com.kikijoli.ville.maps.Tmap;
 import com.kikijoli.ville.pathfind.GridManager;
 import com.kikijoli.ville.util.Constantes;
@@ -82,6 +83,9 @@ public class StageManager {
                 break;
             case Constantes.DOOR:
                 LockManager.addDoor(x, y, data);
+                break;
+            case Constantes.TURRET:
+                EntiteManager.addEntite(new Turret(x, y));
                 break;
         }
     }

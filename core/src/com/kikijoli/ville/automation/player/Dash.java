@@ -19,6 +19,7 @@ public abstract class Dash extends AbstractAction {
     public int count = 0;
     public int delay = 10;
     public int oldSpeed = 0;
+    public int cooldown = 60 * 3;
     private boolean begin;
 
     public Dash(Entite entite) {
@@ -28,6 +29,7 @@ public abstract class Dash extends AbstractAction {
 
     @Override
     public void act() {
+        cooldown--;
         if (!begin) {
             this.entite.speed += boost;
             begin = true;
@@ -35,8 +37,10 @@ public abstract class Dash extends AbstractAction {
         if (count++ < delay) return;
         if (entite.speed > oldSpeed) {
             entite.speed--;
-        } else onFinish();
-
+        } else {
+            if (cooldown <= 0)
+                onFinish();
+        }
     }
 
     public abstract void onFinish();
