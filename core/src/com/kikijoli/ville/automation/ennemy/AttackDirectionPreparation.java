@@ -5,7 +5,6 @@ import com.kikijoli.ville.abstracts.AbstractAction;
 import com.kikijoli.ville.drawable.entite.Entite;
 import com.kikijoli.ville.manager.DrawManager;
 import com.kikijoli.ville.manager.EntiteManager;
-import com.kikijoli.ville.shader.BeatShader;
 import com.kikijoli.ville.shader.ClickShader;
 import com.kikijoli.ville.util.MathUtils;
 

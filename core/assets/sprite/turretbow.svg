@@ -58,17 +58,12 @@
      inkscape:groupmode="layer"
      id="layer1"
      transform="translate(0,-280.06665)">
-    <path
-       style="fill:#ffffff;stroke-width:0.10535444"
-       d="m 8.31555,280.22745 a 5.2975475,6.7138755 0 0 0 -5.274908,6.14196 h 0.765126 a 4.5288184,5.6972633 0 0 1 4.492966,-5.01962 4.5288184,5.6972633 0 0 1 4.49114,5.01962 h 0.800586 a 5.2975475,6.7138755 0 0 0 -5.27491,-6.14196 z"
-       id="path3713"
-       inkscape:connector-curvature="0" />
     <rect
-       style="fill:#ffffff;stroke-width:0.26458332"
-       id="rect3864"
-       width="9.4494047"
-       height="0.094494052"
-       x="3.5907745"
-       y="285.28271" />
+       style="fill:#ffffff;stroke-width:0.26881692"
+       id="rect3789"
+       width="2.126116"
+       height="9.0714293"
+       x="7.3232884"
+       y="280.08554" />
   </g>
 </svg>
