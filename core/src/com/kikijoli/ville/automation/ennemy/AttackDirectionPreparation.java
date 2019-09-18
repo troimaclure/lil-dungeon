@@ -3,9 +3,10 @@ package com.kikijoli.ville.automation.ennemy;
 import com.badlogic.gdx.math.Vector2;
 import com.kikijoli.ville.abstracts.AbstractAction;
 import com.kikijoli.ville.drawable.entite.Entite;
-import com.kikijoli.ville.drawable.entite.simple.LineTarget;
 import com.kikijoli.ville.manager.DrawManager;
 import com.kikijoli.ville.manager.EntiteManager;
+import com.kikijoli.ville.shader.BeatShader;
+import com.kikijoli.ville.shader.ClickShader;
 import com.kikijoli.ville.util.MathUtils;
 
 /**
@@ -24,10 +25,14 @@ public abstract class AttackDirectionPreparation extends AbstractAction {
     public AttackDirectionPreparation(Entite entite, Entite draw) {
         this.entite = entite;
         this.draw = draw;
+
     }
 
     @Override
     public void act() {
+        if (entite.shader == null) {
+            entite.shader = new ClickShader(entite, null);
+        }
         if (prepared) {
             if (count++ >= delay) finish();
             return;
