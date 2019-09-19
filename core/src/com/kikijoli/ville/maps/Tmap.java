@@ -13,6 +13,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Intersector;
@@ -31,6 +32,7 @@ import com.kikijoli.ville.listeners.GeneralKeyListener;
 import com.kikijoli.ville.manager.ProjectileManager;
 import com.kikijoli.ville.manager.CameraManager;
 import static com.kikijoli.ville.manager.CameraManager.camera;
+import com.kikijoli.ville.manager.ColorManager;
 import com.kikijoli.ville.manager.DrawManager;
 import com.kikijoli.ville.manager.EntiteManager;
 import com.kikijoli.ville.manager.LockManager;
@@ -65,8 +67,9 @@ public class Tmap implements Screen {
     public static FPSLogger fps;
     public static float LINE_WIDTH = 1;
     public static SetLevel setLevel = null;
-    Box2DDebugRenderer debugRenderer = new Box2DDebugRenderer();
     public static boolean settingLevel;
+    private static final String ESCAPE_TO_RAGE_QUIT = "PRESS ESCAPE TO RAGE QUIT";
+    private static final String ENTER_TO_RELOAD = "PRESS ENTER TO RELOAD";
 
     public static RayHandler getRay() {
         if (ray == null) {
@@ -110,6 +113,7 @@ public class Tmap implements Screen {
         groundBox.dispose();
         groundBody.setUserData(new Rectangle(x, y, Constantes.TILESIZE, Constantes.TILESIZE));
     }
+    Box2DDebugRenderer debugRenderer = new Box2DDebugRenderer();
 
     public Tmap() {
         StageManager.loadFromXml("1");
@@ -165,7 +169,8 @@ public class Tmap implements Screen {
         if (settingLevel) {
             setLevel();
         }
-        debug();
+
+//        debug();
     }
 
     private void drawSprites(float delta) {
@@ -186,14 +191,21 @@ public class Tmap implements Screen {
     private void drawHud() {
         hudShapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         HudManager.drawShape();
+        if (EntiteManager.playerDead) {
+            drawDeadBackground();
+        }
         hudShapeRenderer.flush();
         hudShapeRenderer.end();
         hudShapeRenderer.begin(ShapeRenderer.ShapeType.Line);
         HudManager.drawLines();
+
         hudShapeRenderer.flush();
         hudShapeRenderer.end();
         hudBatch.begin();
         HudManager.drawSprite();
+        if (EntiteManager.playerDead) {
+            drawDeadMessage();
+        }
         hudBatch.flush();
         hudBatch.end();
 
@@ -202,6 +214,7 @@ public class Tmap implements Screen {
     private void drawShapes() {
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         DrawManager.drawShape();
+        EntiteManager.player.draw(shapeRenderer);
 
         shapeRenderer.flush();
         shapeRenderer.end();
@@ -284,6 +297,24 @@ public class Tmap implements Screen {
 
     private void test() {
 
+    }
+
+    private void drawDeadBackground() {
+        hudShapeRenderer.setColor(Color.RED);
+        hudShapeRenderer.rect(0, Gdx.graphics.getHeight() / 2 - 225, Gdx.graphics.getWidth(), 400);
+    }
+
+    private void drawDeadMessage() {
+        MessageManager.segoe.getData().setScale(2);
+        GlyphLayout layout = new GlyphLayout(MessageManager.segoe, ENTER_TO_RELOAD);
+        MessageManager.segoe.setColor(Color.BLACK);
+        float fontX = (Gdx.graphics.getWidth() - layout.width) / 2;
+        float fontY = (Gdx.graphics.getHeight() + layout.height) / 2;
+        MessageManager.segoe.draw(hudBatch, ENTER_TO_RELOAD, fontX, fontY);
+        layout = new GlyphLayout(MessageManager.segoe, ESCAPE_TO_RAGE_QUIT);
+        fontX = (Gdx.graphics.getWidth() - layout.width) / 2;
+        fontY = (float) ((Gdx.graphics.getHeight() + layout.height) / 2 - layout.height * 1.2);
+        MessageManager.segoe.draw(hudBatch, ESCAPE_TO_RAGE_QUIT, fontX, fontY);
     }
 
 }

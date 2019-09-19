@@ -12,8 +12,11 @@ import java.io.ByteArrayInputStream;
  */
 public class XmlManager {
 
+    private static final String XML = ".xml";
+    private static final String STAGE_PATH = "stage/";
+
     public static Tile[][] load(String name) {
-        FileHandle internal = Gdx.files.internal("stage/" + name + ".xml");
+        FileHandle internal = Gdx.files.internal(STAGE_PATH + name + XML);
         String str = internal.readString();
         try (XMLDecoder d = new XMLDecoder(new ByteArrayInputStream(str.getBytes()))) {
             return (Tile[][]) d.readObject();

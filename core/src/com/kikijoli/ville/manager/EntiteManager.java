@@ -38,6 +38,7 @@ public class EntiteManager {
     private static final ArrayList<Key> keys = new ArrayList<>();
     public static boolean playedBall = false;
     public static Vector2 currentBallPosition = new Vector2();
+    public static boolean playerDead;
 
     public static void addEntite(Entite entite) {
         entites.add(entite);
@@ -231,7 +232,11 @@ public class EntiteManager {
                 dead.setRotation(dead.getRotation() + 5);
             }
             dead.draw(spriteBatch);
+            if (dead == player) {
+                playerDead = true;
+            }
         });
+
     }
 
     public static void spellEffect(Entite entite, Spell spell) {

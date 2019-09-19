@@ -5,6 +5,7 @@
  */
 package com.kikijoli.ville.listeners;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputAdapter;
@@ -13,8 +14,7 @@ import com.kikijoli.ville.business.PlayerBuisiness;
 import com.kikijoli.ville.manager.ColorManager;
 import com.kikijoli.ville.manager.EntiteManager;
 import com.kikijoli.ville.manager.HudManager;
-import com.kikijoli.ville.maps.Tmap;
-import com.kikijoli.ville.util.SetLevel;
+import com.kikijoli.ville.manager.StageManager;
 
 /**
  *
@@ -81,6 +81,16 @@ public class GeneralKeyListener extends InputAdapter {
             case Keys.NUM_9:
                 tilesAction(8);
                 break;
+            case Keys.ENTER:
+                if (EntiteManager.playerDead) {
+                    StageManager.reload();
+                }
+                break;
+            case Keys.ESCAPE:
+                if (EntiteManager.playerDead) {
+                    Gdx.app.exit();
+                }
+                break;
 //            case Keys.K:
 //                Tmap.setLevel = new SetLevel(2);
 //                break;
@@ -122,12 +132,7 @@ public class GeneralKeyListener extends InputAdapter {
 
     @Override
     public boolean scrolled(int amount) {
-//		if ((CameraManager.camera.zoom + ((float) amount / 5) > 0.5f && CameraManager.camera.zoom + ((float) amount / 5) < 6.5f)) {
-//			CameraManager.camera.zoom += ((float) amount / 5);
-//			CameraManager.camera.update();
-//		}
-
-        HudManager.setSelected(-amount);
+        HudManager.setSelected(amount);
         return super.scrolled(amount);
     }
 

@@ -34,9 +34,9 @@ public class PlayerBuisiness extends AbstractBusiness {
     }
 
     public void dash() {
-        if (actions.containsKey(DASH)) return;
+        if (actions.containsKey(DASH) || !EntiteManager.player.canDash()) return;
+        EntiteManager.player.dash(); 
         actions.put(DASH, new Dash(EntiteManager.player) {
-
             @Override
             public void onFinish() {
                 actions.remove(DASH);

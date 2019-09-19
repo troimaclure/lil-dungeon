@@ -9,7 +9,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.kikijoli.ville.drawable.entite.decor.Water;
 import com.kikijoli.ville.drawable.entite.npc.Guard;
+import com.kikijoli.ville.drawable.entite.npc.Player;
 import com.kikijoli.ville.drawable.entite.npc.Turret;
+import static com.kikijoli.ville.manager.EntiteManager.player;
 import com.kikijoli.ville.maps.Tmap;
 import com.kikijoli.ville.pathfind.GridManager;
 import com.kikijoli.ville.util.Constantes;
@@ -23,6 +25,10 @@ public class StageManager {
 
     private static final String SEPARATOR = "\\r?\\n";
     private static final String EMPTY = "";
+    private static String currentLevel;
+
+    private static final String TXT = ".txt";
+    private static final String STAGE_PATH = "stage/";
 
     public static void loadFromXml(String level) {
         Tile[][] load = XmlManager.load(level);
@@ -38,11 +44,12 @@ public class StageManager {
             }
             i++;
         }
+        currentLevel = level;
     }
 
     public static void load(int level) {
 
-        FileHandle internal = Gdx.files.internal("stage/" + level + ".txt");
+        FileHandle internal = Gdx.files.internal(STAGE_PATH + level + TXT);
         String[] contentSplit = internal.readString().split(SEPARATOR);
         GridManager.initialize(contentSplit.length, contentSplit[0].split(EMPTY).length, Constantes.TILESIZE);
         int i = 0;
@@ -91,6 +98,7 @@ public class StageManager {
     }
 
     public static void setLevel(String level) {
+
         EntiteManager.entites.removeIf(e -> e != EntiteManager.player);
         ParticleManager.particleEffects.removeIf(e -> e != EntiteManager.ball);
         EntiteManager.deads.clear();
@@ -103,6 +111,19 @@ public class StageManager {
         SpellManager.spells.clear();
         Tmap.getRay().removeAll();
         loadFromXml(level);
+    }
+
+    static String getCurrentLevel() {
+        return currentLevel;
+    }
+
+    public static void reload() {
+        EntiteManager.playerDead = false;
+        EntiteManager.deads.clear();
+        EntiteManager.player = new Player(0, 0);
+        HudManager.setSelected(0);
+        EntiteManager.addEntite(player);
+        setLevel(getCurrentLevel());
     }
 
 }
