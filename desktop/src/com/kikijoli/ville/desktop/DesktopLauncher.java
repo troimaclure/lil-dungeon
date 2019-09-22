@@ -1,3 +1,4 @@
+
 package com.kikijoli.ville.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;

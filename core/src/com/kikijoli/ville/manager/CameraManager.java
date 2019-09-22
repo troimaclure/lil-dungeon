@@ -25,11 +25,11 @@ public class CameraManager {
 
     public static void tour() {
         camera.unproject(worldCoordinates);
-        if (!EntiteManager.playedBall)
-            camera.position.set(EntiteManager.player.getX(), EntiteManager.player.getY(), 0);
-        else
-            camera.position.set(EntiteManager.currentBallPosition.x, EntiteManager.currentBallPosition.y, 0);
-        camera.update();
+        if (!EntiteManager.playedBall) {
+            camera.position.set((int) EntiteManager.player.getX(), (int) EntiteManager.player.getY(), 0);
+        } else
+            camera.position.set((int) EntiteManager.currentBallPosition.x, (int) EntiteManager.currentBallPosition.y, 0);
+        camera.update(true);
     }
 
 }

@@ -5,9 +5,8 @@
  */
 package com.kikijoli.ville.drawable.entite.simple;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.kikijoli.ville.drawable.entite.Entite;
-import com.kikijoli.ville.shader.ClickShader;
-import com.kikijoli.ville.shader.WaveShader;
 import com.kikijoli.ville.util.Constantes;
 
 /**
@@ -28,8 +27,14 @@ public class PlayerShield extends Entite {
         count += down ? (-1) : 1;
         if (down && count == 0) down = false;
         if (!down && count == total) down = true;
-//        this.setSize(this.getWidth() + (count), this.getHeight() + (count));
+        this.setSize(Constantes.TILESIZE + (count), Constantes.TILESIZE + (count));
         this.setX(x - this.getWidth() / 2 + width / 2);
         this.setY(y - this.getHeight() / 2 + height / 2);
     }
+
+    @Override
+    public void draw(SpriteBatch batch) {
+        batch.draw(this.getTexture(), this.getX(), this.getY(), this.getWidth(), this.getHeight());
+    }
+
 }

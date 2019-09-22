@@ -14,6 +14,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Intersector;
@@ -33,6 +34,7 @@ import com.kikijoli.ville.listeners.GeneralKeyListener;
 import com.kikijoli.ville.manager.ProjectileManager;
 import com.kikijoli.ville.manager.CameraManager;
 import static com.kikijoli.ville.manager.CameraManager.camera;
+import com.kikijoli.ville.manager.ColorManager;
 import com.kikijoli.ville.manager.DrawManager;
 import com.kikijoli.ville.manager.EntiteManager;
 import com.kikijoli.ville.manager.LockManager;
@@ -47,6 +49,7 @@ import com.kikijoli.ville.manager.SpellManager;
 import com.kikijoli.ville.pathfind.GridManager;
 import com.kikijoli.ville.util.Constantes;
 import com.kikijoli.ville.util.SetLevel;
+import com.kikijoli.ville.util.TextureUtil;
 import java.util.ArrayList;
 
 /**
@@ -74,6 +77,7 @@ public class Tmap implements Screen {
     private static final String TIME = "TIME ";
     private static final String SCORE = "SCORE : ";
     private static final String LEVEL_SCORE = "LEVEL SCORE : ";
+    private Sprite arrowCount = new Sprite(TextureUtil.getTexture("sprite/arrow.png"));
 
     public static RayHandler getRay() {
         if (ray == null) {
@@ -208,6 +212,7 @@ public class Tmap implements Screen {
         hudShapeRenderer.end();
         hudBatch.begin();
         drawKeys();
+        drawArrowCount();
         HudManager.drawSprite();
         drawTime();
         if (EntiteManager.playerDead) {
@@ -316,6 +321,12 @@ public class Tmap implements Screen {
         for (Key key : EntiteManager.keys) {
             hudBatch.draw(key.getTexture(), Gdx.graphics.getWidth() - (i++ * (Constantes.TILESIZE)), Constantes.TILESIZE, Constantes.TILESIZE / 2, Constantes.TILESIZE / 2);
         }
+    }
+
+    private void drawArrowCount() {
+        hudBatch.setColor(ColorManager.getTextureColor());
+        hudBatch.draw(arrowCount.getTexture(), Gdx.graphics.getWidth() - Constantes.TILESIZE * 2, Gdx.graphics.getHeight() - Constantes.TILESIZE * 1.5f, Constantes.TILESIZE, Constantes.TILESIZE);
+        MessageManager.SHOWG.draw(hudBatch, "x " + EntiteManager.arrowCount, Gdx.graphics.getWidth() - Constantes.TILESIZE, Gdx.graphics.getHeight() - Constantes.TILESIZE);
     }
 
     @Override

@@ -41,6 +41,7 @@ public class EntiteManager {
     public static boolean playedBall = false;
     public static Vector2 currentBallPosition = new Vector2();
     public static boolean playerDead;
+    public static int arrowCount = 0;
 
     public static void addEntite(Entite entite) {
 

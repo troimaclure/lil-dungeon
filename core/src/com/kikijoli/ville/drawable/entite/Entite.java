@@ -17,7 +17,6 @@ import com.kikijoli.ville.shader.AbstractShader;
 import com.kikijoli.ville.util.Constantes;
 import com.kikijoli.ville.util.TextureUtil;
 import com.kikijoli.ville.interfaces.ISpriteDrawable;
-import com.kikijoli.ville.manager.ShaderManager;
 import com.kikijoli.ville.util.MathUtils;
 import java.util.ArrayList;
 

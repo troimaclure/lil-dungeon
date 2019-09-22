@@ -34,8 +34,9 @@ public class PlayerBuisiness extends AbstractBusiness {
     }
 
     public void dash() {
-        if (actions.containsKey(DASH) || !EntiteManager.player.canDash()) return;
-        EntiteManager.player.dash(); 
+        if (actions.containsKey(DASH) || !EntiteManager.player.canDash())
+            return;
+        EntiteManager.player.dash();
         actions.put(DASH, new Dash(EntiteManager.player) {
             @Override
             public void onFinish() {
@@ -49,8 +50,9 @@ public class PlayerBuisiness extends AbstractBusiness {
         AbstractAction abstractAction = null;
         switch (EntiteManager.player.mode) {
             case Mode.BOW:
-                if (actions.containsKey(Integer.toString(Mode.BOW))) return;
-
+                if (actions.containsKey(Integer.toString(Mode.BOW)) || EntiteManager.arrowCount == 0)
+                    return;
+                EntiteManager.arrowCount -= 1;
                 abstractAction = new AttackBow(EntiteManager.player, new Vector2(Tmap.worldCoordinates.x, Tmap.worldCoordinates.y)) {
                     @Override
                     public void onFinish() {
@@ -81,7 +83,8 @@ public class PlayerBuisiness extends AbstractBusiness {
                 actions.put(Integer.toString(Mode.WAND), abstractAction);
                 break;
             case Mode.WANDFIRE:
-                if (actions.containsKey(Integer.toString(Mode.WANDFIRE))) return;
+                if (actions.containsKey(Integer.toString(Mode.WANDFIRE)))
+                    return;
                 abstractAction = new AttackWandFire(EntiteManager.player, new Vector2(Tmap.worldCoordinates.x, Tmap.worldCoordinates.y)) {
                     @Override
                     public void onFinish() {

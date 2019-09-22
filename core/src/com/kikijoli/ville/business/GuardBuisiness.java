@@ -48,7 +48,7 @@ public class GuardBuisiness extends AbstractBusiness {
 
         int count = 50;
         int delay = 50;
-        int dashDelay = 150;
+        int dashDelay = 50;
         int countDash = 0;
         int bowDelay = 150;
         int countBow = 150;
