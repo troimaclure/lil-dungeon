@@ -18,8 +18,11 @@ public class DrawManager {
     public static ArrayList<IShapeDrawable> sprites = new ArrayList<>();
 
     public static void tour() {
+
         entites.forEach((sprite) -> {
+            Tmap.spriteBatch.setShader(sprite.shader);
             sprite.draw(Tmap.spriteBatch);
+
         });
 
     }

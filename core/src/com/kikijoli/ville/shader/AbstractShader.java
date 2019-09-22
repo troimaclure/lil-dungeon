@@ -28,6 +28,6 @@ public abstract class AbstractShader extends ShaderProgram {
         this.entite = entite;
     }
 
-    public abstract void step(float rawTime);
+    public abstract void step();
 
 }

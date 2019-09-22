@@ -29,7 +29,7 @@ public class WaveShader extends AbstractShader {
     }
 
     @Override
-    public void step(float rawTime) {
+    public void step() {
         final float dt = Gdx.graphics.getRawDeltaTime();
         angleWave += dt * angleWaveSpeed;
         while (angleWave > PI2) {

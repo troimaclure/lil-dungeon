@@ -23,12 +23,11 @@ public class ShaderManager {
 //    public static AbstractShader windShader = new WindShader();
 
     public static void step() {
-        final float dt = Gdx.graphics.getRawDeltaTime();
         EntiteManager.entites.stream().filter((entite) -> (entite.shader != null && !entite.shader.global)).forEach((entite) -> {
-            entite.shader.step(dt);
+            entite.shader.step();
         });
         //shared global shader step
-        waveShader.step(dt);
+        waveShader.step();
 //        windShader.step(dt);
     }
 

@@ -28,7 +28,7 @@ public class WalkShader extends AbstractShader {
     }
 
     @Override
-    public void step(float rawTime) {
+    public void step() {
         count++;
         if (count < delay) {
             return;

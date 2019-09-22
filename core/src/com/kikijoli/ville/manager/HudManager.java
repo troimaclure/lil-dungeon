@@ -27,6 +27,7 @@ public class HudManager {
     }
 
     public static void drawSprite() {
+        Tmap.hudBatch.setColor(Color.WHITE);
         for (Tile tile : tiles) {
             tile.draw(Tmap.hudBatch);
         }

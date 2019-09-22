@@ -13,7 +13,7 @@ import com.badlogic.gdx.graphics.Color;
  */
 public class ColorManager {
 
-    public static boolean mode = true;
+    public static boolean mode = false;
 
     public static void toggle() {
         mode = !mode;

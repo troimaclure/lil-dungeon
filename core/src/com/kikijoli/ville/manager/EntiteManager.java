@@ -37,12 +37,13 @@ public class EntiteManager {
     private static ArrayList<Entite> deads = new ArrayList<>();
     public static ParticleEffect ball;
     public static ArrayList<Rectangle> walls = new ArrayList<Rectangle>();
-    private static final ArrayList<Key> keys = new ArrayList<>();
+    public static final ArrayList<Key> keys = new ArrayList<>();
     public static boolean playedBall = false;
     public static Vector2 currentBallPosition = new Vector2();
     public static boolean playerDead;
 
     public static void addEntite(Entite entite) {
+
         entites.add(entite);
     }
 
@@ -208,7 +209,6 @@ public class EntiteManager {
         ball.setPosition(worldCoordinates.x, worldCoordinates.y);
         currentBallPosition.x = worldCoordinates.x;
         currentBallPosition.y = worldCoordinates.y;
-
     }
 
     public static void togglePlayerBall() {
@@ -223,6 +223,10 @@ public class EntiteManager {
     }
 
     public static void touch(Entite entite) {
+        if (entite.shield != null) {
+            entite.shield = null;
+            return;
+        }
         addDead(entite);
         ParticleManager.addParticle("particle/blood.p", entite.getX(), entite.getY() + entite.getWidth(), 0.5f);
         entite.buisiness = null;

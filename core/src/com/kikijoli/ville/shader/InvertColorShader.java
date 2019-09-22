@@ -19,7 +19,7 @@ public class InvertColorShader extends AbstractShader {
     }
 
     @Override
-    public void step(float rawTime) {
+    public void step() {
     }
 
 }

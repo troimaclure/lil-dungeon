@@ -6,7 +6,6 @@
 package com.kikijoli.ville.maps;
 
 import box2dLight.Light;
-import box2dLight.PointLight;
 import box2dLight.RayHandler;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
@@ -29,11 +28,11 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
 import com.kikijoli.ville.automation.common.GoTo;
+import com.kikijoli.ville.drawable.entite.build.Key;
 import com.kikijoli.ville.listeners.GeneralKeyListener;
 import com.kikijoli.ville.manager.ProjectileManager;
 import com.kikijoli.ville.manager.CameraManager;
 import static com.kikijoli.ville.manager.CameraManager.camera;
-import com.kikijoli.ville.manager.ColorManager;
 import com.kikijoli.ville.manager.DrawManager;
 import com.kikijoli.ville.manager.EntiteManager;
 import com.kikijoli.ville.manager.LockManager;
@@ -72,6 +71,9 @@ public class Tmap implements Screen {
     public static boolean settingLevel;
     private static final String ESCAPE_TO_RAGE_QUIT = "PRESS ESCAPE TO RAGE QUIT";
     private static final String ENTER_TO_RELOAD = "PRESS ENTER TO RELOAD";
+    private static final String TIME = "TIME ";
+    private static final String SCORE = "SCORE : ";
+    private static final String LEVEL_SCORE = "LEVEL SCORE : ";
 
     public static RayHandler getRay() {
         if (ray == null) {
@@ -205,6 +207,7 @@ public class Tmap implements Screen {
         hudShapeRenderer.flush();
         hudShapeRenderer.end();
         hudBatch.begin();
+        drawKeys();
         HudManager.drawSprite();
         drawTime();
         if (EntiteManager.playerDead) {
@@ -279,30 +282,6 @@ public class Tmap implements Screen {
         setLevel.setting();
     }
 
-    @Override
-    public void resize(int width, int height) {
-    }
-
-    @Override
-    public void pause() {
-    }
-
-    @Override
-    public void resume() {
-    }
-
-    @Override
-    public void hide() {
-    }
-
-    @Override
-    public void dispose() {
-    }
-
-    private void test() {
-
-    }
-
     private void drawDeadBackground() {
         hudShapeRenderer.setColor(Color.RED);
         hudShapeRenderer.rect(0, Gdx.graphics.getHeight() / 2 - 225, Gdx.graphics.getWidth(), 400);
@@ -326,9 +305,41 @@ public class Tmap implements Screen {
         MessageManager.segoe.setColor(Color.RED);
         float fontX = 50;
         float fontY = (Gdx.graphics.getHeight() - 50);
-        MessageManager.SHOWG.draw(hudBatch, "TIME " + Integer.toString(StageManager.stopwatch), fontX, fontY);
-        MessageManager.SHOWG.draw(hudBatch, "RANK : " + Integer.toString(RankManager.point), fontX + 200, fontY);
-        MessageManager.SHOWG.draw(hudBatch, "LEVEL POINT : " + Integer.toString(RankManager.currentStagePoint), fontX + 450, fontY);
+        MessageManager.SHOWG.draw(hudBatch, TIME + Integer.toString(StageManager.stopwatch), fontX, fontY);
+        MessageManager.SHOWG.draw(hudBatch, SCORE + Integer.toString(RankManager.point), fontX + 200, fontY);
+        MessageManager.SHOWG.draw(hudBatch, LEVEL_SCORE + Integer.toString(RankManager.currentStagePoint), fontX + 450, fontY);
+    }
+
+    private void drawKeys() {
+        int i = 1;
+        hudBatch.setColor(Color.GOLD);
+        for (Key key : EntiteManager.keys) {
+            hudBatch.draw(key.getTexture(), Gdx.graphics.getWidth() - (i++ * (Constantes.TILESIZE)), Constantes.TILESIZE, Constantes.TILESIZE / 2, Constantes.TILESIZE / 2);
+        }
+    }
+
+    @Override
+    public void resize(int width, int height) {
+    }
+
+    @Override
+    public void pause() {
+    }
+
+    @Override
+    public void resume() {
+    }
+
+    @Override
+    public void hide() {
+    }
+
+    @Override
+    public void dispose() {
+    }
+
+    private void test() {
+
     }
 
 }

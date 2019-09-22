@@ -11,11 +11,13 @@ import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.kikijoli.ville.business.AbstractBusiness;
+import com.kikijoli.ville.drawable.entite.simple.PlayerShield;
 import com.kikijoli.ville.effect.AbstractEffect;
 import com.kikijoli.ville.shader.AbstractShader;
 import com.kikijoli.ville.util.Constantes;
 import com.kikijoli.ville.util.TextureUtil;
 import com.kikijoli.ville.interfaces.ISpriteDrawable;
+import com.kikijoli.ville.manager.ShaderManager;
 import com.kikijoli.ville.util.MathUtils;
 import java.util.ArrayList;
 
@@ -37,6 +39,7 @@ public abstract class Entite extends Sprite implements ISpriteDrawable {
     int width;
     int height;
     public ArrayList<AbstractEffect> effects = new ArrayList<>();
+    public PlayerShield shield;
 
     public Entite(String path, float srcX, float srcY, int srcWidth, int srcHeight) {
         super(TextureUtil.getTexture(path), (int) srcX, (int) srcY, srcWidth, srcHeight);
@@ -51,7 +54,6 @@ public abstract class Entite extends Sprite implements ISpriteDrawable {
     @Override
     public void draw(SpriteBatch batch) {
         calculateAnchors();
-//        Rectangle r = this.getBoundingRectangle();
         batch.draw(getTexture(),
                 getX(), getY(),
                 centerOrigin.x,

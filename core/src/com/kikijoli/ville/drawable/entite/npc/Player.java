@@ -12,11 +12,14 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.kikijoli.ville.business.AbstractBusiness;
 import com.kikijoli.ville.drawable.entite.Entite;
+import com.kikijoli.ville.drawable.entite.simple.PlayerShield;
 import com.kikijoli.ville.interfaces.IBusiness;
 import com.kikijoli.ville.interfaces.IShapeDrawable;
 import com.kikijoli.ville.manager.ColorManager;
-import com.kikijoli.ville.maps.Tmap;
+import com.kikijoli.ville.manager.EntiteManager;
+import com.kikijoli.ville.manager.ShaderManager;
 import com.kikijoli.ville.util.Constantes;
+import com.kikijoli.ville.util.MathUtils;
 import com.kikijoli.ville.util.Mode;
 
 /**
@@ -37,12 +40,16 @@ public final class Player extends Entite implements IBusiness, IShapeDrawable {
         this.buisiness = this.getDefault();
         good = true;
         this.speed = 5;
-
+        this.shield = new PlayerShield((int) this.getX(), (int) this.getY());
     }
 
     @Override
     public void draw(SpriteBatch batch) {
 
+        if (this.shield != null) {
+            this.shield.step(this.getX(), this.getY(), this.getWidth(), this.getHeight());
+            this.shield.draw(batch);
+        }
         super.draw(batch);
     }
 
