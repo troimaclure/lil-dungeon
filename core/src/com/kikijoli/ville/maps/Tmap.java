@@ -6,6 +6,7 @@
 package com.kikijoli.ville.maps;
 
 import box2dLight.Light;
+import box2dLight.PointLight;
 import box2dLight.RayHandler;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
@@ -42,6 +43,7 @@ import com.kikijoli.ville.manager.WaterManager;
 import com.kikijoli.ville.manager.ShaderManager;
 import com.kikijoli.ville.manager.StageManager;
 import com.kikijoli.ville.manager.HudManager;
+import com.kikijoli.ville.manager.RankManager;
 import com.kikijoli.ville.manager.SpellManager;
 import com.kikijoli.ville.pathfind.GridManager;
 import com.kikijoli.ville.util.Constantes;
@@ -74,6 +76,8 @@ public class Tmap implements Screen {
     public static RayHandler getRay() {
         if (ray == null) {
             ray = new RayHandler(getWorld());
+            ray.setCulling(true);
+            ray.setAmbientLight(0, 0, 0, 0.2f);
         }
         return ray;
     }
@@ -117,12 +121,11 @@ public class Tmap implements Screen {
 
     public Tmap() {
         StageManager.loadFromXml("1");
-//        GridManager.initialize(100, 100, Constantes.TILESIZE);
     }
 
     @Override
     public void show() {
-//        Gdx.input.setCursorCatched(true);
+        Gdx.input.setCursorCatched(true);
         fps = new FPSLogger();
         shapeRenderer = new ShapeRenderer();
         shapeRenderer.setAutoShapeType(true);
@@ -140,7 +143,6 @@ public class Tmap implements Screen {
     @Override
     public void render(float delta) {
         Gdx.gl.glLineWidth(LINE_WIDTH);
-
         fps.log();
         ShaderManager.step();
         Gdx.gl.glClearColor(Color.BLACK.r, Color.BLACK.g, Color.BLACK.b, Color.BLACK.a);
@@ -159,9 +161,10 @@ public class Tmap implements Screen {
         drawHud();
 
         getRay().setCombinedMatrix(camera.combined,
-            camera.position.x, camera.position.y,
-            camera.viewportWidth * camera.zoom,
-            camera.viewportHeight * camera.zoom);
+                camera.position.x, camera.position.y,
+                camera.viewportWidth * camera.zoom,
+                camera.viewportHeight * camera.zoom);
+
         getRay().update();
         if (setLevel != null) {
             settingLevel = true;
@@ -175,14 +178,14 @@ public class Tmap implements Screen {
 
     private void drawSprites(float delta) {
         spriteBatch.begin();
-        MessageManager.drawIndicators();
+        MessageManager.tour();
         LockManager.tour();
         EntiteManager.tour();
         ParticleManager.tour(delta);
         DrawManager.tour();
         ProjectileManager.tour();
         SpellManager.tour();
-
+        StageManager.tour();
         spriteBatch.flush();
         spriteBatch.end();
 
@@ -203,6 +206,7 @@ public class Tmap implements Screen {
         hudShapeRenderer.end();
         hudBatch.begin();
         HudManager.drawSprite();
+        drawTime();
         if (EntiteManager.playerDead) {
             drawDeadMessage();
         }
@@ -315,6 +319,16 @@ public class Tmap implements Screen {
         fontX = (Gdx.graphics.getWidth() - layout.width) / 2;
         fontY = (float) ((Gdx.graphics.getHeight() + layout.height) / 2 - layout.height * 1.2);
         MessageManager.segoe.draw(hudBatch, ESCAPE_TO_RAGE_QUIT, fontX, fontY);
+    }
+
+    private void drawTime() {
+        MessageManager.segoe.getData().setScale(1f);
+        MessageManager.segoe.setColor(Color.RED);
+        float fontX = 50;
+        float fontY = (Gdx.graphics.getHeight() - 50);
+        MessageManager.SHOWG.draw(hudBatch, "TIME " + Integer.toString(StageManager.stopwatch), fontX, fontY);
+        MessageManager.SHOWG.draw(hudBatch, "RANK : " + Integer.toString(RankManager.point), fontX + 200, fontY);
+        MessageManager.SHOWG.draw(hudBatch, "LEVEL POINT : " + Integer.toString(RankManager.currentStagePoint), fontX + 450, fontY);
     }
 
 }

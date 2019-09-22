@@ -20,7 +20,7 @@ import java.util.ArrayList;
  */
 public class WaterManager {
 
-    private static ArrayList<Water> waters = new ArrayList<>();
+    public static ArrayList<Water> waters = new ArrayList<>();
 
     public static void tour() {
         drawWater();

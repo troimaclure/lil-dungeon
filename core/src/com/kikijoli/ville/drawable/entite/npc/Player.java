@@ -5,6 +5,7 @@
  */
 package com.kikijoli.ville.drawable.entite.npc;
 
+import box2dLight.PointLight;
 import com.badlogic.gdx.graphics.Color;
 import com.kikijoli.ville.business.PlayerBuisiness;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -14,6 +15,7 @@ import com.kikijoli.ville.drawable.entite.Entite;
 import com.kikijoli.ville.interfaces.IBusiness;
 import com.kikijoli.ville.interfaces.IShapeDrawable;
 import com.kikijoli.ville.manager.ColorManager;
+import com.kikijoli.ville.maps.Tmap;
 import com.kikijoli.ville.util.Constantes;
 import com.kikijoli.ville.util.Mode;
 
@@ -28,15 +30,19 @@ public final class Player extends Entite implements IBusiness, IShapeDrawable {
     public float dashTotal = 2;
     public float dashCooldown = 3 * 60;
     public float dashCount = dashTotal * dashCooldown;
+    public PointLight vision;
 
     public Player(int srcX, int srcY) {
         super(SPRITESIMPLEPNG, srcX, srcY, Constantes.TILESIZE / 4, Constantes.TILESIZE / 2);
         this.buisiness = this.getDefault();
         good = true;
+        this.speed = 5;
+
     }
 
     @Override
     public void draw(SpriteBatch batch) {
+
         super.draw(batch);
     }
 
@@ -61,7 +67,6 @@ public final class Player extends Entite implements IBusiness, IShapeDrawable {
     private float calculateDashWidth() {
         dashCount += dashCount > dashCooldown * dashTotal ? 0 : 1;
         float pourcent = (dashCount / (dashCooldown * dashTotal)) * 100;
-        System.out.println(pourcent);
         return getWidth() * 2 * (pourcent / 100);
     }
 

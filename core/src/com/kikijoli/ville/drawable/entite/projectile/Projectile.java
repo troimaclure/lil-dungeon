@@ -36,4 +36,6 @@ public abstract class Projectile extends Rectangle {
         this.distance += this.speed;
 
     }
+
+    public abstract String getMouvementFilter();
 }

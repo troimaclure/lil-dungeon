@@ -30,16 +30,18 @@ public abstract class Bullet extends Projectile implements ISpriteDrawable {
     @Override
     public void draw(SpriteBatch batch) {
         batch.draw(sprite.getTexture(),
-            getX(), getY(),
-            centerOrigin.x,
-            centerOrigin.y,
-            (int) width, (int) height,
-            1, 1,
-            sprite.getRotation(),
-            (int) 0,
-            (int) 0,
-            (int) sprite.getTexture().getWidth(), (int) sprite.getTexture().getHeight(),
-            false, false);
+                getX(), getY(),
+                centerOrigin.x,
+                centerOrigin.y,
+                (int) width, (int) height,
+                1, 1,
+                sprite.getRotation(),
+                (int) 0,
+                (int) 0,
+                (int) sprite.getTexture().getWidth(), (int) sprite.getTexture().getHeight(),
+                false, false);
     }
+
+    public abstract boolean isTouching(Rectangle rectangle);
 
 }

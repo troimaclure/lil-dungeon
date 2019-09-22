@@ -51,8 +51,9 @@ public class GoTo extends AbstractAction {
     }
 
     private boolean checkPath() {
+        if (entite.getBoundingRectangle().overlaps(target.getBoundingRectangle()))
+            return false;
         count++;
-
         if (count >= delay) {
             count = 0;
             index = 0;
@@ -72,8 +73,10 @@ public class GoTo extends AbstractAction {
         Vector2 center = new Vector2();
         center = entite.getBoundingRectangle().getCenter(center);
         if (!GridManager.isClearZone(goal, Constantes.NPC_MOVEMENT_OK)) return;
-        if (!com.badlogic.gdx.math.MathUtils.isEqual(entite.getX(), goal.x, 5)) entite.setX(entite.getX() + (goal.x < center.x ? (-entite.speed) : center.x == goal.x ? 0 : entite.speed));
-        if (!com.badlogic.gdx.math.MathUtils.isEqual(entite.getY(), goal.y, 5)) entite.setY(entite.getY() + (goal.y < entite.getY() ? (-entite.speed) : entite.getY() == goal.y ? 0 : entite.speed));
+        if (!com.badlogic.gdx.math.MathUtils.isEqual(entite.getX(), goal.x, 5))
+            entite.setX(entite.getX() + (goal.x < center.x ? (-entite.speed) : center.x == goal.x ? 0 : entite.speed));
+        if (!com.badlogic.gdx.math.MathUtils.isEqual(entite.getY(), goal.y, 5))
+            entite.setY(entite.getY() + (goal.y < entite.getY() ? (-entite.speed) : entite.getY() == goal.y ? 0 : entite.speed));
         if (Intersector.overlaps(target.getBoundingRectangle(), entite.getBoundingRectangle())) {
             path = null;
         }

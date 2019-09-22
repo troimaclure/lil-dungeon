@@ -28,7 +28,8 @@ public final class Guard extends Entite implements IBusiness {
     public Guard(int srcX, int srcY) {
         super(GUARD, srcX, srcY, Constantes.TILESIZE / 4, Constantes.TILESIZE / 2);
         this.buisiness = this.getDefault();
-        this.vision = new PointLight(Tmap.getRay(), 20, Color.BLACK, 500, this.getX(), this.getY());
+        this.vision = new PointLight(Tmap.getRay(), 40, Color.BLACK, 500, this.getX(), this.getY());
+        this.vision.setSoft(false);
     }
 
     @Override

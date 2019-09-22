@@ -55,25 +55,10 @@ public class GuardBuisiness extends AbstractBusiness {
 
         @Override
         public void act() {
-            if (isContacted()) {
-                actions.remove(GOTO);
-                if (!(guard.shader instanceof ClickShader)) {
-                    guard.shader = null;
-                }
-                if (count++ >= delay) {
-                    guard.shader = new ClickShader(guard, null);
-                    EntiteManager.attack(guard);
-                    count = 0;
-                }
-            } else {
-                handleWalk();
-                handleDash();
-                handleBow();
-            }
-        }
 
-        private boolean isContacted() {
-            return Intersector.overlaps(guard.anchor, EntiteManager.player.getBoundingRectangle());
+            handleWalk();
+            handleDash();
+            handleBow();
         }
 
         private void handleWalk() {
@@ -85,7 +70,7 @@ public class GuardBuisiness extends AbstractBusiness {
 
         private void handleDash() {
 
-            if (!actions.containsKey(DASH) && !actions.containsKey(PREPARATION) && countDash++ > dashDelay && !isContacted()) {
+            if (!actions.containsKey(DASH) && !actions.containsKey(PREPARATION) && countDash++ > dashDelay) {
                 actions.remove(GOTO);
                 countDash = 0;
                 actions.put(PREPARATION, new AttackDirectionPreparation(guard, MathUtils.centered(guard, new Sword(0, 0))) {
@@ -111,7 +96,7 @@ public class GuardBuisiness extends AbstractBusiness {
         }
 
         private void handleBow() {
-            if (!actions.containsKey(BOW) && !actions.containsKey(PREPARATION) && countBow++ > bowDelay && !isContacted()) {
+            if (!actions.containsKey(BOW) && !actions.containsKey(PREPARATION) && countBow++ > bowDelay) {
                 countBow = 0;
                 actions.remove(GOTO);
                 actions.put(PREPARATION, new AttackDirectionPreparation(guard, MathUtils.centered(guard, new Bow(0, 0))) {

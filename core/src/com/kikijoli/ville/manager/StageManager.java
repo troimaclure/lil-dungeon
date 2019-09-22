@@ -7,6 +7,7 @@ package com.kikijoli.ville.manager;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.kikijoli.ville.drawable.entite.Entite;
 import com.kikijoli.ville.drawable.entite.decor.Water;
 import com.kikijoli.ville.drawable.entite.npc.Guard;
 import com.kikijoli.ville.drawable.entite.npc.Player;
@@ -29,9 +30,13 @@ public class StageManager {
 
     private static final String TXT = ".txt";
     private static final String STAGE_PATH = "stage/";
+    public static int stopwatch;
 
     public static void loadFromXml(String level) {
+
         Tile[][] load = XmlManager.load(level);
+        stopwatch = 60 * 60;
+        RankManager.currentStagePoint = 0;
         GridManager.initialize(load.length, load[0].length, Constantes.TILESIZE);
         int i = 0;
         for (Tile[] tileDTOs : load) {
@@ -97,15 +102,23 @@ public class StageManager {
         }
     }
 
+    public static void tour() {
+        stopwatch -= stopwatch > 0 ? 1 : 0;
+        if (stopwatch <= 0) {
+            EntiteManager.touch(player);
+        }
+    }
+
     public static void setLevel(String level) {
 
         EntiteManager.entites.removeIf(e -> e != EntiteManager.player);
         ParticleManager.particleEffects.removeIf(e -> e != EntiteManager.ball);
-        EntiteManager.deads.clear();
+        EntiteManager.clearDead();
         LockManager.doors.clear();
         LockManager.locks.clear();
         LockManager.keys.clear();
         DrawManager.entites.clear();
+        WaterManager.waters.clear();
         DrawManager.sprites.clear();
         ProjectileManager.projectiles.clear();
         SpellManager.spells.clear();
@@ -119,7 +132,7 @@ public class StageManager {
 
     public static void reload() {
         EntiteManager.playerDead = false;
-        EntiteManager.deads.clear();
+        EntiteManager.clearDead();
         EntiteManager.player = new Player(0, 0);
         HudManager.setSelected(0);
         EntiteManager.addEntite(player);

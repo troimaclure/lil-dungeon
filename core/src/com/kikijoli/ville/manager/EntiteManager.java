@@ -1,5 +1,6 @@
 package com.kikijoli.ville.manager;
 
+import box2dLight.PointLight;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.math.Intersector;
@@ -13,6 +14,7 @@ import com.kikijoli.ville.drawable.entite.npc.Player;
 import com.kikijoli.ville.drawable.entite.projectile.Spell.Spell;
 import com.kikijoli.ville.drawable.entite.simple.Blood;
 import com.kikijoli.ville.listeners.GeneralKeyListener;
+import static com.kikijoli.ville.manager.StageManager.stopwatch;
 import com.kikijoli.ville.maps.Tmap;
 import static com.kikijoli.ville.maps.Tmap.spriteBatch;
 import static com.kikijoli.ville.maps.Tmap.worldCoordinates;
@@ -32,7 +34,7 @@ public class EntiteManager {
     public static Player player = new Player(100, 100);
     public static ArrayList<Entite> entites = new ArrayList<>();
     public static ArrayList<Entite> removes = new ArrayList<>();
-    public static ArrayList<Entite> deads = new ArrayList<>();
+    private static ArrayList<Entite> deads = new ArrayList<>();
     public static ParticleEffect ball;
     public static ArrayList<Rectangle> walls = new ArrayList<Rectangle>();
     private static final ArrayList<Key> keys = new ArrayList<>();
@@ -185,8 +187,11 @@ public class EntiteManager {
     }
 
     private static void doorOpen(Door door) {
-        if (Tmap.setLevel == null)
+        if (Tmap.setLevel == null) {
             Tmap.setLevel = new SetLevel(door.data);
+            RankManager.point += stopwatch;
+            RankManager.point += RankManager.currentStagePoint;
+        }
     }
 
     public static void handleBall() {
@@ -218,7 +223,7 @@ public class EntiteManager {
     }
 
     public static void touch(Entite entite) {
-        deads.add(entite);
+        addDead(entite);
         ParticleManager.addParticle("particle/blood.p", entite.getX(), entite.getY() + entite.getWidth(), 0.5f);
         entite.buisiness = null;
         Vector2 center = MathUtils.getCenter(entite.getBoundingRectangle());
@@ -236,12 +241,24 @@ public class EntiteManager {
                 playerDead = true;
             }
         });
-
     }
 
     public static void spellEffect(Entite entite, Spell spell) {
-        if (entite.effects.stream().anyMatch(e -> e.getClass() == spell.getEffectType())) return;
+        if (entite.effects.stream().anyMatch(e -> e.getClass() == spell.getEffectType()))
+            return;
         entite.effects.add(spell.getEffect(entite.getX(), entite.getY()));
+    }
+
+    public static void addDead(Entite entite) {
+        if (entite != player) {
+            RankManager.currentStagePoint += entite.point;
+            MessageManager.addIndicator(entite.getX(), entite.getY(), Integer.toString(entite.point), entite);
+        }
+        deads.add(entite);
+    }
+
+    public static void clearDead() {
+        deads.clear();
     }
 
     private EntiteManager() {

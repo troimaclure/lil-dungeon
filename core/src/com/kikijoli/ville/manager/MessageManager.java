@@ -6,8 +6,9 @@
 package com.kikijoli.ville.manager;
 
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.kikijoli.ville.drawable.entite.Entite;
 import com.kikijoli.ville.drawable.entite.simple.Indicator;
 import com.kikijoli.ville.maps.Tmap;
 import java.util.ArrayList;
@@ -18,21 +19,26 @@ import java.util.ArrayList;
  */
 public class MessageManager {
 
-    public static BitmapFont segoe = new BitmapFont(new FileHandle("font/segoeui.fnt"));
+    public static BitmapFont segoe;
+    public static BitmapFont SHOWG;
     public static ArrayList<Indicator> indicators = new ArrayList<>();
 
-    public static void addIndicator(float x, float y, String message, Texture texture) {
-        indicators.add(new Indicator(x, y, message, texture));
+    static {
+        SHOWG = FontManager.getFont("SHOWG", 25, Color.GREEN);
+        segoe = FontManager.getFont("vinet", 25, Color.WHITE);
     }
 
-    public static void drawIndicators() {
-        MessageManager.segoe.setColor(ColorManager.getTextureColor());
-        Tmap.spriteBatch.setColor(ColorManager.getTextureColor());
-        MessageManager.segoe.getData().setScale(.50f);
+    public static void addIndicator(float x, float y, String message, Entite entite) {
+        indicators.add(new Indicator(x, y, message, entite));
+    }
+
+    public static void tour() {
         getIndicators().forEach((indicator) -> {
             indicator.draw(Tmap.spriteBatch);
+            if (indicator.count <= 0) {
+                indicators.remove(indicator);
+            }
         });
-
     }
 
     private static ArrayList<Indicator> getIndicators() {

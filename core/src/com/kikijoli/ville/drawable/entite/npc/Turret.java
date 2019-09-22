@@ -21,14 +21,15 @@ import com.kikijoli.ville.util.Constantes;
  */
 public final class Turret extends Entite implements IBusiness {
 
-    private static final String turret = "sprite/turret.png";
+    private static final String TURRET = "sprite/turret.png";
 
     public PointLight vision;
 
     public Turret(int srcX, int srcY) {
-        super(turret, srcX, srcY, Constantes.TILESIZE, Constantes.TILESIZE);
+        super(TURRET, srcX, srcY, Constantes.TILESIZE, Constantes.TILESIZE);
         this.buisiness = this.getDefault();
         this.vision = new PointLight(Tmap.getRay(), 20, Color.BLACK, 500, this.getX(), this.getY());
+        this.vision.setXray(true);
     }
 
     @Override

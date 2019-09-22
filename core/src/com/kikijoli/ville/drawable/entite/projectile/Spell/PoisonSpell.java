@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.kikijoli.ville.drawable.entite.Entite;
 import com.kikijoli.ville.effect.AbstractEffect;
 import com.kikijoli.ville.effect.PoisonEffect;
+import com.kikijoli.ville.util.Constantes;
 
 /**
  *
@@ -13,6 +14,7 @@ public class PoisonSpell extends MoveSpell {
 
     public PoisonSpell(Vector2 destination, Entite author, float x, float y) {
         super("particle/poison.p", destination, 1000, author, x, y);
+        this.speed = 15;
     }
 
     @Override
@@ -25,4 +27,8 @@ public class PoisonSpell extends MoveSpell {
         return PoisonEffect.class;
     }
 
+    @Override
+    public String getMouvementFilter() {
+        return Constantes.BULLET_MOVEMENT_OK;
+    }
 }

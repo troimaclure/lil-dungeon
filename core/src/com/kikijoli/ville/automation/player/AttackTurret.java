@@ -9,6 +9,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.kikijoli.ville.abstracts.AbstractAction;
 import com.kikijoli.ville.drawable.entite.projectile.Bullet.Arrow;
 import com.kikijoli.ville.drawable.entite.Entite;
+import com.kikijoli.ville.drawable.entite.projectile.Bullet.CannonBall;
 import com.kikijoli.ville.drawable.entite.simple.Bow;
 import com.kikijoli.ville.drawable.entite.simple.TurretBow;
 import com.kikijoli.ville.manager.ProjectileManager;
@@ -64,9 +65,9 @@ public abstract class AttackTurret extends AbstractAction {
     private void shoot() {
         countArrow = 0;
         Vector2 center = MathUtils.getCenter(bow.getBoundingRectangle());
-        Arrow arrow = new Arrow((int) center.x, (int) center.y, new Vector2(destination.x, destination.y), entite);
-        arrow.sprite.setRotation(90 + MathUtils.getRotation(entite.getX(), entite.getY(), destination.x, destination.y));
-        ProjectileManager.projectiles.add(arrow);
+        CannonBall cannonBall = new CannonBall((int) center.x, (int) center.y, new Vector2(destination.x, destination.y), entite);
+        cannonBall.sprite.setRotation(90 + MathUtils.getRotation(entite.getX(), entite.getY(), destination.x, destination.y));
+        ProjectileManager.projectiles.add(cannonBall);
     }
 
 }
