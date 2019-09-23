@@ -51,9 +51,6 @@ public class GeneralKeyListener extends InputAdapter {
             case Keys.T:
                 ColorManager.toggle();
                 break;
-            case Keys.F:
-                EntiteManager.togglePlayerBall();
-                break;
             case Keys.NUM_1:
                 tilesAction(0);
                 break;
@@ -91,9 +88,6 @@ public class GeneralKeyListener extends InputAdapter {
                     Gdx.app.exit();
                 }
                 break;
-//            case Keys.K:
-//                Tmap.setLevel = new SetLevel(2);
-//                break;
 
         }
 

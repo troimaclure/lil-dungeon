@@ -7,6 +7,8 @@ package com.kikijoli.ville.manager;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.math.Vector3;
+import com.kikijoli.ville.maps.Tmap;
 import static com.kikijoli.ville.maps.Tmap.worldCoordinates;
 
 /**
@@ -25,10 +27,12 @@ public class CameraManager {
 
     public static void tour() {
         camera.unproject(worldCoordinates);
-        if (!EntiteManager.playedBall) {
-            camera.position.set((int) EntiteManager.player.getX(), (int) EntiteManager.player.getY(), 0);
-        } else
-            camera.position.set((int) EntiteManager.currentBallPosition.x, (int) EntiteManager.currentBallPosition.y, 0);
+        Vector3 target = new Vector3((int) EntiteManager.player.getX(), (int) EntiteManager.player.getY(), 0);
+        Vector3 cameraPosition = camera.position;
+        target.scl(Tmap.delta);
+        cameraPosition.scl(1.0f - Tmap.delta);
+        cameraPosition.add(target);
+        camera.position.set(cameraPosition);
         camera.update(true);
     }
 

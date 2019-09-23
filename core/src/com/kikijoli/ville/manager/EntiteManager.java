@@ -1,6 +1,5 @@
 package com.kikijoli.ville.manager;
 
-import box2dLight.PointLight;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.math.Intersector;
@@ -38,7 +37,6 @@ public class EntiteManager {
     public static ParticleEffect ball;
     public static ArrayList<Rectangle> walls = new ArrayList<Rectangle>();
     public static final ArrayList<Key> keys = new ArrayList<>();
-    public static boolean playedBall = false;
     public static Vector2 currentBallPosition = new Vector2();
     public static boolean playerDead;
     public static int arrowCount = 0;
@@ -89,7 +87,6 @@ public class EntiteManager {
     }
 
     private static void handlePlayer() {
-        if (playedBall) return;
         for (int i = 0; i < player.speed; i++) {
             if (isPlayerDead()) {
                 boolean move = handleY();
@@ -197,7 +194,6 @@ public class EntiteManager {
     }
 
     public static void handleBall() {
-        if (!playedBall) return;
         if (GeneralKeyListener.KeyDown) currentBallPosition.y -= 4;
         else if (GeneralKeyListener.KeyUp) currentBallPosition.y += 4;
         if (GeneralKeyListener.KeyRight) currentBallPosition.x += 4;
@@ -206,15 +202,9 @@ public class EntiteManager {
     }
 
     public static void moveBall() {
-        if (playedBall) return;
         ball.setPosition(worldCoordinates.x, worldCoordinates.y);
         currentBallPosition.x = worldCoordinates.x;
         currentBallPosition.y = worldCoordinates.y;
-    }
-
-    public static void togglePlayerBall() {
-        EntiteManager.playedBall = !EntiteManager.playedBall;
-        player.shader = null;
     }
 
     public static void attack(Entite entite) {

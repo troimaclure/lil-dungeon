@@ -78,6 +78,7 @@ public class Tmap implements Screen {
     private static final String SCORE = "SCORE : ";
     private static final String LEVEL_SCORE = "LEVEL SCORE : ";
     private Sprite arrowCount = new Sprite(TextureUtil.getTexture("sprite/arrow.png"));
+    public static float delta;
 
     public static RayHandler getRay() {
         if (ray == null) {
@@ -148,6 +149,7 @@ public class Tmap implements Screen {
 
     @Override
     public void render(float delta) {
+        Tmap.delta = delta;
         Gdx.gl.glLineWidth(LINE_WIDTH);
         fps.log();
         ShaderManager.step();
