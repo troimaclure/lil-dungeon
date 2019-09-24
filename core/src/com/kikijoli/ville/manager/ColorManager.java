@@ -13,17 +13,11 @@ import com.badlogic.gdx.graphics.Color;
  */
 public class ColorManager {
 
-    public static boolean mode = false;
-
-    public static void toggle() {
-        mode = !mode;
-    }
-
     public static Color getTextureColor() {
-        return mode ? Color.BLACK : Color.WHITE;
+        return Color.WHITE;
     }
 
     public static Color getBackgroundColor() {
-        return mode ? Color.WHITE : Color.BLACK;
+        return Color.valueOf("#2c3e50"); 
     }
 }

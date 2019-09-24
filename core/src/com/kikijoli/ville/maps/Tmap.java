@@ -161,17 +161,16 @@ public class Tmap implements Screen {
         spriteBatch.setProjectionMatrix(camera.combined);
         spriteBatchDefaultColor.setProjectionMatrix(camera.combined);
         shapeRenderer.setProjectionMatrix(camera.combined);
-        background();
-        road();
-        water();
+
         drawShapes();
         drawSprites(delta);
+        water();
         drawHud();
 
         getRay().setCombinedMatrix(camera.combined,
-            camera.position.x, camera.position.y,
-            camera.viewportWidth * camera.zoom,
-            camera.viewportHeight * camera.zoom);
+                camera.position.x, camera.position.y,
+                camera.viewportWidth * camera.zoom,
+                camera.viewportHeight * camera.zoom);
 
         getRay().update();
         if (setLevel != null) {
@@ -227,6 +226,7 @@ public class Tmap implements Screen {
 
     private void drawShapes() {
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        GridManager.tour();
         DrawManager.drawShapeFilled();
         EntiteManager.player.draw(shapeRenderer);
 
@@ -267,22 +267,8 @@ public class Tmap implements Screen {
         shapeRenderer.end();
     }
 
-    private void road() {
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        WaterManager.tour();
-        shapeRenderer.flush();
-        shapeRenderer.end();
-    }
-
     private void water() {
         WaterManager.drawWater();
-    }
-
-    private void background() {
-        spriteBatch.begin();
-        GridManager.tour();
-        spriteBatch.flush();
-        spriteBatch.end();
     }
 
     private void setLevel() {

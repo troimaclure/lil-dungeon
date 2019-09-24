@@ -1,6 +1,7 @@
 package com.kikijoli.ville.util;
 
 import com.badlogic.gdx.math.Rectangle;
+import com.kikijoli.ville.manager.CameraManager;
 import com.kikijoli.ville.manager.StageManager;
 import com.kikijoli.ville.maps.Tmap;
 import static com.kikijoli.ville.maps.Tmap.setLevel;
@@ -24,6 +25,7 @@ public class SetLevel {
 
     public void setting() {
         if (end == false) {
+
             if (count++ >= delay) {
                 end = true;
                 StageManager.setLevel(setLevel.level);
@@ -31,8 +33,10 @@ public class SetLevel {
             rectangle.setWidth(count * 50);
             rectangle.setHeight(count * 50);
         } else {
+            CameraManager.camera.zoom = count;
             if (count-- <= 0) {
                 setLevel = null;
+                CameraManager.camera.zoom = 1;
                 Tmap.settingLevel = false;
             }
             rectangle.setX(countX++ * 50);

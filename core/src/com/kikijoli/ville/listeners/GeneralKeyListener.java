@@ -11,6 +11,7 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputAdapter;
 import com.kikijoli.ville.abstracts.AbstractAction;
 import com.kikijoli.ville.business.PlayerBuisiness;
+import com.kikijoli.ville.manager.CameraManager;
 import com.kikijoli.ville.manager.ColorManager;
 import com.kikijoli.ville.manager.EntiteManager;
 import com.kikijoli.ville.manager.HudManager;
@@ -47,9 +48,6 @@ public class GeneralKeyListener extends InputAdapter {
             case Keys.D:
             case Keys.E:
                 KeyRight = true;
-                break;
-            case Keys.T:
-                ColorManager.toggle();
                 break;
             case Keys.NUM_1:
                 tilesAction(0);

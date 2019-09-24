@@ -29,8 +29,8 @@ public class CameraManager {
         camera.unproject(worldCoordinates);
         Vector3 target = new Vector3((int) EntiteManager.player.getX(), (int) EntiteManager.player.getY(), 0);
         Vector3 cameraPosition = camera.position;
-        target.scl(Tmap.delta);
-        cameraPosition.scl(1.0f - Tmap.delta);
+        target.scl(Tmap.delta * 2);
+        cameraPosition.scl(1.0f - Tmap.delta * 2);
         cameraPosition.add(target);
         camera.position.set(cameraPosition);
         camera.update(true);

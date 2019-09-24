@@ -98,7 +98,6 @@ public class GridManager {
     }
 
     public static void tour() {
-        Tmap.spriteBatch.setColor(Color.WHITE);
         for (Tile[] object : GridManager.grid) {
             for (Tile tile : object) {
                 if (tile.state.equals(Constantes.WALL)) {
@@ -112,17 +111,13 @@ public class GridManager {
     }
 
     private static void drawFloor(Tile tile) {
-        if (ColorManager.mode)
-            Tmap.spriteBatch.draw(TextureUtil.getTexture(FLOOR), tile.getX(), tile.getY(), tile.getWidth(), tile.getHeight());
-        else
-            Tmap.spriteBatch.draw(TextureUtil.getTexture(WALL), tile.getX(), tile.getY(), tile.getWidth(), tile.getHeight());
+        Tmap.shapeRenderer.setColor(ColorManager.getBackgroundColor());
+        Tmap.shapeRenderer.rect(tile.getX(), tile.getY(), tile.getWidth(), tile.getHeight());
     }
 
     private static void drawWall(Tile tile) {
-        if (ColorManager.mode)
-            Tmap.spriteBatch.draw(TextureUtil.getTexture(WALL), tile.getX(), tile.getY(), tile.getWidth(), tile.getHeight());
-        else
-            Tmap.spriteBatch.draw(TextureUtil.getTexture(FLOOR), tile.getX(), tile.getY(), tile.getWidth(), tile.getHeight());
+        Tmap.shapeRenderer.setColor(Color.WHITE);
+        Tmap.shapeRenderer.rect(tile.getX(), tile.getY(), tile.getWidth(), tile.getHeight());
     }
 
     public static boolean isClearZone(Rectangle entite) {
