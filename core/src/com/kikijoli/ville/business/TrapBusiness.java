@@ -11,7 +11,6 @@ import com.kikijoli.ville.abstracts.AbstractAction;
 import com.kikijoli.ville.drawable.entite.npc.Trap;
 import com.kikijoli.ville.drawable.entite.simple.CircleEffect;
 import com.kikijoli.ville.manager.ColorManager;
-import com.kikijoli.ville.manager.DrawManager;
 import com.kikijoli.ville.manager.EntiteManager;
 import com.kikijoli.ville.manager.MessageManager;
 import com.kikijoli.ville.manager.ParticleManager;
@@ -78,7 +77,5 @@ public class TrapBusiness extends AbstractBusiness {
         private boolean isContacted() {
             return Intersector.overlaps(trap.anchor, EntiteManager.player.getBoundingRectangle());
         }
-
     }
-
 }

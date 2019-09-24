@@ -5,7 +5,6 @@
  */
 package com.kikijoli.ville.business;
 
-import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Vector2;
 import com.kikijoli.ville.abstracts.AbstractAction;
 import com.kikijoli.ville.automation.player.AttackBow;
@@ -17,7 +16,6 @@ import com.kikijoli.ville.drawable.entite.npc.Guard;
 import com.kikijoli.ville.drawable.entite.simple.Bow;
 import com.kikijoli.ville.drawable.entite.simple.Sword;
 import com.kikijoli.ville.manager.EntiteManager;
-import com.kikijoli.ville.shader.ClickShader;
 import com.kikijoli.ville.shader.WalkShader;
 import com.kikijoli.ville.util.MathUtils;
 
