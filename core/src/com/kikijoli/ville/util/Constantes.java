@@ -23,7 +23,8 @@ public class Constantes {
     public final static String PLAYER = "6";
     public final static String DOOR = "7";
     public final static String TURRET = "8";
-    public static String NPC_MOVEMENT_OK = Constantes.KEY + Constantes.EMPTY + Constantes.GUARD + Constantes.PLAYER;
+    public final static String TRAP = "9";
+    public static String NPC_MOVEMENT_OK = Constantes.TRAP + Constantes.KEY + Constantes.EMPTY + Constantes.GUARD + Constantes.PLAYER;
     public static String BULLET_MOVEMENT_OK = Constantes.TURRET + Constantes.KEY + Constantes.EMPTY + Constantes.GUARD + Constantes.PLAYER + Constantes.WATER;
     public static String CANNONBALL_MOVEMENT_OK = Constantes.TURRET + Constantes.KEY + Constantes.EMPTY + Constantes.GUARD + Constantes.PLAYER + Constantes.WATER + Constantes.WALL + Constantes.DOOR + Constantes.LOCK + Constantes.KEY;
     public static String NPCFILTERBUILD = Constantes.WALL + Constantes.LOCK + Constantes.WATER;

@@ -15,7 +15,8 @@ public class DrawManager {
     }
 
     public static ArrayList<Entite> entites = new ArrayList<>();
-    public static ArrayList<IShapeDrawable> sprites = new ArrayList<>();
+    public static ArrayList<IShapeDrawable> spritesFilled = new ArrayList<>();
+    public static ArrayList<IShapeDrawable> spritesDrawed = new ArrayList<>();
 
     public static void tour() {
 
@@ -27,8 +28,14 @@ public class DrawManager {
 
     }
 
-    public static void drawShape() {
-        sprites.forEach((sprite) -> {
+    public static void drawShapeFilled() {
+        spritesFilled.forEach((sprite) -> {
+            sprite.draw(Tmap.shapeRenderer);
+        });
+    }
+
+    public static void drawShapeDrawed() {
+        spritesDrawed.forEach((sprite) -> {
             sprite.draw(Tmap.shapeRenderer);
         });
     }

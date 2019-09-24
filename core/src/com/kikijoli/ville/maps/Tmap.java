@@ -127,7 +127,7 @@ public class Tmap implements Screen {
     Box2DDebugRenderer debugRenderer = new Box2DDebugRenderer();
 
     public Tmap() {
-        StageManager.loadFromXml("1");
+        StageManager.loadFromXml("3");
     }
 
     @Override
@@ -169,9 +169,9 @@ public class Tmap implements Screen {
         drawHud();
 
         getRay().setCombinedMatrix(camera.combined,
-                camera.position.x, camera.position.y,
-                camera.viewportWidth * camera.zoom,
-                camera.viewportHeight * camera.zoom);
+            camera.position.x, camera.position.y,
+            camera.viewportWidth * camera.zoom,
+            camera.viewportHeight * camera.zoom);
 
         getRay().update();
         if (setLevel != null) {
@@ -227,9 +227,14 @@ public class Tmap implements Screen {
 
     private void drawShapes() {
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        DrawManager.drawShape();
+        DrawManager.drawShapeFilled();
         EntiteManager.player.draw(shapeRenderer);
 
+        shapeRenderer.flush();
+        shapeRenderer.end();
+
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Point);
+        DrawManager.drawShapeDrawed();
         shapeRenderer.flush();
         shapeRenderer.end();
 

@@ -222,7 +222,7 @@ public class EntiteManager {
         ParticleManager.addParticle("particle/blood.p", entite.getX(), entite.getY() + entite.getWidth(), 0.5f);
         entite.buisiness = null;
         Vector2 center = MathUtils.getCenter(entite.getBoundingRectangle());
-        DrawManager.sprites.add(new Blood(new Rectangle(center.x, entite.getY(), entite.getWidth(), entite.getHeight())));
+        DrawManager.spritesFilled.add(new Blood(new Rectangle(center.x, entite.getY(), entite.getWidth(), entite.getHeight())));
         removes.add(entite);
     }
 
