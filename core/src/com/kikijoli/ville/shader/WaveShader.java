@@ -6,7 +6,6 @@
 package com.kikijoli.ville.shader;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
 import com.kikijoli.ville.drawable.entite.Entite;
 
 /**
@@ -21,11 +20,11 @@ public class WaveShader extends AbstractShader {
     public final float PI2 = 3.1415926535897932384626433832795f * 2.0f;
 
     public WaveShader() {
-        super(new FileHandle("glsl/wave/vertex.glsl"), new FileHandle("glsl/wave/frag.glsl"));
+        super(Gdx.files.internal("glsl/wave/vertex.glsl"), Gdx.files.internal("glsl/wave/frag.glsl"));
     }
 
     public WaveShader(Entite entite) {
-        super(new FileHandle("glsl/wave/vertex.glsl"), new FileHandle("glsl/wave/frag.glsl"), entite);
+        super(Gdx.files.internal("glsl/wave/vertex.glsl"), Gdx.files.internal("glsl/wave/frag.glsl"), entite);
     }
 
     @Override

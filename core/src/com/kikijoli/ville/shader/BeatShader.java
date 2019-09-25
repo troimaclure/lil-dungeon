@@ -22,7 +22,7 @@ public class BeatShader extends AbstractShader {
     public AbstractShader onFinish;
 
     public BeatShader(Entite entite, AbstractShader onFinish) {
-        super(new FileHandle("glsl/beat/vertex.glsl"), new FileHandle("glsl/beat/frag.glsl"), entite);
+        super(Gdx.files.internal("glsl/beat/vertex.glsl"), Gdx.files.internal("glsl/beat/frag.glsl"), entite);
         this.onFinish = onFinish;
     }
 

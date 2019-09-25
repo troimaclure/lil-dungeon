@@ -5,8 +5,7 @@
  */
 package com.kikijoli.ville.shader;
 
-import com.badlogic.gdx.files.FileHandle;
-import com.kikijoli.ville.manager.ShaderManager;
+import com.badlogic.gdx.Gdx;
 
 /**
  *
@@ -15,7 +14,7 @@ import com.kikijoli.ville.manager.ShaderManager;
 public class InvertColorShader extends AbstractShader {
 
     public InvertColorShader() {
-        super(new FileHandle("glsl/invert_color/vertex.glsl"), new FileHandle("glsl/invert_color/frag.glsl"));
+        super(Gdx.files.internal("glsl/invert_color/vertex.glsl"), Gdx.files.internal("glsl/invert_color/frag.glsl"));
     }
 
     @Override

@@ -13,6 +13,7 @@ import com.kikijoli.ville.drawable.entite.simple.Bow;
 import com.kikijoli.ville.manager.ProjectileManager;
 import com.kikijoli.ville.manager.DrawManager;
 import com.kikijoli.ville.manager.EntiteManager;
+import com.kikijoli.ville.manager.SoundManager;
 import com.kikijoli.ville.util.MathUtils;
 
 /**

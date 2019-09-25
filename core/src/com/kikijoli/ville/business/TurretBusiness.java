@@ -12,6 +12,7 @@ import com.kikijoli.ville.automation.player.AttackTurret;
 import com.kikijoli.ville.drawable.entite.npc.Turret;
 import com.kikijoli.ville.drawable.entite.simple.TurretBow;
 import com.kikijoli.ville.manager.EntiteManager;
+import com.kikijoli.ville.manager.SoundManager;
 import com.kikijoli.ville.shader.ClickShader;
 import com.kikijoli.ville.util.MathUtils;
 
@@ -58,10 +59,12 @@ public class TurretBusiness extends AbstractBusiness {
         private void handleBow() {
             if (!actions.containsKey(BOW) && !actions.containsKey(PREPARATION) && countBow++ > bowDelay && !isContacted()) {
                 countBow = 0;
+                SoundManager.playSound(SoundManager.PREPARE_SPELL);
                 actions.put(PREPARATION, new AttackDirectionPreparation(turret, MathUtils.centered(turret, new TurretBow(0, 0))) {
                     @Override
                     public void onComplete() {
                         actions.remove(PREPARATION);
+                        SoundManager.playSound(SoundManager.CANNON);
                         actions.put(BOW, new AttackTurret(turret, destination) {
                             @Override
                             public void onFinish() {

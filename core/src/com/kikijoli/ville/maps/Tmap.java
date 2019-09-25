@@ -128,11 +128,12 @@ public class Tmap implements Screen {
     Box2DDebugRenderer debugRenderer = new Box2DDebugRenderer();
 
     public Tmap() {
-        StageManager.loadFromXml("4");
+        StageManager.loadFromXml("1");
     }
 
     @Override
     public void show() {
+
 //        Gdx.input.setCursorCatched(true);
         fps = new FPSLogger();
         shapeRenderer = new ShapeRenderer();
@@ -169,9 +170,9 @@ public class Tmap implements Screen {
         drawHud();
 
         getRay().setCombinedMatrix(camera.combined,
-            camera.position.x, camera.position.y,
-            camera.viewportWidth * camera.zoom,
-            camera.viewportHeight * camera.zoom);
+                camera.position.x, camera.position.y,
+                camera.viewportWidth * camera.zoom,
+                camera.viewportHeight * camera.zoom);
 
         getRay().update();
         if (setLevel != null) {
@@ -213,9 +214,11 @@ public class Tmap implements Screen {
         hudShapeRenderer.flush();
         hudShapeRenderer.end();
         hudBatch.begin();
+
+        HudManager.drawSprite();
+
         drawKeys();
         drawArrowCount();
-        HudManager.drawSprite();
         drawTime();
         if (EntiteManager.playerDead) {
             drawDeadMessage();
@@ -300,8 +303,7 @@ public class Tmap implements Screen {
     }
 
     private void drawTime() {
-        MessageManager.segoe.getData().setScale(1f);
-        MessageManager.segoe.setColor(Color.RED);
+        MessageManager.SHOWG.setColor(Color.SALMON);
         float fontX = 50;
         float fontY = (Gdx.graphics.getHeight() - 50);
         MessageManager.SHOWG.draw(hudBatch, TIME + Integer.toString(MathUtils.transformIpsToSec(StageManager.stopwatch)), fontX, fontY);

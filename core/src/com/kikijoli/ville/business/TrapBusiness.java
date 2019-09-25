@@ -14,6 +14,7 @@ import com.kikijoli.ville.manager.ColorManager;
 import com.kikijoli.ville.manager.EntiteManager;
 import com.kikijoli.ville.manager.MessageManager;
 import com.kikijoli.ville.manager.ParticleManager;
+import com.kikijoli.ville.manager.SoundManager;
 import com.kikijoli.ville.util.MathUtils;
 
 /**
@@ -60,6 +61,7 @@ public class TrapBusiness extends AbstractBusiness {
                 MessageManager.addMessage(trap.getX() - trap.getWidth() / 2, trap.getY() + trap.getHeight() / 2, "BOOM", ColorManager.getTextureColor(), 30);
                 ParticleManager.addParticle("particle/explosion.p", trap.getX() + trap.getWidth() / 2, trap.getY() + trap.getHeight() / 2, 1.0f);
                 explode = true;
+                SoundManager.playSound(SoundManager.TRAP_EXPLODE);
                 if (trap.getBoundsEffect().contains(MathUtils.getCenter(EntiteManager.player.getBoundingRectangle()))) {
                     EntiteManager.touch(EntiteManager.player);
                 }
@@ -71,6 +73,7 @@ public class TrapBusiness extends AbstractBusiness {
 //                DrawManager.spritesDrawed.add(circleEffect);
                 MessageManager.addIndicator(trap.getX() - trap.getWidth() / 2, trap.getY() + trap.getHeight() / 2, "CLIC", trap, ColorManager.getTextureColor(), 30);
                 exec = true;
+                SoundManager.playSound(SoundManager.TRAP_CLIC);
             }
         }
 

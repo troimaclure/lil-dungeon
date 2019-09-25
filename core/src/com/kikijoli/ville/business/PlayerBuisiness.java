@@ -17,8 +17,8 @@ import com.kikijoli.ville.drawable.hud.WandFireTile;
 import com.kikijoli.ville.drawable.hud.WandTile;
 import com.kikijoli.ville.manager.EntiteManager;
 import com.kikijoli.ville.manager.HudManager;
+import com.kikijoli.ville.manager.SoundManager;
 import com.kikijoli.ville.maps.Tmap;
-import com.kikijoli.ville.pathfind.Tile;
 import com.kikijoli.ville.util.Mode;
 
 /**
@@ -41,6 +41,7 @@ public class PlayerBuisiness extends AbstractBusiness {
         if (actions.containsKey(DASH) || !EntiteManager.player.canDash())
             return;
         EntiteManager.player.dash();
+        SoundManager.playSound(SoundManager.DASH);
         actions.put(DASH, new Dash(EntiteManager.player) {
             @Override
             public void onFinish() {
@@ -56,6 +57,7 @@ public class PlayerBuisiness extends AbstractBusiness {
             case Mode.BOW:
                 if (actions.containsKey(Integer.toString(Mode.BOW)) || EntiteManager.arrowCount == 0)
                     return;
+                SoundManager.playSound(SoundManager.BOW);
                 EntiteManager.arrowCount -= 1;
                 abstractAction = new AttackBow(EntiteManager.player, new Vector2(Tmap.worldCoordinates.x, Tmap.worldCoordinates.y)) {
                     @Override
@@ -68,6 +70,7 @@ public class PlayerBuisiness extends AbstractBusiness {
             case Mode.SWORD:
                 if (actions.containsKey(Integer.toString(Mode.SWORD))) return;
                 dash();
+                SoundManager.playSound(SoundManager.SWORD);
                 abstractAction = new AttackSword(EntiteManager.player) {
                     @Override
                     public void onFinish() {
@@ -80,6 +83,7 @@ public class PlayerBuisiness extends AbstractBusiness {
                 if (actions.containsKey(Integer.toString(Mode.WAND))) return;
                 com.kikijoli.ville.drawable.hud.Tile t = HudManager.tiles.stream().filter(e -> e instanceof WandTile).findFirst().get();
                 t.disabled = true;
+                SoundManager.playSound(SoundManager.POISON_SPELL);
                 abstractAction = new AttackWandPoison(EntiteManager.player, new Vector2(Tmap.worldCoordinates.x, Tmap.worldCoordinates.y)) {
                     @Override
                     public void onFinish() {
@@ -99,6 +103,7 @@ public class PlayerBuisiness extends AbstractBusiness {
                     return;
                 t = HudManager.tiles.stream().filter(e -> e instanceof WandFireTile).findFirst().get();
                 t.disabled = true;
+                SoundManager.playSound(SoundManager.FIRE_SPELL);
                 abstractAction = new AttackWandFire(EntiteManager.player, new Vector2(Tmap.worldCoordinates.x, Tmap.worldCoordinates.y)) {
                     @Override
                     public void onFinish() {

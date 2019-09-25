@@ -4,6 +4,17 @@
   <target-platform-name>j2se</target-platform-name>
   <target-platform>1.8</target-platform>
   <source-level>1.8</source-level>
+  <common-tasks>
+    <task>
+      <display-name>build</display-name>
+      <non-blocking>no</non-blocking>
+      <task-names>
+        <name must-exist="yes">desktop:dist</name>
+      </task-names>
+      <task-args/>
+      <task-jvm-args/>
+    </task>
+  </common-tasks>
   <script-platform>
     <spec-name>j2se</spec-name>
     <spec-version>1.8</spec-version>

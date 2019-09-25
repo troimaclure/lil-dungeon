@@ -16,10 +16,7 @@ import com.kikijoli.ville.drawable.entite.simple.PlayerShield;
 import com.kikijoli.ville.interfaces.IBusiness;
 import com.kikijoli.ville.interfaces.IShapeDrawable;
 import com.kikijoli.ville.manager.ColorManager;
-import com.kikijoli.ville.manager.EntiteManager;
-import com.kikijoli.ville.manager.ShaderManager;
 import com.kikijoli.ville.util.Constantes;
-import com.kikijoli.ville.util.MathUtils;
 import com.kikijoli.ville.util.Mode;
 
 /**
@@ -34,6 +31,7 @@ public final class Player extends Entite implements IBusiness, IShapeDrawable {
     public float dashCooldown = 3 * 60;
     public float dashCount = dashTotal * dashCooldown;
     public PointLight vision;
+    public boolean invincible = false;
 
     public Player(int srcX, int srcY) {
         super(SPRITESIMPLEPNG, srcX, srcY, Constantes.TILESIZE / 4, Constantes.TILESIZE / 2);
@@ -50,12 +48,14 @@ public final class Player extends Entite implements IBusiness, IShapeDrawable {
             this.shield.step(this.getX(), this.getY(), this.getWidth(), this.getHeight());
             this.shield.draw(batch);
         }
+
+        if (this.invincible) batch.setColor(Color.RED);
+        else batch.setColor(ColorManager.getTextureColor());
         super.draw(batch);
     }
 
     @Override
     public void draw(ShapeRenderer batch) {
-        batch.setColor(ColorManager.getTextureColor());
         batch.rect(getX() - getWidth() / 2, getY() + getHeight() + 5, getWidth() * 2, 5);
         batch.setColor(Color.RED);
         batch.rect(getX() - getWidth() / 2, getY() + getHeight() + 5, calculateDashWidth(), 5);

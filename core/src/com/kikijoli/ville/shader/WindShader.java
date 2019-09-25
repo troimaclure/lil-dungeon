@@ -6,7 +6,6 @@
 package com.kikijoli.ville.shader;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
 import com.kikijoli.ville.drawable.entite.Entite;
 
 /**
@@ -21,11 +20,11 @@ public class WindShader extends AbstractShader {
     public final float PI2 = 3.1415926535897932384626433832795f * 2.0f;
 
     public WindShader() {
-        super(new FileHandle("glsl/wind/vertex.glsl"), new FileHandle("glsl/wind/frag.glsl"));
+        super(Gdx.files.internal("glsl/wind/vertex.glsl"), Gdx.files.internal("glsl/wind/frag.glsl"));
     }
 
     public WindShader(Entite entite) {
-        super(new FileHandle("glsl/wind/vertex.glsl"), new FileHandle("glsl/wind/frag.glsl"), entite);
+        super(Gdx.files.internal("glsl/wind/vertex.glsl"), Gdx.files.internal("glsl/wind/frag.glsl"), entite);
 
     }
 

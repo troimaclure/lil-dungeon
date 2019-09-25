@@ -32,6 +32,9 @@ public class GeneralKeyListener extends InputAdapter {
     public boolean keyDown(int keycode) {
 
         switch (keycode) {
+            case Keys.I:
+                EntiteManager.player.invincible = true;
+                break;
             case Keys.LEFT:
             case Keys.Q:
             case Keys.A:

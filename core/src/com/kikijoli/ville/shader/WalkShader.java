@@ -20,11 +20,11 @@ public class WalkShader extends AbstractShader {
     boolean incre = true;
 
     public WalkShader() {
-        super(new FileHandle("glsl/walk/vertex.glsl"), new FileHandle("glsl/walk/frag.glsl"));
+        super(Gdx.files.internal("glsl/walk/vertex.glsl"), Gdx.files.internal("glsl/walk/frag.glsl"));
     }
 
     public WalkShader(Entite entite) {
-        super(new FileHandle("glsl/walk/vertex.glsl"), new FileHandle("glsl/walk/frag.glsl"), entite);
+        super(Gdx.files.internal("glsl/walk/vertex.glsl"), Gdx.files.internal("glsl/walk/frag.glsl"), entite);
     }
 
     @Override

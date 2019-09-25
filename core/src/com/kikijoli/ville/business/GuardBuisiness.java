@@ -16,6 +16,7 @@ import com.kikijoli.ville.drawable.entite.npc.Guard;
 import com.kikijoli.ville.drawable.entite.simple.Bow;
 import com.kikijoli.ville.drawable.entite.simple.Sword;
 import com.kikijoli.ville.manager.EntiteManager;
+import com.kikijoli.ville.manager.SoundManager;
 import com.kikijoli.ville.shader.WalkShader;
 import com.kikijoli.ville.util.MathUtils;
 
@@ -71,10 +72,12 @@ public class GuardBuisiness extends AbstractBusiness {
             if (!actions.containsKey(DASH) && !actions.containsKey(PREPARATION) && countDash++ > dashDelay) {
                 actions.remove(GOTO);
                 countDash = 0;
+                SoundManager.playSound(SoundManager.PREPARE_SPELL);
                 actions.put(PREPARATION, new AttackDirectionPreparation(guard, MathUtils.centered(guard, new Sword(0, 0))) {
                     @Override
                     public void onComplete() {
                         actions.remove(PREPARATION);
+                        SoundManager.playSound(SoundManager.DASH);
                         actions.put(DASH, new DashEnnemy(guard, new Vector2(EntiteManager.player.getX(), EntiteManager.player.getY())) {
                             @Override
                             public void onFinish() {
@@ -82,6 +85,7 @@ public class GuardBuisiness extends AbstractBusiness {
                                 actions.remove(DASH);
                             }
                         });
+                        SoundManager.playSound(SoundManager.SWORD);
                         actions.put(ATTACK, new AttackSword(guard) {
                             @Override
                             public void onFinish() {
@@ -97,10 +101,12 @@ public class GuardBuisiness extends AbstractBusiness {
             if (!actions.containsKey(BOW) && !actions.containsKey(PREPARATION) && countBow++ > bowDelay) {
                 countBow = 0;
                 actions.remove(GOTO);
+                SoundManager.playSound(SoundManager.PREPARE_SPELL);
                 actions.put(PREPARATION, new AttackDirectionPreparation(guard, MathUtils.centered(guard, new Bow(0, 0))) {
                     @Override
                     public void onComplete() {
                         actions.remove(PREPARATION);
+                        SoundManager.playSound(SoundManager.BOW);
                         actions.put(BOW, new AttackBow(guard, destination) {
                             @Override
                             public void onFinish() {

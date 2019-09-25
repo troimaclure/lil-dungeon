@@ -172,6 +172,7 @@ public class EntiteManager {
     }
 
     private static void playerAddKey(Key key) {
+        SoundManager.playSound(SoundManager.TAKE_KEY);
         keys.add(key);
         LockManager.keys.remove(key);
         GridManager.setState(Constantes.EMPTY, key.getBoundingRectangle());
@@ -179,6 +180,7 @@ public class EntiteManager {
     }
 
     private static void lockOpen(Lock lock) {
+        SoundManager.playSound(SoundManager.OPEN_DOOR);
         keys.remove(0);
         LockManager.locks.remove(lock);
         GridManager.setState(Constantes.EMPTY, lock.getBoundingRectangle());
@@ -187,6 +189,8 @@ public class EntiteManager {
 
     private static void doorOpen(Door door) {
         if (Tmap.setLevel == null) {
+            SoundManager.playSound(SoundManager.END_OF_LEVEL);
+            SoundManager.playSound(SoundManager.LEVEL_END_ANIM_SCREEN);
             Tmap.setLevel = new SetLevel(door.data);
             RankManager.point += stopwatch;
             RankManager.point += RankManager.currentStagePoint;
@@ -214,10 +218,13 @@ public class EntiteManager {
     }
 
     public static void touch(Entite entite) {
+        if (entite == player && player.invincible) return;
         if (entite.shield != null) {
             entite.shield = null;
+            SoundManager.playSound(SoundManager.SHIELD_CRASH);
             return;
         }
+
         addDead(entite);
         ParticleManager.addParticle("particle/blood.p", entite.getX(), entite.getY() + entite.getWidth(), 0.5f);
         entite.buisiness = null;
@@ -248,6 +255,9 @@ public class EntiteManager {
         if (entite != player) {
             RankManager.currentStagePoint += entite.point;
             MessageManager.addIndicator(entite.getX(), entite.getY(), Integer.toString(entite.point), entite);
+            SoundManager.playSound(SoundManager.KILL);
+        } else {
+            SoundManager.playSound(SoundManager.DEATH);
         }
         deads.add(entite);
     }

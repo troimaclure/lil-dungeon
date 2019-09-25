@@ -15,6 +15,7 @@ import com.kikijoli.ville.drawable.entite.simple.TurretBow;
 import com.kikijoli.ville.manager.ProjectileManager;
 import com.kikijoli.ville.manager.DrawManager;
 import com.kikijoli.ville.manager.EntiteManager;
+import com.kikijoli.ville.manager.SoundManager;
 import com.kikijoli.ville.util.MathUtils;
 
 /**
@@ -65,6 +66,7 @@ public abstract class AttackTurret extends AbstractAction {
     private void shoot() {
         countArrow = 0;
         Vector2 center = MathUtils.getCenter(bow.getBoundingRectangle());
+        SoundManager.playSound(SoundManager.CANNON_BALL);
         CannonBall cannonBall = new CannonBall((int) center.x, (int) center.y, new Vector2(destination.x, destination.y), entite);
         cannonBall.sprite.setRotation(90 + MathUtils.getRotation(entite.getX(), entite.getY(), destination.x, destination.y));
         ProjectileManager.projectiles.add(cannonBall);
