@@ -41,7 +41,7 @@ public class SoundManager {
 
     private static Sound getSound(String key) {
         if (!sounds.containsKey(key))
-            sounds.put(key, Gdx.audio.newSound(Gdx.files.classpath("sounds/" + key.toLowerCase() + ".mp3")));
+            sounds.put(key, Gdx.audio.newSound(Gdx.files.internal("sounds/" + key.toLowerCase() + ".mp3")));
         return sounds.get(key);
     }
 
