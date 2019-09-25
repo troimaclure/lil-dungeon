@@ -48,6 +48,7 @@ import com.kikijoli.ville.manager.RankManager;
 import com.kikijoli.ville.manager.SpellManager;
 import com.kikijoli.ville.pathfind.GridManager;
 import com.kikijoli.ville.util.Constantes;
+import com.kikijoli.ville.util.MathUtils;
 import com.kikijoli.ville.util.SetLevel;
 import com.kikijoli.ville.util.TextureUtil;
 import java.util.ArrayList;
@@ -127,12 +128,12 @@ public class Tmap implements Screen {
     Box2DDebugRenderer debugRenderer = new Box2DDebugRenderer();
 
     public Tmap() {
-        StageManager.loadFromXml("1");
+        StageManager.loadFromXml("4");
     }
 
     @Override
     public void show() {
-        Gdx.input.setCursorCatched(true);
+//        Gdx.input.setCursorCatched(true);
         fps = new FPSLogger();
         shapeRenderer = new ShapeRenderer();
         shapeRenderer.setAutoShapeType(true);
@@ -168,9 +169,9 @@ public class Tmap implements Screen {
         drawHud();
 
         getRay().setCombinedMatrix(camera.combined,
-                camera.position.x, camera.position.y,
-                camera.viewportWidth * camera.zoom,
-                camera.viewportHeight * camera.zoom);
+            camera.position.x, camera.position.y,
+            camera.viewportWidth * camera.zoom,
+            camera.viewportHeight * camera.zoom);
 
         getRay().update();
         if (setLevel != null) {
@@ -303,7 +304,7 @@ public class Tmap implements Screen {
         MessageManager.segoe.setColor(Color.RED);
         float fontX = 50;
         float fontY = (Gdx.graphics.getHeight() - 50);
-        MessageManager.SHOWG.draw(hudBatch, TIME + Integer.toString(StageManager.stopwatch), fontX, fontY);
+        MessageManager.SHOWG.draw(hudBatch, TIME + Integer.toString(MathUtils.transformIpsToSec(StageManager.stopwatch)), fontX, fontY);
         MessageManager.SHOWG.draw(hudBatch, SCORE + Integer.toString(RankManager.point), fontX + 200, fontY);
         MessageManager.SHOWG.draw(hudBatch, LEVEL_SCORE + Integer.toString(RankManager.currentStagePoint), fontX + 450, fontY);
     }

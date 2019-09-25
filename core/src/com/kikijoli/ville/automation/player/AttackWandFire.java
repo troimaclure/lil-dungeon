@@ -18,11 +18,11 @@ public abstract class AttackWandFire extends AttackWandPoison {
 
     public AttackWandFire(Entite entite, Vector2 destination) {
         super(entite, destination);
+        this.delay = 60 * 5;
     }
 
     @Override
     public void act() {
-
         super.act();
     }
 

@@ -21,7 +21,7 @@ import com.kikijoli.ville.util.MathUtils;
 public abstract class AttackWandPoison extends AbstractAction {
 
     public int count = 0;
-    public int delay = 100;
+    public int delay = 60 * 4;
 
     Wand wand;
     Entite entite;
@@ -34,7 +34,7 @@ public abstract class AttackWandPoison extends AbstractAction {
 
     @Override
     public void act() {
-
+        step(delay - count);
         addWandIfNotExist();
         wand.setX((float) (entite.getX() - (entite.getWidth() * 1.5)));
         wand.setY(entite.getY() - entite.getHeight() / 2);
@@ -62,5 +62,7 @@ public abstract class AttackWandPoison extends AbstractAction {
         PoisonSpell poison = new PoisonSpell(new Vector2(destination.x, destination.y), entite, (int) center.x, (int) center.y);
         SpellManager.spells.add(poison);
     }
+
+    public abstract void step(int step);
 
 }

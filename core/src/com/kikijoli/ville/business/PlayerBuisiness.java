@@ -13,8 +13,12 @@ import com.kikijoli.ville.automation.common.None;
 import com.kikijoli.ville.automation.player.AttackSword;
 import com.kikijoli.ville.automation.player.AttackWandFire;
 import com.kikijoli.ville.automation.player.AttackWandPoison;
+import com.kikijoli.ville.drawable.hud.WandFireTile;
+import com.kikijoli.ville.drawable.hud.WandTile;
 import com.kikijoli.ville.manager.EntiteManager;
+import com.kikijoli.ville.manager.HudManager;
 import com.kikijoli.ville.maps.Tmap;
+import com.kikijoli.ville.pathfind.Tile;
 import com.kikijoli.ville.util.Mode;
 
 /**
@@ -74,10 +78,18 @@ public class PlayerBuisiness extends AbstractBusiness {
                 break;
             case Mode.WAND:
                 if (actions.containsKey(Integer.toString(Mode.WAND))) return;
+                com.kikijoli.ville.drawable.hud.Tile t = HudManager.tiles.stream().filter(e -> e instanceof WandTile).findFirst().get();
+                t.disabled = true;
                 abstractAction = new AttackWandPoison(EntiteManager.player, new Vector2(Tmap.worldCoordinates.x, Tmap.worldCoordinates.y)) {
                     @Override
                     public void onFinish() {
                         actions.remove(Integer.toString(Mode.WAND));
+                        t.disabled = false;
+                    }
+
+                    @Override
+                    public void step(int step) {
+                        t.count = step;
                     }
                 };
                 actions.put(Integer.toString(Mode.WAND), abstractAction);
@@ -85,10 +97,18 @@ public class PlayerBuisiness extends AbstractBusiness {
             case Mode.WANDFIRE:
                 if (actions.containsKey(Integer.toString(Mode.WANDFIRE)))
                     return;
+                t = HudManager.tiles.stream().filter(e -> e instanceof WandFireTile).findFirst().get();
+                t.disabled = true;
                 abstractAction = new AttackWandFire(EntiteManager.player, new Vector2(Tmap.worldCoordinates.x, Tmap.worldCoordinates.y)) {
                     @Override
                     public void onFinish() {
                         actions.remove(Integer.toString(Mode.WANDFIRE));
+                        t.disabled = false;
+                    }
+
+                    @Override
+                    public void step(int step) {
+                        t.count = step;
                     }
                 };
                 actions.put(Integer.toString(Mode.WANDFIRE), abstractAction);

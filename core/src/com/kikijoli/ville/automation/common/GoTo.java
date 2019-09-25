@@ -14,10 +14,8 @@ import com.kikijoli.ville.manager.PathFinderManager;
 import com.kikijoli.ville.pathfind.GridManager;
 import com.kikijoli.ville.pathfind.Tile;
 import com.kikijoli.ville.shader.AbstractShader;
-import com.kikijoli.ville.shader.WalkShader;
 import com.kikijoli.ville.util.Constantes;
 import java.util.ArrayList;
-import net.dermetfan.gdx.math.MathUtils;
 
 /**
  *
@@ -57,7 +55,7 @@ public class GoTo extends AbstractAction {
         if (count >= delay) {
             count = 0;
             index = 0;
-            path = PathFinderManager.getPath(entite, target, Constantes.NPCFILTERBUILD);
+            path = PathFinderManager.getPath(entite, target, Constantes.NPC_MOVEMENT_OK);
         }
         return path != null;
     }

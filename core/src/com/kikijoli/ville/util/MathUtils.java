@@ -36,4 +36,8 @@ public class MathUtils {
         target.setY(source.getY() - target.getHeight() / 2 + source.getHeight() / 2);
         return target;
     }
+
+    public static int transformIpsToSec(int by60) {
+        return (int) (Math.ceil(by60 > 0 ? by60 / 60 : 0) + 1);
+    }
 }

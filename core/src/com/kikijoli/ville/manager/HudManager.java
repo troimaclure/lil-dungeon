@@ -27,7 +27,6 @@ public class HudManager {
     }
 
     public static void drawSprite() {
-        Tmap.hudBatch.setColor(Color.WHITE);
         for (Tile tile : tiles) {
             tile.draw(Tmap.hudBatch);
         }
@@ -36,18 +35,14 @@ public class HudManager {
     public static void drawShape() {
 
         for (Tile tile : tiles) {
-            if (tile.selected) {
-                Tmap.hudShapeRenderer.setColor(Color.BLUE);
-            } else Tmap.hudShapeRenderer.setColor(Color.BLACK);
             tile.draw(Tmap.hudShapeRenderer);
         }
     }
 
     public static void drawLines() {
 
-        Tmap.hudShapeRenderer.setColor(Color.WHITE);
         for (Tile tile : tiles) {
-            tile.draw(Tmap.hudShapeRenderer);
+            tile.drawLines(Tmap.hudShapeRenderer);
         }
     }
 

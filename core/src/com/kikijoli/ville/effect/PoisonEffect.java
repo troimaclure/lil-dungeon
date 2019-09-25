@@ -2,7 +2,6 @@ package com.kikijoli.ville.effect;
 
 import com.badlogic.gdx.math.Vector2;
 import com.kikijoli.ville.drawable.entite.Entite;
-import com.kikijoli.ville.drawable.entite.projectile.Spell.MoveSpell;
 import com.kikijoli.ville.manager.EntiteManager;
 import com.kikijoli.ville.manager.ParticleManager;
 import com.kikijoli.ville.util.MathUtils;

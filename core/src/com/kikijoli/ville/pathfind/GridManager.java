@@ -116,7 +116,7 @@ public class GridManager {
     }
 
     private static void drawWall(Tile tile) {
-        Tmap.shapeRenderer.setColor(Color.WHITE);
+        Tmap.shapeRenderer.setColor(Color.valueOf("#c8d6e5"));
         Tmap.shapeRenderer.rect(tile.getX(), tile.getY(), tile.getWidth(), tile.getHeight());
     }
 

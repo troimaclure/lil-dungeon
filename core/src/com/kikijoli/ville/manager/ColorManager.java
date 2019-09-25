@@ -14,10 +14,10 @@ import com.badlogic.gdx.graphics.Color;
 public class ColorManager {
 
     public static Color getTextureColor() {
-        return Color.WHITE;
+        return Color.valueOf("#54a0ff");
     }
 
     public static Color getBackgroundColor() {
-        return Color.valueOf("#2c3e50"); 
+        return Color.valueOf("#222f3e");
     }
 }

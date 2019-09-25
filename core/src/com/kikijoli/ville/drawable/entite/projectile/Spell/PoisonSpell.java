@@ -13,8 +13,8 @@ import com.kikijoli.ville.util.Constantes;
 public class PoisonSpell extends MoveSpell {
 
     public PoisonSpell(Vector2 destination, Entite author, float x, float y) {
-        super("particle/poison.p", destination, 1000, author, x, y);
-        this.speed = 15;
+        super("particle/poison.p", destination, 5000, author, x, y);
+        this.speed = 5;
     }
 
     @Override

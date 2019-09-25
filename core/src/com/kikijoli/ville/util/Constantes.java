@@ -12,8 +12,6 @@ package com.kikijoli.ville.util;
 public class Constantes {
 
     public static int TILESIZE = 64;
-    public static int SCREENWIDTH = 600;
-    public static int SCREENHEIGHT = 800;
     public final static String EMPTY = "0";
     public final static String WALL = "1";
     public final static String WATER = "2";
@@ -25,8 +23,7 @@ public class Constantes {
     public final static String TURRET = "8";
     public final static String TRAP = "9";
     public static String NPC_MOVEMENT_OK = Constantes.TRAP + Constantes.KEY + Constantes.EMPTY + Constantes.GUARD + Constantes.PLAYER;
-    public static String BULLET_MOVEMENT_OK = Constantes.TURRET + Constantes.KEY + Constantes.EMPTY + Constantes.GUARD + Constantes.PLAYER + Constantes.WATER;
-    public static String CANNONBALL_MOVEMENT_OK = Constantes.TURRET + Constantes.KEY + Constantes.EMPTY + Constantes.GUARD + Constantes.PLAYER + Constantes.WATER + Constantes.WALL + Constantes.DOOR + Constantes.LOCK + Constantes.KEY;
-    public static String NPCFILTERBUILD = Constantes.WALL + Constantes.LOCK + Constantes.WATER;
+    public static String BULLET_MOVEMENT_OK = NPC_MOVEMENT_OK + Constantes.TURRET + Constantes.WATER;
+    public static String CANNONBALL_MOVEMENT_OK = BULLET_MOVEMENT_OK + Constantes.WALL + Constantes.DOOR + Constantes.LOCK;
 
 }

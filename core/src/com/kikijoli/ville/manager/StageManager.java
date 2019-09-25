@@ -50,7 +50,7 @@ public class StageManager {
             i++;
         }
         currentLevel = level;
-        EntiteManager.arrowCount = (int) EntiteManager.entites.stream().filter(e -> e != EntiteManager.player).count();
+        EntiteManager.arrowCount = (int) EntiteManager.entites.stream().filter(e -> e != EntiteManager.player).count() / 2;
     }
 
     public static void load(int level) {
@@ -125,6 +125,10 @@ public class StageManager {
         DrawManager.entites.clear();
         WaterManager.waters.clear();
         DrawManager.spritesFilled.clear();
+        HudManager.tiles.stream().forEach(e -> {
+            e.disabled = false;
+            e.count = 0;
+        });
         ProjectileManager.projectiles.clear();
         SpellManager.spells.clear();
         Tmap.getRay().removeAll();

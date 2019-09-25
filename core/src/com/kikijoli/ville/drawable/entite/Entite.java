@@ -54,16 +54,16 @@ public abstract class Entite extends Sprite implements ISpriteDrawable {
     public void draw(SpriteBatch batch) {
         calculateAnchors();
         batch.draw(getTexture(),
-                getX(), getY(),
-                centerOrigin.x,
-                centerOrigin.y,
-                (int) width, (int) height,
-                1, 1,
-                getRotation(),
-                (int) 0,
-                (int) 0,
-                (int) getTexture().getWidth(), (int) getTexture().getHeight(),
-                false, false);
+            getX(), getY(),
+            centerOrigin.x,
+            centerOrigin.y,
+            (int) width, (int) height,
+            1, 1,
+            getRotation(),
+            (int) 0,
+            (int) 0,
+            (int) getTexture().getWidth(), (int) getTexture().getHeight(),
+            false, false);
     }
 
     private void calculateAnchors() {
