@@ -39,7 +39,6 @@ public class GuardBuisiness extends AbstractBusiness {
 
         private static final String GOTO = "GOTO";
         private static final String DASH = "DASH";
-        private static final String BOW = "BOW";
         private static final String ATTACK = "ATTACK";
         private static final String PREPARATION = "PREPARATIOn";
 
@@ -92,29 +91,6 @@ public class GuardBuisiness extends AbstractBusiness {
                 });
             }
         }
-
-//        private void handleBow() {
-//            if (!actions.containsKey(BOW) && !actions.containsKey(PREPARATION) && countBow++ > bowDelay) {
-//                countBow = 0;
-//                actions.remove(GOTO);
-//                SoundManager.playSound(SoundManager.PREPARE_SPELL);
-//                actions.put(PREPARATION, new AttackDirectionPreparation(guard, MathUtils.centered(guard, new Bow(0, 0))) {
-//                    @Override
-//                    public void onComplete() {
-//                        actions.remove(PREPARATION);
-//                        SoundManager.playSound(SoundManager.BOW);
-//                        actions.put(BOW, new AttackBow(guard, destination) {
-//                            @Override
-//                            public void onFinish() {
-//                                actions.remove(BOW);
-//                            }
-//                        });
-//                    }
-//                });
-//
-//            }
-//        }
-//
     }
 
     public class WaitPlayer extends AbstractAction {

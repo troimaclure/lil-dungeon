@@ -28,9 +28,9 @@ public class GoTo extends AbstractAction {
     public static ArrayList<Tile> path = null;
     private Vector2 goal = new Vector2();
     private int index = 0;
-    private int count = 50;
-    private int delay = 50;
-    private AbstractShader old;
+    private int count = 30;
+    private final int delay = 50;
+    private final AbstractShader old;
 
     public GoTo(Entite entite, Entite target) {
         this.entite = entite;
@@ -52,27 +52,22 @@ public class GoTo extends AbstractAction {
         if (entite.getBoundingRectangle().overlaps(target.getBoundingRectangle())) {
             return false;
         }
-
         count++;
         if (count >= delay) {
             count = 0;
             index = 0;
-          
             path = PathFinderManager.getPath(entite, target, Constantes.NPC_MOVEMENT_OK);
-            System.out.println(path);
         }
         return path != null;
     }
 
     private void getGoal() {
-        System.out.println("getGoal");
         if (index < path.size()) {
             goal = path.get(index).getBoundingRectangle().getCenter(goal);
         }
     }
 
     private void goToGoal() {
-        System.out.println("goToGoal");
         Vector2 center = new Vector2();
         center = entite.getBoundingRectangle().getCenter(center);
         if (!GridManager.isClearZone(goal, Constantes.NPC_MOVEMENT_OK)) return;
@@ -83,15 +78,12 @@ public class GoTo extends AbstractAction {
         if (Intersector.overlaps(target.getBoundingRectangle(), entite.getBoundingRectangle())) {
             path = null;
         }
-
     }
 
     private void checkGoal() {
-        System.out.println("checkGoal");
         if (entite.getBoundingRectangle().overlaps(new Rectangle(goal.x, goal.y, Constantes.TILESIZE, Constantes.TILESIZE))) {
             index++;
         }
-
     }
 
 }

@@ -12,7 +12,7 @@ import com.kikijoli.ville.util.MathUtils;
  */
 public class PoisonEffect extends AbstractEffect {
 
-    private int count = 90;
+    private int count = 60;
 
     public PoisonEffect(float x, float y) {
         super(ParticleManager.addParticle("particle/poison.p", x, y, 0.5f));

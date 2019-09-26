@@ -5,19 +5,13 @@
  */
 package com.kikijoli.ville.business;
 
-import com.badlogic.gdx.math.Vector2;
 import com.kikijoli.ville.abstracts.AbstractAction;
 import com.kikijoli.ville.automation.player.AttackBow;
-import com.kikijoli.ville.automation.ennemy.DashEnnemy;
-import com.kikijoli.ville.automation.common.GoTo;
 import com.kikijoli.ville.automation.ennemy.AttackDirectionPreparation;
-import com.kikijoli.ville.automation.player.AttackSword;
 import com.kikijoli.ville.drawable.entite.npc.Archer;
 import com.kikijoli.ville.drawable.entite.simple.Bow;
-import com.kikijoli.ville.drawable.entite.simple.Sword;
 import com.kikijoli.ville.manager.EntiteManager;
 import com.kikijoli.ville.manager.SoundManager;
-import com.kikijoli.ville.shader.WalkShader;
 import com.kikijoli.ville.util.MathUtils;
 
 /**
@@ -42,9 +36,6 @@ public class ArcherBusiness extends AbstractBusiness {
         private static final String BOW = "BOW";
         private static final String PREPARATION = "PREPARATION";
 
-        int bowDelay = 100;
-        int countBow = 100;
-
         @Override
         public void act() {
 
@@ -52,8 +43,7 @@ public class ArcherBusiness extends AbstractBusiness {
         }
 
         private void handleBow() {
-            if (!actions.containsKey(BOW) && !actions.containsKey(PREPARATION) && countBow++ > bowDelay) {
-                countBow = 0;
+            if (!actions.containsKey(BOW) && !actions.containsKey(PREPARATION)) {
                 SoundManager.playSound(SoundManager.PREPARE_SPELL);
                 actions.put(PREPARATION, new AttackDirectionPreparation(archer, MathUtils.centered(archer, new Bow(0, 0))) {
                     @Override

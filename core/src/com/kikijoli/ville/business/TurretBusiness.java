@@ -43,13 +43,7 @@ public class TurretBusiness extends AbstractBusiness {
 
         @Override
         public void act() {
-            if (isContacted()) {
-                if (!(turret.shader instanceof ClickShader)) {
-                    turret.shader = null;
-                }
-            } else {
-                handleBow();
-            }
+            handleBow();
         }
 
         private boolean isContacted() {

@@ -14,7 +14,7 @@ import com.badlogic.gdx.graphics.Color;
 public class ColorManager {
 
     public static Color getTextureColor() {
-        return Color.valueOf("#54a0ff");
+        return Color.valueOf("#f1f2f6");
     }
 
     public static Color getBackgroundColor() {

@@ -35,7 +35,7 @@ public class PathFinder {
         if (target == null || source == null) {
             return null;
         }
-        if (filters.contains(target.state) || filters.contains(source.state)) {
+        if (!filters.contains(target.state) || !filters.contains(source.state)) {
             return null;
         }
         Search[][] searchs = new Search[GridManager.COLUMNCOUNT][GridManager.ROWCOUNT];
@@ -143,14 +143,14 @@ public class PathFinder {
 
         //au dessus
         if (current.c.row + compte < GridManager.ROWCOUNT) {
-            if (!filters.contains(grille[current.c.col][current.c.row + compte].c.state)) {
+            if (filters.contains(grille[current.c.col][current.c.row + compte].c.state)) {
                 grille[current.c.col][current.c.row + compte].index = compte;
             }
             complete(current.c.row + compte, current.c.col, compte, grille);
         }
         //ne dessous
         if (current.c.row - compte >= 0) {
-            if (!filters.contains(grille[current.c.col][current.c.row - compte].c.state)) {
+            if (filters.contains(grille[current.c.col][current.c.row - compte].c.state)) {
                 grille[current.c.col][current.c.row - compte].index = compte;
             }
             complete(current.c.row - compte, current.c.col, compte, grille);
@@ -176,7 +176,7 @@ public class PathFinder {
         }
         while (x + number < GridManager.COLUMNCOUNT) {
             ++increm;
-            if (!filters.contains(grille[x + number][y].c.state)) {
+            if (filters.contains(grille[x + number][y].c.state)) {
                 grille[x + number][y].index = increm;
             }
 
@@ -191,7 +191,7 @@ public class PathFinder {
         while (x - number >= 0) {
 
             ++increm;
-            if (!filters.contains(grille[x - number][y].c.state)) {
+            if (filters.contains(grille[x - number][y].c.state)) {
                 grille[x - number][y].index = increm;
             }
             if (target.col == (x - number) && target.row == y) {
