@@ -44,11 +44,6 @@ public final class Player extends Entite implements IBusiness, IShapeDrawable {
     @Override
     public void draw(SpriteBatch batch) {
 
-        if (this.shield != null) {
-            this.shield.step(this.getX(), this.getY(), this.getWidth(), this.getHeight());
-            this.shield.draw(batch);
-        }
-
         if (this.invincible) batch.setColor(Color.RED);
         else batch.setColor(ColorManager.getTextureColor());
         super.draw(batch);
@@ -56,6 +51,7 @@ public final class Player extends Entite implements IBusiness, IShapeDrawable {
 
     @Override
     public void draw(ShapeRenderer batch) {
+        batch.setColor(Color.GRAY);
         batch.rect(getX() - getWidth() / 2, getY() + getHeight() + 5, getWidth() * 2, 5);
         batch.setColor(Color.RED);
         batch.rect(getX() - getWidth() / 2, getY() + getHeight() + 5, calculateDashWidth(), 5);

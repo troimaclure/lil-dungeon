@@ -53,6 +53,11 @@ public abstract class Entite extends Sprite implements ISpriteDrawable {
     @Override
     public void draw(SpriteBatch batch) {
         calculateAnchors();
+
+        if (this.shield != null) {
+            this.shield.step(this.getX(), this.getY(), this.getWidth(), this.getHeight());
+            this.shield.draw(batch);
+        }
         batch.draw(getTexture(),
             getX(), getY(),
             centerOrigin.x,

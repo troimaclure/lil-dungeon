@@ -22,7 +22,9 @@ public class Constantes {
     public final static String DOOR = "7";
     public final static String TURRET = "8";
     public final static String TRAP = "9";
-    public static String NPC_MOVEMENT_OK = Constantes.TRAP + Constantes.KEY + Constantes.EMPTY + Constantes.GUARD + Constantes.PLAYER;
+    public final static String ARCHER = "a";
+    public final static String MAGICIAN = "b";
+    public static String NPC_MOVEMENT_OK = Constantes.MAGICIAN + Constantes.ARCHER + Constantes.TRAP + Constantes.KEY + Constantes.EMPTY + Constantes.GUARD + Constantes.PLAYER;
     public static String BULLET_MOVEMENT_OK = NPC_MOVEMENT_OK + Constantes.TURRET + Constantes.WATER;
     public static String CANNONBALL_MOVEMENT_OK = BULLET_MOVEMENT_OK + Constantes.WALL + Constantes.DOOR + Constantes.LOCK;
 

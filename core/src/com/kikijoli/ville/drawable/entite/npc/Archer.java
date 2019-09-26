@@ -7,11 +7,10 @@ package com.kikijoli.ville.drawable.entite.npc;
 
 import box2dLight.PointLight;
 import com.badlogic.gdx.graphics.Color;
-import com.kikijoli.ville.business.GuardBuisiness;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.kikijoli.ville.business.AbstractBusiness;
+import com.kikijoli.ville.business.ArcherBusiness;
 import com.kikijoli.ville.drawable.entite.Entite;
-import com.kikijoli.ville.drawable.entite.simple.PlayerShield;
 import com.kikijoli.ville.interfaces.IBusiness;
 import com.kikijoli.ville.maps.Tmap;
 import com.kikijoli.ville.util.Constantes;
@@ -20,18 +19,17 @@ import com.kikijoli.ville.util.Constantes;
  *
  * @author troïmaclure
  */
-public final class Guard extends Entite implements IBusiness {
+public final class Archer extends Entite implements IBusiness {
 
-    private static final String GUARD = "sprite/guard.png";
+    private static final String ARCHER = "sprite/archer.png";
 
     public PointLight vision;
 
-    public Guard(int srcX, int srcY) {
-        super(GUARD, srcX, srcY, Constantes.TILESIZE / 4, Constantes.TILESIZE / 2);
+    public Archer(int srcX, int srcY) {
+        super(ARCHER, srcX, srcY, Constantes.TILESIZE / 4, Constantes.TILESIZE / 2);
         this.buisiness = this.getDefault();
         this.vision = new PointLight(Tmap.getRay(), 40, Color.BLACK, 500, this.getX(), this.getY());
         this.vision.setSoft(false);
-        this.shield = new PlayerShield(srcX, srcY);
     }
 
     @Override
@@ -42,6 +40,6 @@ public final class Guard extends Entite implements IBusiness {
 
     @Override
     public AbstractBusiness getDefault() {
-        return new GuardBuisiness(this);
+        return new ArcherBusiness(this);
     }
 }

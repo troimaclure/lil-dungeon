@@ -25,8 +25,6 @@ public class GridManager {
     public static int COLUMNCOUNT;
     public static int ROWCOUNT;
     public static Tile[][] grid;
-    private static final String FLOOR = "sprite/floor.png";
-    private static final String WALL = "sprite/wall.png";
 
     public static void initialize(int rowCount, int columnCount, int size) {
         COLUMNCOUNT = columnCount;
@@ -54,20 +52,6 @@ public class GridManager {
     }
 
     public static Tile getCaseFor(Rectangle entite, String filters) {
-        if (entite != null) {
-            for (Tile[] grille1 : grid) {
-                for (Tile g : grille1) {
-                    if (Intersector.overlaps(entite, g.getBoundingRectangle()) && !filters.contains(g.state)) {
-                        return g;
-                    }
-                }
-            }
-        }
-
-        return null;
-    }
-
-    public static Tile getCaseFor(Circle entite, String filters) {
         if (entite != null) {
             for (Tile[] grille1 : grid) {
                 for (Tile g : grille1) {

@@ -24,14 +24,11 @@ public abstract class AttackDirectionPreparation extends AbstractAction {
     public AttackDirectionPreparation(Entite entite, Entite draw) {
         this.entite = entite;
         this.draw = draw;
-
     }
 
     @Override
     public void act() {
-        if (entite.shader == null) {
-            entite.shader = new ClickShader(entite, null);
-        }
+
         if (prepared) {
             if (count++ >= delay) finish();
             return;

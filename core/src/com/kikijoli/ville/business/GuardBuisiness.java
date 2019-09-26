@@ -7,13 +7,11 @@ package com.kikijoli.ville.business;
 
 import com.badlogic.gdx.math.Vector2;
 import com.kikijoli.ville.abstracts.AbstractAction;
-import com.kikijoli.ville.automation.player.AttackBow;
 import com.kikijoli.ville.automation.ennemy.DashEnnemy;
 import com.kikijoli.ville.automation.common.GoTo;
 import com.kikijoli.ville.automation.ennemy.AttackDirectionPreparation;
 import com.kikijoli.ville.automation.player.AttackSword;
 import com.kikijoli.ville.drawable.entite.npc.Guard;
-import com.kikijoli.ville.drawable.entite.simple.Bow;
 import com.kikijoli.ville.drawable.entite.simple.Sword;
 import com.kikijoli.ville.manager.EntiteManager;
 import com.kikijoli.ville.manager.SoundManager;
@@ -49,20 +47,18 @@ public class GuardBuisiness extends AbstractBusiness {
         int delay = 50;
         int dashDelay = 50;
         int countDash = 0;
-        int bowDelay = 150;
-        int countBow = 150;
 
         @Override
         public void act() {
 
             handleWalk();
             handleDash();
-            handleBow();
         }
 
         private void handleWalk() {
-            if (!actions.containsKey(GOTO) && !actions.containsKey(DASH) && !actions.containsKey(PREPARATION))
+            if (!actions.containsKey(GOTO) && !actions.containsKey(DASH) && !actions.containsKey(PREPARATION)) {
                 actions.put(GOTO, new GoTo(guard, EntiteManager.player));
+            }
             if (!(guard.shader instanceof WalkShader))
                 guard.shader = new WalkShader(guard);
         }
@@ -97,28 +93,28 @@ public class GuardBuisiness extends AbstractBusiness {
             }
         }
 
-        private void handleBow() {
-            if (!actions.containsKey(BOW) && !actions.containsKey(PREPARATION) && countBow++ > bowDelay) {
-                countBow = 0;
-                actions.remove(GOTO);
-                SoundManager.playSound(SoundManager.PREPARE_SPELL);
-                actions.put(PREPARATION, new AttackDirectionPreparation(guard, MathUtils.centered(guard, new Bow(0, 0))) {
-                    @Override
-                    public void onComplete() {
-                        actions.remove(PREPARATION);
-                        SoundManager.playSound(SoundManager.BOW);
-                        actions.put(BOW, new AttackBow(guard, destination) {
-                            @Override
-                            public void onFinish() {
-                                actions.remove(BOW);
-                            }
-                        });
-                    }
-                });
-
-            }
-        }
-
+//        private void handleBow() {
+//            if (!actions.containsKey(BOW) && !actions.containsKey(PREPARATION) && countBow++ > bowDelay) {
+//                countBow = 0;
+//                actions.remove(GOTO);
+//                SoundManager.playSound(SoundManager.PREPARE_SPELL);
+//                actions.put(PREPARATION, new AttackDirectionPreparation(guard, MathUtils.centered(guard, new Bow(0, 0))) {
+//                    @Override
+//                    public void onComplete() {
+//                        actions.remove(PREPARATION);
+//                        SoundManager.playSound(SoundManager.BOW);
+//                        actions.put(BOW, new AttackBow(guard, destination) {
+//                            @Override
+//                            public void onFinish() {
+//                                actions.remove(BOW);
+//                            }
+//                        });
+//                    }
+//                });
+//
+//            }
+//        }
+//
     }
 
     public class WaitPlayer extends AbstractAction {

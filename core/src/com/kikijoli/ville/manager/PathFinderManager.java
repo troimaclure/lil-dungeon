@@ -23,16 +23,4 @@ public class PathFinderManager {
         return new PathFinder().getPathFor(GridManager.getCaseFor(source.getBoundingRectangle(), filters), GridManager.getCaseFor(target.getBoundingRectangle(), filters), filters);
     }
 
-    public static ArrayList<Tile> getPath(Entite entite, Rectangle target, String filters) {
-        return new PathFinder().getPathFor(GridManager.getCaseFor(entite.getBoundingRectangle(), filters), GridManager.getCaseFor(target, filters), filters);
-    }
-
-    public static ArrayList<Tile> getPath(Entite entite, Circle target, String filters) {
-        return new PathFinder().getPathFor(GridManager.getCaseFor(entite.getBoundingRectangle(), filters), GridManager.getCaseFor(target, filters), filters);
-    }
-
-    public static ArrayList<Tile> getPath(Rectangle source, Rectangle target, String filters) {
-        return new PathFinder().getPathFor(GridManager.getCaseFor(source, filters), GridManager.getCaseFor(target, filters), filters);
-    }
-
 }

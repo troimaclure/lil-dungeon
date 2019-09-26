@@ -49,25 +49,30 @@ public class GoTo extends AbstractAction {
     }
 
     private boolean checkPath() {
-        if (entite.getBoundingRectangle().overlaps(target.getBoundingRectangle()))
+        if (entite.getBoundingRectangle().overlaps(target.getBoundingRectangle())) {
             return false;
+        }
+
         count++;
         if (count >= delay) {
             count = 0;
             index = 0;
+          
             path = PathFinderManager.getPath(entite, target, Constantes.NPC_MOVEMENT_OK);
+            System.out.println(path);
         }
         return path != null;
     }
 
     private void getGoal() {
+        System.out.println("getGoal");
         if (index < path.size()) {
             goal = path.get(index).getBoundingRectangle().getCenter(goal);
         }
     }
 
     private void goToGoal() {
-
+        System.out.println("goToGoal");
         Vector2 center = new Vector2();
         center = entite.getBoundingRectangle().getCenter(center);
         if (!GridManager.isClearZone(goal, Constantes.NPC_MOVEMENT_OK)) return;
@@ -82,6 +87,7 @@ public class GoTo extends AbstractAction {
     }
 
     private void checkGoal() {
+        System.out.println("checkGoal");
         if (entite.getBoundingRectangle().overlaps(new Rectangle(goal.x, goal.y, Constantes.TILESIZE, Constantes.TILESIZE))) {
             index++;
         }

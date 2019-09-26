@@ -14662,7 +14662,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile381"/>
-        <string>5</string>
+        <string>b</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
@@ -20221,7 +20221,7 @@
        <string>code</string>
        <void method="set">
         <object idref="Tile524"/>
-        <string>0</string>
+        <string>a</string>
        </void>
       </void>
       <void class="java.awt.Rectangle" method="getField">
