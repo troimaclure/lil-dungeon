@@ -70,7 +70,7 @@ public class Tmap implements Screen {
     public static Vector3 worldCoordinates = new Vector3();
     public static Stage stage;
     public static FPSLogger fps;
-    public static float LINE_WIDTH = 1;
+    public static float LINE_WIDTH = 5;
     public static SetLevel setLevel = null;
     public static boolean settingLevel;
     private static final String ESCAPE_TO_RAGE_QUIT = "PRESS ESCAPE TO RAGE QUIT";
@@ -78,14 +78,14 @@ public class Tmap implements Screen {
     private static final String TIME = "TIME ";
     private static final String SCORE = "SCORE : ";
     private static final String LEVEL_SCORE = "LEVEL SCORE : ";
-    private Sprite arrowCount = new Sprite(TextureUtil.getTexture("sprite/arrow.png"));
+    private final Sprite arrowCountSprite = new Sprite(TextureUtil.getTexture("sprite/arrow.png"));
     public static float delta;
 
     public static RayHandler getRay() {
         if (ray == null) {
             ray = new RayHandler(getWorld());
             ray.setCulling(true);
-            ray.setAmbientLight(0, 0, 0, 0.2f);
+            ray.setAmbientLight(0, 0, 0, 0.7f);
         }
         return ray;
     }
@@ -170,9 +170,9 @@ public class Tmap implements Screen {
         drawHud();
 
         getRay().setCombinedMatrix(camera.combined,
-            camera.position.x, camera.position.y,
-            camera.viewportWidth * camera.zoom,
-            camera.viewportHeight * camera.zoom);
+                camera.position.x, camera.position.y,
+                camera.viewportWidth * camera.zoom,
+                camera.viewportHeight * camera.zoom);
 
         getRay().update();
         if (setLevel != null) {
@@ -333,7 +333,7 @@ public class Tmap implements Screen {
 
     private void drawArrowCount() {
         hudBatch.setColor(ColorManager.getTextureColor());
-        hudBatch.draw(arrowCount.getTexture(), Gdx.graphics.getWidth() - Constantes.TILESIZE * 2, Gdx.graphics.getHeight() - Constantes.TILESIZE * 1.5f, Constantes.TILESIZE, Constantes.TILESIZE);
+        hudBatch.draw(arrowCountSprite.getTexture(), Gdx.graphics.getWidth() - Constantes.TILESIZE * 2, Gdx.graphics.getHeight() - Constantes.TILESIZE * 1.5f, Constantes.TILESIZE, Constantes.TILESIZE);
         MessageManager.SHOWG.draw(hudBatch, "x " + EntiteManager.arrowCount, Gdx.graphics.getWidth() - Constantes.TILESIZE, Gdx.graphics.getHeight() - Constantes.TILESIZE);
     }
 

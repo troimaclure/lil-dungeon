@@ -68,7 +68,8 @@ public class PlayerBuisiness extends AbstractBusiness {
                 actions.put(Integer.toString(Mode.BOW), abstractAction);
                 break;
             case Mode.SWORD:
-                if (actions.containsKey(Integer.toString(Mode.SWORD))) return;
+                if (actions.containsKey(Integer.toString(Mode.SWORD)) || !EntiteManager.player.canDash())
+                    return;
                 dash();
                 SoundManager.playSound(SoundManager.SWORD);
                 abstractAction = new AttackSword(EntiteManager.player) {

@@ -10,13 +10,16 @@ import com.badlogic.gdx.graphics.Color;
 import com.kikijoli.ville.business.PlayerBuisiness;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Vector2;
 import com.kikijoli.ville.business.AbstractBusiness;
 import com.kikijoli.ville.drawable.entite.Entite;
 import com.kikijoli.ville.drawable.entite.simple.PlayerShield;
 import com.kikijoli.ville.interfaces.IBusiness;
 import com.kikijoli.ville.interfaces.IShapeDrawable;
 import com.kikijoli.ville.manager.ColorManager;
+import com.kikijoli.ville.maps.Tmap;
 import com.kikijoli.ville.util.Constantes;
+import com.kikijoli.ville.util.MathUtils;
 import com.kikijoli.ville.util.Mode;
 
 /**
@@ -43,7 +46,6 @@ public final class Player extends Entite implements IBusiness, IShapeDrawable {
 
     @Override
     public void draw(SpriteBatch batch) {
-
         if (this.invincible) batch.setColor(Color.RED);
         else batch.setColor(ColorManager.getTextureColor());
         super.draw(batch);

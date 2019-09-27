@@ -13,5 +13,6 @@ public class RankManager {
 
     public static int point = 0;
     public static int currentStagePoint = 0;
+    public static int TIME_POINT = 250;
 
 }

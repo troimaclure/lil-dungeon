@@ -52,7 +52,7 @@ public class StageManager {
             i++;
         }
         currentLevel = level;
-        EntiteManager.arrowCount = (int) EntiteManager.entites.stream().filter(e -> e != EntiteManager.player).count() / 2;
+        EntiteManager.arrowCount = (int) EntiteManager.entites.stream().filter(e -> e != EntiteManager.player).count();
     }
 
     public static void load(int level) {

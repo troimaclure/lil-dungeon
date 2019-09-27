@@ -30,6 +30,7 @@ public final class Archer extends Entite implements IBusiness {
         this.buisiness = this.getDefault();
         this.vision = new PointLight(Tmap.getRay(), 40, Color.BLACK, 500, this.getX(), this.getY());
         this.vision.setSoft(false);
+        this.point = 500;
     }
 
     @Override

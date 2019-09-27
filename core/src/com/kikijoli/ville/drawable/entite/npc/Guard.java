@@ -32,6 +32,7 @@ public final class Guard extends Entite implements IBusiness {
         this.vision = new PointLight(Tmap.getRay(), 40, Color.BLACK, 500, this.getX(), this.getY());
         this.vision.setSoft(false);
         this.shield = new PlayerShield(srcX, srcY);
+        this.point = 1000;
     }
 
     @Override

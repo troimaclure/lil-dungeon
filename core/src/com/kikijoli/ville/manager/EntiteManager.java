@@ -192,7 +192,7 @@ public class EntiteManager {
             SoundManager.playSound(SoundManager.END_OF_LEVEL);
             SoundManager.playSound(SoundManager.LEVEL_END_ANIM_SCREEN);
             Tmap.setLevel = new SetLevel(door.data);
-            RankManager.point += stopwatch;
+            RankManager.point += MathUtils.transformIpsToSec(stopwatch) * RankManager.TIME_POINT;
             RankManager.point += RankManager.currentStagePoint;
         }
     }
@@ -254,7 +254,7 @@ public class EntiteManager {
     public static void addDead(Entite entite) {
         if (entite != player) {
             RankManager.currentStagePoint += entite.point;
-            MessageManager.addIndicator(entite.getX(), entite.getY(), Integer.toString(entite.point), entite);
+            MessageManager.addIndicator(entite.getX(), entite.getY(), "+" + Integer.toString(entite.point) + "pts", entite);
             SoundManager.playSound(SoundManager.KILL);
         } else {
             SoundManager.playSound(SoundManager.DEATH);
