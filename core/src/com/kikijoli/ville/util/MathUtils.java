@@ -1,5 +1,7 @@
 package com.kikijoli.ville.util;
 
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.kikijoli.ville.drawable.entite.Entite;
@@ -39,5 +41,12 @@ public class MathUtils {
 
     public static int transformIpsToSec(int by60) {
         return (int) (Math.ceil(by60 > 0 ? by60 / 60 : 0) + 1);
+    }
+
+    public static Vector2 centerString(String s, BitmapFont bitMapFont, Rectangle rect) {
+        final GlyphLayout layout = new GlyphLayout(bitMapFont, s);
+        final float fontX = rect.x + (rect.width - layout.width) / 2;
+        final float fontY = rect.y + (rect.height + layout.height) / 2;
+        return new Vector2(fontX, fontY);
     }
 }

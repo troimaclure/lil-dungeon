@@ -22,7 +22,7 @@ public class GridManager {
 
     public static int COLUMNCOUNT;
     public static int ROWCOUNT;
-    public static Tile[][] grid;
+    public static Tile[][] grid = new Tile[0][0];
 
     public static void initialize(int rowCount, int columnCount, int size) {
         COLUMNCOUNT = columnCount;
@@ -88,8 +88,8 @@ public class GridManager {
                     drawFloor(tile);
                 }
             }
-        }
 
+        }
     }
 
     private static void drawFloor(Tile tile) {

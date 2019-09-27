@@ -21,11 +21,13 @@ public class MessageManager {
 
     public static BitmapFont segoe;
     public static BitmapFont SHOWG;
+    public static BitmapFont LEVELFONT;
     public static ArrayList<Indicator> indicators = new ArrayList<>();
     public static ArrayList<Message> messages = new ArrayList<>();
 
     static {
         SHOWG = FontManager.getFont("SHOWG", 25, Color.GREEN);
+        LEVELFONT = FontManager.getFont("SHOWG", 150, Color.GREEN);
         segoe = FontManager.getFont("vinet", 25, Color.WHITE);
     }
 

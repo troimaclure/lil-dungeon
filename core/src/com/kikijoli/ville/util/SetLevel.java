@@ -14,10 +14,10 @@ import static com.kikijoli.ville.maps.Tmap.setLevel;
 public class SetLevel {
 
     public String level;
-    private int count = 0;
-    private int countX = 0;
-    private final int delay = 50;
-    private boolean end;
+    public int count = 0;
+    public int countX = 0;
+    public final int delay = 50;
+    public boolean end;
     public Rectangle rectangle = new Rectangle(0, 0, 0, 0);
     boolean soundPlayed = false;
 

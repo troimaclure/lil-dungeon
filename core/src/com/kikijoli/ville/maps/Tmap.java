@@ -170,9 +170,9 @@ public class Tmap implements Screen {
         drawHud();
 
         getRay().setCombinedMatrix(camera.combined,
-                camera.position.x, camera.position.y,
-                camera.viewportWidth * camera.zoom,
-                camera.viewportHeight * camera.zoom);
+            camera.position.x, camera.position.y,
+            camera.viewportWidth * camera.zoom,
+            camera.viewportHeight * camera.zoom);
 
         getRay().update();
         if (setLevel != null) {
@@ -281,6 +281,18 @@ public class Tmap implements Screen {
         hudShapeRenderer.rect(setLevel.rectangle.x, setLevel.rectangle.y, setLevel.rectangle.width, setLevel.rectangle.height);
         hudShapeRenderer.flush();
         hudShapeRenderer.end();
+        hudBatch.begin();
+        String title = "Level " + setLevel.level;
+        Vector2 centerString = MathUtils.centerString(title, MessageManager.LEVELFONT, new Rectangle(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
+
+        int number = setLevel.end ? 0 * setLevel.count / 2 : (setLevel.count + 1 - setLevel.delay) * setLevel.count / 2;
+
+        MessageManager.LEVELFONT.setColor(ColorManager.getBackgroundColor());
+        MessageManager.LEVELFONT.draw(hudBatch, title, centerString.x + number, centerString.y + number);
+        MessageManager.LEVELFONT.setColor(ColorManager.getTextureColor());
+        MessageManager.LEVELFONT.draw(hudBatch, title, centerString.x + 5 - number, centerString.y + 5 - number);
+        hudBatch.flush();
+        hudBatch.end();
         setLevel.setting();
     }
 
