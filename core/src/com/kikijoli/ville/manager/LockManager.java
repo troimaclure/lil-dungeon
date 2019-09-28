@@ -21,11 +21,11 @@ public class LockManager {
     public static ArrayList<Door> doors = new ArrayList<>();
     public static ArrayList<Key> keys = new ArrayList<>();
 
-    public static void addLock(int x, int y) {
+    public static void addLock(float x, float y) {
         locks.add(new Lock(x, y));
     }
 
-    public static void addKey(int x, int y) {
+    public static void addKey(float x, float y) {
         keys.add(new Key(x, y));
     }
 

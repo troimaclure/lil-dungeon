@@ -10,6 +10,7 @@ import com.badlogic.gdx.files.FileHandle;
 import com.kikijoli.ville.drawable.entite.decor.Water;
 import com.kikijoli.ville.drawable.entite.npc.Archer;
 import com.kikijoli.ville.drawable.entite.npc.Guard;
+import com.kikijoli.ville.drawable.entite.npc.KeyGuard;
 import com.kikijoli.ville.drawable.entite.npc.Magician;
 import com.kikijoli.ville.drawable.entite.npc.Player;
 import com.kikijoli.ville.drawable.entite.npc.Trap;
@@ -110,6 +111,9 @@ public class StageManager {
                 break;
             case Constantes.MAGICIAN:
                 EntiteManager.addEntite(new Magician(x, y));
+                break;
+            case Constantes.GUARD_WITH_KEY:
+                EntiteManager.addEntite(new KeyGuard(x, y));
                 break;
         }
     }

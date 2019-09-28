@@ -15,7 +15,7 @@ public class Key extends Build {
 
     private static final String SPRITEKEYPNG = "sprite/key.png";
 
-    public Key(int srcX, int srcY) {
+    public Key(float srcX, float srcY) {
         super(SPRITEKEYPNG, srcX, srcY, Constantes.TILESIZE / 2, Constantes.TILESIZE / 2);
     }
 

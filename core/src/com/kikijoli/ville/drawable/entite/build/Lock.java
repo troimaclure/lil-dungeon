@@ -15,7 +15,7 @@ public class Lock extends Build {
 
     private static final String SPRITELOCKPNG = "sprite/lock.png";
 
-    public Lock(int srcX, int srcY) {
+    public Lock(float srcX, float srcY) {
         super(SPRITELOCKPNG, srcX, srcY, Constantes.TILESIZE, Constantes.TILESIZE);
     }
 

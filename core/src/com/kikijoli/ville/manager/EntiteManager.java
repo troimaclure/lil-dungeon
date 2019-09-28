@@ -260,6 +260,7 @@ public class EntiteManager {
             SoundManager.playSound(SoundManager.DEATH);
         }
         deads.add(entite);
+        entite.dead();
     }
 
     public static void clearDead() {

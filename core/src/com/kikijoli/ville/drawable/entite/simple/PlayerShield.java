@@ -23,6 +23,10 @@ public class PlayerShield extends Entite {
         super("sprite/player-shield.png", srcX, srcY, Constantes.TILESIZE, Constantes.TILESIZE);
     }
 
+    public PlayerShield(float srcX, float srcY, float width, float height) {
+        super("sprite/player-shield.png", srcX, srcY, width, height);
+    }
+
     public void step(float x, float y, float width, float height) {
         count += down ? (-1) : 1;
         if (down && count == 0) down = false;

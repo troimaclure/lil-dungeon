@@ -40,14 +40,14 @@ public abstract class Entite extends Sprite implements ISpriteDrawable {
     public ArrayList<AbstractEffect> effects = new ArrayList<>();
     public PlayerShield shield;
 
-    public Entite(String path, float srcX, float srcY, int srcWidth, int srcHeight) {
-        super(TextureUtil.getTexture(path), (int) srcX, (int) srcY, srcWidth, srcHeight);
+    public Entite(String path, float srcX, float srcY, float srcWidth, float srcHeight) {
+        super(TextureUtil.getTexture(path), (int) srcX, (int) srcY, (int) srcWidth, (int) srcHeight);
         this.setX(srcX);
         this.setY(srcY);
         calculateAnchors();
         centerOrigin = MathUtils.getCenter(new Rectangle(0, 0, srcWidth, srcHeight));
-        width = srcWidth;
-        height = srcHeight;
+        width = (int) srcWidth;
+        height = (int) srcHeight;
     }
 
     @Override
@@ -71,7 +71,7 @@ public abstract class Entite extends Sprite implements ISpriteDrawable {
                 false, false);
     }
 
-    private void calculateAnchors() {
+    protected void calculateAnchors() {
         Rectangle r = this.getBoundingRectangle();
         Vector2 center = new Vector2();
         r.getCenter(center);
@@ -82,4 +82,7 @@ public abstract class Entite extends Sprite implements ISpriteDrawable {
         return Constantes.TILESIZE / 2;
     }
 
+    public void dead() {
+
+    }
 }
