@@ -218,6 +218,7 @@ public class EntiteManager {
     }
 
     public static void touch(Entite entite) {
+        if (!entite.isTouchable) return;
         if (entite == player && player.invincible) return;
         if (entite.shield != null) {
             entite.shield = null;

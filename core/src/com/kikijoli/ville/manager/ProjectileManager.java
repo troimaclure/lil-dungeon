@@ -32,7 +32,7 @@ public class ProjectileManager {
         if (!GridManager.isClearZone(MathUtils.getCenter(bullet), bullet.getMouvementFilter()))
             removes.add(bullet);
         for (Entite entite : EntiteManager.entites) {
-            if (!entite.equals(bullet.author) && entite.good != bullet.author.good) {
+            if (!entite.equals(bullet.author) && entite.good != bullet.author.good && entite.isTouchable) {
                 if (bullet instanceof Bullet) {
                     if (bullet.isTouching(entite.getBoundingRectangle())) {
                         removes.add(bullet);

@@ -13,6 +13,7 @@ import com.kikijoli.ville.drawable.entite.npc.Guard;
 import com.kikijoli.ville.drawable.entite.npc.KeyGuard;
 import com.kikijoli.ville.drawable.entite.npc.Magician;
 import com.kikijoli.ville.drawable.entite.npc.Player;
+import com.kikijoli.ville.drawable.entite.npc.RollingTrap;
 import com.kikijoli.ville.drawable.entite.npc.Trap;
 import com.kikijoli.ville.drawable.entite.npc.Turret;
 import static com.kikijoli.ville.manager.EntiteManager.player;
@@ -115,7 +116,25 @@ public class StageManager {
             case Constantes.GUARD_WITH_KEY:
                 EntiteManager.addEntite(new KeyGuard(x, y));
                 break;
+            case Constantes.ROLLING_TRAP:
+                
+                handleRollingTrap(data, x, y);
+                break;
         }
+    }
+
+    public static void handleRollingTrap(String data, int x, int y) throws NumberFormatException {
+        String[] split = data.split("");
+        int count = 0;
+        String speedx = split[count];
+        if ("-".equals(speedx)) {
+            speedx += split[++count];
+        }
+        String speedY = split[++count];
+        if ("-".equals(speedY)) {
+            speedY += split[++count];
+        }
+        EntiteManager.addEntite(new RollingTrap(x, y, Float.valueOf(speedx), Float.valueOf(speedY)));
     }
 
     public static void tour() {
@@ -158,6 +177,10 @@ public class StageManager {
         HudManager.setSelected(0);
         EntiteManager.addEntite(player);
         setLevel(getCurrentLevel());
+    }
+
+    private StageManager() {
+
     }
 
 }
