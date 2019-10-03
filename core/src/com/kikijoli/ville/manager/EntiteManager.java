@@ -42,7 +42,6 @@ public class EntiteManager {
     public static int arrowCount = 0;
 
     public static void addEntite(Entite entite) {
-
         entites.add(entite);
     }
 
@@ -163,8 +162,9 @@ public class EntiteManager {
                 break;
             }
         }
+
         for (Door door : LockManager.doors) {
-            if (Intersector.overlaps(player.anchor, door.getBoundingRectangle())) {
+            if (player.anchor.contains(MathUtils.getCenter(EntiteManager.player.getBoundingRectangle())) && Intersector.overlaps(player.anchor, door.getBoundingRectangle())) {
                 doorOpen(door);
                 break;
             }
@@ -266,6 +266,10 @@ public class EntiteManager {
 
     public static void clearDead() {
         deads.clear();
+    }
+
+    public static ArrayList<Entite> getEntites() {
+        return (ArrayList<Entite>) entites.clone();
     }
 
     private EntiteManager() {

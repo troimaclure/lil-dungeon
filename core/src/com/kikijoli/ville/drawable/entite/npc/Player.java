@@ -18,6 +18,8 @@ import com.kikijoli.ville.interfaces.IBusiness;
 import com.kikijoli.ville.interfaces.IShapeDrawable;
 import com.kikijoli.ville.manager.ColorManager;
 import com.kikijoli.ville.maps.Tmap;
+import com.kikijoli.ville.pathfind.GridManager;
+import com.kikijoli.ville.pathfind.Tile;
 import com.kikijoli.ville.util.Constantes;
 import com.kikijoli.ville.util.MathUtils;
 import com.kikijoli.ville.util.Mode;
@@ -53,10 +55,12 @@ public final class Player extends Entite implements IBusiness, IShapeDrawable {
 
     @Override
     public void draw(ShapeRenderer batch) {
+
         batch.setColor(Color.GRAY);
         batch.rect(getX() - getWidth() / 2, getY() + getHeight() + 5, getWidth() * 2, 5);
         batch.setColor(Color.RED);
         batch.rect(getX() - getWidth() / 2, getY() + getHeight() + 5, calculateDashWidth(), 5);
+
     }
 
     @Override

@@ -1,6 +1,5 @@
 package com.kikijoli.ville.pathfind;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -8,6 +7,7 @@ import com.kikijoli.ville.drawable.entite.Entite;
 import com.kikijoli.ville.manager.ColorManager;
 import com.kikijoli.ville.maps.Tmap;
 import com.kikijoli.ville.util.Constantes;
+import java.util.ArrayList;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -61,6 +61,20 @@ public class GridManager {
         }
 
         return null;
+    }
+
+    public static ArrayList<Tile> getCasesFor(Rectangle entite) {
+        ArrayList<Tile> al = new ArrayList<>();
+        if (entite != null) {
+            for (Tile[] grille1 : grid) {
+                for (Tile g : grille1) {
+                    if (Intersector.overlaps(entite, g.getBoundingRectangle())) {
+                        al.add(g);
+                    }
+                }
+            }
+        }
+        return al;
     }
 
     public static void setState(String b, Rectangle entite) {

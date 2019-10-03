@@ -10,6 +10,7 @@ import com.kikijoli.ville.drawable.entite.npc.RollingTrap;
 import com.kikijoli.ville.manager.EntiteManager;
 import com.kikijoli.ville.pathfind.GridManager;
 import com.kikijoli.ville.util.Constantes;
+import com.kikijoli.ville.util.MathUtils;
 
 /**
  *
@@ -38,7 +39,7 @@ public class RollingTrapBusiness extends AbstractBusiness {
                 rolling.speedX *= -1;
                 rolling.speedY *= -1;
             }
-            if (rolling.getBoundingRectangle().overlaps(EntiteManager.player.getBoundingRectangle())) {
+            if (rolling.getBoundingRectangle().contains(MathUtils.getCenter(EntiteManager.player.getBoundingRectangle()))) {
                 EntiteManager.touch(EntiteManager.player);
             }
         }

@@ -117,22 +117,26 @@ public class StageManager {
                 EntiteManager.addEntite(new KeyGuard(x, y));
                 break;
             case Constantes.ROLLING_TRAP:
-                
                 handleRollingTrap(data, x, y);
                 break;
         }
     }
 
     public static void handleRollingTrap(String data, int x, int y) throws NumberFormatException {
-        String[] split = data.split("");
-        int count = 0;
-        String speedx = split[count];
-        if ("-".equals(speedx)) {
-            speedx += split[++count];
-        }
-        String speedY = split[++count];
-        if ("-".equals(speedY)) {
-            speedY += split[++count];
+        String speedx = "0";
+        String speedY = "0";
+        try {
+            String[] split = data.split("");
+            int count = 0;
+            speedx = split[count];
+            if ("-".equals(speedx)) {
+                speedx += split[++count];
+            }
+            speedY = split[++count];
+            if ("-".equals(speedY)) {
+                speedY += split[++count];
+            }
+        } catch (Exception e) {
         }
         EntiteManager.addEntite(new RollingTrap(x, y, Float.valueOf(speedx), Float.valueOf(speedY)));
     }

@@ -70,7 +70,7 @@ public class Tmap implements Screen {
     public static Vector3 worldCoordinates = new Vector3();
     public static Stage stage;
     public static FPSLogger fps;
-    public static float LINE_WIDTH = 5;
+    public static float LINE_WIDTH = 2;
     public static SetLevel setLevel = null;
     public static boolean settingLevel;
     private static final String ESCAPE_TO_RAGE_QUIT = "PRESS ESCAPE TO RAGE QUIT";
@@ -78,8 +78,9 @@ public class Tmap implements Screen {
     private static final String TIME = "TIME ";
     private static final String SCORE = "SCORE : ";
     private static final String LEVEL_SCORE = "LEVEL SCORE : ";
-    private final Sprite arrowCountSprite = new Sprite(TextureUtil.getTexture("sprite/arrow.png"));
     public static float delta;
+    public int rayUpdateCount = 60;
+    private final int RAYCOUNTTOTAL = 60;
 
     public static RayHandler getRay() {
         if (ray == null) {
@@ -125,10 +126,11 @@ public class Tmap implements Screen {
         groundBox.dispose();
         groundBody.setUserData(new Rectangle(x, y, Constantes.TILESIZE, Constantes.TILESIZE));
     }
+    private final Sprite arrowCountSprite = new Sprite(TextureUtil.getTexture("sprite/arrow.png"));
     Box2DDebugRenderer debugRenderer = new Box2DDebugRenderer();
 
     public Tmap() {
-        StageManager.loadFromXml("6");
+        StageManager.loadFromXml("7");
     }
 
     @Override
@@ -168,20 +170,22 @@ public class Tmap implements Screen {
         drawSprites(delta);
         water();
         drawHud();
+        if (rayUpdateCount-- <= 0) {
 
-        getRay().setCombinedMatrix(camera.combined,
-            camera.position.x, camera.position.y,
-            camera.viewportWidth * camera.zoom,
-            camera.viewportHeight * camera.zoom);
+            getRay().setCombinedMatrix(camera.combined,
+                camera.position.x, camera.position.y,
+                camera.viewportWidth * camera.zoom,
+                camera.viewportHeight * camera.zoom);
 
-        getRay().update();
+            getRay().update();
+            rayUpdateCount = RAYCOUNTTOTAL;
+        }
         if (setLevel != null) {
             settingLevel = true;
         }
         if (settingLevel) {
             setLevel();
         }
-
 //        debug();
     }
 
