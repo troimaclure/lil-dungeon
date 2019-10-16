@@ -50,7 +50,7 @@ public class KeyGuardBuisiness extends AbstractBusiness {
         @Override
         public void act() {
 
-            handleWalk();
+//            handleWalk();
             handleDash();
         }
 

@@ -45,12 +45,12 @@ public class GuardBuisiness extends AbstractBusiness {
         int count = 50;
         int delay = 50;
         int dashDelay = 50;
-        int countDash = 0;
+        int countDash = 50;
 
         @Override
         public void act() {
 
-            handleWalk();
+//            handleWalk();
             handleDash();
         }
 

@@ -13,7 +13,6 @@ import com.kikijoli.ville.drawable.entite.simple.Bow;
 import com.kikijoli.ville.manager.ProjectileManager;
 import com.kikijoli.ville.manager.DrawManager;
 import com.kikijoli.ville.manager.EntiteManager;
-import com.kikijoli.ville.manager.SoundManager;
 import com.kikijoli.ville.util.MathUtils;
 
 /**
@@ -23,12 +22,12 @@ import com.kikijoli.ville.util.MathUtils;
 public abstract class AttackBow extends AbstractAction {
 
     public int count = 0;
-    public int countArrow = 50;
-    public int delayArrow = 50;
-    public int delay = 30;
+
+    public int delay = 0;
     Bow bow;
     Entite entite;
     Vector2 destination;
+    boolean shooted = false;
 
     public AttackBow(Entite entite, Vector2 destination) {
         this.entite = entite;
@@ -42,7 +41,7 @@ public abstract class AttackBow extends AbstractAction {
         bow.setX((float) (entite.getX() - (bow.getWidth() / 2 - entite.getWidth() / 2)));
         bow.setY(entite.getY() - entite.getHeight() / 2);
         bow.setRotation(90 + MathUtils.getRotation(entite.getX(), entite.getY(), destination.x, destination.y));
-        if (countArrow++ >= delayArrow) shoot();
+        shoot();
         if (count++ > delay) end();
     }
 
@@ -62,7 +61,8 @@ public abstract class AttackBow extends AbstractAction {
     }
 
     private void shoot() {
-        countArrow = 0;
+        if (shooted) return;
+        shooted = true;
         Vector2 center = MathUtils.getCenter(bow.getBoundingRectangle());
         Arrow arrow = new Arrow((int) center.x, (int) center.y, new Vector2(destination.x, destination.y), entite);
         arrow.sprite.setRotation(90 + MathUtils.getRotation(entite.getX(), entite.getY(), destination.x, destination.y));

@@ -28,8 +28,22 @@ import com.kikijoli.ville.util.Mode;
 public class PlayerBuisiness extends AbstractBusiness {
 
     public static final String DASH = "Dash";
+    public int touchableCount;
+    public int touchabledelay = 60 * 2;
 
     public PlayerBuisiness() {
+    }
+
+    @Override
+    public void act() {
+        super.act();
+        if (EntiteManager.player.touched) {
+            touchableCount++;
+            if (touchableCount++ >= touchabledelay) {
+                EntiteManager.player.touched = false;
+                touchableCount = 0;
+            }
+        }
     }
 
     @Override

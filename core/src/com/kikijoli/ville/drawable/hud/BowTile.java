@@ -1,10 +1,8 @@
 package com.kikijoli.ville.drawable.hud;
 
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.kikijoli.ville.drawable.entite.simple.Bow;
 import com.kikijoli.ville.manager.EntiteManager;
+import com.kikijoli.ville.util.Constantes;
 import com.kikijoli.ville.util.Mode;
 
 /**
@@ -14,7 +12,7 @@ import com.kikijoli.ville.util.Mode;
 public class BowTile extends Tile {
 
     public BowTile(int srcX, int srcY) {
-        super(srcX, srcY, new Bow(0, 0));
+        super(srcX, srcY, new Bow(0, 0, Constantes.TILESIZE, Constantes.TILESIZE));
     }
 
     @Override

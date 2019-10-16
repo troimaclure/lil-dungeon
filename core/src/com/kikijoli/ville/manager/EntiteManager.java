@@ -219,9 +219,11 @@ public class EntiteManager {
 
     public static void touch(Entite entite) {
         if (!entite.isTouchable) return;
-        if (entite == player && player.invincible) return;
+
+        if (entite == player && (player.invincible || player.touched)) return;
         if (entite.shield != null) {
             entite.shield = null;
+            if (entite == player) player.touched = true;
             SoundManager.playSound(SoundManager.SHIELD_CRASH);
             return;
         }

@@ -10,7 +10,11 @@ import com.kikijoli.ville.util.Constantes;
 public class Bow extends Entite {
 
     public Bow(float srcX, float srcY) {
-        super("sprite/bow.png", srcX, srcY, Constantes.TILESIZE, Constantes.TILESIZE);
+        super("sprite/bow.png", srcX, srcY, Constantes.TILESIZE * 2, Constantes.TILESIZE * 2);
+    }
+
+    public Bow(float srcX, float srcY, float width, float height) {
+        super("sprite/bow.png", srcX, srcY, width, height);
     }
 
 }

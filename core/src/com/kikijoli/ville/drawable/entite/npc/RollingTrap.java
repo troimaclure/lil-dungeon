@@ -5,11 +5,9 @@
  */
 package com.kikijoli.ville.drawable.entite.npc;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.kikijoli.ville.business.AbstractBusiness;
 import com.kikijoli.ville.business.RollingTrapBusiness;
 import com.kikijoli.ville.drawable.entite.Entite;
-import com.kikijoli.ville.drawable.entite.simple.PlayerShield;
 import com.kikijoli.ville.interfaces.IBusiness;
 import com.kikijoli.ville.util.Constantes;
 

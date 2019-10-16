@@ -10,18 +10,13 @@ import com.badlogic.gdx.graphics.Color;
 import com.kikijoli.ville.business.PlayerBuisiness;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Vector2;
 import com.kikijoli.ville.business.AbstractBusiness;
 import com.kikijoli.ville.drawable.entite.Entite;
 import com.kikijoli.ville.drawable.entite.simple.PlayerShield;
 import com.kikijoli.ville.interfaces.IBusiness;
 import com.kikijoli.ville.interfaces.IShapeDrawable;
 import com.kikijoli.ville.manager.ColorManager;
-import com.kikijoli.ville.maps.Tmap;
-import com.kikijoli.ville.pathfind.GridManager;
-import com.kikijoli.ville.pathfind.Tile;
 import com.kikijoli.ville.util.Constantes;
-import com.kikijoli.ville.util.MathUtils;
 import com.kikijoli.ville.util.Mode;
 
 /**
@@ -37,9 +32,10 @@ public final class Player extends Entite implements IBusiness, IShapeDrawable {
     public float dashCount = dashTotal * dashCooldown;
     public PointLight vision;
     public boolean invincible = false;
+    public boolean touched = false;
 
     public Player(int srcX, int srcY) {
-        super(SPRITESIMPLEPNG, srcX, srcY, Constantes.TILESIZE / 4, Constantes.TILESIZE / 2);
+        super(SPRITESIMPLEPNG, srcX, srcY);
         this.buisiness = this.getDefault();
         good = true;
         this.speed = 5;
@@ -48,8 +44,11 @@ public final class Player extends Entite implements IBusiness, IShapeDrawable {
 
     @Override
     public void draw(SpriteBatch batch) {
+        batch.setColor(ColorManager.getTextureColor());
         if (this.invincible) batch.setColor(Color.RED);
-        else batch.setColor(ColorManager.getTextureColor());
+        if (this.touched) {
+            batch.setColor(ColorManager.getTextureColor().r, ColorManager.getTextureColor().g, ColorManager.getTextureColor().b, 0.5f);
+        }
         super.draw(batch);
     }
 

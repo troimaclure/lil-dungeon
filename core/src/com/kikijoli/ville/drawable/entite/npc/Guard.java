@@ -14,7 +14,6 @@ import com.kikijoli.ville.drawable.entite.Entite;
 import com.kikijoli.ville.drawable.entite.simple.PlayerShield;
 import com.kikijoli.ville.interfaces.IBusiness;
 import com.kikijoli.ville.maps.Tmap;
-import com.kikijoli.ville.util.Constantes;
 
 /**
  *
@@ -22,12 +21,12 @@ import com.kikijoli.ville.util.Constantes;
  */
 public class Guard extends Entite implements IBusiness {
 
-    private static final String GUARD = "sprite/guard.png";
+    private static final String GUARD = "sprite/samourai.png";
 
     public PointLight vision;
 
     public Guard(int srcX, int srcY) {
-        super(GUARD, srcX, srcY, Constantes.TILESIZE / 4, Constantes.TILESIZE / 2);
+        super(GUARD, srcX, srcY);
         this.buisiness = this.getDefault();
         this.vision = new PointLight(Tmap.getRay(), 40, Color.BLACK, 500, this.getX(), this.getY());
         this.vision.setSoft(false);

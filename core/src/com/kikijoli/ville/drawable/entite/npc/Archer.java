@@ -26,7 +26,7 @@ public final class Archer extends Entite implements IBusiness {
     public PointLight vision;
 
     public Archer(int srcX, int srcY) {
-        super(ARCHER, srcX, srcY, Constantes.TILESIZE / 4, Constantes.TILESIZE / 2);
+        super(ARCHER, srcX, srcY);
         this.buisiness = this.getDefault();
         this.vision = new PointLight(Tmap.getRay(), 40, Color.BLACK, 500, this.getX(), this.getY());
         this.vision.setSoft(false);

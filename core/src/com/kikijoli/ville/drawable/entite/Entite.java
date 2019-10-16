@@ -25,8 +25,8 @@ import java.util.ArrayList;
  * @author troïmaclure
  */
 public abstract class Entite extends Sprite implements ISpriteDrawable {
-    
-    public boolean isTouchable = true; 
+
+    public boolean isTouchable = true;
     public int point = 500;
     public Circle anchor;
     public boolean good;
@@ -49,6 +49,10 @@ public abstract class Entite extends Sprite implements ISpriteDrawable {
         centerOrigin = MathUtils.getCenter(new Rectangle(0, 0, srcWidth, srcHeight));
         width = (int) srcWidth;
         height = (int) srcHeight;
+    }
+
+    public Entite(String path, float x, float y) {
+        this(path, x, y, Constantes.TILESIZE / 2, Constantes.TILESIZE);
     }
 
     @Override
@@ -80,7 +84,7 @@ public abstract class Entite extends Sprite implements ISpriteDrawable {
     }
 
     public float getAnchorSize() {
-        return Constantes.TILESIZE / 2;
+        return Constantes.TILESIZE;
     }
 
     public void dead() {
