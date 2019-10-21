@@ -13,7 +13,6 @@ import com.kikijoli.ville.business.ArcherBusiness;
 import com.kikijoli.ville.drawable.entite.Entite;
 import com.kikijoli.ville.interfaces.IBusiness;
 import com.kikijoli.ville.maps.Tmap;
-import com.kikijoli.ville.util.Constantes;
 
 /**
  *

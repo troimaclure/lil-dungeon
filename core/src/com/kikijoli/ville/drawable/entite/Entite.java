@@ -52,7 +52,7 @@ public abstract class Entite extends Sprite implements ISpriteDrawable {
     }
 
     public Entite(String path, float x, float y) {
-        this(path, x, y, Constantes.TILESIZE / 2, Constantes.TILESIZE);
+        this(path, x, y, Constantes.TILESIZE, Constantes.TILESIZE);
     }
 
     @Override

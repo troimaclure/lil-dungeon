@@ -5,6 +5,7 @@
  */
 package com.kikijoli.ville.automation.ennemy;
 
+import com.badlogic.gdx.math.Rectangle;
 import com.kikijoli.ville.automation.player.Dash;
 import com.badlogic.gdx.math.Vector2;
 import com.kikijoli.ville.drawable.entite.Entite;
@@ -29,7 +30,8 @@ public abstract class DashEnnemy extends Dash {
     public void act() {
         super.act();
         Vector2 goal = new Vector2(entite.getX() + vel.x * entite.speed, entite.getY() + vel.y * entite.speed);
-        if (!GridManager.isClearZone(goal, Constantes.NPC_MOVEMENT_OK)) return;
+        Rectangle r = new Rectangle(goal.x, goal.y, entite.getWidth(), entite.getHeight());
+        if (!GridManager.isClearZone(r, Constantes.NPC_MOVEMENT_OK)) return;
         entite.setX(entite.getX() + vel.x * entite.speed);
         entite.setY(entite.getY() + vel.y * entite.speed);
 

@@ -33,7 +33,7 @@ public abstract class AttackSword extends AbstractAction {
     @Override
     public void act() {
         addSwordIfNotExist();
-        sword.setX((float) (entite.getX() - (entite.getWidth() * 1.5)));
+        sword.setX((float) (entite.getX() - (entite.getWidth() / 2)));
         sword.setY(entite.getY() - entite.getHeight() / 2);
         sword.setRotation(-countSword * 12);
         EntiteManager.attack(entite);
