@@ -1,5 +1,6 @@
 package com.kikijoli.ville.drawable.hud;
 
+import com.kikijoli.ville.component.BowComponent;
 import com.kikijoli.ville.drawable.entite.simple.Bow;
 import com.kikijoli.ville.manager.EntiteManager;
 import com.kikijoli.ville.util.Constantes;
@@ -19,6 +20,7 @@ public class BowTile extends Tile {
     public void action() {
         super.action();
         EntiteManager.player.mode = Mode.BOW;
+        EntiteManager.player.currentComponent = new BowComponent(EntiteManager.player);
     }
 
 }

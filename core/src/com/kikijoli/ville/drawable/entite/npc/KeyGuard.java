@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.kikijoli.ville.business.AbstractBusiness;
 import com.kikijoli.ville.business.KeyGuardBuisiness;
+import com.kikijoli.ville.component.SwordComponent;
 import com.kikijoli.ville.drawable.entite.Entite;
 import com.kikijoli.ville.drawable.entite.simple.PlayerShield;
 import com.kikijoli.ville.interfaces.IBusiness;
@@ -24,7 +25,6 @@ import com.kikijoli.ville.util.Constantes;
 public final class KeyGuard extends Entite implements IBusiness {
 
     private static final String KeyGuard = "sprite/KeyGuard.png";
-
     public PointLight vision;
 
     public KeyGuard(int srcX, int srcY) {
@@ -35,6 +35,8 @@ public final class KeyGuard extends Entite implements IBusiness {
         this.vision.setSoft(false);
         this.shield = new PlayerShield(srcX, srcY, getWidth(), getHeight());
         this.point = 1500;
+        this.currentComponent = new SwordComponent(this);
+
     }
 
     @Override

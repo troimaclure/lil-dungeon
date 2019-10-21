@@ -11,6 +11,7 @@ import com.kikijoli.ville.business.PlayerBuisiness;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.kikijoli.ville.business.AbstractBusiness;
+import com.kikijoli.ville.component.IComponent;
 import com.kikijoli.ville.drawable.entite.Entite;
 import com.kikijoli.ville.drawable.entite.simple.PlayerShield;
 import com.kikijoli.ville.interfaces.IBusiness;
@@ -33,6 +34,7 @@ public final class Player extends Entite implements IBusiness, IShapeDrawable {
     public PointLight vision;
     public boolean invincible = false;
     public boolean touched = false;
+   
 
     public Player(int srcX, int srcY) {
         super(SPRITESIMPLEPNG, srcX, srcY);
@@ -45,7 +47,9 @@ public final class Player extends Entite implements IBusiness, IShapeDrawable {
     @Override
     public void draw(SpriteBatch batch) {
         batch.setColor(ColorManager.getTextureColor());
-        if (this.invincible) batch.setColor(Color.RED);
+        if (this.invincible) {
+            batch.setColor(Color.RED);
+        }
         if (this.touched) {
             batch.setColor(ColorManager.getTextureColor().r, ColorManager.getTextureColor().g, ColorManager.getTextureColor().b, 0.5f);
         }

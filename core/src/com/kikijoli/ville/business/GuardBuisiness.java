@@ -58,8 +58,9 @@ public class GuardBuisiness extends AbstractBusiness {
             if (!actions.containsKey(GOTO) && !actions.containsKey(DASH) && !actions.containsKey(PREPARATION)) {
                 actions.put(GOTO, new GoTo(guard, EntiteManager.player));
             }
-            if (!(guard.shader instanceof WalkShader))
+            if (!(guard.shader instanceof WalkShader)) {
                 guard.shader = new WalkShader(guard);
+            }
         }
 
         private void handleDash() {

@@ -52,8 +52,9 @@ public class PlayerBuisiness extends AbstractBusiness {
     }
 
     public void dash() {
-        if (actions.containsKey(DASH) || !EntiteManager.player.canDash())
+        if (actions.containsKey(DASH) || !EntiteManager.player.canDash()) {
             return;
+        }
         EntiteManager.player.dash();
         SoundManager.playSound(SoundManager.DASH);
         actions.put(DASH, new Dash(EntiteManager.player) {
@@ -69,8 +70,9 @@ public class PlayerBuisiness extends AbstractBusiness {
         AbstractAction abstractAction = null;
         switch (EntiteManager.player.mode) {
             case Mode.BOW:
-                if (actions.containsKey(Integer.toString(Mode.BOW)) || EntiteManager.arrowCount == 0)
+                if (actions.containsKey(Integer.toString(Mode.BOW)) || EntiteManager.arrowCount == 0) {
                     return;
+                }
                 SoundManager.playSound(SoundManager.BOW);
                 EntiteManager.arrowCount -= 1;
                 abstractAction = new AttackBow(EntiteManager.player, new Vector2(Tmap.worldCoordinates.x, Tmap.worldCoordinates.y)) {
@@ -82,8 +84,9 @@ public class PlayerBuisiness extends AbstractBusiness {
                 actions.put(Integer.toString(Mode.BOW), abstractAction);
                 break;
             case Mode.SWORD:
-                if (actions.containsKey(Integer.toString(Mode.SWORD)) || !EntiteManager.player.canDash())
+                if (actions.containsKey(Integer.toString(Mode.SWORD)) || !EntiteManager.player.canDash()) {
                     return;
+                }
                 dash();
                 SoundManager.playSound(SoundManager.SWORD);
                 abstractAction = new AttackSword(EntiteManager.player) {
@@ -95,7 +98,9 @@ public class PlayerBuisiness extends AbstractBusiness {
                 actions.put(Integer.toString(Mode.SWORD), abstractAction);
                 break;
             case Mode.WAND:
-                if (actions.containsKey(Integer.toString(Mode.WAND))) return;
+                if (actions.containsKey(Integer.toString(Mode.WAND))) {
+                    return;
+                }
                 com.kikijoli.ville.drawable.hud.Tile t = HudManager.tiles.stream().filter(e -> e instanceof WandTile).findFirst().get();
                 t.disabled = true;
                 SoundManager.playSound(SoundManager.POISON_SPELL);
@@ -114,8 +119,9 @@ public class PlayerBuisiness extends AbstractBusiness {
                 actions.put(Integer.toString(Mode.WAND), abstractAction);
                 break;
             case Mode.WANDFIRE:
-                if (actions.containsKey(Integer.toString(Mode.WANDFIRE)))
+                if (actions.containsKey(Integer.toString(Mode.WANDFIRE))) {
                     return;
+                }
                 t = HudManager.tiles.stream().filter(e -> e instanceof WandFireTile).findFirst().get();
                 t.disabled = true;
                 SoundManager.playSound(SoundManager.FIRE_SPELL);

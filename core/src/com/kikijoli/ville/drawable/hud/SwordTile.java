@@ -1,5 +1,6 @@
 package com.kikijoli.ville.drawable.hud;
 
+import com.kikijoli.ville.component.SwordComponent;
 import com.kikijoli.ville.drawable.entite.simple.Sword;
 import com.kikijoli.ville.interfaces.IShapeDrawable;
 import com.kikijoli.ville.interfaces.ISpriteDrawable;
@@ -21,6 +22,7 @@ public class SwordTile extends Tile implements ISpriteDrawable, IShapeDrawable {
     public void action() {
         super.action();
         EntiteManager.player.mode = Mode.SWORD;
+        EntiteManager.player.currentComponent = new SwordComponent(EntiteManager.player);
     }
 
 }

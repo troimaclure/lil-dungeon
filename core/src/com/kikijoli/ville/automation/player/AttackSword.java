@@ -6,9 +6,9 @@
 package com.kikijoli.ville.automation.player;
 
 import com.kikijoli.ville.abstracts.AbstractAction;
+import com.kikijoli.ville.component.SwordComponent;
 import com.kikijoli.ville.drawable.entite.Entite;
 import com.kikijoli.ville.drawable.entite.simple.Sword;
-import com.kikijoli.ville.manager.DrawManager;
 import com.kikijoli.ville.manager.EntiteManager;
 
 /**
@@ -19,8 +19,8 @@ public abstract class AttackSword extends AbstractAction {
 
     public int countSword = 0;
     public int delaySword = 30;
-    Sword sword;
     private final Entite entite;
+    private final Sword sword;
 
     /**
      *
@@ -28,30 +28,21 @@ public abstract class AttackSword extends AbstractAction {
      */
     public AttackSword(Entite entite) {
         this.entite = entite;
+        this.sword = ((SwordComponent) this.entite.currentComponent).sword;
     }
 
     @Override
     public void act() {
-        addSwordIfNotExist();
-        sword.setX((float) (entite.getX() - (entite.getWidth() / 2)));
-        sword.setY(entite.getY() - entite.getHeight() / 2);
         sword.setRotation(-countSword * 12);
         EntiteManager.attack(entite);
-        if (countSword++ > delaySword) end();
-    }
-
-    private void addSwordIfNotExist() {
-        if (sword != null) return;
-        sword = new Sword((int) (entite.getX()), (int) (entite.getY()));
-        DrawManager.entites.add(sword);
-
+        if (countSword++ > delaySword) {
+            end();
+        }
     }
 
     public abstract void onFinish();
 
     private void end() {
-        if (sword != null)
-            DrawManager.entites.remove(sword);
         onFinish();
     }
 
