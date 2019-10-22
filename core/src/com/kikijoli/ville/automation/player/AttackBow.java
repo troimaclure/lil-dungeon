@@ -7,12 +7,11 @@ package com.kikijoli.ville.automation.player;
 
 import com.badlogic.gdx.math.Vector2;
 import com.kikijoli.ville.abstracts.AbstractAction;
+import com.kikijoli.ville.component.BowComponent;
 import com.kikijoli.ville.drawable.entite.projectile.Bullet.Arrow;
 import com.kikijoli.ville.drawable.entite.Entite;
 import com.kikijoli.ville.drawable.entite.simple.Bow;
 import com.kikijoli.ville.manager.ProjectileManager;
-import com.kikijoli.ville.manager.DrawManager;
-import com.kikijoli.ville.manager.EntiteManager;
 import com.kikijoli.ville.util.MathUtils;
 
 /**
@@ -21,9 +20,6 @@ import com.kikijoli.ville.util.MathUtils;
  */
 public abstract class AttackBow extends AbstractAction {
 
-    public int count = 0;
-
-    public int delay = 0;
     Bow bow;
     Entite entite;
     Vector2 destination;
@@ -32,31 +28,18 @@ public abstract class AttackBow extends AbstractAction {
     public AttackBow(Entite entite, Vector2 destination) {
         this.entite = entite;
         this.destination = destination;
+        this.bow = ((BowComponent) this.entite.getComponent(BowComponent.class)).bow;
     }
 
     @Override
     public void act() {
-
-        addBowIfNotExist();
-        bow.setX((float) (entite.getX() - (bow.getWidth() / 2 - entite.getWidth() / 2)));
-        bow.setY(entite.getY() - entite.getHeight() / 2);
-        bow.setRotation(90 + MathUtils.getRotation(entite.getX(), entite.getY(), destination.x, destination.y));
         shoot();
-        if (count++ > delay) end();
-    }
-
-    private void addBowIfNotExist() {
-        if (bow != null) return;
-        bow = new Bow((int) (entite.getX()), (int) (entite.getY()));
-        DrawManager.entites.add(bow);
-        EntiteManager.attack(entite);
+        end();
     }
 
     public abstract void onFinish();
 
     private void end() {
-        if (bow != null)
-            DrawManager.entites.remove(bow);
         onFinish();
     }
 

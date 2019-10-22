@@ -27,6 +27,7 @@ import java.util.ArrayList;
  */
 public abstract class Entite extends Sprite implements ISpriteDrawable {
 
+    public ArrayList<IComponent> components = new ArrayList<>();
     public IComponent currentComponent;
     public boolean isTouchable = true;
     public int point = 500;
@@ -66,18 +67,17 @@ public abstract class Entite extends Sprite implements ISpriteDrawable {
             this.shield.draw(batch);
         }
         batch.draw(getTexture(),
-                getX(), getY(),
-                centerOrigin.x,
-                centerOrigin.y,
-                (int) width, (int) height,
-                1, 1,
-                getRotation(),
-                (int) 0,
-                (int) 0,
-                (int) getTexture().getWidth(), (int) getTexture().getHeight(),
-                false, false);
+            getX(), getY(),
+            centerOrigin.x,
+            centerOrigin.y,
+            (int) width, (int) height,
+            1, 1,
+            getRotation(),
+            (int) 0,
+            (int) 0,
+            (int) getTexture().getWidth(), (int) getTexture().getHeight(),
+            false, false);
         if (currentComponent != null) {
-            this.currentComponent.handle();
             this.currentComponent.draw(batch);
         }
     }
@@ -94,7 +94,12 @@ public abstract class Entite extends Sprite implements ISpriteDrawable {
     }
 
     public void dead() {
+        this.currentComponent = null;
+        this.components.clear();
+    }
 
+    public IComponent getComponent(Class clazz) {
+        return this.components.stream().filter(e -> e.getClass().equals(clazz)).findFirst().get();
     }
 
 }

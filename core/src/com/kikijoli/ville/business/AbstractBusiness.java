@@ -19,8 +19,12 @@ public abstract class AbstractBusiness extends AbstractAction {
 
     protected AbstractAction current;
 
+    public boolean stop;
+
     @Override
     public void act() {
+        if (stop) return;
+
         if (Tmap.settingLevel) return;
         ((HashMap<String, AbstractAction>) actions.clone()).values().stream().forEach((action) -> {
             action.act();

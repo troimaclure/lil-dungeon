@@ -6,10 +6,8 @@
 package com.kikijoli.ville.business;
 
 import com.kikijoli.ville.abstracts.AbstractAction;
-import com.kikijoli.ville.automation.player.AttackBow;
-import com.kikijoli.ville.automation.ennemy.AttackDirectionPreparation;
+import com.kikijoli.ville.automation.ennemy.AttackBowEnnemy;
 import com.kikijoli.ville.drawable.entite.npc.Archer;
-import com.kikijoli.ville.drawable.entite.simple.Bow;
 import com.kikijoli.ville.manager.EntiteManager;
 import com.kikijoli.ville.manager.SoundManager;
 import com.kikijoli.ville.util.MathUtils;
@@ -34,7 +32,6 @@ public class ArcherBusiness extends AbstractBusiness {
     private class AttackPlayer extends AbstractAction {
 
         private static final String BOW = "BOW";
-        private static final String PREPARATION = "PREPARATION";
 
         @Override
         public void act() {
@@ -43,22 +40,15 @@ public class ArcherBusiness extends AbstractBusiness {
         }
 
         private void handleBow() {
-            if (!actions.containsKey(BOW) && !actions.containsKey(PREPARATION)) {
+            if (!actions.containsKey(BOW)) {
                 SoundManager.playSound(SoundManager.PREPARE_SPELL);
-                actions.put(PREPARATION, new AttackDirectionPreparation(archer, MathUtils.centered(archer, new Bow(0, 0))) {
+                SoundManager.playSound(SoundManager.BOW);
+                actions.put(BOW, new AttackBowEnnemy(archer, MathUtils.getCenter(EntiteManager.player.getBoundingRectangle())) {
                     @Override
-                    public void onComplete() {
-                        actions.remove(PREPARATION);
-                        SoundManager.playSound(SoundManager.BOW);
-                        actions.put(BOW, new AttackBow(archer, destination) {
-                            @Override
-                            public void onFinish() {
-                                actions.remove(BOW);
-                            }
-                        });
+                    public void onFinish() {
+                        actions.remove(BOW);
                     }
                 });
-
             }
         }
     }

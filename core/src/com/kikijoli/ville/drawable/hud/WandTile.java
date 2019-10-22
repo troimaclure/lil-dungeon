@@ -1,9 +1,7 @@
 package com.kikijoli.ville.drawable.hud;
 
 import com.kikijoli.ville.drawable.entite.simple.Wand;
-import com.kikijoli.ville.manager.EntiteManager;
 import com.kikijoli.ville.util.Constantes;
-import com.kikijoli.ville.util.Mode;
 
 /**
  *
@@ -18,7 +16,7 @@ public class WandTile extends Tile {
     @Override
     public void action() {
         super.action();
-        EntiteManager.player.mode = Mode.WAND;
+//        EntiteManager.player.mode = Mode.WAND;
     }
 
 }

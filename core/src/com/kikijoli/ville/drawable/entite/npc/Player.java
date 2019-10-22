@@ -10,15 +10,19 @@ import com.badlogic.gdx.graphics.Color;
 import com.kikijoli.ville.business.PlayerBuisiness;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Vector2;
 import com.kikijoli.ville.business.AbstractBusiness;
+import com.kikijoli.ville.component.BowComponent;
 import com.kikijoli.ville.component.IComponent;
+import com.kikijoli.ville.component.SwordComponent;
 import com.kikijoli.ville.drawable.entite.Entite;
 import com.kikijoli.ville.drawable.entite.simple.PlayerShield;
 import com.kikijoli.ville.interfaces.IBusiness;
 import com.kikijoli.ville.interfaces.IShapeDrawable;
 import com.kikijoli.ville.manager.ColorManager;
+import com.kikijoli.ville.maps.Tmap;
 import com.kikijoli.ville.util.Constantes;
-import com.kikijoli.ville.util.Mode;
+import java.util.Arrays;
 
 /**
  *
@@ -27,14 +31,12 @@ import com.kikijoli.ville.util.Mode;
 public final class Player extends Entite implements IBusiness, IShapeDrawable {
 
     private static final String SPRITESIMPLEPNG = "sprite/simple.png";
-    public int mode = Mode.BOW;
     public float dashTotal = 2;
     public float dashCooldown = 3 * 60;
     public float dashCount = dashTotal * dashCooldown;
     public PointLight vision;
     public boolean invincible = false;
     public boolean touched = false;
-   
 
     public Player(int srcX, int srcY) {
         super(SPRITESIMPLEPNG, srcX, srcY);
@@ -42,6 +44,10 @@ public final class Player extends Entite implements IBusiness, IShapeDrawable {
         good = true;
         this.speed = 5;
         this.shield = new PlayerShield((int) this.getX(), (int) this.getY());
+        this.components.addAll(Arrays.asList(new IComponent[]{new BowComponent(this, (t) -> {
+            return new Vector2(Tmap.worldCoordinates.x, Tmap.worldCoordinates.y);
+        }), new SwordComponent(this)}));
+        this.currentComponent = this.components.get(0);
     }
 
     @Override

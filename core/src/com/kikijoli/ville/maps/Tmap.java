@@ -117,9 +117,7 @@ public class Tmap implements Screen {
     public static void addBox(int x, int y) {
         BodyDef groundBodyDef = new BodyDef();
         groundBodyDef.position.set(new Vector2(x + 32, y + 32));
-
         Body groundBody = getWorld().createBody(groundBodyDef);
-
         PolygonShape groundBox = new PolygonShape();
         groundBox.setAsBox(32, 32);
         groundBody.createFixture(groundBox, 0.0f);
@@ -130,7 +128,7 @@ public class Tmap implements Screen {
     Box2DDebugRenderer debugRenderer = new Box2DDebugRenderer();
 
     public Tmap() {
-        StageManager.loadFromXml("1");
+        StageManager.loadFromXml("3");
     }
 
     @Override

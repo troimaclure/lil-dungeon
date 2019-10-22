@@ -28,7 +28,7 @@ public abstract class AttackSword extends AbstractAction {
      */
     public AttackSword(Entite entite) {
         this.entite = entite;
-        this.sword = ((SwordComponent) this.entite.currentComponent).sword;
+        this.sword = ((SwordComponent) this.entite.getComponent(SwordComponent.class)).sword;
     }
 
     @Override

@@ -15,7 +15,6 @@ public abstract class Build extends Entite {
 
     public Build(String path, float srcX, float srcY, int srcWidth, int srcHeight) {
         super(path, srcX, srcY, srcWidth, srcHeight);
-
     }
 
 }

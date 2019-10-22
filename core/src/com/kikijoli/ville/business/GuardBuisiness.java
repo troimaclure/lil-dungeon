@@ -9,14 +9,11 @@ import com.badlogic.gdx.math.Vector2;
 import com.kikijoli.ville.abstracts.AbstractAction;
 import com.kikijoli.ville.automation.ennemy.DashEnnemy;
 import com.kikijoli.ville.automation.common.GoTo;
-import com.kikijoli.ville.automation.ennemy.AttackDirectionPreparation;
 import com.kikijoli.ville.automation.player.AttackSword;
 import com.kikijoli.ville.drawable.entite.npc.Guard;
-import com.kikijoli.ville.drawable.entite.simple.Sword;
 import com.kikijoli.ville.manager.EntiteManager;
 import com.kikijoli.ville.manager.SoundManager;
 import com.kikijoli.ville.shader.WalkShader;
-import com.kikijoli.ville.util.MathUtils;
 
 /**
  *
@@ -40,7 +37,6 @@ public class GuardBuisiness extends AbstractBusiness {
         private static final String GOTO = "GOTO";
         private static final String DASH = "DASH";
         private static final String ATTACK = "ATTACK";
-        private static final String PREPARATION = "PREPARATIOn";
 
         int count = 50;
         int delay = 50;
@@ -55,7 +51,7 @@ public class GuardBuisiness extends AbstractBusiness {
         }
 
         private void handleWalk() {
-            if (!actions.containsKey(GOTO) && !actions.containsKey(DASH) && !actions.containsKey(PREPARATION)) {
+            if (!actions.containsKey(GOTO) && !actions.containsKey(DASH)) {
                 actions.put(GOTO, new GoTo(guard, EntiteManager.player));
             }
             if (!(guard.shader instanceof WalkShader)) {
@@ -65,31 +61,27 @@ public class GuardBuisiness extends AbstractBusiness {
 
         private void handleDash() {
 
-            if (!actions.containsKey(DASH) && !actions.containsKey(PREPARATION) && countDash++ > dashDelay) {
+            if (!actions.containsKey(DASH) && countDash++ > dashDelay) {
                 actions.remove(GOTO);
                 countDash = 0;
                 SoundManager.playSound(SoundManager.PREPARE_SPELL);
-                actions.put(PREPARATION, new AttackDirectionPreparation(guard, MathUtils.centered(guard, new Sword(0, 0))) {
+
+                SoundManager.playSound(SoundManager.DASH);
+                actions.put(DASH, new DashEnnemy(guard, new Vector2(EntiteManager.player.getX(), EntiteManager.player.getY())) {
                     @Override
-                    public void onComplete() {
-                        actions.remove(PREPARATION);
-                        SoundManager.playSound(SoundManager.DASH);
-                        actions.put(DASH, new DashEnnemy(guard, new Vector2(EntiteManager.player.getX(), EntiteManager.player.getY())) {
-                            @Override
-                            public void onFinish() {
-                                handleWalk();
-                                actions.remove(DASH);
-                            }
-                        });
-                        SoundManager.playSound(SoundManager.SWORD);
-                        actions.put(ATTACK, new AttackSword(guard) {
-                            @Override
-                            public void onFinish() {
-                                actions.remove(ATTACK);
-                            }
-                        });
+                    public void onFinish() {
+                        handleWalk();
+                        actions.remove(DASH);
                     }
                 });
+                SoundManager.playSound(SoundManager.SWORD);
+                actions.put(ATTACK, new AttackSword(guard) {
+                    @Override
+                    public void onFinish() {
+                        actions.remove(ATTACK);
+                    }
+                });
+
             }
         }
     }

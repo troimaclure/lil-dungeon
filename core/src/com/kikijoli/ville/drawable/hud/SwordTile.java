@@ -6,7 +6,6 @@ import com.kikijoli.ville.interfaces.IShapeDrawable;
 import com.kikijoli.ville.interfaces.ISpriteDrawable;
 import com.kikijoli.ville.manager.EntiteManager;
 import com.kikijoli.ville.util.Constantes;
-import com.kikijoli.ville.util.Mode;
 
 /**
  *
@@ -21,8 +20,7 @@ public class SwordTile extends Tile implements ISpriteDrawable, IShapeDrawable {
     @Override
     public void action() {
         super.action();
-        EntiteManager.player.mode = Mode.SWORD;
-        EntiteManager.player.currentComponent = new SwordComponent(EntiteManager.player);
+        EntiteManager.player.currentComponent = EntiteManager.player.getComponent(SwordComponent.class);
     }
 
 }

@@ -7,13 +7,10 @@ package com.kikijoli.ville.business;
 
 import com.badlogic.gdx.math.Intersector;
 import com.kikijoli.ville.abstracts.AbstractAction;
-import com.kikijoli.ville.automation.ennemy.AttackDirectionPreparation;
 import com.kikijoli.ville.automation.player.AttackTurret;
 import com.kikijoli.ville.drawable.entite.npc.Turret;
-import com.kikijoli.ville.drawable.entite.simple.TurretBow;
 import com.kikijoli.ville.manager.EntiteManager;
 import com.kikijoli.ville.manager.SoundManager;
-import com.kikijoli.ville.shader.ClickShader;
 import com.kikijoli.ville.util.MathUtils;
 
 /**
@@ -36,7 +33,6 @@ public class TurretBusiness extends AbstractBusiness {
     private class AttackPlayer extends AbstractAction {
 
         private static final String BOW = "BOW";
-        private static final String PREPARATION = "PREPARATION";
 
         int bowDelay = 150;
         int countBow = 150;
@@ -51,20 +47,13 @@ public class TurretBusiness extends AbstractBusiness {
         }
 
         private void handleBow() {
-            if (!actions.containsKey(BOW) && !actions.containsKey(PREPARATION) && countBow++ > bowDelay && !isContacted()) {
+            if (!actions.containsKey(BOW) && countBow++ > bowDelay && !isContacted()) {
                 countBow = 0;
-                SoundManager.playSound(SoundManager.PREPARE_SPELL);
-                actions.put(PREPARATION, new AttackDirectionPreparation(turret, MathUtils.centered(turret, new TurretBow(0, 0))) {
+                SoundManager.playSound(SoundManager.CANNON);
+                actions.put(BOW, new AttackTurret(turret, MathUtils.getCenter(EntiteManager.player.getBoundingRectangle())) {
                     @Override
-                    public void onComplete() {
-                        actions.remove(PREPARATION);
-                        SoundManager.playSound(SoundManager.CANNON);
-                        actions.put(BOW, new AttackTurret(turret, destination) {
-                            @Override
-                            public void onFinish() {
-                                actions.remove(BOW);
-                            }
-                        });
+                    public void onFinish() {
+                        actions.remove(BOW);
                     }
                 });
 

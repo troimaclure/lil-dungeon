@@ -13,7 +13,5 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  */
 public interface IComponent {
 
-    public void handle();
-
     public void draw(SpriteBatch spriteBatch);
 }

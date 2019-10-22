@@ -13,7 +13,7 @@ public class CannonBall extends Bullet {
 
     public CannonBall(int srcX, int srcY, Vector2 destination, Entite author) {
         super("sprite/cannonball.png", destination, 2000, author, srcX, srcY, Constantes.TILESIZE / 2, Constantes.TILESIZE / 2);
-        this.speed = 10;
+        this.speed = 5;
     }
 
     @Override

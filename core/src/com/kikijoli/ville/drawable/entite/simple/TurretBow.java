@@ -10,7 +10,7 @@ import com.kikijoli.ville.util.Constantes;
 public class TurretBow extends Entite {
 
     public TurretBow(float srcX, float srcY) {
-        super("sprite/turretbow.png", srcX, srcY, Constantes.TILESIZE, Constantes.TILESIZE);
+        super("sprite/turretbow.png", srcX, srcY, Constantes.TILESIZE * 2, Constantes.TILESIZE * 2);
     }
 
 }

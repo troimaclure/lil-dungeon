@@ -23,11 +23,6 @@ public class SwordComponent implements IComponent {
     }
 
     @Override
-    public void handle() {
-
-    }
-
-    @Override
     public void draw(SpriteBatch batch) {
         sword.setX((float) (this.entite.getX() - (sword.getWidth() / 2 - this.entite.getWidth() / 2)));
         sword.setY(this.entite.getY() - this.entite.getHeight() / 2);

@@ -10,9 +10,14 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.kikijoli.ville.business.AbstractBusiness;
 import com.kikijoli.ville.business.ArcherBusiness;
+import com.kikijoli.ville.component.BowComponent;
+import com.kikijoli.ville.component.IComponent;
 import com.kikijoli.ville.drawable.entite.Entite;
 import com.kikijoli.ville.interfaces.IBusiness;
+import com.kikijoli.ville.manager.EntiteManager;
 import com.kikijoli.ville.maps.Tmap;
+import com.kikijoli.ville.util.MathUtils;
+import java.util.Arrays;
 
 /**
  *
@@ -30,6 +35,11 @@ public final class Archer extends Entite implements IBusiness {
         this.vision = new PointLight(Tmap.getRay(), 40, Color.BLACK, 500, this.getX(), this.getY());
         this.vision.setSoft(false);
         this.point = 500;
+        this.components.addAll(Arrays.asList(new IComponent[]{new BowComponent(this, (t) -> {
+            return MathUtils.getCenter(EntiteManager.player.getBoundingRectangle());
+        })}));
+        this.currentComponent = this.components.get(0);
+
     }
 
     @Override

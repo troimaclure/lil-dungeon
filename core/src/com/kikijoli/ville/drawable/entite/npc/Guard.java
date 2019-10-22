@@ -10,12 +10,13 @@ import com.badlogic.gdx.graphics.Color;
 import com.kikijoli.ville.business.GuardBuisiness;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.kikijoli.ville.business.AbstractBusiness;
+import com.kikijoli.ville.component.IComponent;
 import com.kikijoli.ville.component.SwordComponent;
 import com.kikijoli.ville.drawable.entite.Entite;
 import com.kikijoli.ville.drawable.entite.simple.PlayerShield;
-import com.kikijoli.ville.drawable.entite.simple.Sword;
 import com.kikijoli.ville.interfaces.IBusiness;
 import com.kikijoli.ville.maps.Tmap;
+import java.util.Arrays;
 
 /**
  *
@@ -34,7 +35,9 @@ public class Guard extends Entite implements IBusiness {
         this.vision.setSoft(false);
         this.shield = new PlayerShield(srcX, srcY);
         this.point = 1000;
-        this.currentComponent = new SwordComponent(this);
+        this.components.addAll(Arrays.asList(new IComponent[]{new SwordComponent(this)}));
+        this.currentComponent = this.components.get(0);
+
     }
 
     @Override
