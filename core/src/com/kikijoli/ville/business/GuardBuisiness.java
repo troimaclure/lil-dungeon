@@ -5,6 +5,7 @@
  */
 package com.kikijoli.ville.business;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.kikijoli.ville.abstracts.AbstractAction;
 import com.kikijoli.ville.automation.ennemy.DashEnnemy;
@@ -12,6 +13,7 @@ import com.kikijoli.ville.automation.common.GoTo;
 import com.kikijoli.ville.automation.player.AttackSword;
 import com.kikijoli.ville.drawable.entite.npc.Guard;
 import com.kikijoli.ville.manager.EntiteManager;
+import com.kikijoli.ville.manager.MessageManager;
 import com.kikijoli.ville.manager.SoundManager;
 import com.kikijoli.ville.shader.WalkShader;
 
@@ -38,10 +40,10 @@ public class GuardBuisiness extends AbstractBusiness {
         private static final String DASH = "DASH";
         private static final String ATTACK = "ATTACK";
 
-        int count = 50;
-        int delay = 50;
-        int dashDelay = 50;
-        int countDash = 50;
+        int count = 30;
+        int delay = 60;
+        int dashDelay = 60;
+        int countDash = 30;
 
         @Override
         public void act() {
@@ -91,6 +93,7 @@ public class GuardBuisiness extends AbstractBusiness {
         @Override
         public void act() {
             if (guard.vision.contains(EntiteManager.player.getX(), EntiteManager.player.getY())) {
+                MessageManager.addIndicator(guard.getX() - 8, guard.getY() + guard.getHeight(), "?!", guard, Color.ORANGE, 50);
                 current = new AttackPlayer();
             }
         }

@@ -42,7 +42,7 @@ public final class Player extends Entite implements IBusiness, IShapeDrawable {
         super(SPRITESIMPLEPNG, srcX, srcY);
         this.buisiness = this.getDefault();
         good = true;
-        this.speed = 5;
+        this.speed = 7;
         this.shield = new PlayerShield((int) this.getX(), (int) this.getY());
         this.components.addAll(Arrays.asList(new IComponent[]{new BowComponent(this, (t) -> {
             return new Vector2(Tmap.worldCoordinates.x, Tmap.worldCoordinates.y);
@@ -53,23 +53,17 @@ public final class Player extends Entite implements IBusiness, IShapeDrawable {
     @Override
     public void draw(SpriteBatch batch) {
         batch.setColor(ColorManager.getTextureColor());
-        if (this.invincible) {
-            batch.setColor(Color.RED);
-        }
-        if (this.touched) {
-            batch.setColor(ColorManager.getTextureColor().r, ColorManager.getTextureColor().g, ColorManager.getTextureColor().b, 0.5f);
-        }
+        if (this.invincible) batch.setColor(Color.RED);
+        if (this.touched) batch.setColor(batch.getColor().r, batch.getColor().g, batch.getColor().b, 0.5f);
         super.draw(batch);
     }
 
     @Override
     public void draw(ShapeRenderer batch) {
-
         batch.setColor(Color.GRAY);
         batch.rect(getX() - getWidth() / 2, getY() + getHeight() + 5, getWidth() * 2, 5);
         batch.setColor(Color.RED);
         batch.rect(getX() - getWidth() / 2, getY() + getHeight() + 5, calculateDashWidth(), 5);
-
     }
 
     @Override

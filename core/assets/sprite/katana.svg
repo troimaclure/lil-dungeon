@@ -25,9 +25,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="16"
-     inkscape:cx="16.716955"
-     inkscape:cy="126.67331"
+     inkscape:zoom="4"
+     inkscape:cx="50.361461"
+     inkscape:cy="100.96291"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -50,7 +50,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -65,7 +65,7 @@
        id="rect5514"
        inkscape:connector-curvature="0" />
     <rect
-       style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.28971764;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:#ffcc00;fill-opacity:1;stroke:#000000;stroke-width:0.28971764;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect5516"
        width="0.81744939"
        height="6.3688054"
@@ -73,7 +73,7 @@
        y="250.5005"
        transform="matrix(0.95983052,0.28058042,-0.29767852,0.95466617,0,0)" />
     <path
-       style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.235;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;stroke-dashoffset:0;stroke-linejoin:miter;paint-order:normal"
+       style="fill:#b3b3b3;fill-opacity:1;stroke:#000000;stroke-width:0.235;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;stroke-dashoffset:0;stroke-linejoin:miter;paint-order:normal"
        d="m 3.1276483,263.73233 c 6.9403017,1.74389 14.0225637,3.864 21.1834167,6.1924 l -0.790676,2.53572 C 16.168611,269.81838 8.6144946,267.82522 1.0424267,265.88963 Z"
        id="rect5522"
        inkscape:connector-curvature="0"
@@ -177,7 +177,7 @@
        id="path6281"
        inkscape:connector-curvature="0" />
     <rect
-       style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.33429989;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:#ffcc00;fill-opacity:1;stroke:#000000;stroke-width:0.33429989;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect6314"
        width="1.6232355"
        height="2.5017843"

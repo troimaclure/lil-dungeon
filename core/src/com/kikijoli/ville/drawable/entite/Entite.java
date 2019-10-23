@@ -20,6 +20,7 @@ import com.kikijoli.ville.util.TextureUtil;
 import com.kikijoli.ville.interfaces.ISpriteDrawable;
 import com.kikijoli.ville.util.MathUtils;
 import java.util.ArrayList;
+import java.util.Optional;
 
 /**
  *
@@ -96,10 +97,14 @@ public abstract class Entite extends Sprite implements ISpriteDrawable {
     public void dead() {
         this.currentComponent = null;
         this.components.clear();
+        if (this.buisiness != null)
+            this.buisiness.stop = true;
     }
 
-    public IComponent getComponent(Class clazz) {
-        return this.components.stream().filter(e -> e.getClass().equals(clazz)).findFirst().get();
+    public IComponent getComponent(Class clazz) throws NullPointerException {
+        Optional<IComponent> findFirst = this.components.stream().filter(e -> e.getClass().equals(clazz)).findFirst();
+        if (findFirst.isPresent()) return findFirst.get();
+        throw new NullPointerException();
     }
 
 }

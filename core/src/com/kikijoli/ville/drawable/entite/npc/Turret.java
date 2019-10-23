@@ -8,12 +8,20 @@ package com.kikijoli.ville.drawable.entite.npc;
 import box2dLight.PointLight;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 import com.kikijoli.ville.business.AbstractBusiness;
 import com.kikijoli.ville.business.TurretBusiness;
+import com.kikijoli.ville.component.BowComponent;
+import com.kikijoli.ville.component.IComponent;
+import com.kikijoli.ville.component.SwordComponent;
+import com.kikijoli.ville.component.TurretComponent;
 import com.kikijoli.ville.drawable.entite.Entite;
 import com.kikijoli.ville.interfaces.IBusiness;
+import com.kikijoli.ville.manager.EntiteManager;
 import com.kikijoli.ville.maps.Tmap;
 import com.kikijoli.ville.util.Constantes;
+import com.kikijoli.ville.util.MathUtils;
+import java.util.Arrays;
 
 /**
  *
@@ -31,6 +39,10 @@ public final class Turret extends Entite implements IBusiness {
         this.vision = new PointLight(Tmap.getRay(), 20, Color.BLACK, 500, this.getX(), this.getY());
         this.vision.setXray(true);
         this.point = 1500;
+        this.components.addAll(Arrays.asList(new IComponent[]{new TurretComponent(this, (t) -> {
+            return MathUtils.getCenter(EntiteManager.player.getBoundingRectangle());
+        })}));
+        this.currentComponent = this.components.get(0);
     }
 
     @Override

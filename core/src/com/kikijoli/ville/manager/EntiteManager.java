@@ -262,7 +262,6 @@ public class EntiteManager {
         } else {
             SoundManager.playSound(SoundManager.DEATH);
         }
-        entite.buisiness.stop = true;
         deads.add(entite);
         entite.dead();
     }

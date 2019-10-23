@@ -7,6 +7,7 @@ import com.kikijoli.ville.drawable.entite.Entite;
 import com.kikijoli.ville.manager.ColorManager;
 import com.kikijoli.ville.maps.Tmap;
 import com.kikijoli.ville.util.Constantes;
+import com.kikijoli.ville.util.TextureUtil;
 import java.util.ArrayList;
 
 /*
@@ -93,13 +94,21 @@ public class GridManager {
         grid[Math.abs(row - ROWCOUNT) - 1][col].state = state;
     }
 
-    public static void tour() {
+    public static void drawShape() {
+        for (Tile[] object : GridManager.grid) {
+            for (Tile tile : object) {
+                drawFloor(tile);
+            }
+
+        }
+    }
+
+    public static void drawSprite() {
         for (Tile[] object : GridManager.grid) {
             for (Tile tile : object) {
                 if (tile.state.equals(Constantes.WALL)) {
-                    drawWall(tile);
-                } else {
-                    drawFloor(tile);
+//                    drawWall(tile);
+                    drawWallSprite(tile);
                 }
             }
 
@@ -114,6 +123,11 @@ public class GridManager {
     private static void drawWall(Tile tile) {
         Tmap.shapeRenderer.setColor(ColorManager.getTextureColor());
         Tmap.shapeRenderer.rect(tile.getX(), tile.getY(), tile.getWidth(), tile.getHeight());
+    }
+
+    private static void drawWallSprite(Tile tile) {
+//        Tmap.shapeRenderer.setColor(ColorManager.getTextureColor());
+        Tmap.spriteBatch.draw(TextureUtil.getTexture("sprite/bush.png"), tile.getX(), tile.getY(), tile.getWidth(), tile.getHeight());
     }
 
     public static boolean isClearZone(Rectangle entite) {

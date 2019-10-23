@@ -79,8 +79,6 @@ public class Tmap implements Screen {
     private static final String SCORE = "SCORE : ";
     private static final String LEVEL_SCORE = "LEVEL SCORE : ";
     public static float delta;
-    public int rayUpdateCount = 60;
-    private final int RAYCOUNTTOTAL = 60;
 
     public static RayHandler getRay() {
         if (ray == null) {
@@ -97,6 +95,8 @@ public class Tmap implements Screen {
         }
         return world;
     }
+    public int rayUpdateCount = 60;
+    private final int RAYCOUNTTOTAL = 60;
 
     public static void removeBoxs(Rectangle rectangle) {
         Array<Body> bodies = new Array<>();
@@ -128,7 +128,7 @@ public class Tmap implements Screen {
     Box2DDebugRenderer debugRenderer = new Box2DDebugRenderer();
 
     public Tmap() {
-        StageManager.loadFromXml("3");
+        StageManager.loadFromXml("4");
     }
 
     @Override
@@ -189,14 +189,17 @@ public class Tmap implements Screen {
 
     private void drawSprites(float delta) {
         spriteBatch.begin();
-        MessageManager.tour();
+
+        GridManager.drawSprite();
         LockManager.tour();
         EntiteManager.tour();
         ParticleManager.tour(delta);
         DrawManager.tour();
+
         ProjectileManager.tour();
         SpellManager.tour();
         StageManager.tour();
+        MessageManager.tour();
         spriteBatch.flush();
         spriteBatch.end();
 
@@ -232,7 +235,7 @@ public class Tmap implements Screen {
 
     private void drawShapes() {
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        GridManager.tour();
+        GridManager.drawShape();
         DrawManager.drawShapeFilled();
         EntiteManager.player.draw(shapeRenderer);
 

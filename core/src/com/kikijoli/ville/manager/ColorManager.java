@@ -18,6 +18,6 @@ public class ColorManager {
     }
 
     public static Color getBackgroundColor() {
-        return Color.valueOf("#222f3e");
+        return Color.valueOf("#27ae60");
     }
 }

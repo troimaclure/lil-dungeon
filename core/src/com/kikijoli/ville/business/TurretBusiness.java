@@ -7,7 +7,7 @@ package com.kikijoli.ville.business;
 
 import com.badlogic.gdx.math.Intersector;
 import com.kikijoli.ville.abstracts.AbstractAction;
-import com.kikijoli.ville.automation.player.AttackTurret;
+import com.kikijoli.ville.automation.ennemy.AttackTurret;
 import com.kikijoli.ville.drawable.entite.npc.Turret;
 import com.kikijoli.ville.manager.EntiteManager;
 import com.kikijoli.ville.manager.SoundManager;
