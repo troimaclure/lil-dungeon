@@ -11,8 +11,8 @@ import com.kikijoli.ville.util.Constantes;
  */
 public class BowTile extends Tile {
 
-    public BowTile(int srcX, int srcY) {
-        super(srcX, srcY, new Bow(0, 0, Constantes.TILESIZE, Constantes.TILESIZE));
+    public BowTile() {
+        super(new Bow(0, 0, Constantes.TILESIZE, Constantes.TILESIZE));
     }
 
     @Override

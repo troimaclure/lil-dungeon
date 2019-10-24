@@ -5,6 +5,7 @@
  */
 package com.kikijoli.ville.manager;
 
+import com.badlogic.gdx.graphics.Color;
 import com.kikijoli.ville.drawable.entite.build.Door;
 import com.kikijoli.ville.drawable.entite.build.Key;
 import com.kikijoli.ville.drawable.entite.build.Lock;
@@ -30,7 +31,6 @@ public class LockManager {
     }
 
     public static void tour() {
-        Tmap.spriteBatch.setColor(ColorManager.getTextureColor());
         locks.forEach((lock) -> {
             lock.draw(Tmap.spriteBatch);
         });

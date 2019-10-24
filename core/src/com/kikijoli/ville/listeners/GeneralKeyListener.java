@@ -14,6 +14,7 @@ import com.kikijoli.ville.business.PlayerBuisiness;
 import com.kikijoli.ville.manager.EntiteManager;
 import com.kikijoli.ville.manager.HudManager;
 import com.kikijoli.ville.manager.StageManager;
+import com.kikijoli.ville.manager.ThemeManager;
 
 /**
  *
@@ -94,8 +95,8 @@ public class GeneralKeyListener extends InputAdapter {
     }
 
     private void tilesAction(int index) {
-        if (index > HudManager.tiles.size() - 1) return;
-        HudManager.tiles.get(index).action();
+        if (index > ThemeManager.currentTheme.getTiles().size() - 1) return;
+        ThemeManager.currentTheme.getTiles().get(index).action();
     }
 
     @Override

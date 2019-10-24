@@ -27,17 +27,17 @@ public class WaterManager {
     }
 
     public static void drawWater() {
-        Tmap.spriteBatchDefaultColor.begin();
+        Tmap.spriteBatch.begin();
         getWaters().forEach((entite) -> {
-            ShaderProgram shader = Tmap.spriteBatchDefaultColor.getShader();
+            ShaderProgram shader = Tmap.spriteBatch.getShader();
             if (entite.shader != null) {
-                Tmap.spriteBatchDefaultColor.setShader(entite.shader);
+                Tmap.spriteBatch.setShader(entite.shader);
             }
-            entite.draw(Tmap.spriteBatchDefaultColor);
-            Tmap.spriteBatchDefaultColor.setShader(shader);
+            entite.draw(Tmap.spriteBatch);
+            Tmap.spriteBatch.setShader(shader);
         });
-        Tmap.spriteBatchDefaultColor.flush();
-        Tmap.spriteBatchDefaultColor.end();
+        Tmap.spriteBatch.flush();
+        Tmap.spriteBatch.end();
 
     }
 

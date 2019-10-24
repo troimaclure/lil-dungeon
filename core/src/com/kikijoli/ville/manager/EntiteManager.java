@@ -74,7 +74,6 @@ public class EntiteManager {
     }
 
     private static void renderEntity(Entite entite) {
-        spriteBatch.setColor(ColorManager.getTextureColor());
         spriteBatch.setShader(entite.shader);
         if (entite.buisiness != null) {
             entite.buisiness.act();

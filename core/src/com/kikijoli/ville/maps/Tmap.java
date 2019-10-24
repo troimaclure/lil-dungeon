@@ -34,7 +34,6 @@ import com.kikijoli.ville.listeners.GeneralKeyListener;
 import com.kikijoli.ville.manager.ProjectileManager;
 import com.kikijoli.ville.manager.CameraManager;
 import static com.kikijoli.ville.manager.CameraManager.camera;
-import com.kikijoli.ville.manager.ColorManager;
 import com.kikijoli.ville.manager.DrawManager;
 import com.kikijoli.ville.manager.EntiteManager;
 import com.kikijoli.ville.manager.LockManager;
@@ -46,6 +45,7 @@ import com.kikijoli.ville.manager.StageManager;
 import com.kikijoli.ville.manager.HudManager;
 import com.kikijoli.ville.manager.RankManager;
 import com.kikijoli.ville.manager.SpellManager;
+import com.kikijoli.ville.manager.ThemeManager;
 import com.kikijoli.ville.pathfind.GridManager;
 import com.kikijoli.ville.util.Constantes;
 import com.kikijoli.ville.util.MathUtils;
@@ -66,7 +66,6 @@ public class Tmap implements Screen {
     public static ShapeRenderer hudShapeRenderer;
     public static SpriteBatch spriteBatch;
     public static SpriteBatch hudBatch;
-    public static SpriteBatch spriteBatchDefaultColor;
     public static Vector3 worldCoordinates = new Vector3();
     public static Stage stage;
     public static FPSLogger fps;
@@ -95,8 +94,6 @@ public class Tmap implements Screen {
         }
         return world;
     }
-    public int rayUpdateCount = 60;
-    private final int RAYCOUNTTOTAL = 60;
 
     public static void removeBoxs(Rectangle rectangle) {
         Array<Body> bodies = new Array<>();
@@ -124,6 +121,8 @@ public class Tmap implements Screen {
         groundBox.dispose();
         groundBody.setUserData(new Rectangle(x, y, Constantes.TILESIZE, Constantes.TILESIZE));
     }
+    public int rayUpdateCount = 60;
+    private final int RAYCOUNTTOTAL = 60;
     private final Sprite arrowCountSprite = new Sprite(TextureUtil.getTexture("sprite/arrow.png"));
     Box2DDebugRenderer debugRenderer = new Box2DDebugRenderer();
 
@@ -142,7 +141,7 @@ public class Tmap implements Screen {
         hudShapeRenderer.setAutoShapeType(true);
         spriteBatch = new SpriteBatch();
         hudBatch = new SpriteBatch();
-        spriteBatchDefaultColor = new SpriteBatch();
+
         Gdx.input.setInputProcessor(new InputMultiplexer(new GeneralKeyListener()));
         CameraManager.initialize(Constantes.TILESIZE * 15, Constantes.TILESIZE * 10);
         EntiteManager.initialize();
@@ -161,9 +160,9 @@ public class Tmap implements Screen {
         CameraManager.tour();
 
         spriteBatch.setProjectionMatrix(camera.combined);
-        spriteBatchDefaultColor.setProjectionMatrix(camera.combined);
         shapeRenderer.setProjectionMatrix(camera.combined);
-
+        StageManager.tiledMapRenderer.setView(camera);
+        StageManager.tiledMapRenderer.render();
         drawShapes();
         drawSprites(delta);
         water();
@@ -184,6 +183,7 @@ public class Tmap implements Screen {
         if (settingLevel) {
             setLevel();
         }
+
 //        debug();
     }
 
@@ -206,18 +206,16 @@ public class Tmap implements Screen {
     }
 
     private void drawHud() {
+
         hudShapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        hudShapeRenderer.setColor(Color.WHITE);
         HudManager.drawShape();
         if (EntiteManager.playerDead) {
             drawDeadBackground();
         }
         hudShapeRenderer.flush();
         hudShapeRenderer.end();
-        hudShapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-        HudManager.drawLines();
 
-        hudShapeRenderer.flush();
-        hudShapeRenderer.end();
         hudBatch.begin();
 
         HudManager.drawSprite();
@@ -230,7 +228,12 @@ public class Tmap implements Screen {
         }
         hudBatch.flush();
         hudBatch.end();
+        hudShapeRenderer.begin(ShapeRenderer.ShapeType.Line);
 
+        HudManager.drawLines();
+
+        hudShapeRenderer.flush();
+        hudShapeRenderer.end();
     }
 
     private void drawShapes() {
@@ -292,9 +295,9 @@ public class Tmap implements Screen {
 
         int number = setLevel.end ? 0 * setLevel.count / 2 : (setLevel.count + 1 - setLevel.delay) * setLevel.count / 2;
 
-        MessageManager.LEVELFONT.setColor(ColorManager.getBackgroundColor());
+        MessageManager.LEVELFONT.setColor(ThemeManager.currentTheme.getBackGroundColor());
         MessageManager.LEVELFONT.draw(hudBatch, title, centerString.x + number, centerString.y + number);
-        MessageManager.LEVELFONT.setColor(ColorManager.getTextureColor());
+        MessageManager.LEVELFONT.setColor(Color.WHITE);
         MessageManager.LEVELFONT.draw(hudBatch, title, centerString.x + 5 - number, centerString.y + 5 - number);
         hudBatch.flush();
         hudBatch.end();
@@ -337,7 +340,7 @@ public class Tmap implements Screen {
     }
 
     private void drawArrowCount() {
-        hudBatch.setColor(ColorManager.getTextureColor());
+        hudBatch.setColor(Color.WHITE);
         hudBatch.draw(arrowCountSprite.getTexture(), Gdx.graphics.getWidth() - Constantes.TILESIZE * 2, Gdx.graphics.getHeight() - Constantes.TILESIZE * 1.5f, Constantes.TILESIZE, Constantes.TILESIZE);
         MessageManager.SHOWG.draw(hudBatch, "x " + EntiteManager.arrowCount, Gdx.graphics.getWidth() - Constantes.TILESIZE, Gdx.graphics.getHeight() - Constantes.TILESIZE);
     }

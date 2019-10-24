@@ -5,9 +5,9 @@
  */
 package com.kikijoli.ville.drawable.entite.build;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.kikijoli.ville.manager.ColorManager;
 import com.kikijoli.ville.manager.MessageManager;
 import com.kikijoli.ville.util.Constantes;
 
@@ -30,13 +30,11 @@ public class Door extends Build {
     public void draw(SpriteBatch batch) {
         MessageManager.segoe.getData().setScale(1);
         final GlyphLayout layout = new GlyphLayout(MessageManager.segoe, data);
-        MessageManager.segoe.setColor(ColorManager.getTextureColor());
+        MessageManager.segoe.setColor(Color.WHITE);
 
         final float fontX = getX() + (getWidth() - layout.width) / 2;
         final float fontY = getY() + (getHeight() + layout.height) / 2;
         MessageManager.segoe.draw(batch, data, fontX, fontY);
     }
-
-
 
 }

@@ -19,7 +19,6 @@ import com.kikijoli.ville.drawable.entite.Entite;
 import com.kikijoli.ville.drawable.entite.simple.PlayerShield;
 import com.kikijoli.ville.interfaces.IBusiness;
 import com.kikijoli.ville.interfaces.IShapeDrawable;
-import com.kikijoli.ville.manager.ColorManager;
 import com.kikijoli.ville.maps.Tmap;
 import com.kikijoli.ville.util.Constantes;
 import java.util.Arrays;
@@ -52,7 +51,7 @@ public final class Player extends Entite implements IBusiness, IShapeDrawable {
 
     @Override
     public void draw(SpriteBatch batch) {
-        batch.setColor(ColorManager.getTextureColor());
+        batch.setColor(Color.WHITE);
         if (this.invincible) batch.setColor(Color.RED);
         if (this.touched) batch.setColor(batch.getColor().r, batch.getColor().g, batch.getColor().b, 0.5f);
         super.draw(batch);

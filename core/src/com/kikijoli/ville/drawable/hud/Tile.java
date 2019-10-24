@@ -8,9 +8,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.kikijoli.ville.drawable.entite.Entite;
 import com.kikijoli.ville.interfaces.IShapeDrawable;
 import com.kikijoli.ville.interfaces.ISpriteDrawable;
-import com.kikijoli.ville.manager.ColorManager;
-import com.kikijoli.ville.manager.HudManager;
 import com.kikijoli.ville.manager.MessageManager;
+import com.kikijoli.ville.manager.ThemeManager;
 import com.kikijoli.ville.util.Constantes;
 import com.kikijoli.ville.util.MathUtils;
 
@@ -25,13 +24,14 @@ public abstract class Tile extends Rectangle implements ISpriteDrawable, IShapeD
     public boolean disabled;
     public int count = 0;
 
-    public Tile(int srcX, int srcY, Entite entite) {
-        super(srcX, srcY, Constantes.TILESIZE, Constantes.TILESIZE);
+    public Tile(Entite entite) {
+        this.setHeight(Constantes.TILESIZE);
+        this.setWidth(Constantes.TILESIZE);
         this.draw = entite;
     }
 
     public void action() {
-        HudManager.tiles.forEach((tile) -> tile.selected = false);
+        ThemeManager.currentTheme.getTiles().forEach((tile) -> tile.selected = false);
         this.selected = true;
     }
 
@@ -50,7 +50,7 @@ public abstract class Tile extends Rectangle implements ISpriteDrawable, IShapeD
 
     @Override
     public void draw(ShapeRenderer batch) {
-        batch.setColor(disabled ? Color.GRAY : selected ? Color.BLUE : ColorManager.getBackgroundColor());
+        batch.setColor(disabled ? Color.GRAY : selected ? Color.BLUE : Color.BLACK);
         batch.rect(x, y, width, height);
     }
 

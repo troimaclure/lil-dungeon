@@ -13,8 +13,8 @@ import com.kikijoli.ville.util.Constantes;
  */
 public class SwordTile extends Tile implements ISpriteDrawable, IShapeDrawable {
 
-    public SwordTile(int srcX, int srcY) {
-        super(srcX, srcY, new Sword(0, 0, Constantes.TILESIZE, Constantes.TILESIZE));
+    public SwordTile() {
+        super(new Sword(0, 0, Constantes.TILESIZE, Constantes.TILESIZE));
     }
 
     @Override

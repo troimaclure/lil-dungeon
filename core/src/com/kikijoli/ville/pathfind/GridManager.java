@@ -4,10 +4,9 @@ import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.kikijoli.ville.drawable.entite.Entite;
-import com.kikijoli.ville.manager.ColorManager;
+import com.kikijoli.ville.manager.ThemeManager;
 import com.kikijoli.ville.maps.Tmap;
 import com.kikijoli.ville.util.Constantes;
-import com.kikijoli.ville.util.TextureUtil;
 import java.util.ArrayList;
 
 /*
@@ -116,18 +115,12 @@ public class GridManager {
     }
 
     private static void drawFloor(Tile tile) {
-        Tmap.shapeRenderer.setColor(ColorManager.getBackgroundColor());
-        Tmap.shapeRenderer.rect(tile.getX(), tile.getY(), tile.getWidth(), tile.getHeight());
-    }
-
-    private static void drawWall(Tile tile) {
-        Tmap.shapeRenderer.setColor(ColorManager.getTextureColor());
+        Tmap.shapeRenderer.setColor(ThemeManager.currentTheme.getBackGroundColor());
         Tmap.shapeRenderer.rect(tile.getX(), tile.getY(), tile.getWidth(), tile.getHeight());
     }
 
     private static void drawWallSprite(Tile tile) {
-//        Tmap.shapeRenderer.setColor(ColorManager.getTextureColor());
-        Tmap.spriteBatch.draw(TextureUtil.getTexture("sprite/bush.png"), tile.getX(), tile.getY(), tile.getWidth(), tile.getHeight());
+        Tmap.spriteBatch.draw(ThemeManager.currentTheme.getWallTexture(), tile.getX(), tile.getY(), tile.getWidth(), tile.getHeight());
     }
 
     public static boolean isClearZone(Rectangle entite) {

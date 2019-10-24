@@ -9,8 +9,8 @@ import com.kikijoli.ville.util.Constantes;
  */
 public class WandFireTile extends Tile {
 
-    public WandFireTile(int srcX, int srcY) {
-        super(srcX, srcY, new Wand(0, 0, Constantes.TILESIZE, Constantes.TILESIZE));
+    public WandFireTile() {
+        super(new Wand(0, 0, Constantes.TILESIZE, Constantes.TILESIZE));
     }
 
     @Override

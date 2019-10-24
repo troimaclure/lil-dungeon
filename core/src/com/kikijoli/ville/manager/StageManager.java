@@ -7,6 +7,10 @@ package com.kikijoli.ville.manager;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.kikijoli.ville.drawable.entite.decor.Water;
 import com.kikijoli.ville.drawable.entite.npc.Archer;
 import com.kikijoli.ville.drawable.entite.npc.Guard;
@@ -19,7 +23,6 @@ import static com.kikijoli.ville.manager.EntiteManager.player;
 import com.kikijoli.ville.maps.Tmap;
 import com.kikijoli.ville.pathfind.GridManager;
 import com.kikijoli.ville.util.Constantes;
-import leveleditor.Tile;
 
 /**
  *
@@ -34,26 +37,29 @@ public class StageManager {
     private static final String TXT = ".txt";
     private static final String STAGE_PATH = "stage/";
     public static int stopwatch;
+    public static TiledMapRenderer tiledMapRenderer;
+    public static TiledMap tiledMap;
 
     public static void loadFromXml(String level) {
-
-        Tile[][] load = XmlManager.load(level);
+        tiledMap = new TmxMapLoader().load("stage/" + level + ".tmx");
+        tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
+//        Tile[][] load = XmlManager.load(level);
         stopwatch = 60 * 60;
         RankManager.currentStagePoint = 0;
-        GridManager.initialize(load.length, load[0].length, Constantes.TILESIZE);
-        int i = 0;
-        for (Tile[] tileDTOs : load) {
-            int r = 0;
-            for (Tile tileDTO : tileDTOs) {
-                GridManager.setState(tileDTO.code, i, r++);
-                int x = (r - 1) * Constantes.TILESIZE;
-                int y = Math.abs(i - tileDTOs.length + 1) * Constantes.TILESIZE;
-                handleElement(tileDTO.code, x, y, tileDTO.data);
-            }
-            i++;
-        }
-        currentLevel = level;
-        EntiteManager.arrowCount = (int) EntiteManager.entites.stream().filter(e -> e != EntiteManager.player).count();
+//        GridManager.initialize(load.length, load[0].length, Constantes.TILESIZE);
+//        int i = 0;
+//        for (Tile[] tileDTOs : load) {
+//            int r = 0;
+//            for (Tile tileDTO : tileDTOs) {
+//                GridManager.setState(tileDTO.code, i, r++);
+//                int x = (r - 1) * Constantes.TILESIZE;
+//                int y = Math.abs(i - tileDTOs.length + 1) * Constantes.TILESIZE;
+//                handleElement(tileDTO.code, x, y, tileDTO.data);
+//            }
+//            i++;
+//        }
+//        currentLevel = level;
+//        EntiteManager.arrowCount = (int) EntiteManager.entites.stream().filter(e -> e != EntiteManager.player).count();
     }
 
     public static void load(int level) {
@@ -156,7 +162,7 @@ public class StageManager {
         DrawManager.entites.clear();
         WaterManager.waters.clear();
         DrawManager.spritesFilled.clear();
-        HudManager.tiles.stream().forEach(e -> {
+        ThemeManager.currentTheme.getTiles().stream().forEach(e -> {
             e.disabled = false;
             e.count = 0;
         });
