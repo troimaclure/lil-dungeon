@@ -7,10 +7,15 @@ package com.kikijoli.ville.manager;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.maps.MapObjects;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.Intersector;
+import com.badlogic.gdx.math.Rectangle;
 import com.kikijoli.ville.drawable.entite.decor.Water;
 import com.kikijoli.ville.drawable.entite.npc.Archer;
 import com.kikijoli.ville.drawable.entite.npc.Guard;
@@ -46,6 +51,20 @@ public class StageManager {
 //        Tile[][] load = XmlManager.load(level);
         stopwatch = 60 * 60;
         RankManager.currentStagePoint = 0;
+
+        TiledMapTileLayer collisionObjectLayer = (TiledMapTileLayer) tiledMap.getLayers().get(0);
+        MapObjects objects = collisionObjectLayer.getObjects();
+
+// there are several other types, Rectangle is probably the most common one
+        for (RectangleMapObject rectangleObject : objects.getByType(RectangleMapObject.class)) {
+
+            Rectangle rectangle = rectangleObject.getRectangle();
+            Tmap.addBox((int) rectangle.getX(), (int) rectangle.getY());
+//            if (Intersector.overlaps(rectangle, player.getRectangle())   {
+//                // collision happened
+//            }
+        }
+
 //        GridManager.initialize(load.length, load[0].length, Constantes.TILESIZE);
 //        int i = 0;
 //        for (Tile[] tileDTOs : load) {
@@ -183,6 +202,10 @@ public class StageManager {
         HudManager.setSelected(0);
         EntiteManager.addEntite(player);
         setLevel(getCurrentLevel());
+    }
+
+    static boolean isClearZone(Rectangle moved) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     private StageManager() {

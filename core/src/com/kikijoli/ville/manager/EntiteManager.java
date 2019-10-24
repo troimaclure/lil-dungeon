@@ -115,12 +115,13 @@ public class EntiteManager {
         } else if (GeneralKeyListener.KeyRight) {
             moved.x++;
         }
-        if (GridManager.isClearZone(moved)) {
+        if (StageManager.isClearZone(moved)) {
             if (moved.x != player.getX()) {
                 player.setPosition(moved.x, moved.y);
                 return true;
             }
         }
+
         return false;
     }
 
