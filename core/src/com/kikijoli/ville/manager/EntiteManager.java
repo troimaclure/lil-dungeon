@@ -94,6 +94,7 @@ public class EntiteManager {
             handleGet();
             handleDoor();
         }
+        checkPlayerVisible();
     }
 
     private static boolean isPlayerDead() {
@@ -132,7 +133,7 @@ public class EntiteManager {
         } else if (GeneralKeyListener.KeyUp) {
             moved.y++;
         }
-        if (GridManager.isClearZone(moved)) {
+        if (StageManager.isClearZone(moved)) {
             if (moved.y != player.getY()) {
                 player.setPosition(moved.x, moved.y);
                 return true;
@@ -272,6 +273,10 @@ public class EntiteManager {
 
     public static ArrayList<Entite> getEntites() {
         return (ArrayList<Entite>) entites.clone();
+    }
+
+    private static void checkPlayerVisible() {
+        player.hide = (StageManager.hideouts.stream().anyMatch(e -> e.overlaps(player.getBoundingRectangle())));
     }
 
     private EntiteManager() {

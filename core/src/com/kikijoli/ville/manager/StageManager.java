@@ -7,14 +7,14 @@ package com.kikijoli.ville.manager;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.objects.TiledMapTileMapObject;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.kikijoli.ville.drawable.entite.decor.Water;
 import com.kikijoli.ville.drawable.entite.npc.Archer;
@@ -28,6 +28,7 @@ import static com.kikijoli.ville.manager.EntiteManager.player;
 import com.kikijoli.ville.maps.Tmap;
 import com.kikijoli.ville.pathfind.GridManager;
 import com.kikijoli.ville.util.Constantes;
+import java.util.ArrayList;
 
 /**
  *
@@ -44,27 +45,21 @@ public class StageManager {
     public static int stopwatch;
     public static TiledMapRenderer tiledMapRenderer;
     public static TiledMap tiledMap;
+    public static ArrayList<Rectangle> walls = new ArrayList<>();
+    public static ArrayList<Rectangle> hideouts = new ArrayList<>();
+    public static final String PHYSIQUE = "physique";
+    public static final String LIGHT_PHYSIQUE = "light_physique";
+    public static final String ENTITE = "entite";
 
     public static void loadFromXml(String level) {
         tiledMap = new TmxMapLoader().load("stage/" + level + ".tmx");
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
-//        Tile[][] load = XmlManager.load(level);
         stopwatch = 60 * 60;
         RankManager.currentStagePoint = 0;
-
-        TiledMapTileLayer collisionObjectLayer = (TiledMapTileLayer) tiledMap.getLayers().get(0);
-        MapObjects objects = collisionObjectLayer.getObjects();
-
-// there are several other types, Rectangle is probably the most common one
-        for (RectangleMapObject rectangleObject : objects.getByType(RectangleMapObject.class)) {
-
-            Rectangle rectangle = rectangleObject.getRectangle();
-            Tmap.addBox((int) rectangle.getX(), (int) rectangle.getY());
-//            if (Intersector.overlaps(rectangle, player.getRectangle())   {
-//                // collision happened
-//            }
-        }
-
+        createWall();
+        createEntite();
+        createHideOut();
+        //<editor-fold defaultstate="collapsed" desc="grid initialisation">
 //        GridManager.initialize(load.length, load[0].length, Constantes.TILESIZE);
 //        int i = 0;
 //        for (Tile[] tileDTOs : load) {
@@ -79,87 +74,39 @@ public class StageManager {
 //        }
 //        currentLevel = level;
 //        EntiteManager.arrowCount = (int) EntiteManager.entites.stream().filter(e -> e != EntiteManager.player).count();
+//</editor-fold>
     }
 
-    public static void load(int level) {
-
-        FileHandle internal = Gdx.files.internal(STAGE_PATH + level + TXT);
-        String[] contentSplit = internal.readString().split(SEPARATOR);
-        GridManager.initialize(contentSplit.length, contentSplit[0].split(EMPTY).length, Constantes.TILESIZE);
-        int i = 0;
-        for (String row : contentSplit) {
-            int r = 0;
-            String[] cols = row.split(EMPTY);
-            for (String col : cols) {
-                GridManager.setState(col, i, r++);
-                int x = (r - 1) * Constantes.TILESIZE;
-                int y = Math.abs(i - cols.length + 1) * Constantes.TILESIZE;
-                handleElement(col, x, y, "");
-            }
-            i++;
-        }
-
-    }
-
-    private static void handleElement(String col, int x, int y, String data) {
-        switch (col) {
-            case Constantes.WATER:
-                WaterManager.addWater(new Water(x, y));
-                break;
-            case Constantes.LOCK:
-                LockManager.addLock(x, y);
-                Tmap.addBox(x, y);
-                break;
-            case Constantes.KEY:
-                LockManager.addKey(x, y);
-                break;
-            case Constantes.GUARD:
-                EntiteManager.addEntite(new Guard(x, y));
-                break;
-            case Constantes.PLAYER:
-                EntiteManager.player.setPosition(x, y);
-                break;
-            case Constantes.WALL:
-                Tmap.addBox(x, y);
-                break;
-            case Constantes.DOOR:
-                LockManager.addDoor(x, y, data);
-                break;
-            case Constantes.TURRET:
-                EntiteManager.addEntite(new Turret(x, y));
-                break;
-            case Constantes.TRAP:
-                EntiteManager.addEntite(new Trap(x, y));
-                break;
-            case Constantes.ARCHER:
-                EntiteManager.addEntite(new Archer(x, y));
-                break;
-            case Constantes.GUARD_WITH_KEY:
-                EntiteManager.addEntite(new KeyGuard(x, y));
-                break;
-            case Constantes.ROLLING_TRAP:
-                handleRollingTrap(data, x, y);
-                break;
+    private static void createWall() {
+        MapLayer collisionObjectLayer = (MapLayer) tiledMap.getLayers().get(PHYSIQUE);
+        MapObjects objects = collisionObjectLayer.getObjects();
+        for (RectangleMapObject rectangleObject : objects.getByType(RectangleMapObject.class)) {
+            Rectangle rectangle = rectangleObject.getRectangle();
+            Tmap.addBox((int) rectangle.getX(), (int) rectangle.getY(), rectangle.getWidth(), rectangle.getHeight());
+            walls.add(rectangle);
         }
     }
 
-    public static void handleRollingTrap(String data, int x, int y) throws NumberFormatException {
-        String speedx = "0";
-        String speedY = "0";
-        try {
-            String[] split = data.split("");
-            int count = 0;
-            speedx = split[count];
-            if ("-".equals(speedx)) {
-                speedx += split[++count];
-            }
-            speedY = split[++count];
-            if ("-".equals(speedY)) {
-                speedY += split[++count];
-            }
-        } catch (Exception e) {
+    private static void createHideOut() {
+        MapLayer collisionObjectLayer = (MapLayer) tiledMap.getLayers().get(LIGHT_PHYSIQUE);
+        MapObjects objects = collisionObjectLayer.getObjects();
+        for (RectangleMapObject rectangleObject : objects.getByType(RectangleMapObject.class)) {
+            hideouts.add(rectangleObject.getRectangle());
         }
-        EntiteManager.addEntite(new RollingTrap(x, y, Float.valueOf(speedx), Float.valueOf(speedY)));
+    }
+
+    private static void createEntite() {
+        MapLayer collisionObjectLayer = (MapLayer) tiledMap.getLayers().get(ENTITE);
+        MapObjects objects = collisionObjectLayer.getObjects();
+        for (TiledMapTileMapObject entite : objects.getByType(TiledMapTileMapObject.class)) {
+            if ("player".equals(entite.getName())) {
+                EntiteManager.player.setX(entite.getX());
+                EntiteManager.player.setY(entite.getY());
+                continue;
+            }
+            ThemeManager.currentTheme.handleFromTmx(entite);
+        }
+
     }
 
     public static void tour() {
@@ -204,8 +151,8 @@ public class StageManager {
         setLevel(getCurrentLevel());
     }
 
-    static boolean isClearZone(Rectangle moved) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public static boolean isClearZone(Rectangle moved) {
+        return !walls.stream().filter(e -> e.overlaps(moved)).findFirst().isPresent();
     }
 
     private StageManager() {

@@ -19,7 +19,7 @@ public class PlayerShield extends Entite {
     int total = 10;
     boolean down;
 
-    public PlayerShield(int srcX, int srcY) {
+    public PlayerShield(float srcX, float srcY) {
         super("sprite/player-shield.png", srcX, srcY, Constantes.TILESIZE, Constantes.TILESIZE);
     }
 

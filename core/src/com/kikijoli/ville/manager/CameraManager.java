@@ -23,6 +23,7 @@ public class CameraManager {
         camera.position.x = x;
         camera.position.y = y;
         camera.update();
+        
     }
 
     public static void tour() {

@@ -34,6 +34,7 @@ public final class Player extends Entite implements IBusiness, IShapeDrawable {
     public float dashCooldown = 3 * 60;
     public float dashCount = dashTotal * dashCooldown;
     public PointLight vision;
+    public boolean hide;
     public boolean invincible = false;
     public boolean touched = false;
 
@@ -54,6 +55,7 @@ public final class Player extends Entite implements IBusiness, IShapeDrawable {
         batch.setColor(Color.WHITE);
         if (this.invincible) batch.setColor(Color.RED);
         if (this.touched) batch.setColor(batch.getColor().r, batch.getColor().g, batch.getColor().b, 0.5f);
+        if (this.hide) batch.setColor(batch.getColor().r, batch.getColor().g, batch.getColor().b, 0.5f);
         super.draw(batch);
     }
 

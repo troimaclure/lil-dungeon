@@ -93,36 +93,6 @@ public class GridManager {
         grid[Math.abs(row - ROWCOUNT) - 1][col].state = state;
     }
 
-    public static void drawShape() {
-        for (Tile[] object : GridManager.grid) {
-            for (Tile tile : object) {
-                drawFloor(tile);
-            }
-
-        }
-    }
-
-    public static void drawSprite() {
-        for (Tile[] object : GridManager.grid) {
-            for (Tile tile : object) {
-                if (tile.state.equals(Constantes.WALL)) {
-//                    drawWall(tile);
-                    drawWallSprite(tile);
-                }
-            }
-
-        }
-    }
-
-    private static void drawFloor(Tile tile) {
-        Tmap.shapeRenderer.setColor(ThemeManager.currentTheme.getBackGroundColor());
-        Tmap.shapeRenderer.rect(tile.getX(), tile.getY(), tile.getWidth(), tile.getHeight());
-    }
-
-    private static void drawWallSprite(Tile tile) {
-        Tmap.spriteBatch.draw(ThemeManager.currentTheme.getWallTexture(), tile.getX(), tile.getY(), tile.getWidth(), tile.getHeight());
-    }
-
     public static boolean isClearZone(Rectangle entite) {
         for (Tile[] grille1 : grid) {
             for (Tile g : grille1) {

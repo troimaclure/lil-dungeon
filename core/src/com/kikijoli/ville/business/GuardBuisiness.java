@@ -92,6 +92,7 @@ public class GuardBuisiness extends AbstractBusiness {
 
         @Override
         public void act() {
+            if (EntiteManager.player.hide) return;
             if (guard.vision.contains(EntiteManager.player.getX(), EntiteManager.player.getY())) {
                 MessageManager.addIndicator(guard.getX() - 8, guard.getY() + guard.getHeight(), "?!", guard, Color.ORANGE, 50);
                 current = new AttackPlayer();

@@ -5,7 +5,6 @@
  */
 package com.kikijoli.ville.manager;
 
-import com.badlogic.gdx.graphics.Color;
 import com.kikijoli.ville.drawable.entite.build.Door;
 import com.kikijoli.ville.drawable.entite.build.Key;
 import com.kikijoli.ville.drawable.entite.build.Lock;
@@ -24,6 +23,7 @@ public class LockManager {
 
     public static void addLock(float x, float y) {
         locks.add(new Lock(x, y));
+        Tmap.addBox(x, y);
     }
 
     public static void addKey(float x, float y) {
