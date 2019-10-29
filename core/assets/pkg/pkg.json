@@ -1,0 +1,19 @@
+{
+    "platform": "windows64",
+    "jdk": "path_to_jdk.zip",
+    "executable": "name_of_exec_without_exe_extension",
+    "classpath": [
+        "path_to\\lil-dungeon\\desktop\\build\\libs\\desktop-1.0.jar"
+    ],
+    "removelibs": [
+    ],
+    "mainclass": "com.kikijoli.ville.desktop.DesktopLauncher",
+    "vmargs": [
+        "Xmx1G"
+    ],
+    "icon": "path_to_ico.incs",
+    "resources": [
+    ],
+    "minimizejre": "soft",
+    "output": "directory_output"
+}
