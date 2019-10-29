@@ -3,10 +3,10 @@ package com.kikijoli.ville.drawable.entite.projectile.Bullet;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.kikijoli.ville.drawable.entite.Entite;
-import com.kikijoli.ville.manager.StageManager;
-import com.kikijoli.ville.util.ArrayUtils;
 import com.kikijoli.ville.util.Constantes;
+import com.kikijoli.ville.util.Move;
 import java.util.ArrayList;
+import java.util.stream.Stream;
 
 /**
  *
@@ -25,8 +25,8 @@ public class Arrow extends Bullet {
     }
 
     @Override
-    public ArrayList<Rectangle>[] getMouvementFilter() {
-        return ArrayUtils.create(StageManager.walls);
+    public Stream<ArrayList<Rectangle>> getMouvementFilter() {
+        return Move.BULLET_MOVE_FILTER;
     }
 
 }

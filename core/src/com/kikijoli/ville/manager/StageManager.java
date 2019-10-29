@@ -20,6 +20,7 @@ import static com.kikijoli.ville.manager.EntiteManager.player;
 import com.kikijoli.ville.maps.Tmap;
 import com.kikijoli.ville.util.Move;
 import java.util.ArrayList;
+import java.util.stream.Stream;
 
 /**
  *
@@ -152,24 +153,12 @@ public class StageManager {
         return !rectangle.stream().filter(e -> e.contains(moved)).findFirst().isPresent();
     }
 
-    public static boolean isClearZone(Rectangle moved, ArrayList<Rectangle>[] rectangles) {
-        if (rectangles == null) return true;
-        for (ArrayList<Rectangle> rectangle : rectangles) {
-            if (!isClearZone(moved, rectangle)) {
-                return false;
-            }
-        }
-        return true;
+    public static boolean isClearZone(Rectangle moved, Stream<ArrayList<Rectangle>> rectangles) {
+        return (rectangles != null) && rectangles.anyMatch(e -> !isClearZone(moved, e));
     }
 
-    public static boolean isClearZone(Vector2 moved, ArrayList<Rectangle>[] rectangles) {
-        if (rectangles == null) return true;
-        for (ArrayList<Rectangle> rectangle : rectangles) {
-            if (!isClearZone(moved, rectangle)) {
-                return false;
-            }
-        }
-        return true;
+    public static boolean isClearZone(Vector2 moved, Stream<ArrayList<Rectangle>> rectangles) {
+        return (rectangles != null) && rectangles.anyMatch(e -> !isClearZone(moved, e));
     }
 
     private StageManager() {

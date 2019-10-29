@@ -3,9 +3,9 @@ package com.kikijoli.ville.drawable.entite.projectile.Bullet;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.kikijoli.ville.drawable.entite.Entite;
-import com.kikijoli.ville.util.ArrayUtils;
 import com.kikijoli.ville.util.Constantes;
 import java.util.ArrayList;
+import java.util.stream.Stream;
 
 /**
  *
@@ -24,7 +24,7 @@ public class CannonBall extends Bullet {
     }
 
     @Override
-    public ArrayList<Rectangle>[] getMouvementFilter() {
-        return ArrayUtils.create();
+    public Stream<ArrayList<Rectangle>> getMouvementFilter() {
+        return Stream.of(new ArrayList<>());
     }
 }

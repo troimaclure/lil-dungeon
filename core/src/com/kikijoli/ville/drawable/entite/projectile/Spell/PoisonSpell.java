@@ -7,7 +7,9 @@ import com.kikijoli.ville.effect.AbstractEffect;
 import com.kikijoli.ville.effect.PoisonEffect;
 import com.kikijoli.ville.manager.StageManager;
 import com.kikijoli.ville.util.ArrayUtils;
+import com.kikijoli.ville.util.Move;
 import java.util.ArrayList;
+import java.util.stream.Stream;
 
 /**
  *
@@ -31,8 +33,8 @@ public class PoisonSpell extends MoveSpell {
     }
 
     @Override
-    public ArrayList<Rectangle>[] getMouvementFilter() {
-        return ArrayUtils.create(StageManager.walls);
+    public Stream<ArrayList<Rectangle>> getMouvementFilter() {
+        return Move.SPELL_MOVE_FILTER;
     }
 
 }
