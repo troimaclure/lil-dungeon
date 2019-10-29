@@ -1,6 +1,5 @@
 package com.kikijoli.ville.manager;
 
-import com.badlogic.gdx.graphics.Color;
 import com.kikijoli.ville.drawable.hud.Tile;
 import com.kikijoli.ville.maps.Tmap;
 import com.kikijoli.ville.util.Constantes;

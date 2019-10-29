@@ -10,8 +10,6 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.kikijoli.ville.drawable.entite.decor.Water;
 import com.kikijoli.ville.maps.Tmap;
-import com.kikijoli.ville.pathfind.GridManager;
-import com.kikijoli.ville.util.Constantes;
 import java.util.ArrayList;
 
 /**
@@ -54,7 +52,6 @@ public class WaterManager {
 
     static void addWater(Water water) {
         waters.add(water);
-        GridManager.setState(Constantes.WATER, water.getBoundingRectangle());
     }
 
     public static ArrayList<Water> getWaters() {

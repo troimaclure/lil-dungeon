@@ -5,8 +5,6 @@
  */
 package com.kikijoli.ville.manager;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
@@ -16,18 +14,11 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.objects.TiledMapTileMapObject;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
-import com.kikijoli.ville.drawable.entite.decor.Water;
-import com.kikijoli.ville.drawable.entite.npc.Archer;
-import com.kikijoli.ville.drawable.entite.npc.Guard;
-import com.kikijoli.ville.drawable.entite.npc.KeyGuard;
+import com.badlogic.gdx.math.Vector2;
 import com.kikijoli.ville.drawable.entite.npc.Player;
-import com.kikijoli.ville.drawable.entite.npc.RollingTrap;
-import com.kikijoli.ville.drawable.entite.npc.Trap;
-import com.kikijoli.ville.drawable.entite.npc.Turret;
 import static com.kikijoli.ville.manager.EntiteManager.player;
 import com.kikijoli.ville.maps.Tmap;
-import com.kikijoli.ville.pathfind.GridManager;
-import com.kikijoli.ville.util.Constantes;
+import com.kikijoli.ville.util.Move;
 import java.util.ArrayList;
 
 /**
@@ -50,6 +41,7 @@ public class StageManager {
     public static final String PHYSIQUE = "physique";
     public static final String LIGHT_PHYSIQUE = "light_physique";
     public static final String ENTITE = "entite";
+    public static final String PLAYER = "player";
 
     public static void loadFromXml(String level) {
         tiledMap = new TmxMapLoader().load("stage/" + level + ".tmx");
@@ -59,6 +51,7 @@ public class StageManager {
         createWall();
         createEntite();
         createHideOut();
+        Move.initialize();
         //<editor-fold defaultstate="collapsed" desc="grid initialisation">
 //        GridManager.initialize(load.length, load[0].length, Constantes.TILESIZE);
 //        int i = 0;
@@ -99,7 +92,7 @@ public class StageManager {
         MapLayer collisionObjectLayer = (MapLayer) tiledMap.getLayers().get(ENTITE);
         MapObjects objects = collisionObjectLayer.getObjects();
         for (TiledMapTileMapObject entite : objects.getByType(TiledMapTileMapObject.class)) {
-            if ("player".equals(entite.getName())) {
+            if (PLAYER.equals(entite.getName())) {
                 EntiteManager.player.setX(entite.getX());
                 EntiteManager.player.setY(entite.getY());
                 continue;
@@ -151,8 +144,32 @@ public class StageManager {
         setLevel(getCurrentLevel());
     }
 
-    public static boolean isClearZone(Rectangle moved) {
-        return !walls.stream().filter(e -> e.overlaps(moved)).findFirst().isPresent();
+    public static boolean isClearZone(Rectangle moved, ArrayList<Rectangle> rectangle) {
+        return !rectangle.stream().filter(e -> e.overlaps(moved)).findFirst().isPresent();
+    }
+
+    public static boolean isClearZone(Vector2 moved, ArrayList<Rectangle> rectangle) {
+        return !rectangle.stream().filter(e -> e.contains(moved)).findFirst().isPresent();
+    }
+
+    public static boolean isClearZone(Rectangle moved, ArrayList<Rectangle>[] rectangles) {
+        if (rectangles == null) return true;
+        for (ArrayList<Rectangle> rectangle : rectangles) {
+            if (!isClearZone(moved, rectangle)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static boolean isClearZone(Vector2 moved, ArrayList<Rectangle>[] rectangles) {
+        if (rectangles == null) return true;
+        for (ArrayList<Rectangle> rectangle : rectangles) {
+            if (!isClearZone(moved, rectangle)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     private StageManager() {

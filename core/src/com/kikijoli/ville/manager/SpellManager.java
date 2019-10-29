@@ -3,9 +3,8 @@ package com.kikijoli.ville.manager;
 import com.kikijoli.ville.drawable.entite.projectile.Spell.DurationSpell;
 import com.kikijoli.ville.drawable.entite.projectile.Spell.MoveSpell;
 import com.kikijoli.ville.drawable.entite.projectile.Spell.Spell;
-import com.kikijoli.ville.pathfind.GridManager;
-import com.kikijoli.ville.util.Constantes;
 import com.kikijoli.ville.util.MathUtils;
+import com.kikijoli.ville.util.Move;
 import java.util.ArrayList;
 
 /**
@@ -44,7 +43,7 @@ public class SpellManager {
     }
 
     private static void testCollision(Spell bullet) {
-        if (!GridManager.isClearZone(MathUtils.getCenter(bullet.getAnchors()), Constantes.BULLET_MOVEMENT_OK)) removes.add(bullet);
+        if (!StageManager.isClearZone(MathUtils.getCenter(bullet.getAnchors()), Move.BULLET_MOVE_FILTER)) removes.add(bullet);
         EntiteManager.entites.stream().filter((entite) -> (!entite.equals(bullet.getAuthor()) && entite.good != bullet.getAuthor().good)).filter((entite) -> (bullet instanceof Spell && entite.getBoundingRectangle().overlaps(((Spell) bullet).getAnchors()))).forEachOrdered((entite) -> {
             EntiteManager.spellEffect(entite, ((Spell) bullet));
         });

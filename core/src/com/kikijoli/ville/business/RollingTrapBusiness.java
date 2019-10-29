@@ -8,9 +8,9 @@ package com.kikijoli.ville.business;
 import com.kikijoli.ville.abstracts.AbstractAction;
 import com.kikijoli.ville.drawable.entite.npc.RollingTrap;
 import com.kikijoli.ville.manager.EntiteManager;
-import com.kikijoli.ville.pathfind.GridManager;
-import com.kikijoli.ville.util.Constantes;
+import com.kikijoli.ville.manager.StageManager;
 import com.kikijoli.ville.util.MathUtils;
+import com.kikijoli.ville.util.Move;
 
 /**
  *
@@ -35,7 +35,7 @@ public class RollingTrapBusiness extends AbstractBusiness {
         public void act() {
             rolling.setX(rolling.getX() + (rolling.speedX));
             rolling.setY(rolling.getY() + (rolling.speedY));
-            if (!GridManager.isClearZone(rolling.getBoundingRectangle(), Constantes.NPC_MOVEMENT_OK)) {
+            if (!StageManager.isClearZone(rolling.getBoundingRectangle(), Move.TRAP_MOVE_FILTER)) {
                 rolling.speedX *= -1;
                 rolling.speedY *= -1;
             }

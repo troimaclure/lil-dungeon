@@ -10,11 +10,11 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.kikijoli.ville.abstracts.AbstractAction;
 import com.kikijoli.ville.drawable.entite.Entite;
-import com.kikijoli.ville.manager.PathFinderManager;
-import com.kikijoli.ville.pathfind.GridManager;
+import com.kikijoli.ville.manager.StageManager;
 import com.kikijoli.ville.pathfind.Tile;
 import com.kikijoli.ville.shader.AbstractShader;
 import com.kikijoli.ville.util.Constantes;
+import com.kikijoli.ville.util.Move;
 import java.util.ArrayList;
 
 /**
@@ -23,9 +23,10 @@ import java.util.ArrayList;
  */
 public class GoTo extends AbstractAction {
 
+    public static ArrayList<Tile> path = null;
+
     private final Entite entite;
     private final Entite target;
-    public static ArrayList<Tile> path = null;
     private Vector2 goal = new Vector2();
     private int index = 0;
     private int count = 30;
@@ -56,7 +57,7 @@ public class GoTo extends AbstractAction {
         if (count >= delay) {
             count = 0;
             index = 0;
-            path = PathFinderManager.getPath(entite, target, Constantes.NPC_MOVEMENT_OK);
+//            path = PathFinderManager.getPath(entite, target, Constantes.NPC_MOVEMENT_OK);
         }
         return path != null;
     }
@@ -70,7 +71,7 @@ public class GoTo extends AbstractAction {
     private void goToGoal() {
         Vector2 center = new Vector2();
         center = entite.getBoundingRectangle().getCenter(center);
-        if (!GridManager.isClearZone(goal, Constantes.NPC_MOVEMENT_OK)) return;
+        if (!StageManager.isClearZone(goal, Move.NPC_MOVE_FILTER)) return;
         if (!com.badlogic.gdx.math.MathUtils.isEqual(entite.getX(), goal.x, 5))
             entite.setX(entite.getX() + (goal.x < center.x ? (-entite.speed) : center.x == goal.x ? 0 : entite.speed));
         if (!com.badlogic.gdx.math.MathUtils.isEqual(entite.getY(), goal.y, 5))

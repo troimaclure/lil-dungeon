@@ -3,7 +3,9 @@ package com.kikijoli.ville.drawable.entite.projectile.Bullet;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.kikijoli.ville.drawable.entite.Entite;
+import com.kikijoli.ville.util.ArrayUtils;
 import com.kikijoli.ville.util.Constantes;
+import java.util.ArrayList;
 
 /**
  *
@@ -17,12 +19,12 @@ public class CannonBall extends Bullet {
     }
 
     @Override
-    public String getMouvementFilter() {
-        return Constantes.CANNONBALL_MOVEMENT_OK;
+    public boolean isTouching(Rectangle rectangle) {
+        return this.overlaps(rectangle);
     }
 
     @Override
-    public boolean isTouching(Rectangle rectangle) {
-        return this.overlaps(rectangle);
+    public ArrayList<Rectangle>[] getMouvementFilter() {
+        return ArrayUtils.create();
     }
 }

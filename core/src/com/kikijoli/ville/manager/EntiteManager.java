@@ -2,26 +2,21 @@ package com.kikijoli.ville.manager;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
-import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.kikijoli.ville.drawable.entite.Entite;
-import com.kikijoli.ville.drawable.entite.build.Door;
 import com.kikijoli.ville.drawable.entite.build.Key;
-import com.kikijoli.ville.drawable.entite.build.Lock;
 import com.kikijoli.ville.drawable.entite.npc.Player;
 import com.kikijoli.ville.drawable.entite.projectile.Spell.Spell;
 import com.kikijoli.ville.drawable.entite.simple.Blood;
 import com.kikijoli.ville.listeners.GeneralKeyListener;
-import static com.kikijoli.ville.manager.StageManager.stopwatch;
-import com.kikijoli.ville.maps.Tmap;
+import static com.kikijoli.ville.manager.LockManager.handleDoor;
+import static com.kikijoli.ville.manager.LockManager.playerAddKey;
 import static com.kikijoli.ville.maps.Tmap.spriteBatch;
 import static com.kikijoli.ville.maps.Tmap.worldCoordinates;
-import com.kikijoli.ville.pathfind.GridManager;
 import com.kikijoli.ville.shader.WalkShader;
-import com.kikijoli.ville.util.Constantes;
 import com.kikijoli.ville.util.MathUtils;
-import com.kikijoli.ville.util.SetLevel;
+import com.kikijoli.ville.util.Move;
 import java.util.ArrayList;
 
 /**
@@ -35,7 +30,6 @@ public class EntiteManager {
     public static ArrayList<Entite> removes = new ArrayList<>();
     private static final ArrayList<Entite> deads = new ArrayList<>();
     public static ParticleEffect ball;
-    public static ArrayList<Rectangle> walls = new ArrayList<Rectangle>();
     public static final ArrayList<Key> keys = new ArrayList<>();
     public static Vector2 currentBallPosition = new Vector2();
     public static boolean playerDead;
@@ -48,7 +42,7 @@ public class EntiteManager {
     public static void tour() {
         Color c = spriteBatch.getColor();
         handlePlayer();
-        handleBall();
+
         entites.stream().forEach((Entite entite) -> {
             renderEntity(entite);
             entite.effects.forEach((effect) -> {
@@ -116,7 +110,7 @@ public class EntiteManager {
         } else if (GeneralKeyListener.KeyRight) {
             moved.x++;
         }
-        if (StageManager.isClearZone(moved)) {
+        if (StageManager.isClearZone(moved, Move.NPC_MOVE_FILTER)) {
             if (moved.x != player.getX()) {
                 player.setPosition(moved.x, moved.y);
                 return true;
@@ -133,7 +127,7 @@ public class EntiteManager {
         } else if (GeneralKeyListener.KeyUp) {
             moved.y++;
         }
-        if (StageManager.isClearZone(moved)) {
+        if (StageManager.isClearZone(moved, Move.NPC_MOVE_FILTER)) {
             if (moved.y != player.getY()) {
                 player.setPosition(moved.x, moved.y);
                 return true;
@@ -154,56 +148,6 @@ public class EntiteManager {
                 break;
             }
         }
-    }
-
-    private static void handleDoor() {
-        for (Lock lock : LockManager.locks) {
-            if (!keys.isEmpty() && Intersector.overlaps(player.anchor, lock.getBoundingRectangle())) {
-                lockOpen(lock);
-                break;
-            }
-        }
-
-        for (Door door : LockManager.doors) {
-            if (player.anchor.contains(MathUtils.getCenter(EntiteManager.player.getBoundingRectangle())) && Intersector.overlaps(player.anchor, door.getBoundingRectangle())) {
-                doorOpen(door);
-                break;
-            }
-        }
-    }
-
-    private static void playerAddKey(Key key) {
-        SoundManager.playSound(SoundManager.TAKE_KEY);
-        keys.add(key);
-        LockManager.keys.remove(key);
-        GridManager.setState(Constantes.EMPTY, key.getBoundingRectangle());
-
-    }
-
-    private static void lockOpen(Lock lock) {
-        SoundManager.playSound(SoundManager.OPEN_DOOR);
-        keys.remove(0);
-        LockManager.locks.remove(lock);
-        GridManager.setState(Constantes.EMPTY, lock.getBoundingRectangle());
-        Tmap.removeBoxs(lock.getBoundingRectangle());
-    }
-
-    private static void doorOpen(Door door) {
-        if (Tmap.setLevel == null) {
-            SoundManager.playSound(SoundManager.END_OF_LEVEL);
-            SoundManager.playSound(SoundManager.LEVEL_END_ANIM_SCREEN);
-            Tmap.setLevel = new SetLevel(door.data);
-            RankManager.point += MathUtils.transformIpsToSec(stopwatch) * RankManager.TIME_POINT;
-            RankManager.point += RankManager.currentStagePoint;
-        }
-    }
-
-    public static void handleBall() {
-        if (GeneralKeyListener.KeyDown) currentBallPosition.y -= 4;
-        else if (GeneralKeyListener.KeyUp) currentBallPosition.y += 4;
-        if (GeneralKeyListener.KeyRight) currentBallPosition.x += 4;
-        else if (GeneralKeyListener.KeyLeft) currentBallPosition.x -= 4;
-        ball.setPosition(currentBallPosition.x, currentBallPosition.y);
     }
 
     public static void moveBall() {
