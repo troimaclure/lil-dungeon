@@ -1,0 +1,4 @@
+package first with gradle task "dist" from desktop project (create .jar in desktop/build/libs)
+use packr from libgdx : https://github.com/libgdx/packr
+command line java -jar path_to_packr.jar --output from_users/target/out -- path_to_config.json (pkg.json for example)
+
