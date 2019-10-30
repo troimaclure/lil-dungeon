@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.kikijoli.ville.drawable.entite.Entite;
 import com.kikijoli.ville.util.Constantes;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Stream;
 
 /**
@@ -24,7 +25,7 @@ public class CannonBall extends Bullet {
     }
 
     @Override
-    public Stream<ArrayList<Rectangle>> getMouvementFilter() {
-        return Stream.of(new ArrayList<>());
+    public List<Rectangle> getMouvementFilter() {
+        return new ArrayList<>();
     }
 }

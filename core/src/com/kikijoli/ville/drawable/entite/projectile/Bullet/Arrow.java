@@ -5,8 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.kikijoli.ville.drawable.entite.Entite;
 import com.kikijoli.ville.util.Constantes;
 import com.kikijoli.ville.util.Move;
-import java.util.ArrayList;
-import java.util.stream.Stream;
+import java.util.List;
 
 /**
  *
@@ -25,7 +24,7 @@ public class Arrow extends Bullet {
     }
 
     @Override
-    public Stream<ArrayList<Rectangle>> getMouvementFilter() {
+    public List<Rectangle> getMouvementFilter() {
         return Move.BULLET_MOVE_FILTER;
     }
 

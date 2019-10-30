@@ -4,8 +4,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.kikijoli.ville.drawable.entite.Entite;
 import com.kikijoli.ville.util.MathUtils;
-import java.util.ArrayList;
-import java.util.stream.Stream;
+import java.util.List;
 
 /**
  *
@@ -39,5 +38,5 @@ public abstract class Projectile extends Rectangle {
 
     }
 
-    public abstract Stream<ArrayList<Rectangle>> getMouvementFilter();
+    public abstract List<Rectangle> getMouvementFilter();
 }

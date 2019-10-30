@@ -5,11 +5,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.kikijoli.ville.drawable.entite.Entite;
 import com.kikijoli.ville.effect.AbstractEffect;
 import com.kikijoli.ville.effect.PoisonEffect;
-import com.kikijoli.ville.manager.StageManager;
-import com.kikijoli.ville.util.ArrayUtils;
 import com.kikijoli.ville.util.Move;
-import java.util.ArrayList;
-import java.util.stream.Stream;
+import java.util.List;
 
 /**
  *
@@ -33,7 +30,7 @@ public class PoisonSpell extends MoveSpell {
     }
 
     @Override
-    public Stream<ArrayList<Rectangle>> getMouvementFilter() {
+    public List<Rectangle> getMouvementFilter() {
         return Move.SPELL_MOVE_FILTER;
     }
 
