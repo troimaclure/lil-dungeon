@@ -14,6 +14,7 @@ import static com.kikijoli.ville.manager.EntiteManager.player;
 import static com.kikijoli.ville.manager.StageManager.stopwatch;
 import com.kikijoli.ville.maps.Tmap;
 import com.kikijoli.ville.util.MathUtils;
+import com.kikijoli.ville.util.Move;
 import com.kikijoli.ville.util.SetLevel;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
@@ -100,6 +101,7 @@ public class LockManager {
         LockManager.locks.remove(lock);
         Tmap.removeBoxs(lock.getBoundingRectangle());
         refeshLocksRectangle();
+        Move.initialize();
     }
 
     public static void refeshLocksRectangle() {
