@@ -181,6 +181,7 @@ public class Tmap implements Screen {
         Gdx.gl.glLineWidth(LINE_WIDTH);
         fps.log();
         ShaderManager.step();
+        Gdx.gl.glEnable(0x0BA1);
         Gdx.gl.glClearColor(Color.BLACK.r, Color.BLACK.g, Color.BLACK.b, Color.BLACK.a);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         worldCoordinates = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
