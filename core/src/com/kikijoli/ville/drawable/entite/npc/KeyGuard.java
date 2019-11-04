@@ -8,11 +8,11 @@ package com.kikijoli.ville.drawable.entite.npc;
 import box2dLight.PointLight;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.kikijoli.ville.business.AbstractBusiness;
 import com.kikijoli.ville.business.KeyGuardBuisiness;
 import com.kikijoli.ville.component.IComponent;
 import com.kikijoli.ville.component.SwordComponent;
-import com.kikijoli.ville.drawable.entite.Entite;
 import com.kikijoli.ville.drawable.entite.simple.PlayerShield;
 import com.kikijoli.ville.interfaces.IBusiness;
 import com.kikijoli.ville.manager.LockManager;
@@ -24,7 +24,7 @@ import java.util.Arrays;
  *
  * @author troïmaclure
  */
-public final class KeyGuard extends Entite implements IBusiness {
+public final class KeyGuard extends Npc implements IBusiness {
 
     private static final String KeyGuard = "sprite/KeyGuard.png";
     public PointLight vision;
@@ -56,5 +56,7 @@ public final class KeyGuard extends Entite implements IBusiness {
     public void dead() {
         LockManager.addKey(this.getX(), this.getY());
     }
+
+ 
 
 }

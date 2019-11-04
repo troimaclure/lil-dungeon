@@ -57,6 +57,7 @@ public final class Player extends Entite implements IBusiness, IShapeDrawable {
         if (this.touched) batch.setColor(batch.getColor().r, batch.getColor().g, batch.getColor().b, 0.5f);
         if (this.hide) batch.setColor(batch.getColor().r, batch.getColor().g, batch.getColor().b, 0.5f);
         super.draw(batch);
+        batch.setColor(batch.getColor().r, batch.getColor().g, batch.getColor().b, 1.0f);
     }
 
     @Override

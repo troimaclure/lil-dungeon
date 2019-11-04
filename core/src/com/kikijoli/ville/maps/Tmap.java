@@ -29,6 +29,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
 import com.kikijoli.ville.automation.common.GoTo;
+import com.kikijoli.ville.drawable.entite.Entite;
 import com.kikijoli.ville.drawable.entite.build.Key;
 import com.kikijoli.ville.listeners.GeneralKeyListener;
 import com.kikijoli.ville.manager.ProjectileManager;
@@ -99,10 +100,12 @@ public class Tmap implements Screen {
         getWorld().getBodies(bodies);
         Body destroy = null;
         for (Body body : bodies) {
-            if (Intersector.overlaps((Rectangle) body.getUserData(), rectangle)) {
-                destroy = body;
-                break;
+            if (body.getUserData() instanceof Rectangle) {
+                if (Intersector.overlaps((Rectangle) body.getUserData(), rectangle)) {
+                    destroy = body;
+                    break;
 
+                }
             }
         }
         getWorld().destroyBody(destroy);
@@ -119,6 +122,18 @@ public class Tmap implements Screen {
         groundBody.createFixture(groundBox, 0.0f);
         groundBox.dispose();
         groundBody.setUserData(new Rectangle(x, y, Constantes.TILESIZE, Constantes.TILESIZE));
+    }
+
+    public static Body addBody(Entite entite) {
+        BodyDef groundBodyDef = new BodyDef();
+        groundBodyDef.position.set(new Vector2(entite.getX() + 32, entite.getY() + 32));
+        Body body = getWorld().createBody(groundBodyDef);
+        PolygonShape groundBox = new PolygonShape();
+        groundBox.setAsBox(entite.getWidth() / 2, entite.getHeight() / 2);
+        body.createFixture(groundBox, 0.0f);
+        groundBox.dispose();
+        body.setUserData(entite);
+        return body;
     }
 
     public static void addBox(float x, float y, float width, float height) {
@@ -161,6 +176,7 @@ public class Tmap implements Screen {
 
     @Override
     public void render(float delta) {
+
         Tmap.delta = delta;
         Gdx.gl.glLineWidth(LINE_WIDTH);
         fps.log();
@@ -179,16 +195,16 @@ public class Tmap implements Screen {
         water();
         StageManager.tiledMapRenderer.render(new int[]{4});
         drawHud();
-        if (rayUpdateCount-- <= 0) {
+//        if (rayUpdateCount-- <= 0) {
 
-            getRay().setCombinedMatrix(camera.combined,
-                camera.position.x, camera.position.y,
-                camera.viewportWidth * camera.zoom,
-                camera.viewportHeight * camera.zoom);
+        getRay().setCombinedMatrix(camera.combined,
+            camera.position.x, camera.position.y,
+            camera.viewportWidth * camera.zoom,
+            camera.viewportHeight * camera.zoom);
 
-            getRay().update();
-            rayUpdateCount = RAYCOUNTTOTAL;
-        }
+        getRay().updateAndRender();
+        rayUpdateCount = RAYCOUNTTOTAL;
+//        }
         if (setLevel != null) {
             settingLevel = true;
         }
@@ -196,7 +212,7 @@ public class Tmap implements Screen {
             setLevel();
         }
 
-//        debug();
+        debug();
     }
 
     private void drawSprites(float delta) {

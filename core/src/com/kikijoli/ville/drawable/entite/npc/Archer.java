@@ -8,11 +8,11 @@ package com.kikijoli.ville.drawable.entite.npc;
 import box2dLight.PointLight;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.kikijoli.ville.business.AbstractBusiness;
 import com.kikijoli.ville.business.ArcherBusiness;
 import com.kikijoli.ville.component.BowComponent;
 import com.kikijoli.ville.component.IComponent;
-import com.kikijoli.ville.drawable.entite.Entite;
 import com.kikijoli.ville.interfaces.IBusiness;
 import com.kikijoli.ville.manager.EntiteManager;
 import com.kikijoli.ville.maps.Tmap;
@@ -23,7 +23,7 @@ import java.util.Arrays;
  *
  * @author troïmaclure
  */
-public final class Archer extends Entite implements IBusiness {
+public final class Archer extends Npc implements IBusiness {
 
     private static final String ARCHER = "sprite/archer.png";
 
@@ -52,4 +52,6 @@ public final class Archer extends Entite implements IBusiness {
     public AbstractBusiness getDefault() {
         return new ArcherBusiness(this);
     }
+
+   
 }

@@ -39,9 +39,9 @@ public abstract class Entite extends Sprite implements ISpriteDrawable {
     public AbstractBusiness buisiness;
     public int speed = 2;
     public int strenght = 2;
-    Vector2 centerOrigin;
-    int width;
-    int height;
+    public Vector2 centerOrigin;
+    public int width;
+    public int height;
     public ArrayList<AbstractEffect> effects = new ArrayList<>();
     public PlayerShield shield;
 

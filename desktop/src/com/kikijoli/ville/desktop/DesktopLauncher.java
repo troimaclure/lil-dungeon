@@ -1,4 +1,3 @@
-
 package com.kikijoli.ville.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
@@ -16,6 +15,7 @@ public class DesktopLauncher {
         config.samples = 4;
         config.vSyncEnabled = true;
         config.allowSoftwareMode = true;
+//        config.useHDPI = true;
         new LwjglApplication(new Ville(), config);
     }
 }

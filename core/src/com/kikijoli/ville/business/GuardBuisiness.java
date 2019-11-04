@@ -16,6 +16,7 @@ import com.kikijoli.ville.manager.EntiteManager;
 import com.kikijoli.ville.manager.MessageManager;
 import com.kikijoli.ville.manager.SoundManager;
 import com.kikijoli.ville.shader.WalkShader;
+import com.kikijoli.ville.util.MathUtils;
 
 /**
  *
@@ -47,8 +48,8 @@ public class GuardBuisiness extends AbstractBusiness {
 
         @Override
         public void act() {
-
-//            handleWalk();
+            Vector2 center = MathUtils.getCenter(guard.getBoundingRectangle());
+            guard.setRotation(90 + MathUtils.getRotation(EntiteManager.player.getX(), EntiteManager.player.getY(), center.x, center.y));
             handleDash();
         }
 
@@ -90,8 +91,11 @@ public class GuardBuisiness extends AbstractBusiness {
 
     public class WaitPlayer extends AbstractAction {
 
+        float degree = 0;
+
         @Override
         public void act() {
+            guard.setRotation(degree++);
             if (EntiteManager.player.hide) return;
             if (guard.vision.contains(EntiteManager.player.getX(), EntiteManager.player.getY())) {
                 MessageManager.addIndicator(guard.getX() - 8, guard.getY() + guard.getHeight(), "?!", guard, Color.ORANGE, 50);

@@ -28,12 +28,7 @@ import java.util.List;
  */
 public class StageManager {
 
-    private static final String SEPARATOR = "\\r?\\n";
-    private static final String EMPTY = "";
     private static String currentLevel;
-
-    private static final String TXT = ".txt";
-    private static final String STAGE_PATH = "stage/";
     public static int stopwatch;
     public static TiledMapRenderer tiledMapRenderer;
     public static TiledMap tiledMap;
@@ -85,7 +80,9 @@ public class StageManager {
         MapLayer collisionObjectLayer = (MapLayer) tiledMap.getLayers().get(LIGHT_PHYSIQUE);
         MapObjects objects = collisionObjectLayer.getObjects();
         for (RectangleMapObject rectangleObject : objects.getByType(RectangleMapObject.class)) {
-            hideouts.add(rectangleObject.getRectangle());
+            Rectangle rectangle = rectangleObject.getRectangle();
+            Tmap.addBox((int) rectangle.getX(), (int) rectangle.getY(), rectangle.getWidth(), rectangle.getHeight());
+            hideouts.add(rectangle);
         }
     }
 
