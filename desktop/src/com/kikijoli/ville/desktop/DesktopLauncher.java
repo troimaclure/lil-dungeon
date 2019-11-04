@@ -8,14 +8,13 @@ public class DesktopLauncher {
 
     public static void main(String[] arg) {
         LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-        config.height = 1024;
-        config.width = 1280;
+
         config.foregroundFPS = 60;
-//        config.fullscreen = true;
         config.samples = 4;
         config.vSyncEnabled = true;
         config.allowSoftwareMode = true;
 //        config.useHDPI = true;
+        config.setFromDisplayMode(LwjglApplicationConfiguration.getDesktopDisplayMode());
         new LwjglApplication(new Ville(), config);
     }
 }
