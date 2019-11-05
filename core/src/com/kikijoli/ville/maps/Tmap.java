@@ -83,7 +83,7 @@ public class Tmap implements Screen {
         if (ray == null) {
             ray = new RayHandler(getWorld());
             ray.setCulling(true);
-            ray.setAmbientLight(0, 0, 0, 0.7f);
+            ray.setAmbientLight(0, 0, 0, 0.9f);
         }
         return ray;
     }

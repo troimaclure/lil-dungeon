@@ -43,6 +43,12 @@ public class MathUtils {
         return (int) (Math.ceil(by60 > 0 ? by60 / 60 : 0) + 1);
     }
 
+    public static int nearest(int x, int y, int v) {
+        int one = Math.abs(v) - Math.abs(x);
+        int two = Math.abs(v) - Math.abs(y);
+        return two > one ? y : x;
+    }
+
     public static Vector2 centerString(String s, BitmapFont bitMapFont, Rectangle rect) {
         final GlyphLayout layout = new GlyphLayout(bitMapFont, s);
         final float fontX = rect.x + (rect.width - layout.width) / 2;

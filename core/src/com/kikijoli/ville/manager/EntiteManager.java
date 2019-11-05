@@ -12,6 +12,7 @@ import com.kikijoli.ville.drawable.entite.simple.Blood;
 import com.kikijoli.ville.listeners.GeneralKeyListener;
 import static com.kikijoli.ville.manager.LockManager.handleDoor;
 import static com.kikijoli.ville.manager.LockManager.playerAddKey;
+import com.kikijoli.ville.maps.Tmap;
 import static com.kikijoli.ville.maps.Tmap.spriteBatch;
 import static com.kikijoli.ville.maps.Tmap.worldCoordinates;
 import com.kikijoli.ville.shader.WalkShader;
@@ -34,12 +35,15 @@ public class EntiteManager {
     public static Vector2 currentBallPosition = new Vector2();
     public static boolean playerDead;
     public static int arrowCount = 0;
+    public static Vector2 currentMove = new Vector2(0, 0);
+    private static int rotationExpected;
 
     public static void addEntite(Entite entite) {
         entites.add(entite);
     }
 
     public static void tour() {
+        currentMove = new Vector2(0, 0);
         Color c = spriteBatch.getColor();
         handlePlayer();
 
@@ -79,14 +83,17 @@ public class EntiteManager {
     }
 
     private static void handlePlayer() {
+
         for (int i = 0; i < player.speed; i++) {
             if (isPlayerDead()) {
                 boolean move = handleY();
                 move = handleX() || move;
                 playerMove(move);
             }
+
             handleGet();
             handleDoor();
+            rotatePlayer();
         }
         checkPlayerVisible();
     }
@@ -98,21 +105,49 @@ public class EntiteManager {
     private static void playerMove(boolean move) {
         if (player.shader == null && move) {
             player.shader = new WalkShader(player);
+
         } else if (player.shader instanceof WalkShader && !move) {
             player.shader = null;
         }
+
+    }
+
+    public static void rotatePlayer() {
+        int y = (int) ((currentMove.y) * 45);
+        switch ((int) currentMove.x) {
+            case 1:
+                rotationExpected = (int) (90 + ((currentMove.y) * 45));
+                break;
+            case -1:
+                rotationExpected = (int) (270 - ((currentMove.y) * 45));
+                break;
+            default:
+                if (currentMove.y == 1) {
+                    rotationExpected = 180;
+                } else {
+                    rotationExpected = 0;
+                }
+                break;
+        }
+        float rotation = player.getRotation();
+        rotation = rotation > rotationExpected
+            ? rotation - 2 : rotation < rotationExpected
+                ? rotation + 2 : rotation;
+        player.setRotation(rotation);
     }
 
     private static boolean handleX() {
-        Rectangle moved = player.getBoundingRectangle();
+        Rectangle moved = new Rectangle(player.getX(), player.getY(), player.getWidth(), player.getHeight());
         if (GeneralKeyListener.KeyLeft) {
             moved.x--;
+            currentMove.x = -1;
         } else if (GeneralKeyListener.KeyRight) {
             moved.x++;
+            currentMove.x = 1;
         }
         if (StageManager.isClearZone(moved, Move.NPC_MOVE_FILTER)) {
             if (moved.x != player.getX()) {
-                player.setPosition(moved.x, moved.y);
+                player.setX(moved.x);
                 return true;
             }
         }
@@ -121,15 +156,17 @@ public class EntiteManager {
     }
 
     private static boolean handleY() {
-        Rectangle moved = player.getBoundingRectangle();
+        Rectangle moved = new Rectangle(player.getX(), player.getY(), player.getWidth(), player.getHeight());
         if (GeneralKeyListener.KeyDown) {
             moved.y--;
+            currentMove.y = -1;
         } else if (GeneralKeyListener.KeyUp) {
             moved.y++;
+            currentMove.y = 1;
         }
         if (StageManager.isClearZone(moved, Move.NPC_MOVE_FILTER)) {
             if (moved.y != player.getY()) {
-                player.setPosition(moved.x, moved.y);
+                player.setY(moved.y);
                 return true;
             }
         }

@@ -11,7 +11,7 @@ import com.kikijoli.ville.abstracts.AbstractAction;
 import com.kikijoli.ville.automation.ennemy.DashEnnemy;
 import com.kikijoli.ville.automation.common.GoTo;
 import com.kikijoli.ville.automation.player.AttackSword;
-import com.kikijoli.ville.drawable.entite.npc.Guard;
+import com.kikijoli.ville.drawable.entite.npc.Samourai;
 import com.kikijoli.ville.manager.EntiteManager;
 import com.kikijoli.ville.manager.MessageManager;
 import com.kikijoli.ville.manager.SoundManager;
@@ -24,9 +24,9 @@ import com.kikijoli.ville.util.MathUtils;
  */
 public class GuardBuisiness extends AbstractBusiness {
 
-    Guard guard;
+    Samourai guard;
 
-    public GuardBuisiness(Guard guard) {
+    public GuardBuisiness(Samourai guard) {
         this.guard = guard;
     }
 
@@ -95,10 +95,11 @@ public class GuardBuisiness extends AbstractBusiness {
 
         @Override
         public void act() {
-            guard.setRotation(degree++);
+            guard.setRotation(degree += 2);
             if (EntiteManager.player.hide) return;
             if (guard.vision.contains(EntiteManager.player.getX(), EntiteManager.player.getY())) {
                 MessageManager.addIndicator(guard.getX() - 8, guard.getY() + guard.getHeight(), "?!", guard, Color.ORANGE, 50);
+                guard.vision.setColor(Color.RED);
                 current = new AttackPlayer();
             }
         }

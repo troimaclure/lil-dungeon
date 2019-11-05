@@ -13,7 +13,7 @@ public class DesktopLauncher {
         config.samples = 4;
         config.vSyncEnabled = true;
         config.allowSoftwareMode = true;
-//        config.useHDPI = true;
+        config.useHDPI = true;
         config.setFromDisplayMode(LwjglApplicationConfiguration.getDesktopDisplayMode());
         new LwjglApplication(new Ville(), config);
     }
