@@ -5,8 +5,7 @@
  */
 package com.kikijoli.ville.drawable.entite.npc;
 
-import com.kikijoli.ville.business.GuardBuisiness;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.kikijoli.ville.business.SamouraiBusiness;
 import com.kikijoli.ville.business.AbstractBusiness;
 import com.kikijoli.ville.component.IComponent;
 import com.kikijoli.ville.component.SwordComponent;
@@ -18,7 +17,7 @@ import java.util.Arrays;
  *
  * @author troïmaclure
  */
-public class Samourai extends Npc implements IBusiness {
+public final class Samourai extends Npc implements IBusiness {
 
     private static final String GUARD = "sprite/samourai.png";
 
@@ -34,7 +33,7 @@ public class Samourai extends Npc implements IBusiness {
 
     @Override
     public AbstractBusiness getDefault() {
-        return new GuardBuisiness(this);
+        return new SamouraiBusiness(this);
     }
 
 }

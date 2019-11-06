@@ -16,9 +16,13 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.kikijoli.ville.drawable.entite.npc.Player;
+import com.kikijoli.ville.drawable.hud.Tile;
 import static com.kikijoli.ville.manager.EntiteManager.player;
 import com.kikijoli.ville.maps.Tmap;
+import com.kikijoli.ville.pathfind.GridManager;
+import com.kikijoli.ville.util.Constantes;
 import com.kikijoli.ville.util.Move;
+import static com.kotcrab.vis.ui.VisUI.load;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,26 +48,17 @@ public class StageManager {
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
         stopwatch = 60 * 60;
         RankManager.currentStagePoint = 0;
+        Integer width = (Integer) tiledMap.getProperties().get("width");
+        Integer height = (Integer) tiledMap.getProperties().get("height");
+        GridManager.initialize(width, height, Constantes.TILESIZE);
+
         createWall();
         createEntite();
         createHideOut();
         Move.initialize();
-        //<editor-fold defaultstate="collapsed" desc="grid initialisation">
-//        GridManager.initialize(load.length, load[0].length, Constantes.TILESIZE);
-//        int i = 0;
-//        for (Tile[] tileDTOs : load) {
-//            int r = 0;
-//            for (Tile tileDTO : tileDTOs) {
-//                GridManager.setState(tileDTO.code, i, r++);
-//                int x = (r - 1) * Constantes.TILESIZE;
-//                int y = Math.abs(i - tileDTOs.length + 1) * Constantes.TILESIZE;
-//                handleElement(tileDTO.code, x, y, tileDTO.data);
-//            }
-//            i++;
-//        }
-//        currentLevel = level;
-//        EntiteManager.arrowCount = (int) EntiteManager.entites.stream().filter(e -> e != EntiteManager.player).count();
-//</editor-fold>
+
+        currentLevel = level;
+        EntiteManager.arrowCount = (int) EntiteManager.entites.stream().filter(e -> e != EntiteManager.player).count();
     }
 
     private static void createWall() {
@@ -72,6 +67,7 @@ public class StageManager {
         for (RectangleMapObject rectangleObject : objects.getByType(RectangleMapObject.class)) {
             Rectangle rectangle = rectangleObject.getRectangle();
             Tmap.addBox((int) rectangle.getX(), (int) rectangle.getY(), rectangle.getWidth(), rectangle.getHeight());
+            GridManager.setState("1", rectangle);
             walls.add(rectangle);
         }
     }

@@ -22,11 +22,12 @@ import com.kikijoli.ville.util.MathUtils;
  *
  * @author Arthur
  */
-public class GuardBuisiness extends AbstractBusiness {
+public class SamouraiBusiness extends AbstractBusiness {
 
     Samourai guard;
+    private static final String GOTO = "GOTO";
 
-    public GuardBuisiness(Samourai guard) {
+    public SamouraiBusiness(Samourai guard) {
         this.guard = guard;
     }
 
@@ -50,7 +51,8 @@ public class GuardBuisiness extends AbstractBusiness {
         public void act() {
             Vector2 center = MathUtils.getCenter(guard.getBoundingRectangle());
             guard.setRotation(90 + MathUtils.getRotation(EntiteManager.player.getX(), EntiteManager.player.getY(), center.x, center.y));
-            handleDash();
+            handleWalk();
+//            handleDash();
         }
 
         private void handleWalk() {

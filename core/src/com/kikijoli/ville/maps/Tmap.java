@@ -47,6 +47,8 @@ import com.kikijoli.ville.manager.HudManager;
 import com.kikijoli.ville.manager.RankManager;
 import com.kikijoli.ville.manager.SpellManager;
 import com.kikijoli.ville.manager.ThemeManager;
+import com.kikijoli.ville.pathfind.GridManager;
+import com.kikijoli.ville.pathfind.Tile;
 import com.kikijoli.ville.util.Constantes;
 import com.kikijoli.ville.util.MathUtils;
 import com.kikijoli.ville.util.SetLevel;
@@ -282,12 +284,7 @@ public class Tmap implements Screen {
     private void debug() {
         debugRenderer.render(world, camera.combined);
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-        shapeRenderer.setColor(Color.RED);
-        if (GoTo.path != null) {
-            GoTo.path.forEach((t) -> {
-                shapeRenderer.rect(t.getX(), t.getY(), t.getWidth(), t.getHeight());
-            });
-        }
+
         EntiteManager.entites.forEach((entite) -> {
             shapeRenderer.circle(entite.anchor.x, entite.anchor.y, entite.anchor.radius);
         });
@@ -302,8 +299,39 @@ public class Tmap implements Screen {
             shapeRenderer.circle(t.anchor.x, t.anchor.y, t.anchor.radius);
             shapeRenderer.rect(t.getBoundingRectangle().x, t.getBoundingRectangle().y, t.getBoundingRectangle().width, t.getBoundingRectangle().height);
         });
+        int row = 0;
+
+        for (Tile[] t : GridManager.grid) {
+            int col = 0;
+            for (Tile tile : t) {
+                shapeRenderer.rect(col++ * Constantes.TILESIZE, row * Constantes.TILESIZE, Constantes.TILESIZE, Constantes.TILESIZE);
+            }
+            row++;
+        }
+        shapeRenderer.setColor(Color.BLUE);
+        if (GoTo.path != null) {
+            GoTo.path.forEach((t) -> {
+                shapeRenderer.rect(t.getX(), t.getY(), t.getWidth(), t.getHeight());
+            });
+        }
+        shapeRenderer.setColor(Color.YELLOW);
+
+        if (GoTo.goal != null) {
+            shapeRenderer.circle(GoTo.goal.x, GoTo.goal.y, 20);
+        }
         shapeRenderer.flush();
         shapeRenderer.end();
+        spriteBatch.begin();
+        row = 0;
+        for (Tile[] t : GridManager.grid) {
+            int col = 0;
+            for (Tile tile : t) {
+                MessageManager.segoe.draw(spriteBatch, tile.state, col++ * Constantes.TILESIZE + 32, row * Constantes.TILESIZE + 32);
+            }
+            row++;
+        }
+        spriteBatch.flush();
+        spriteBatch.end();
     }
 
     private void water() {

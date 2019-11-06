@@ -12,7 +12,6 @@ import com.kikijoli.ville.drawable.entite.simple.Blood;
 import com.kikijoli.ville.listeners.GeneralKeyListener;
 import static com.kikijoli.ville.manager.LockManager.handleDoor;
 import static com.kikijoli.ville.manager.LockManager.playerAddKey;
-import com.kikijoli.ville.maps.Tmap;
 import static com.kikijoli.ville.maps.Tmap.spriteBatch;
 import static com.kikijoli.ville.maps.Tmap.worldCoordinates;
 import com.kikijoli.ville.shader.WalkShader;
@@ -90,11 +89,10 @@ public class EntiteManager {
                 move = handleX() || move;
                 playerMove(move);
             }
-
             handleGet();
             handleDoor();
-            rotatePlayer();
         }
+        rotatePlayer();
         checkPlayerVisible();
     }
 
@@ -113,13 +111,14 @@ public class EntiteManager {
     }
 
     public static void rotatePlayer() {
+        int oldRotation = rotationExpected;
         int y = (int) ((currentMove.y) * 45);
         switch ((int) currentMove.x) {
             case 1:
-                rotationExpected = (int) (90 + ((currentMove.y) * 45));
+                rotationExpected = (int) (90 + y);
                 break;
             case -1:
-                rotationExpected = (int) (270 - ((currentMove.y) * 45));
+                rotationExpected = (int) (270 - y);
                 break;
             default:
                 if (currentMove.y == 1) {
@@ -129,11 +128,8 @@ public class EntiteManager {
                 }
                 break;
         }
-        float rotation = player.getRotation();
-        rotation = rotation > rotationExpected
-            ? rotation - 2 : rotation < rotationExpected
-                ? rotation + 2 : rotation;
-        player.setRotation(rotation);
+        if (oldRotation != rotationExpected)
+            player.setRotation(rotationExpected);
     }
 
     private static boolean handleX() {
