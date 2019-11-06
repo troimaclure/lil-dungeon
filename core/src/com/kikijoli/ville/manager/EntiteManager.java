@@ -41,20 +41,25 @@ public class EntiteManager {
         entites.add(entite);
     }
 
-    public static void tour() {
-        currentMove = new Vector2(0, 0);
+    public static void draw() {
         Color c = spriteBatch.getColor();
         handlePlayer();
 
         entites.stream().forEach((Entite entite) -> {
             renderEntity(entite);
             entite.effects.forEach((effect) -> {
-                effect.tour(entite);
+                effect.draw(entite);
             });
         });
         spriteBatch.setColor(c);
-        moveBall();
         handleDeads();
+    }
+
+    public static void tour() {
+        currentMove = new Vector2(0, 0);
+
+        moveBall();
+
         for (Entite remove : removes) {
             remove.effects.forEach((effect) -> {
                 ParticleManager.particleEffects.remove(effect.effect);
@@ -62,6 +67,9 @@ public class EntiteManager {
             remove.effects.clear();
         }
         entites.forEach((entite) -> {
+            if (entite.buisiness != null) {
+                entite.buisiness.act();
+            }
             entite.effects.stream().filter((effect) -> (effect.end)).forEachOrdered((effect) -> {
                 ParticleManager.particleEffects.remove(effect.effect);
             });
@@ -72,13 +80,10 @@ public class EntiteManager {
 
     private static void renderEntity(Entite entite) {
         spriteBatch.setShader(entite.shader);
-        if (entite.buisiness != null) {
-            entite.buisiness.act();
-        }
         if (entite.visible) {
             entite.draw(spriteBatch);
         }
-        spriteBatch.setShader(ShaderManager.defaultShader);
+        spriteBatch.setShader(null);
     }
 
     private static void handlePlayer() {

@@ -47,7 +47,7 @@ public class MessageManager {
         messages.add(new Message(x, y, message, color, time));
     }
 
-    public static void tour() {
+    public static void draw() {
         getIndicators().forEach((indicator) -> {
             indicator.draw(Tmap.spriteBatch);
             if (indicator.count <= 0) {

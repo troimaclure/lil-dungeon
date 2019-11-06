@@ -22,9 +22,11 @@ import java.util.ArrayList;
  */
 public class GoTo extends AbstractAction {
 
-    public static ArrayList<Tile> path = null;
-    public static Vector2 goal = new Vector2();
+    public static ArrayList<Tile> pathTest = null;
+    public static Vector2 goalTest = new Vector2();
     public static final String EMPTY = "0";
+    public ArrayList<Tile> path = null;
+    public Vector2 goal = new Vector2();
 
     private final Entite entite;
     private final Entite target;
@@ -49,6 +51,10 @@ public class GoTo extends AbstractAction {
         }
     }
 
+    public boolean isFinish() {
+        return Intersector.overlaps(target.getBoundingRectangle(), entite.getBoundingRectangle());
+    }
+
     private boolean checkPath() {
         if (entite.getBoundingRectangle().overlaps(target.getBoundingRectangle())) {
             return false;
@@ -58,6 +64,10 @@ public class GoTo extends AbstractAction {
             count = 0;
             index = 0;
             path = PathFinderManager.getPath(entite, target, EMPTY);
+            pathTest = (ArrayList<Tile>) path.clone();
+            path.stream().filter((tile) -> (tile.getBoundingRectangle().overlaps(entite.getBoundingRectangle()))).forEachOrdered((_item) -> {
+                index++;
+            });
         }
         return path != null;
     }
@@ -65,20 +75,24 @@ public class GoTo extends AbstractAction {
     private void getGoal() {
         if (index < path.size()) {
             goal = new Vector2(path.get(index).getX(), path.get(index).getY());
+            goalTest = new Vector2(path.get(index).getX(), path.get(index).getY());
         }
     }
 
     private void goToGoal() {
-        Vector2 center = new Vector2();
-        center = entite.getBoundingRectangle().getPosition(center);
         for (int i = 0; i < entite.speed; i++) {
-            if (!com.badlogic.gdx.math.MathUtils.isEqual(entite.getX(), goal.x, 5))
-                entite.setX((int) entite.getX() + (goal.x < center.x ? (-1) : 1));
-            if (!com.badlogic.gdx.math.MathUtils.isEqual(entite.getY(), goal.y, 5))
-                entite.setY((int) entite.getY() + (goal.y < entite.getY() ? (-1) : 1));
+            if (!com.badlogic.gdx.math.MathUtils.isEqual((int) entite.getX(), goal.x)) {
+                int x = goal.x < entite.getX() ? (-1) : 1;
+                entite.setX((int) (entite.getX() + x));
+                entite.setRotation(x > 0 ? 90 : 270);
+            }
+            if (!com.badlogic.gdx.math.MathUtils.isEqual((int) (int) entite.getY(), goal.y)) {
+                int y = goal.y < (int) entite.getY() ? (-1) : 1;
+                entite.setY((int) (entite.getY() + y));
+                entite.setRotation(y > 0 ? 180 : 0);
+            }
         }
-
-        if (Intersector.overlaps(target.getBoundingRectangle(), entite.getBoundingRectangle())) {
+        if (isFinish()) {
             path = null;
         }
     }

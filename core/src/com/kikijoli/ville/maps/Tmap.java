@@ -24,6 +24,9 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.physics.box2d.Filter;
+import com.badlogic.gdx.physics.box2d.Fixture;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -49,6 +52,8 @@ import com.kikijoli.ville.manager.SpellManager;
 import com.kikijoli.ville.manager.ThemeManager;
 import com.kikijoli.ville.pathfind.GridManager;
 import com.kikijoli.ville.pathfind.Tile;
+import com.kikijoli.ville.shader.ShadowMap;
+import com.kikijoli.ville.shader.ShadowRender;
 import com.kikijoli.ville.util.Constantes;
 import com.kikijoli.ville.util.MathUtils;
 import com.kikijoli.ville.util.SetLevel;
@@ -83,9 +88,13 @@ public class Tmap implements Screen {
 
     public static RayHandler getRay() {
         if (ray == null) {
-            ray = new RayHandler(getWorld());
+            ray = new RayHandler(getWorld(), Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
             ray.setCulling(true);
-            ray.setAmbientLight(0, 0, 0, 0.9f);
+            ray.setAmbientLight(Color.BLUE.r, Color.BLUE.g, Color.BLUE.b, 0.2f);
+            ray.setBlur(false);
+            ray.setCulling(true);
+//            ray.setShadows(false);
+//            ray.setLightShader(new ShadowMap());
         }
         return ray;
     }
@@ -188,22 +197,20 @@ public class Tmap implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
         worldCoordinates = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
         CameraManager.tour();
+        EntiteManager.tour();
+        ProjectileManager.tour();
+        StageManager.tour();
 
         spriteBatch.setProjectionMatrix(camera.combined);
         shapeRenderer.setProjectionMatrix(camera.combined);
-        StageManager.tiledMapRenderer.setView(camera);
-        StageManager.tiledMapRenderer.render(new int[]{0, 1, 2, 3});
-        drawShapes();
-        drawSprites(delta);
-        water();
-        StageManager.tiledMapRenderer.render(new int[]{4});
-        drawHud();
-//        if (rayUpdateCount-- <= 0) {
 
+        draw(delta);
+
+//        if (rayUpdateCount-- <= 0) {
         getRay().setCombinedMatrix(camera.combined,
-            camera.position.x, camera.position.y,
-            camera.viewportWidth * camera.zoom,
-            camera.viewportHeight * camera.zoom);
+                camera.position.x, camera.position.y,
+                camera.viewportWidth * camera.zoom,
+                camera.viewportHeight * camera.zoom);
 
         getRay().updateAndRender();
         rayUpdateCount = RAYCOUNTTOTAL;
@@ -214,22 +221,31 @@ public class Tmap implements Screen {
         if (settingLevel) {
             setLevel();
         }
+        drawHud();
+//        debug();
+    }
 
-        debug();
+    private void draw(float delta1) {
+
+        StageManager.tiledMapRenderer.setView(camera);
+        StageManager.tiledMapRenderer.render(new int[]{0, 1, 2, 3});
+        drawShapes();
+        drawSprites(delta1);
+        water();
+        StageManager.tiledMapRenderer.render(new int[]{4});
     }
 
     private void drawSprites(float delta) {
+
         spriteBatch.begin();
+        EntiteManager.draw();
+        LockManager.draw();
+        ParticleManager.draw(delta);
+        DrawManager.draw();
 
-        LockManager.tour();
-        EntiteManager.tour();
-        ParticleManager.tour(delta);
-        DrawManager.tour();
-
-        ProjectileManager.tour();
-        SpellManager.tour();
-        StageManager.tour();
-        MessageManager.tour();
+        ProjectileManager.draw();
+//        SpellManager.tour();
+        MessageManager.draw();
         spriteBatch.flush();
         spriteBatch.end();
 
@@ -309,15 +325,15 @@ public class Tmap implements Screen {
             row++;
         }
         shapeRenderer.setColor(Color.BLUE);
-        if (GoTo.path != null) {
-            GoTo.path.forEach((t) -> {
+        if (GoTo.pathTest != null) {
+            GoTo.pathTest.forEach((t) -> {
                 shapeRenderer.rect(t.getX(), t.getY(), t.getWidth(), t.getHeight());
             });
         }
         shapeRenderer.setColor(Color.YELLOW);
 
-        if (GoTo.goal != null) {
-            shapeRenderer.circle(GoTo.goal.x, GoTo.goal.y, 20);
+        if (GoTo.goalTest != null) {
+            shapeRenderer.circle(GoTo.goalTest.x, GoTo.goalTest.y, 20);
         }
         shapeRenderer.flush();
         shapeRenderer.end();

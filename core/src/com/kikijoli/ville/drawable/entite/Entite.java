@@ -68,16 +68,16 @@ public abstract class Entite extends Sprite implements ISpriteDrawable {
             this.shield.draw(batch);
         }
         batch.draw(getTexture(),
-            getX(), getY(),
-            centerOrigin.x,
-            centerOrigin.y,
-            (int) width, (int) height,
-            1, 1,
-            getRotation(),
-            (int) 0,
-            (int) 0,
-            (int) getTexture().getWidth(), (int) getTexture().getHeight(),
-            false, false);
+                getX(), getY(),
+                centerOrigin.x,
+                centerOrigin.y,
+                (int) width, (int) height,
+                1, 1,
+                getRotation(),
+                (int) 0,
+                (int) 0,
+                (int) getTexture().getWidth(), (int) getTexture().getHeight(),
+                false, false);
         if (currentComponent != null) {
             this.currentComponent.draw(batch);
         }
@@ -107,4 +107,12 @@ public abstract class Entite extends Sprite implements ISpriteDrawable {
         throw new NullPointerException();
     }
 
+    public Vector2 getCenter() {
+        return MathUtils.getCenter(this.getBoundingRectangle());
+    }
+
+    public Vector2 getPosition() {
+        Vector2 pos = new Vector2();
+        return this.getBoundingRectangle().getPosition(pos);
+    }
 }

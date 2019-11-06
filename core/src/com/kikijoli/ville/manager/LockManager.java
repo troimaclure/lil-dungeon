@@ -39,7 +39,7 @@ public class LockManager {
         keys.add(new Key(x, y));
     }
 
-    public static void tour() {
+    public static void draw() {
         locks.forEach((lock) -> {
             lock.draw(Tmap.spriteBatch);
         });

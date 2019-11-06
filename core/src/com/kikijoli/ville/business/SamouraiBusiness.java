@@ -15,8 +15,11 @@ import com.kikijoli.ville.drawable.entite.npc.Samourai;
 import com.kikijoli.ville.manager.EntiteManager;
 import com.kikijoli.ville.manager.MessageManager;
 import com.kikijoli.ville.manager.SoundManager;
+import com.kikijoli.ville.pathfind.GridManager;
+import com.kikijoli.ville.pathfind.Tile;
 import com.kikijoli.ville.shader.WalkShader;
 import com.kikijoli.ville.util.MathUtils;
+import java.util.ArrayList;
 
 /**
  *
@@ -52,7 +55,7 @@ public class SamouraiBusiness extends AbstractBusiness {
             Vector2 center = MathUtils.getCenter(guard.getBoundingRectangle());
             guard.setRotation(90 + MathUtils.getRotation(EntiteManager.player.getX(), EntiteManager.player.getY(), center.x, center.y));
             handleWalk();
-//            handleDash();
+            handleDash();
         }
 
         private void handleWalk() {
@@ -67,6 +70,10 @@ public class SamouraiBusiness extends AbstractBusiness {
         private void handleDash() {
 
             if (!actions.containsKey(DASH) && countDash++ > dashDelay) {
+                if (MathUtils.getDistance(guard.getCenter(), EntiteManager.player.getCenter()) > 200)
+                    return;
+                if (!guard.vision.contains(EntiteManager.player.getX(), EntiteManager.player.getY()))
+                    return;
                 actions.remove(GOTO);
                 countDash = 0;
                 SoundManager.playSound(SoundManager.PREPARE_SPELL);
@@ -94,12 +101,33 @@ public class SamouraiBusiness extends AbstractBusiness {
     public class WaitPlayer extends AbstractAction {
 
         float degree = 0;
+        private GoTo goTo;
+        int count = 0;
+        int delay = 60 * 2;
 
         @Override
         public void act() {
-            guard.setRotation(degree += 2);
+            if (!actions.containsKey(GOTO)) {
+                ArrayList<Tile> tileFor = GridManager.getTileFor(guard.sonar);
+                Tile t = tileFor.get(com.badlogic.gdx.math.MathUtils.random(tileFor.size() - 1));
+                goTo = new GoTo(guard, t);
+                actions.put(GOTO, goTo);
+
+            } else {
+                if (goTo.isFinish()) {
+                    if (count++ > delay) {
+                        actions.remove(GOTO);
+                        count = 0;
+                    }
+                }
+            }
+            lookForPlayer();
+        }
+
+        private void lookForPlayer() {
             if (EntiteManager.player.hide) return;
             if (guard.vision.contains(EntiteManager.player.getX(), EntiteManager.player.getY())) {
+                actions.clear();
                 MessageManager.addIndicator(guard.getX() - 8, guard.getY() + guard.getHeight(), "?!", guard, Color.ORANGE, 50);
                 guard.vision.setColor(Color.RED);
                 current = new AttackPlayer();

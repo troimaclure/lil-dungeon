@@ -54,8 +54,8 @@ public final class Player extends Entite implements IBusiness, IShapeDrawable {
     public void draw(SpriteBatch batch) {
         batch.setColor(Color.WHITE);
         if (this.invincible) batch.setColor(Color.RED);
-        if (this.touched) batch.setColor(batch.getColor().r, batch.getColor().g, batch.getColor().b, 0.5f);
-        if (this.hide) batch.setColor(batch.getColor().r, batch.getColor().g, batch.getColor().b, 0.5f);
+        if (this.touched || this.hide)
+            batch.setColor(batch.getColor().r, batch.getColor().g, batch.getColor().b, 0.5f);
         super.draw(batch);
         batch.setColor(Color.WHITE);
         batch.setColor(batch.getColor().r, batch.getColor().g, batch.getColor().b, 1.0f);
@@ -80,6 +80,7 @@ public final class Player extends Entite implements IBusiness, IShapeDrawable {
     }
 
     private float calculateDashWidth() {
+
         dashCount += dashCount > dashCooldown * dashTotal ? 0 : 1;
         float pourcent = (dashCount / (dashCooldown * dashTotal)) * 100;
         return getWidth() * 2 * (pourcent / 100);

@@ -18,5 +18,5 @@ public abstract class AbstractEffect {
         this.effect = effect;
     }
 
-    public abstract void tour(Entite entite);
+    public abstract void draw(Entite entite);
 }

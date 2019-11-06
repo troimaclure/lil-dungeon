@@ -3,7 +3,6 @@ package com.kikijoli.ville.manager;
 import com.kikijoli.ville.drawable.entite.projectile.Bullet.Bullet;
 import com.kikijoli.ville.drawable.entite.Entite;
 import com.kikijoli.ville.maps.Tmap;
-import com.kikijoli.ville.pathfind.GridManager;
 import com.kikijoli.ville.util.MathUtils;
 import java.util.ArrayList;
 
@@ -16,10 +15,15 @@ public class ProjectileManager {
     public static ArrayList<Bullet> projectiles = new ArrayList<>();
     public static ArrayList<Bullet> removes = new ArrayList<>();
 
+    public static void draw() {
+        projectiles.forEach((proj) -> {
+            proj.draw(Tmap.spriteBatch);
+        });
+    }
+
     public static void tour() {
         for (Bullet proj : projectiles) {
             proj.move();
-            proj.draw(Tmap.spriteBatch);
             testCollision(proj);
             if (proj.distance >= proj.scope) {
                 removes.add(proj);

@@ -1,7 +1,9 @@
 package com.kikijoli.ville.pathfind;
 
+import box2dLight.Light;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
+import java.util.ArrayList;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -21,9 +23,9 @@ public class GridManager {
     public static void initialize(int rowCount, int columnCount, int size) {
         COLUMNCOUNT = columnCount;
         ROWCOUNT = rowCount;
-        grid = new Tile[rowCount][columnCount];
-        for (int i = 0; i < columnCount; i++) {
-            for (int j = 0; j < rowCount; j++) {
+        grid = new Tile[columnCount][rowCount];
+        for (int i = 0; i < rowCount; i++) {
+            for (int j = 0; j < columnCount; j++) {
                 grid[j][i] = new Tile(i, j, i * size, j * size, size, size);
             }
         }
@@ -69,8 +71,16 @@ public class GridManager {
         }
     }
 
-    public static void setState(String state, int row, int col) {
-        grid[Math.abs(row - ROWCOUNT) - 1][col].state = state;
+    public static ArrayList<Tile> getTileFor(Light light) {
+        ArrayList<Tile> tilesReturn = new ArrayList<>();
+        for (Tile[] tiles : grid) {
+            for (Tile tile : tiles) {
+                if (light.contains(tile.getCenter().x, tile.getCenter().y)) {
+                    tilesReturn.add(tile);
+                }
+            }
+        }
+        return tilesReturn;
     }
 
 }

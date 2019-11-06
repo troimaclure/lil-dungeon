@@ -44,7 +44,7 @@ public class ParticleManager {
         return (ArrayList<ParticleEffect>) particleEffects.clone();
     }
 
-    public static void tour(float delta) {
+    public static void draw(float delta) {
         Color c = spriteBatch.getColor();
         for (ParticleEffect par : ParticleManager.getParticleEffects()) {
 //			Color col = ColorManager.getTextureColor();

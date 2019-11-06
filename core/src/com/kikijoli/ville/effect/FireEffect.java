@@ -20,7 +20,7 @@ public class FireEffect extends AbstractEffect {
     }
 
     @Override
-    public void tour(Entite entite) {
+    public void draw(Entite entite) {
         if (!(entite.buisiness instanceof InFireBuisiness)) {
             entite.buisiness = new InFireBuisiness(entite);
         }

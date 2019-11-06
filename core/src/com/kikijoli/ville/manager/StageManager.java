@@ -16,13 +16,11 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.kikijoli.ville.drawable.entite.npc.Player;
-import com.kikijoli.ville.drawable.hud.Tile;
 import static com.kikijoli.ville.manager.EntiteManager.player;
 import com.kikijoli.ville.maps.Tmap;
 import com.kikijoli.ville.pathfind.GridManager;
 import com.kikijoli.ville.util.Constantes;
 import com.kikijoli.ville.util.Move;
-import static com.kotcrab.vis.ui.VisUI.load;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,7 +54,6 @@ public class StageManager {
         createEntite();
         createHideOut();
         Move.initialize();
-
         currentLevel = level;
         EntiteManager.arrowCount = (int) EntiteManager.entites.stream().filter(e -> e != EntiteManager.player).count();
     }

@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.kikijoli.ville.drawable.entite.decor.Water;
 import com.kikijoli.ville.maps.Tmap;
+import static com.kikijoli.ville.maps.Tmap.spriteBatch;
 import java.util.ArrayList;
 
 /**
@@ -25,7 +26,9 @@ public class WaterManager {
     }
 
     public static void drawWater() {
-        Tmap.spriteBatch.begin();
+
+        spriteBatch.begin();
+
         getWaters().forEach((entite) -> {
             ShaderProgram shader = Tmap.spriteBatch.getShader();
             if (entite.shader != null) {
@@ -34,8 +37,7 @@ public class WaterManager {
             entite.draw(Tmap.spriteBatch);
             Tmap.spriteBatch.setShader(shader);
         });
-        Tmap.spriteBatch.flush();
-        Tmap.spriteBatch.end();
+        spriteBatch.end();
 
     }
 

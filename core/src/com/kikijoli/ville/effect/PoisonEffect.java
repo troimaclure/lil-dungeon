@@ -19,7 +19,7 @@ public class PoisonEffect extends AbstractEffect {
     }
 
     @Override
-    public void tour(Entite entite) {
+    public void draw(Entite entite) {
         Vector2 center = MathUtils.getCenter(entite.getBoundingRectangle());
         this.effect.setPosition(center.x, center.y);
         this.count--;

@@ -18,7 +18,7 @@ public class DrawManager {
     public static ArrayList<IShapeDrawable> spritesFilled = new ArrayList<>();
     public static ArrayList<IShapeDrawable> spritesDrawed = new ArrayList<>();
 
-    public static void tour() {
+    public static void draw() {
 
         entites.forEach((sprite) -> {
             Tmap.spriteBatch.setShader(sprite.shader);
