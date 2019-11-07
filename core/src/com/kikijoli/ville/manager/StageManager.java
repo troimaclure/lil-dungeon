@@ -15,6 +15,7 @@ import com.badlogic.gdx.maps.tiled.objects.TiledMapTileMapObject;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.kikijoli.ville.buffer.ShadowFBO;
 import com.kikijoli.ville.drawable.entite.npc.Player;
 import static com.kikijoli.ville.manager.EntiteManager.player;
 import com.kikijoli.ville.maps.Tmap;
@@ -49,13 +50,14 @@ public class StageManager {
         Integer width = (Integer) tiledMap.getProperties().get("width");
         Integer height = (Integer) tiledMap.getProperties().get("height");
         GridManager.initialize(width, height, Constantes.TILESIZE);
-
+        ShadowFBO.lightSize = width * Constantes.TILESIZE;
         createWall();
         createEntite();
         createHideOut();
         Move.initialize();
         currentLevel = level;
         EntiteManager.arrowCount = (int) EntiteManager.entites.stream().filter(e -> e != EntiteManager.player).count();
+
     }
 
     private static void createWall() {

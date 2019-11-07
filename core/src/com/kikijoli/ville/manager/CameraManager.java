@@ -22,6 +22,7 @@ public class CameraManager {
     public static void initialize(int x, int y) {
         camera.position.x = x;
         camera.position.y = y;
+        camera.setToOrtho(false);
         camera.update();
 
     }

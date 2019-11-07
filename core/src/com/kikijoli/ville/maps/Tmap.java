@@ -24,9 +24,6 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
-import com.badlogic.gdx.physics.box2d.Filter;
-import com.badlogic.gdx.physics.box2d.Fixture;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -53,7 +50,6 @@ import com.kikijoli.ville.manager.ThemeManager;
 import com.kikijoli.ville.pathfind.GridManager;
 import com.kikijoli.ville.pathfind.Tile;
 import com.kikijoli.ville.shader.ShadowMap;
-import com.kikijoli.ville.shader.ShadowRender;
 import com.kikijoli.ville.util.Constantes;
 import com.kikijoli.ville.util.MathUtils;
 import com.kikijoli.ville.util.SetLevel;
@@ -85,12 +81,14 @@ public class Tmap implements Screen {
     private static final String SCORE = "SCORE : ";
     private static final String LEVEL_SCORE = "LEVEL SCORE : ";
     public static float delta;
+//    public static ShadowFBO shadowFBO = new ShadowFBO();
 
     public static RayHandler getRay() {
         if (ray == null) {
             ray = new RayHandler(getWorld(), Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
             ray.setCulling(true);
-            ray.setAmbientLight(Color.BLUE.r, Color.BLUE.g, Color.BLUE.b, 0.2f);
+            Color ambiant = Color.BLACK;
+            ray.setAmbientLight(ambiant.r, ambiant.g, ambiant.b, 0.7f);
             ray.setBlur(false);
             ray.setCulling(true);
 //            ray.setShadows(false);
@@ -158,6 +156,18 @@ public class Tmap implements Screen {
         groundBody.setUserData(new Rectangle(x, y, width, height));
     }
 
+    public static void drawSprites() {
+
+        EntiteManager.draw();
+        LockManager.draw();
+        DrawManager.draw();
+
+        ProjectileManager.draw();
+//        SpellManager.tour();
+        MessageManager.draw();
+
+    }
+
     public int rayUpdateCount = 60;
     private final int RAYCOUNTTOTAL = 60;
     private final Sprite arrowCountSprite = new Sprite(TextureUtil.getTexture("sprite/arrow.png"));
@@ -193,7 +203,7 @@ public class Tmap implements Screen {
         fps.log();
         ShaderManager.step();
         Gdx.gl.glEnable(0x0BA1);
-        Gdx.gl.glClearColor(Color.BLACK.r, Color.BLACK.g, Color.BLACK.b, Color.BLACK.a);
+        Gdx.gl20.glClearColor(0.0f, 0.0f, 0.0f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
         worldCoordinates = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
         CameraManager.tour();
@@ -204,16 +214,17 @@ public class Tmap implements Screen {
         spriteBatch.setProjectionMatrix(camera.combined);
         shapeRenderer.setProjectionMatrix(camera.combined);
 
-        draw(delta);
-
+        draw();
+//        shadowFBO.render();
 //        if (rayUpdateCount-- <= 0) {
         getRay().setCombinedMatrix(camera.combined,
-                camera.position.x, camera.position.y,
-                camera.viewportWidth * camera.zoom,
-                camera.viewportHeight * camera.zoom);
+            camera.position.x, camera.position.y,
+            camera.viewportWidth * camera.zoom,
+            camera.viewportHeight * camera.zoom);
 
         getRay().updateAndRender();
         rayUpdateCount = RAYCOUNTTOTAL;
+
 //        }
         if (setLevel != null) {
             settingLevel = true;
@@ -225,30 +236,19 @@ public class Tmap implements Screen {
 //        debug();
     }
 
-    private void draw(float delta1) {
+    private void draw() {
 
         StageManager.tiledMapRenderer.setView(camera);
         StageManager.tiledMapRenderer.render(new int[]{0, 1, 2, 3});
         drawShapes();
-        drawSprites(delta1);
-        water();
-        StageManager.tiledMapRenderer.render(new int[]{4});
-    }
-
-    private void drawSprites(float delta) {
-
         spriteBatch.begin();
-        EntiteManager.draw();
-        LockManager.draw();
-        ParticleManager.draw(delta);
-        DrawManager.draw();
+        drawSprites();
+        ParticleManager.draw(Tmap.delta);
 
-        ProjectileManager.draw();
-//        SpellManager.tour();
-        MessageManager.draw();
         spriteBatch.flush();
         spriteBatch.end();
-
+        water();
+        StageManager.tiledMapRenderer.render(new int[]{4});
     }
 
     private void drawHud() {
