@@ -24,7 +24,7 @@ import java.util.Arrays;
  *
  * @author troïmaclure
  */
-public final class KeyGuard extends Npc implements IBusiness {
+public final class KeyGuard extends Ennemy implements IBusiness {
 
     private static final String KeyGuard = "sprite/KeyGuard.png";
     public PointLight vision;

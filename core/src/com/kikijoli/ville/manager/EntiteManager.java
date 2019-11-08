@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.kikijoli.ville.drawable.entite.Entite;
 import com.kikijoli.ville.drawable.entite.build.Key;
+import com.kikijoli.ville.drawable.entite.npc.Ennemy;
 import com.kikijoli.ville.drawable.entite.npc.Player;
 import com.kikijoli.ville.drawable.entite.projectile.Spell.Spell;
 import com.kikijoli.ville.drawable.entite.simple.Blood;
@@ -239,11 +240,18 @@ public class EntiteManager {
 
     public static void addDead(Entite entite) {
         if (entite != player) {
-            RankManager.currentStagePoint += entite.point;
-            MessageManager.addIndicator(entite.getX(), entite.getY(), "+" + Integer.toString(entite.point) + "pts", entite);
             SoundManager.playSound(SoundManager.KILL);
         } else {
             SoundManager.playSound(SoundManager.DEATH);
+        }
+        if (entite instanceof Ennemy) {
+            if (!((Ennemy) entite).isAlarmed) {
+                entite.talkDouble("SILENT KILL !", Color.WHITE, Color.RED, 60 * 2);
+                RankManager.currentStagePoint += entite.point * 2;
+            } else {
+                entite.talkDouble("SHAMEFUL KILL...", Color.GRAY, Color.WHITE, 60 * 2);
+                RankManager.currentStagePoint += entite.point / 2;
+            }
         }
         deads.add(entite);
         entite.dead();

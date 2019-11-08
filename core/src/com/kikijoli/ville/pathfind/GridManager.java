@@ -3,6 +3,7 @@ package com.kikijoli.ville.pathfind;
 import box2dLight.Light;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import java.util.ArrayList;
 
 /*
@@ -38,6 +39,18 @@ public class GridManager {
                     if (Intersector.overlaps(entite, g.getBoundingRectangle())) {
                         return g;
                     }
+                }
+            }
+        }
+
+        return null;
+    }
+
+    public static Tile getCaseFor(Vector2 vector) {
+        for (Tile[] grille1 : grid) {
+            for (Tile g : grille1) {
+                if (g.getBoundingRectangle().contains(vector)) {
+                    return g;
                 }
             }
         }

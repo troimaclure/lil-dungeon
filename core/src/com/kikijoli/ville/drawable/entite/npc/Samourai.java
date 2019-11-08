@@ -9,7 +9,6 @@ import com.kikijoli.ville.business.SamouraiBusiness;
 import com.kikijoli.ville.business.AbstractBusiness;
 import com.kikijoli.ville.component.IComponent;
 import com.kikijoli.ville.component.SwordComponent;
-import com.kikijoli.ville.drawable.entite.simple.PlayerShield;
 import com.kikijoli.ville.interfaces.IBusiness;
 import java.util.Arrays;
 
@@ -17,14 +16,13 @@ import java.util.Arrays;
  *
  * @author troïmaclure
  */
-public final class Samourai extends Npc implements IBusiness {
+public final class Samourai extends Ennemy implements IBusiness {
 
     private static final String GUARD = "sprite/samourai.png";
 
     public Samourai(float srcX, float srcY) {
         super(GUARD, srcX, srcY);
         this.buisiness = this.getDefault();
-        this.shield = new PlayerShield(srcX, srcY);
         this.point = 1000;
         this.components.addAll(Arrays.asList(new IComponent[]{new SwordComponent(this)}));
         this.currentComponent = this.components.get(0);

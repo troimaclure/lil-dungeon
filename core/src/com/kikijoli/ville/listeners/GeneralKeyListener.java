@@ -79,9 +79,9 @@ public class GeneralKeyListener extends InputAdapter {
                 tilesAction(8);
                 break;
             case Keys.ENTER:
-                if (EntiteManager.playerDead) {
-                    StageManager.reload();
-                }
+//                if (EntiteManager.playerDead) {
+                StageManager.reload();
+//                }
                 break;
             case Keys.ESCAPE:
                 if (EntiteManager.playerDead) {

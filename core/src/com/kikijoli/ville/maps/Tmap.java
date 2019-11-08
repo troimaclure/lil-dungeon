@@ -49,7 +49,6 @@ import com.kikijoli.ville.manager.SpellManager;
 import com.kikijoli.ville.manager.ThemeManager;
 import com.kikijoli.ville.pathfind.GridManager;
 import com.kikijoli.ville.pathfind.Tile;
-import com.kikijoli.ville.shader.ShadowMap;
 import com.kikijoli.ville.util.Constantes;
 import com.kikijoli.ville.util.MathUtils;
 import com.kikijoli.ville.util.SetLevel;
@@ -89,10 +88,7 @@ public class Tmap implements Screen {
             ray.setCulling(true);
             Color ambiant = Color.BLACK;
             ray.setAmbientLight(ambiant.r, ambiant.g, ambiant.b, 0.7f);
-            ray.setBlur(false);
             ray.setCulling(true);
-//            ray.setShadows(false);
-//            ray.setLightShader(new ShadowMap());
         }
         return ray;
     }

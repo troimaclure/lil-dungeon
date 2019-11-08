@@ -14,6 +14,7 @@ import com.kikijoli.ville.automation.player.AttackSword;
 import com.kikijoli.ville.manager.EntiteManager;
 import com.kikijoli.ville.manager.SoundManager;
 import com.kikijoli.ville.maps.Tmap;
+import com.kikijoli.ville.util.Count;
 
 /**
  *
@@ -22,8 +23,7 @@ import com.kikijoli.ville.maps.Tmap;
 public class PlayerBuisiness extends AbstractBusiness {
 
     public static final String DASH = "Dash";
-    public int touchableCount;
-    public int touchabledelay = 60 * 2;
+    Count touchable = new Count(0, 60 * 2);
 
     public PlayerBuisiness() {
     }
@@ -32,10 +32,8 @@ public class PlayerBuisiness extends AbstractBusiness {
     public void act() {
         super.act();
         if (EntiteManager.player.touched) {
-            touchableCount++;
-            if (touchableCount++ >= touchabledelay) {
+            if (touchable.stepAndComplete()) {
                 EntiteManager.player.touched = false;
-                touchableCount = 0;
             }
         }
     }
@@ -91,48 +89,6 @@ public class PlayerBuisiness extends AbstractBusiness {
                 };
                 actions.put("SwordComponent", abstractAction);
                 break;
-//            case Mode.WAND:
-//                if (actions.containsKey(Integer.toString(Mode.WAND))) {
-//                    return;
-//                }
-//                com.kikijoli.ville.drawable.hud.Tile t = HudManager.tiles.stream().filter(e -> e instanceof WandTile).findFirst().get();
-//                t.disabled = true;
-//                SoundManager.playSound(SoundManager.POISON_SPELL);
-//                abstractAction = new AttackWandPoison(EntiteManager.player, new Vector2(Tmap.worldCoordinates.x, Tmap.worldCoordinates.y)) {
-//                    @Override
-//                    public void onFinish() {
-//                        actions.remove(Integer.toString(Mode.WAND));
-//                        t.disabled = false;
-//                    }
-//
-//                    @Override
-//                    public void step(int step) {
-//                        t.count = step;
-//                    }
-//                };
-//                actions.put(Integer.toString(Mode.WAND), abstractAction);
-//                break;
-//            case Mode.WANDFIRE:
-//                if (actions.containsKey(Integer.toString(Mode.WANDFIRE))) {
-//                    return;
-//                }
-//                t = HudManager.tiles.stream().filter(e -> e instanceof WandFireTile).findFirst().get();
-//                t.disabled = true;
-//                SoundManager.playSound(SoundManager.FIRE_SPELL);
-//                abstractAction = new AttackWandFire(EntiteManager.player, new Vector2(Tmap.worldCoordinates.x, Tmap.worldCoordinates.y)) {
-//                    @Override
-//                    public void onFinish() {
-//                        actions.remove(Integer.toString(Mode.WANDFIRE));
-//                        t.disabled = false;
-//                    }
-//
-//                    @Override
-//                    public void step(int step) {
-//                        t.count = step;
-//                    }
-//                };
-//                actions.put(Integer.toString(Mode.WANDFIRE), abstractAction);
-//                break;
         }
 
     }

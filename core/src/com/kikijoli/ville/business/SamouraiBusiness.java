@@ -5,7 +5,7 @@
  */
 package com.kikijoli.ville.business;
 
-import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.kikijoli.ville.abstracts.AbstractAction;
 import com.kikijoli.ville.automation.ennemy.DashEnnemy;
@@ -13,11 +13,10 @@ import com.kikijoli.ville.automation.common.GoTo;
 import com.kikijoli.ville.automation.player.AttackSword;
 import com.kikijoli.ville.drawable.entite.npc.Samourai;
 import com.kikijoli.ville.manager.EntiteManager;
-import com.kikijoli.ville.manager.MessageManager;
 import com.kikijoli.ville.manager.SoundManager;
 import com.kikijoli.ville.pathfind.GridManager;
 import com.kikijoli.ville.pathfind.Tile;
-import com.kikijoli.ville.shader.WalkShader;
+import com.kikijoli.ville.util.Count;
 import com.kikijoli.ville.util.MathUtils;
 import java.util.ArrayList;
 
@@ -27,11 +26,11 @@ import java.util.ArrayList;
  */
 public class SamouraiBusiness extends AbstractBusiness {
 
-    Samourai guard;
     private static final String GOTO = "GOTO";
+    Samourai samourai;
 
     public SamouraiBusiness(Samourai guard) {
-        this.guard = guard;
+        this.samourai = guard;
     }
 
     @Override
@@ -45,41 +44,48 @@ public class SamouraiBusiness extends AbstractBusiness {
         private static final String DASH = "DASH";
         private static final String ATTACK = "ATTACK";
 
-        int count = 30;
-        int delay = 60;
-        int dashDelay = 60;
-        int countDash = 30;
+        Count dash = new Count(30, 60);
+        Count alarmed = new Count(0, 4 * 60);
+
+        public AttackPlayer() {
+            actions.clear();
+            samourai.alarmed();
+        }
 
         @Override
         public void act() {
-            Vector2 center = MathUtils.getCenter(guard.getBoundingRectangle());
-            guard.setRotation(90 + MathUtils.getRotation(EntiteManager.player.getX(), EntiteManager.player.getY(), center.x, center.y));
+            if (samourai.isAlarmed && !samourai.see(EntiteManager.player)) {
+                if (alarmed.stepAndComplete()) {
+                    current = new LostPlayer();
+                }
+            }
+            if (!samourai.isAlarmed) return;
             handleWalk();
             handleDash();
+            Vector2 center = samourai.getCenter();
+            samourai.setRotation(90 + MathUtils.getRotation(EntiteManager.player.getX(), EntiteManager.player.getY(), center.x, center.y));
         }
 
         private void handleWalk() {
             if (!actions.containsKey(GOTO) && !actions.containsKey(DASH)) {
-                actions.put(GOTO, new GoTo(guard, EntiteManager.player));
+                actions.put(GOTO, new GoTo(samourai, EntiteManager.player));
             }
-            if (!(guard.shader instanceof WalkShader)) {
-                guard.shader = new WalkShader(guard);
-            }
+
         }
 
         private void handleDash() {
 
-            if (!actions.containsKey(DASH) && countDash++ > dashDelay) {
-                if (MathUtils.getDistance(guard.getCenter(), EntiteManager.player.getCenter()) > 200)
+            if (!actions.containsKey(DASH) && dash.step()) {
+                if (MathUtils.getDistance(samourai.getCenter(), EntiteManager.player.getCenter()) > 200)
                     return;
-                if (!guard.vision.contains(EntiteManager.player.getX(), EntiteManager.player.getY()))
+                if (!samourai.vision.contains(EntiteManager.player.getX(), EntiteManager.player.getY()))
                     return;
+                dash.complete();
                 actions.remove(GOTO);
-                countDash = 0;
                 SoundManager.playSound(SoundManager.PREPARE_SPELL);
 
                 SoundManager.playSound(SoundManager.DASH);
-                actions.put(DASH, new DashEnnemy(guard, new Vector2(EntiteManager.player.getX(), EntiteManager.player.getY())) {
+                actions.put(DASH, new DashEnnemy(samourai, new Vector2(EntiteManager.player.getX(), EntiteManager.player.getY())) {
                     @Override
                     public void onFinish() {
                         handleWalk();
@@ -87,7 +93,7 @@ public class SamouraiBusiness extends AbstractBusiness {
                     }
                 });
                 SoundManager.playSound(SoundManager.SWORD);
-                actions.put(ATTACK, new AttackSword(guard) {
+                actions.put(ATTACK, new AttackSword(samourai) {
                     @Override
                     public void onFinish() {
                         actions.remove(ATTACK);
@@ -102,36 +108,67 @@ public class SamouraiBusiness extends AbstractBusiness {
 
         float degree = 0;
         private GoTo goTo;
-        int count = 0;
-        int delay = 60 * 2;
+        Count go = new Count(0, 60 * 2);
+
+        public WaitPlayer() {
+            actions.clear();
+        }
 
         @Override
         public void act() {
             if (!actions.containsKey(GOTO)) {
-                ArrayList<Tile> tileFor = GridManager.getTileFor(guard.sonar);
+                ArrayList<Tile> tileFor = GridManager.getTileFor(samourai.sonar);
                 Tile t = tileFor.get(com.badlogic.gdx.math.MathUtils.random(tileFor.size() - 1));
-                goTo = new GoTo(guard, t);
-                actions.put(GOTO, goTo);
-
-            } else {
-                if (goTo.isFinish()) {
-                    if (count++ > delay) {
-                        actions.remove(GOTO);
-                        count = 0;
+                goTo = new GoTo(samourai, t, () -> {
+                    if (goTo.isFinish()) {
+                        if (go.stepAndComplete()) {
+                            actions.remove(GOTO);
+                        }
                     }
-                }
+                });
+                actions.put(GOTO, goTo);
             }
             lookForPlayer();
         }
 
         private void lookForPlayer() {
+
             if (EntiteManager.player.hide) return;
-            if (guard.vision.contains(EntiteManager.player.getX(), EntiteManager.player.getY())) {
-                actions.clear();
-                MessageManager.addIndicator(guard.getX() - 8, guard.getY() + guard.getHeight(), "?!", guard, Color.ORANGE, 50);
-                guard.vision.setColor(Color.RED);
+            if (samourai.vision.contains(EntiteManager.player.getX(), EntiteManager.player.getY())) {
                 current = new AttackPlayer();
             }
+          
+        }
+
+    }
+
+    private class LostPlayer extends AbstractAction {
+
+        Count lookingFor = new Count(0, 4 * 60);
+        Count waitRotation = new Count(0, 60);
+
+        private float targetRotation;
+
+        public LostPlayer() {
+            samourai.shader = null;
+            samourai.calmDown();
+            actions.clear();
+        }
+
+        @Override
+        public void act() {
+            if (samourai.see(EntiteManager.player)) current = new AttackPlayer();
+            if (com.badlogic.gdx.math.MathUtils.isEqual(samourai.getRotation(), targetRotation, 10)) {
+                if (waitRotation.stepAndComplete()) {
+                    targetRotation = com.badlogic.gdx.math.MathUtils.random(360);
+                }
+            } else {
+                samourai.setRotation(samourai.getRotation() + (samourai.getRotation() < targetRotation ? 5 : (-5)));
+            }
+            if (lookingFor.stepAndComplete())
+                actions.put(GOTO, new GoTo(samourai, GridManager.getCaseFor(samourai.initial), () -> {
+                    current = new WaitPlayer();
+                }));
         }
 
     }

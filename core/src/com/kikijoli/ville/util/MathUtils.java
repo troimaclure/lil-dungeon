@@ -14,8 +14,8 @@ public class MathUtils {
 
     public static float getRotation(float x, float y, float x2, float y2) {
         return (float) (Math.atan2(
-                y - y2,
-                x - x2
+            y - y2,
+            x - x2
         ) * 180.0d / Math.PI);
     }
 
@@ -51,7 +51,8 @@ public class MathUtils {
 
     public static Vector2 centerString(String s, BitmapFont bitMapFont, Rectangle rect) {
         final GlyphLayout layout = new GlyphLayout(bitMapFont, s);
-        final float fontX = rect.x + (rect.width - layout.width) / 2;
+        Vector2 center = MathUtils.getCenter(rect);
+        final float fontX = center.x - layout.width / 2 - rect.width / 2;
         final float fontY = rect.y + (rect.height + layout.height) / 2;
         return new Vector2(fontX, fontY);
     }

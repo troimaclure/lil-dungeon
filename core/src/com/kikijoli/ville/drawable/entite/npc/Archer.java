@@ -23,7 +23,7 @@ import java.util.Arrays;
  *
  * @author troïmaclure
  */
-public final class Archer extends Npc implements IBusiness {
+public final class Archer extends Ennemy implements IBusiness {
 
     private static final String ARCHER = "sprite/archer.png";
 

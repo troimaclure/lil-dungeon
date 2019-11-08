@@ -5,6 +5,7 @@
  */
 package com.kikijoli.ville.drawable.entite;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Circle;
@@ -18,6 +19,7 @@ import com.kikijoli.ville.shader.AbstractShader;
 import com.kikijoli.ville.util.Constantes;
 import com.kikijoli.ville.util.TextureUtil;
 import com.kikijoli.ville.interfaces.ISpriteDrawable;
+import com.kikijoli.ville.manager.MessageManager;
 import com.kikijoli.ville.util.MathUtils;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -68,16 +70,16 @@ public abstract class Entite extends Sprite implements ISpriteDrawable {
             this.shield.draw(batch);
         }
         batch.draw(getTexture(),
-                getX(), getY(),
-                centerOrigin.x,
-                centerOrigin.y,
-                (int) width, (int) height,
-                1, 1,
-                getRotation(),
-                (int) 0,
-                (int) 0,
-                (int) getTexture().getWidth(), (int) getTexture().getHeight(),
-                false, false);
+            getX(), getY(),
+            centerOrigin.x,
+            centerOrigin.y,
+            (int) width, (int) height,
+            1, 1,
+            getRotation(),
+            (int) 0,
+            (int) 0,
+            (int) getTexture().getWidth(), (int) getTexture().getHeight(),
+            false, false);
         if (currentComponent != null) {
             this.currentComponent.draw(batch);
         }
@@ -114,5 +116,25 @@ public abstract class Entite extends Sprite implements ISpriteDrawable {
     public Vector2 getPosition() {
         Vector2 pos = new Vector2();
         return this.getBoundingRectangle().getPosition(pos);
+    }
+
+    public void talk(String message, Color color, int duration) {
+        Vector2 centerString = MathUtils.centerString(message, MessageManager.SHOWG, this.getBoundingRectangle());
+        MessageManager.addIndicator(centerString.x, getY() + getHeight() + 10, message, this, color, duration);
+    }
+
+    public void talk(String message, Color color) {
+        this.talk(message, color, 60);
+    }
+
+    public void talkDouble(String message, Color color, Color fore) {
+        this.talkDouble(message, color, fore, 60);
+    }
+
+    public void talkDouble(String message, Color color, Color fore, int duration) {
+        Vector2 centerString = MathUtils.centerString(message, MessageManager.SHOWG, this.getBoundingRectangle());
+        MessageManager.addIndicator(centerString.x + 4, getY() + getHeight() + 8, message, this, color, 60);
+        MessageManager.addIndicator(centerString.x, getY() + getHeight() + 10, message, this, fore, 60);
+
     }
 }

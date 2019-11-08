@@ -10,9 +10,11 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.kikijoli.ville.abstracts.AbstractAction;
 import com.kikijoli.ville.drawable.entite.Entite;
+import com.kikijoli.ville.interfaces.IFunction;
 import com.kikijoli.ville.manager.PathFinderManager;
 import com.kikijoli.ville.pathfind.Tile;
 import com.kikijoli.ville.shader.AbstractShader;
+import com.kikijoli.ville.shader.WalkShader;
 import com.kikijoli.ville.util.Constantes;
 import java.util.ArrayList;
 
@@ -33,17 +35,29 @@ public class GoTo extends AbstractAction {
     private int index = 0;
     private int count = 30;
     private final int delay = 50;
-    private final AbstractShader old;
+    private IFunction callback;
 
     public GoTo(Entite entite, Entite target) {
         this.entite = entite;
         this.target = target;
-        old = entite.shader;
+        entite.shader = new WalkShader();
+    }
+
+    public GoTo(Entite entite, Entite target, IFunction consumer) {
+        this.entite = entite;
+        this.target = target;
+        entite.shader = new WalkShader();
+        this.callback = consumer;
     }
 
     @Override
     public void act() {
-
+        if (isFinish()) {
+            path = null;
+            if (callback != null)
+                callback.run();
+            return;
+        }
         if (checkPath()) {
             getGoal();
             goToGoal();
@@ -52,7 +66,11 @@ public class GoTo extends AbstractAction {
     }
 
     public boolean isFinish() {
-        return Intersector.overlaps(target.getBoundingRectangle(), entite.getBoundingRectangle());
+        boolean finish = Intersector.overlaps(target.getBoundingRectangle(), entite.getBoundingRectangle());
+        if (finish) {
+            entite.shader = null;
+        }
+        return finish;
     }
 
     private boolean checkPath() {
@@ -80,6 +98,7 @@ public class GoTo extends AbstractAction {
     }
 
     private void goToGoal() {
+
         for (int i = 0; i < entite.speed; i++) {
             if (!com.badlogic.gdx.math.MathUtils.isEqual((int) entite.getX(), goal.x)) {
                 int x = goal.x < entite.getX() ? (-1) : 1;
@@ -92,9 +111,7 @@ public class GoTo extends AbstractAction {
                 entite.setRotation(y > 0 ? 180 : 0);
             }
         }
-        if (isFinish()) {
-            path = null;
-        }
+
     }
 
     private void checkGoal() {

@@ -51,12 +51,9 @@ public class Indicator implements ISpriteDrawable {
 
     @Override
     public void draw(SpriteBatch batch) {
-        y += 0.50f;
-        if (entite != null) {
-            entite.draw(batch);
-        }
+        y += 0.1f;
         MessageManager.SHOWG.setColor(Color.BLACK);
-        MessageManager.SHOWG.draw(batch, message, x + 2 + Constantes.TILESIZE / 2, y + Constantes.TILESIZE / 2);
+        MessageManager.SHOWG.draw(batch, message, x + Constantes.TILESIZE / 2, y + Constantes.TILESIZE / 2);
         MessageManager.SHOWG.setColor(this.color);
         MessageManager.SHOWG.draw(batch, message, x + Constantes.TILESIZE / 2, y + Constantes.TILESIZE / 2);
         count -= 1;

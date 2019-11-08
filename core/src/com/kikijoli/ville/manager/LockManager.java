@@ -5,6 +5,7 @@
  */
 package com.kikijoli.ville.manager;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.kikijoli.ville.drawable.entite.build.Door;
@@ -93,12 +94,15 @@ public class LockManager {
         SoundManager.playSound(SoundManager.TAKE_KEY);
         EntiteManager.keys.add(key);
         LockManager.keys.remove(key);
+        EntiteManager.player.talkDouble("Got key !", Color.BLACK, Color.ORANGE);
+
     }
 
     public static void lockOpen(Lock lock) {
         SoundManager.playSound(SoundManager.OPEN_DOOR);
         EntiteManager.keys.remove(0);
         LockManager.locks.remove(lock);
+        lock.talkDouble("Open !", Color.BLACK, Color.CYAN);
         Tmap.removeBoxs(lock.getBoundingRectangle());
         refeshLocksRectangle();
         Move.initialize();
