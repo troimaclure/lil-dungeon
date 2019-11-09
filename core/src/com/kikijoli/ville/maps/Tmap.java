@@ -14,6 +14,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -85,9 +86,8 @@ public class Tmap implements Screen {
     public static RayHandler getRay() {
         if (ray == null) {
             ray = new RayHandler(getWorld(), Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-            ray.setCulling(true);
-            Color ambiant = Color.BLACK;
-            ray.setAmbientLight(ambiant.r, ambiant.g, ambiant.b, 0.7f);
+            Color ambiant = Color.BLUE;
+            ray.setAmbientLight(ambiant.r, ambiant.g, ambiant.b, 0.3f);
             ray.setCulling(true);
         }
         return ray;
@@ -116,6 +116,19 @@ public class Tmap implements Screen {
         getWorld().destroyBody(destroy);
         destroy.setUserData(null);
         destroy = null;
+    }
+
+    public static void removeAllBoxs() {
+        Array<Body> bodies = new Array<>();
+        getWorld().getBodies(bodies);
+        Body destroy = null;
+        for (Body body : bodies) {
+            destroy = body;
+            getWorld().destroyBody(destroy);
+            destroy.setUserData(null);
+            destroy = null;
+        }
+
     }
 
     public static void addBox(float x, float y) {
@@ -160,8 +173,16 @@ public class Tmap implements Screen {
 
         ProjectileManager.draw();
 //        SpellManager.tour();
-        MessageManager.draw();
 
+    }
+
+    private static void drawLights() {
+        getRay().setCombinedMatrix(camera.combined,
+                camera.position.x, camera.position.y,
+                camera.viewportWidth * camera.zoom,
+                camera.viewportHeight * camera.zoom);
+
+        getRay().updateAndRender();
     }
 
     public int rayUpdateCount = 60;
@@ -188,7 +209,19 @@ public class Tmap implements Screen {
         Gdx.input.setInputProcessor(new InputMultiplexer(new GeneralKeyListener()));
         CameraManager.initialize(Constantes.TILESIZE * 15, Constantes.TILESIZE * 10);
         EntiteManager.initialize();
+        addRain();
         test();
+    }
+
+    private void addRain() {
+        ParticleEffect addParticleFixed = ParticleManager.addParticleFixed("particle/rain.p", -20, Gdx.graphics.getHeight(), 1f);
+        float[] colors = addParticleFixed.getEmitters().first().getTint().getColors();
+        colors[0] = Color.BLUE.r;
+        colors[1] = Color.BLUE.g;
+        colors[2] = Color.BLUE.b;
+        addParticleFixed.getEmitters().first().getTint().setColors(colors);
+        ParticleManager.addParticleFixed("particle/rain.p", Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), 1f);
+
     }
 
     @Override
@@ -202,6 +235,7 @@ public class Tmap implements Screen {
         Gdx.gl20.glClearColor(0.0f, 0.0f, 0.0f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
         worldCoordinates = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
+
         CameraManager.tour();
         EntiteManager.tour();
         ProjectileManager.tour();
@@ -211,23 +245,17 @@ public class Tmap implements Screen {
         shapeRenderer.setProjectionMatrix(camera.combined);
 
         draw();
-//        shadowFBO.render();
-//        if (rayUpdateCount-- <= 0) {
-        getRay().setCombinedMatrix(camera.combined,
-            camera.position.x, camera.position.y,
-            camera.viewportWidth * camera.zoom,
-            camera.viewportHeight * camera.zoom);
-
-        getRay().updateAndRender();
+        drawLights();
         rayUpdateCount = RAYCOUNTTOTAL;
 
-//        }
         if (setLevel != null) {
             settingLevel = true;
         }
         if (settingLevel) {
             setLevel();
         }
+
+        MessageManager.draw();
         drawHud();
 //        debug();
     }
@@ -237,6 +265,7 @@ public class Tmap implements Screen {
         StageManager.tiledMapRenderer.setView(camera);
         StageManager.tiledMapRenderer.render(new int[]{0, 1, 2, 3});
         drawShapes();
+
         spriteBatch.begin();
         drawSprites();
         ParticleManager.draw(Tmap.delta);
@@ -245,6 +274,7 @@ public class Tmap implements Screen {
         spriteBatch.end();
         water();
         StageManager.tiledMapRenderer.render(new int[]{4});
+
     }
 
     private void drawHud() {
@@ -268,6 +298,7 @@ public class Tmap implements Screen {
         if (EntiteManager.playerDead) {
             drawDeadMessage();
         }
+        ParticleManager.drawFixed(delta);
         hudBatch.flush();
         hudBatch.end();
         hudShapeRenderer.begin(ShapeRenderer.ShapeType.Line);

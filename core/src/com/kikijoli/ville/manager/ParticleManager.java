@@ -21,6 +21,7 @@ public class ParticleManager {
 
     private static final HashMap<String, ParticleEffect> particles = new HashMap<>();
     public static final ArrayList<ParticleEffect> particleEffects = new ArrayList<>();
+    public static final ArrayList<ParticleEffect> particleEffectsFixed = new ArrayList<>();
 
     public static ParticleEffect addParticle(String path, float x, float y, float scale) {
         ParticleEffect efft = null;
@@ -40,25 +41,36 @@ public class ParticleManager {
         return efft;
     }
 
+    public static ParticleEffect addParticleFixed(String path, float x, float y, float scale) {
+        ParticleEffect efft = null;
+        if (!particles.containsKey(path)) {
+            efft = new ParticleEffect();
+            efft.load(Gdx.files.internal(path), Gdx.files.internal(""));
+            particles.put(path, efft);
+        } else {
+            efft = new ParticleEffect(particles.get(path));
+        }
+
+        efft.reset(true);
+        efft.scaleEffect(scale);
+
+        efft.getEmitters().first().setPosition(x, y);
+        particleEffectsFixed.add(efft);
+        return efft;
+    }
+
     public static ArrayList<ParticleEffect> getParticleEffects() {
         return (ArrayList<ParticleEffect>) particleEffects.clone();
+    }
+
+    public static ArrayList<ParticleEffect> getParticleEffectsFixed() {
+        return (ArrayList<ParticleEffect>) particleEffectsFixed.clone();
     }
 
     public static void draw(float delta) {
         Color c = spriteBatch.getColor();
         for (ParticleEffect par : ParticleManager.getParticleEffects()) {
-//			Color col = ColorManager.getTextureColor();
-//			float[] colors = par.getEmitters().first().getTint().getColors();
 
-//			if (colors.length >= 6) {
-//				colors[0] = col.r;
-//				colors[1] = col.g;
-//				colors[2] = col.b;
-//				colors[3] = col.r;
-//				colors[4] = col.g;
-//				colors[5] = col.b;
-//			}
-//			par.getEmitters().first().getTint().setColors(colors);
             par.update(delta);
             par.getEmitters().first().getTransparency().setHigh(1.0f);
             par.draw(Tmap.spriteBatch);
@@ -66,6 +78,22 @@ public class ParticleManager {
                 particleEffects.remove(par);
             }
         }
+
         spriteBatch.setColor(c);
+    }
+
+    public static void drawFixed(float delta) {
+        Color c = Tmap.hudBatch.getColor();
+
+        for (ParticleEffect par : ParticleManager.getParticleEffectsFixed()) {
+            par.update(delta);
+            par.getEmitters().first().getTransparency().setHigh(1.0f);
+            par.draw(Tmap.hudBatch);
+            if (par.isComplete()) {
+                particleEffectsFixed.remove(par);
+            }
+        }
+
+        Tmap.hudBatch.setColor(c);
     }
 }

@@ -15,6 +15,7 @@ import com.kikijoli.ville.manager.EntiteManager;
 import com.kikijoli.ville.manager.HudManager;
 import com.kikijoli.ville.manager.StageManager;
 import com.kikijoli.ville.manager.ThemeManager;
+import com.kikijoli.ville.maps.Tmap;
 
 /**
  *

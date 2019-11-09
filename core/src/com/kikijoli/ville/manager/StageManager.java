@@ -49,6 +49,7 @@ public class StageManager {
         RankManager.currentStagePoint = 0;
         Integer width = (Integer) tiledMap.getProperties().get("width");
         Integer height = (Integer) tiledMap.getProperties().get("height");
+        Tmap.removeAllBoxs();
         GridManager.initialize(width, height, Constantes.TILESIZE);
         ShadowFBO.lightSize = width * Constantes.TILESIZE;
         createWall();

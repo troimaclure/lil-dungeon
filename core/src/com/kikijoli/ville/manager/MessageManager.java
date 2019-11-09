@@ -48,6 +48,7 @@ public class MessageManager {
     }
 
     public static void draw() {
+        Tmap.spriteBatch.begin();
         getIndicators().forEach((indicator) -> {
             indicator.draw(Tmap.spriteBatch);
             if (indicator.count <= 0) {
@@ -60,6 +61,8 @@ public class MessageManager {
                 messages.remove(indicator);
             }
         });
+        Tmap.spriteBatch.flush();
+        Tmap.spriteBatch.end();
     }
 
     private static ArrayList<Indicator> getIndicators() {
