@@ -5,7 +5,6 @@
  */
 package com.kikijoli.ville.business;
 
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.kikijoli.ville.abstracts.AbstractAction;
 import com.kikijoli.ville.automation.ennemy.DashEnnemy;
@@ -62,8 +61,7 @@ public class SamouraiBusiness extends AbstractBusiness {
             if (!samourai.isAlarmed) return;
             handleWalk();
             handleDash();
-            Vector2 center = samourai.getCenter();
-            samourai.setRotation(90 + MathUtils.getRotation(EntiteManager.player.getX(), EntiteManager.player.getY(), center.x, center.y));
+            samourai.lookAt(EntiteManager.player);
         }
 
         private void handleWalk() {
@@ -137,7 +135,7 @@ public class SamouraiBusiness extends AbstractBusiness {
             if (samourai.vision.contains(EntiteManager.player.getX(), EntiteManager.player.getY())) {
                 current = new AttackPlayer();
             }
-          
+
         }
 
     }
@@ -157,7 +155,8 @@ public class SamouraiBusiness extends AbstractBusiness {
 
         @Override
         public void act() {
-            if (samourai.see(EntiteManager.player)) current = new AttackPlayer();
+            if (samourai.see(EntiteManager.player))
+                current = new AttackPlayer();
             if (com.badlogic.gdx.math.MathUtils.isEqual(samourai.getRotation(), targetRotation, 10)) {
                 if (waitRotation.stepAndComplete()) {
                     targetRotation = com.badlogic.gdx.math.MathUtils.random(360);

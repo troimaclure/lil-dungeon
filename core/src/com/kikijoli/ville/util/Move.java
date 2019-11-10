@@ -20,7 +20,7 @@ public class Move {
 
     public static void initialize() {
         LockManager.refeshLocksRectangle();
-        NPC_MOVE_FILTER = Stream.concat(StageManager.walls.stream(), LockManager.lockRectangles.stream()).collect(Collectors.toList());
+        NPC_MOVE_FILTER = Stream.concat(Stream.concat(StageManager.cannotmove.stream(), StageManager.walls.stream()), LockManager.lockRectangles.stream()).collect(Collectors.toList());
         BULLET_MOVE_FILTER = Stream.concat(StageManager.walls.stream(), LockManager.lockRectangles.stream()).collect(Collectors.toList());
         SPELL_MOVE_FILTER = BULLET_MOVE_FILTER;
         TRAP_MOVE_FILTER = StageManager.walls;

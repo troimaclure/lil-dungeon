@@ -46,7 +46,7 @@ public class SoundManager {
     }
 
     public static void playSound(String key) {
-        getSound(key).play();
+//        getSound(key).play();
     }
 
 }

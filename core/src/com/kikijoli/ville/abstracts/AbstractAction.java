@@ -13,4 +13,7 @@ public abstract class AbstractAction {
 
     public abstract void act();
 
+    public boolean isFinish() {
+        return true;
+    }
 }

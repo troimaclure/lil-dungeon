@@ -5,17 +5,13 @@
  */
 package com.kikijoli.ville.drawable.entite.npc;
 
-import box2dLight.PointLight;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.kikijoli.ville.business.AbstractBusiness;
-import com.kikijoli.ville.business.ArcherBusiness;
+import com.kikijoli.ville.business.ArcherSamouraiBusiness;
 import com.kikijoli.ville.component.BowComponent;
 import com.kikijoli.ville.component.IComponent;
 import com.kikijoli.ville.interfaces.IBusiness;
 import com.kikijoli.ville.manager.EntiteManager;
-import com.kikijoli.ville.maps.Tmap;
 import com.kikijoli.ville.util.MathUtils;
 import java.util.Arrays;
 
@@ -23,17 +19,13 @@ import java.util.Arrays;
  *
  * @author troïmaclure
  */
-public final class Archer extends Ennemy implements IBusiness {
+public final class ArcherSamourai extends Ennemy implements IBusiness {
 
-    private static final String ARCHER = "sprite/archer.png";
+    private static final String ARCHER = "sprite/archersamourai.png";
 
-    public PointLight vision;
-
-    public Archer(int srcX, int srcY) {
+    public ArcherSamourai(float srcX, float srcY) {
         super(ARCHER, srcX, srcY);
         this.buisiness = this.getDefault();
-        this.vision = new PointLight(Tmap.getRay(), 40, Color.BLACK, 500, this.getX(), this.getY());
-        this.vision.setSoft(false);
         this.point = 500;
         this.components.addAll(Arrays.asList(new IComponent[]{new BowComponent(this, (t) -> {
             return MathUtils.getCenter(EntiteManager.player.getBoundingRectangle());
@@ -50,8 +42,7 @@ public final class Archer extends Ennemy implements IBusiness {
 
     @Override
     public AbstractBusiness getDefault() {
-        return new ArcherBusiness(this);
+        return new ArcherSamouraiBusiness(this);
     }
 
-   
 }

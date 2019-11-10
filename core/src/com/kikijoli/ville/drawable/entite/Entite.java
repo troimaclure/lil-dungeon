@@ -70,16 +70,16 @@ public abstract class Entite extends Sprite implements ISpriteDrawable {
             this.shield.draw(batch);
         }
         batch.draw(getTexture(),
-            getX(), getY(),
-            centerOrigin.x,
-            centerOrigin.y,
-            (int) width, (int) height,
-            1, 1,
-            getRotation(),
-            (int) 0,
-            (int) 0,
-            (int) getTexture().getWidth(), (int) getTexture().getHeight(),
-            false, false);
+                getX(), getY(),
+                centerOrigin.x,
+                centerOrigin.y,
+                (int) width, (int) height,
+                1, 1,
+                getRotation(),
+                (int) 0,
+                (int) 0,
+                (int) getTexture().getWidth(), (int) getTexture().getHeight(),
+                false, false);
         if (currentComponent != null) {
             this.currentComponent.draw(batch);
         }
@@ -135,6 +135,13 @@ public abstract class Entite extends Sprite implements ISpriteDrawable {
         Vector2 centerString = MathUtils.centerString(message, MessageManager.SHOWG, this.getBoundingRectangle());
         MessageManager.addIndicator(centerString.x + 4, getY() + getHeight() + 8, message, this, color, 60);
         MessageManager.addIndicator(centerString.x, getY() + getHeight() + 10, message, this, fore, 60);
+
+    }
+
+    public void lookAt(Entite e) {
+        
+        Vector2 center = getCenter();
+        this.setRotation(90 + MathUtils.getRotation(e.getX(), e.getY(), center.x, center.y));
 
     }
 }

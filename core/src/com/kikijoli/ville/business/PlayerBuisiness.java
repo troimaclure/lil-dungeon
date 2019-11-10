@@ -11,6 +11,8 @@ import com.kikijoli.ville.automation.player.AttackBow;
 import com.kikijoli.ville.automation.player.Dash;
 import com.kikijoli.ville.automation.common.None;
 import com.kikijoli.ville.automation.player.AttackSword;
+import com.kikijoli.ville.component.BowComponent;
+import com.kikijoli.ville.component.SwordComponent;
 import com.kikijoli.ville.manager.EntiteManager;
 import com.kikijoli.ville.manager.SoundManager;
 import com.kikijoli.ville.maps.Tmap;
@@ -59,38 +61,43 @@ public class PlayerBuisiness extends AbstractBusiness {
 
     public void attack() {
 
-        AbstractAction abstractAction = null;
         switch (EntiteManager.player.currentComponent.getClass().getSimpleName()) {
             case "BowComponent":
-                if (actions.containsKey("BowComponent") || EntiteManager.arrowCount == 0) {
-                    return;
-                }
-                SoundManager.playSound(SoundManager.BOW);
-                EntiteManager.arrowCount -= 1;
-                abstractAction = new AttackBow(EntiteManager.player, new Vector2(Tmap.worldCoordinates.x, Tmap.worldCoordinates.y)) {
-                    @Override
-                    public void onFinish() {
-                        actions.remove("BowComponent");
-                    }
-                };
-                actions.put("BowComponent", abstractAction);
-                break;
+                if (bow()) return;
             case "SwordComponent":
-                if (actions.containsKey("SwordComponent") || !EntiteManager.player.canDash()) {
-                    return;
-                }
-                dash();
-                SoundManager.playSound(SoundManager.SWORD);
-                abstractAction = new AttackSword(EntiteManager.player) {
-                    @Override
-                    public void onFinish() {
-                        actions.remove("SwordComponent");
-                    }
-                };
-                actions.put("SwordComponent", abstractAction);
-                break;
+                if (sword()) return;
         }
 
+    }
+
+    private boolean bow() {
+        if (actions.containsKey(BowComponent.class.getSimpleName()) || EntiteManager.arrowCount == 0) {
+            return true;
+        }
+        SoundManager.playSound(SoundManager.BOW);
+        EntiteManager.arrowCount -= 1;
+        actions.put(BowComponent.class.getSimpleName(), new AttackBow(EntiteManager.player, new Vector2(Tmap.worldCoordinates.x, Tmap.worldCoordinates.y)) {
+            @Override
+            public void onFinish() {
+                actions.remove(BowComponent.class.getSimpleName());
+            }
+        });
+        return false;
+    }
+
+    private boolean sword() {
+
+        if (actions.containsKey(SwordComponent.class.getSimpleName())) {
+            return true;
+        }
+        SoundManager.playSound(SoundManager.SWORD);
+        actions.put(SwordComponent.class.getSimpleName(), new AttackSword(EntiteManager.player) {
+            @Override
+            public void onFinish() {
+                actions.remove(SwordComponent.class.getSimpleName());
+            }
+        });
+        return false;
     }
 
 }

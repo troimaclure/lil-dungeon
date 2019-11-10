@@ -13,7 +13,6 @@ import com.kikijoli.ville.drawable.entite.Entite;
 import com.kikijoli.ville.interfaces.IFunction;
 import com.kikijoli.ville.manager.PathFinderManager;
 import com.kikijoli.ville.pathfind.Tile;
-import com.kikijoli.ville.shader.AbstractShader;
 import com.kikijoli.ville.shader.WalkShader;
 import com.kikijoli.ville.util.Constantes;
 import java.util.ArrayList;
@@ -82,10 +81,13 @@ public class GoTo extends AbstractAction {
             count = 0;
             index = 0;
             path = PathFinderManager.getPath(entite, target, EMPTY);
-            pathTest = (ArrayList<Tile>) path.clone();
-            path.stream().filter((tile) -> (tile.getBoundingRectangle().overlaps(entite.getBoundingRectangle()))).forEachOrdered((_item) -> {
-                index++;
-            });
+            if (path != null) {
+                pathTest = (ArrayList<Tile>) path.clone();
+                path.stream().filter((tile) -> (tile.getBoundingRectangle().overlaps(entite.getBoundingRectangle()))).forEachOrdered((_item) -> {
+                    index++;
+                });
+            }
+
         }
         return path != null;
     }

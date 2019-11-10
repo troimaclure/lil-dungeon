@@ -37,22 +37,28 @@ public class StageManager {
     public static TiledMap tiledMap;
     public static ArrayList<Rectangle> walls = new ArrayList<>();
     public static ArrayList<Rectangle> hideouts = new ArrayList<>();
+    public static ArrayList<Rectangle> cannotmove = new ArrayList<>();
+
     public static final String PHYSIQUE = "physique";
+    public static final String MOVE_PHYSIQUE = "move_physique";
     public static final String LIGHT_PHYSIQUE = "light_physique";
     public static final String ENTITE = "entite";
     public static final String PLAYER = "player";
+    public static Integer widthd = 0;
+    public static Integer heightd = 0;
 
     public static void loadFromXml(String level) {
         tiledMap = new TmxMapLoader().load("stage/" + level + ".tmx");
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
         stopwatch = 60 * 60;
         RankManager.currentStagePoint = 0;
-        Integer width = (Integer) tiledMap.getProperties().get("width");
-        Integer height = (Integer) tiledMap.getProperties().get("height");
+        widthd = (Integer) tiledMap.getProperties().get("width");
+        heightd = (Integer) tiledMap.getProperties().get("height");
         Tmap.removeAllBoxs();
-        GridManager.initialize(width, height, Constantes.TILESIZE);
-        ShadowFBO.lightSize = width * Constantes.TILESIZE;
+        GridManager.initialize(widthd, heightd, Constantes.TILESIZE);
+        ShadowFBO.lightSize = widthd * Constantes.TILESIZE;
         createWall();
+        createCannotMove();
         createEntite();
         createHideOut();
         Move.initialize();
@@ -69,6 +75,16 @@ public class StageManager {
             Tmap.addBox((int) rectangle.getX(), (int) rectangle.getY(), rectangle.getWidth(), rectangle.getHeight());
             GridManager.setState("1", rectangle);
             walls.add(rectangle);
+        }
+    }
+
+    private static void createCannotMove() {
+        MapLayer collisionObjectLayer = (MapLayer) tiledMap.getLayers().get(MOVE_PHYSIQUE);
+        MapObjects objects = collisionObjectLayer.getObjects();
+        for (RectangleMapObject rectangleObject : objects.getByType(RectangleMapObject.class)) {
+            Rectangle rectangle = rectangleObject.getRectangle();
+            GridManager.setState("1", rectangle);
+            cannotmove.add(rectangle);
         }
     }
 

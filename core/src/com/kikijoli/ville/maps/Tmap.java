@@ -14,7 +14,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
-import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -48,12 +47,14 @@ import com.kikijoli.ville.manager.HudManager;
 import com.kikijoli.ville.manager.RankManager;
 import com.kikijoli.ville.manager.SpellManager;
 import com.kikijoli.ville.manager.ThemeManager;
+import com.kikijoli.ville.manager.WeatherManager;
 import com.kikijoli.ville.pathfind.GridManager;
 import com.kikijoli.ville.pathfind.Tile;
 import com.kikijoli.ville.util.Constantes;
 import com.kikijoli.ville.util.MathUtils;
 import com.kikijoli.ville.util.SetLevel;
 import com.kikijoli.ville.util.TextureUtil;
+import com.kikijoli.ville.weather.StormWeather;
 import java.util.ArrayList;
 
 /**
@@ -86,8 +87,6 @@ public class Tmap implements Screen {
     public static RayHandler getRay() {
         if (ray == null) {
             ray = new RayHandler(getWorld(), Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-            Color ambiant = Color.BLUE;
-            ray.setAmbientLight(ambiant.r, ambiant.g, ambiant.b, 0.3f);
             ray.setCulling(true);
         }
         return ray;
@@ -185,8 +184,6 @@ public class Tmap implements Screen {
         getRay().updateAndRender();
     }
 
-    public int rayUpdateCount = 60;
-    private final int RAYCOUNTTOTAL = 60;
     private final Sprite arrowCountSprite = new Sprite(TextureUtil.getTexture("sprite/arrow.png"));
     Box2DDebugRenderer debugRenderer = new Box2DDebugRenderer();
 
@@ -205,7 +202,7 @@ public class Tmap implements Screen {
         hudShapeRenderer.setAutoShapeType(true);
         spriteBatch = new SpriteBatch();
         hudBatch = new SpriteBatch();
-
+        WeatherManager.currentWeather = new StormWeather();
         Gdx.input.setInputProcessor(new InputMultiplexer(new GeneralKeyListener()));
         CameraManager.initialize(Constantes.TILESIZE * 15, Constantes.TILESIZE * 10);
         EntiteManager.initialize();
@@ -214,14 +211,14 @@ public class Tmap implements Screen {
     }
 
     private void addRain() {
-        ParticleEffect addParticleFixed = ParticleManager.addParticleFixed("particle/rain.p", -20, Gdx.graphics.getHeight(), 1f);
-        float[] colors = addParticleFixed.getEmitters().first().getTint().getColors();
-        colors[0] = Color.BLUE.r;
-        colors[1] = Color.BLUE.g;
-        colors[2] = Color.BLUE.b;
-        addParticleFixed.getEmitters().first().getTint().setColors(colors);
+        ParticleManager.addParticleFixed("particle/rain.p", -20, Gdx.graphics.getHeight(), 1f);
         ParticleManager.addParticleFixed("particle/rain.p", Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), 1f);
 
+//        for (int i = -1; i < 26; i++) {
+//            for (int j = -1; j < 25; j++) {
+//                ParticleManager.addParticleFixed("particle/fog.p", Gdx.graphics.getWidth() / 25 * i, Gdx.graphics.getHeight() / 25 * j, 2.5f);
+//            }
+//        }
     }
 
     @Override
@@ -246,7 +243,6 @@ public class Tmap implements Screen {
 
         draw();
         drawLights();
-        rayUpdateCount = RAYCOUNTTOTAL;
 
         if (setLevel != null) {
             settingLevel = true;
@@ -257,6 +253,7 @@ public class Tmap implements Screen {
 
         MessageManager.draw();
         drawHud();
+        WeatherManager.tour();
 //        debug();
     }
 

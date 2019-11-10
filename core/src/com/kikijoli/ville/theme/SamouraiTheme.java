@@ -2,6 +2,7 @@ package com.kikijoli.ville.theme;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.maps.tiled.objects.TiledMapTileMapObject;
+import com.kikijoli.ville.drawable.entite.npc.ArcherSamourai;
 import com.kikijoli.ville.drawable.entite.npc.Samourai;
 import com.kikijoli.ville.drawable.hud.BowTile;
 import com.kikijoli.ville.drawable.hud.SwordTile;
@@ -24,6 +25,9 @@ public class SamouraiTheme extends AbstractTheme {
         switch (entite.getName()) {
             case "samourai":
                 EntiteManager.addEntite(new Samourai(entite.getX(), entite.getY()));
+                break;
+            case "archersamourai":
+                EntiteManager.addEntite(new ArcherSamourai(entite.getX(), entite.getY()));
                 break;
             case "key":
                 LockManager.addKey(entite.getX(), entite.getY());

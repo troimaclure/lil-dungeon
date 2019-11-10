@@ -14,6 +14,8 @@ public class DesktopLauncher {
         config.vSyncEnabled = true;
         config.allowSoftwareMode = true;
         config.useHDPI = true;
+//        config.width = 800;
+//        config.height = 600;
         config.setFromDisplayMode(LwjglApplicationConfiguration.getDesktopDisplayMode());
         new LwjglApplication(new Ville(), config);
     }

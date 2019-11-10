@@ -60,4 +60,8 @@ public class MathUtils {
     public static double getDistance(Vector2 object1, Vector2 object2) {
         return Math.sqrt(Math.pow((object2.x - object1.x), 2) + Math.pow((object2.y - object1.y), 2));
     }
+
+    public static float getMax(float a, float b) {
+        return (a > b) ? a : b;
+    }
 }
