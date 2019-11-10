@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.kikijoli.ville.drawable.entite.Entite;
+import com.kikijoli.ville.manager.EntiteManager;
 import com.kikijoli.ville.maps.Tmap;
 import com.kikijoli.ville.util.Constantes;
 
@@ -21,6 +22,8 @@ public abstract class Ennemy extends Entite {
     public PointLight sonar;
     public boolean isAlarmed;
     public Vector2 initial;
+    public Color calm = new Color(0, 0, 0, 0.5f);
+    public Color alarm = Color.RED;
 
     public Ennemy(String path, float srcX, float srcY, float srcWidth, float srcHeight) {
         super(path, srcX, srcY, srcWidth, srcHeight);
@@ -33,10 +36,10 @@ public abstract class Ennemy extends Entite {
     }
 
     public void initVision(float srcX, float srcY) {
-        this.vision = new ConeLight(Tmap.getRay(), 100, Color.BLACK, 500, srcX + getWidth() / 2, srcY + getHeight() / 2, 0, 75);
+        this.vision = new ConeLight(Tmap.getRay(), 50, calm, 500, srcX + getWidth() / 2, srcY + getHeight() / 2, 0, 75);
         this.vision.setSoftnessLength(Constantes.TILESIZE);
         this.sonar = new PointLight(Tmap.getRay(), 20, Color.CLEAR, 500, srcX, srcY);
-        this.sonar.setIgnoreAttachedBody(true);
+
     }
 
     @Override
@@ -48,24 +51,27 @@ public abstract class Ennemy extends Entite {
 
     @Override
     public void draw(SpriteBatch batch) {
-        super.draw(batch); //To change body of generated methods, choose Tools | Templates.
+        super.draw(batch);
         this.vision.setPosition(this.getX() + Constantes.TILESIZE / 2, this.getY() + Constantes.TILESIZE / 2);
         this.sonar.setPosition(this.getX() + Constantes.TILESIZE / 2, this.getY() + Constantes.TILESIZE / 2);
     }
 
     @Override
     public void dead() {
-        super.dead(); //To change body of generated methods, choose Tools | Templates.
-        this.vision.setActive(false);
+        super.dead();
+        this.vision.remove(true);
+        this.sonar.remove(true);
     }
 
     public boolean see(Entite entite) {
+        if (entite == EntiteManager.player && EntiteManager.player.hide)
+            return false;
         Vector2 center = entite.getCenter();
         return this.vision.contains(center.x, center.y);
     }
 
     public void calmDown() {
-        this.vision.setColor(Color.BLACK);
+        this.vision.setColor(calm);
         this.isAlarmed = false;
         this.speed /= 2;
         this.talk("?", Color.ORANGE);
@@ -73,9 +79,10 @@ public abstract class Ennemy extends Entite {
 
     public void alarmed() {
         this.isAlarmed = true;
-        this.vision.setColor(Color.RED);
+        this.vision.setColor(alarm);
         this.speed *= 2;
-        this.talk("?!", Color.ORANGE);
+        this.talk("?!", Color.RED);
 
     }
+
 }

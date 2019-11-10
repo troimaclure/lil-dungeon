@@ -20,5 +20,6 @@ public class ThemeManager {
     static {
         currentTheme = new SamouraiTheme();
     }
+    
 
 }

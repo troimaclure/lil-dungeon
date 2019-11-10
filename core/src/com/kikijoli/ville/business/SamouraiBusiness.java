@@ -131,8 +131,7 @@ public class SamouraiBusiness extends AbstractBusiness {
 
         private void lookForPlayer() {
 
-            if (EntiteManager.player.hide) return;
-            if (samourai.vision.contains(EntiteManager.player.getX(), EntiteManager.player.getY())) {
+            if (samourai.see(EntiteManager.player)) {
                 current = new AttackPlayer();
             }
 

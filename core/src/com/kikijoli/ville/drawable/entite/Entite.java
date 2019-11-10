@@ -139,7 +139,7 @@ public abstract class Entite extends Sprite implements ISpriteDrawable {
     }
 
     public void lookAt(Entite e) {
-        
+
         Vector2 center = getCenter();
         this.setRotation(90 + MathUtils.getRotation(e.getX(), e.getY(), center.x, center.y));
 

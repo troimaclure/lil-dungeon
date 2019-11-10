@@ -16,6 +16,7 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.kikijoli.ville.buffer.ShadowFBO;
+import com.kikijoli.ville.drawable.entite.decor.Water;
 import com.kikijoli.ville.drawable.entite.npc.Player;
 import static com.kikijoli.ville.manager.EntiteManager.player;
 import com.kikijoli.ville.maps.Tmap;
@@ -58,6 +59,7 @@ public class StageManager {
         GridManager.initialize(widthd, heightd, Constantes.TILESIZE);
         ShadowFBO.lightSize = widthd * Constantes.TILESIZE;
         createWall();
+        createWater();
         createCannotMove();
         createEntite();
         createHideOut();
@@ -85,6 +87,15 @@ public class StageManager {
             Rectangle rectangle = rectangleObject.getRectangle();
             GridManager.setState("1", rectangle);
             cannotmove.add(rectangle);
+        }
+    }
+
+    private static void createWater() {
+        MapLayer collisionObjectLayer = (MapLayer) tiledMap.getLayers().get("water");
+        MapObjects objects = collisionObjectLayer.getObjects();
+        for (TiledMapTileMapObject water : objects.getByType(TiledMapTileMapObject.class)) {
+            GridManager.setState("1", new Rectangle(water.getX(), water.getY(), Constantes.TILESIZE, Constantes.TILESIZE));
+            WaterManager.addWater(new Water(water.getX(), water.getY()));
         }
     }
 

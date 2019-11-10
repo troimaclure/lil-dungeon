@@ -88,6 +88,7 @@ public class Tmap implements Screen {
         if (ray == null) {
             ray = new RayHandler(getWorld(), Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
             ray.setCulling(true);
+            
         }
         return ray;
     }
@@ -227,12 +228,11 @@ public class Tmap implements Screen {
         Tmap.delta = delta;
         Gdx.gl.glLineWidth(LINE_WIDTH);
         fps.log();
-        ShaderManager.step();
         Gdx.gl.glEnable(0x0BA1);
-        Gdx.gl20.glClearColor(0.0f, 0.0f, 0.0f, 1f);
+        Gdx.gl20.glClearColor(ThemeManager.currentTheme.getFontColor().r, ThemeManager.currentTheme.getFontColor().g, ThemeManager.currentTheme.getFontColor().b, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
         worldCoordinates = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
-
+        ShaderManager.step();
         CameraManager.tour();
         EntiteManager.tour();
         ProjectileManager.tour();

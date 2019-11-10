@@ -14,6 +14,7 @@ import com.kikijoli.ville.drawable.entite.build.Lock;
 import static com.kikijoli.ville.manager.EntiteManager.player;
 import static com.kikijoli.ville.manager.StageManager.stopwatch;
 import com.kikijoli.ville.maps.Tmap;
+import com.kikijoli.ville.pathfind.GridManager;
 import com.kikijoli.ville.util.MathUtils;
 import com.kikijoli.ville.util.Move;
 import com.kikijoli.ville.util.SetLevel;
@@ -32,8 +33,10 @@ public class LockManager {
     public static ArrayList<Key> keys = new ArrayList<>();
 
     public static void addLock(float x, float y) {
-        locks.add(new Lock(x, y));
+        Lock lock = new Lock(x, y);
+        locks.add(lock);
         Tmap.addBox(x, y);
+        GridManager.setState("1", lock.getBoundingRectangle());
     }
 
     public static void addKey(float x, float y) {
@@ -104,6 +107,7 @@ public class LockManager {
         LockManager.locks.remove(lock);
         lock.talkDouble("Open !", Color.BLACK, Color.CYAN);
         Tmap.removeBoxs(lock.getBoundingRectangle());
+        GridManager.setState("0", lock.getBoundingRectangle());
         refeshLocksRectangle();
         Move.initialize();
     }

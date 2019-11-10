@@ -13,7 +13,7 @@ import com.kikijoli.ville.drawable.entite.Entite;
  */
 public abstract class Decor extends Entite {
 
-    public Decor(String path, int srcX, int srcY, int srcWidth, int srcHeight) {
+    public Decor(String path, float srcX, float srcY, int srcWidth, int srcHeight) {
         super(path, srcX, srcY, srcWidth, srcHeight);
     }
 

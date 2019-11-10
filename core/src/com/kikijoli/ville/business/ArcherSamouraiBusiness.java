@@ -35,6 +35,10 @@ public class ArcherSamouraiBusiness extends AbstractBusiness {
         private static final String BOW = "BOW";
         Count alarmed = new Count(0, 4 * 60);
 
+        public AttackPlayer() {
+            actions.clear();
+        }
+
         @Override
         public void act() {
             if (archer.isAlarmed && !archer.see(EntiteManager.player)) {
@@ -69,6 +73,10 @@ public class ArcherSamouraiBusiness extends AbstractBusiness {
         Count delay = new Count(0, 60 * 3);
         int currentVision = 0;
 
+        public WaitPlayer() {
+            actions.clear();
+        }
+
         @Override
         public void act() {
             if (delay.stepAndComplete()) {
@@ -78,7 +86,7 @@ public class ArcherSamouraiBusiness extends AbstractBusiness {
                 float angle = archer.getRotation() > currentVision ? archer.getRotation() - 5 : archer.getRotation() + 5;
                 archer.setRotation(angle);
             }
-            if (archer.vision.contains(EntiteManager.player.getX(), EntiteManager.player.getY())) {
+            if (archer.see(EntiteManager.player)) {
                 archer.alarmed();
                 current = new AttackPlayer();
             }

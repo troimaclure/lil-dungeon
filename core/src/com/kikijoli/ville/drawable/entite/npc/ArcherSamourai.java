@@ -6,6 +6,7 @@
 package com.kikijoli.ville.drawable.entite.npc;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 import com.kikijoli.ville.business.AbstractBusiness;
 import com.kikijoli.ville.business.ArcherSamouraiBusiness;
 import com.kikijoli.ville.component.BowComponent;
@@ -28,10 +29,13 @@ public final class ArcherSamourai extends Ennemy implements IBusiness {
         this.buisiness = this.getDefault();
         this.point = 500;
         this.components.addAll(Arrays.asList(new IComponent[]{new BowComponent(this, (t) -> {
-            return MathUtils.getCenter(EntiteManager.player.getBoundingRectangle());
+            if (isAlarmed && see(EntiteManager.player)) {
+                return MathUtils.getCenter(EntiteManager.player.getBoundingRectangle());
+            }
+            return Vector2.Zero;
         })}));
         this.currentComponent = this.components.get(0);
-
+        this.vision.setDistance(1000);
     }
 
     @Override
