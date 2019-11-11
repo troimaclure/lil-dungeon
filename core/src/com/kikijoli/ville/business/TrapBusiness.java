@@ -70,7 +70,7 @@ public class TrapBusiness extends AbstractBusiness {
         public void waitForPlayer() {
             if (!exec) {
 //                DrawManager.spritesDrawed.add(circleEffect);
-                MessageManager.addIndicator(trap.getX() - trap.getWidth() / 2, trap.getY() + trap.getHeight() / 2, "CLIC", trap, Color.WHITE, 30);
+                MessageManager.addIndicator(trap.getX() - trap.getWidth() / 2, trap.getY() + trap.getHeight() / 2, "CLIC", Color.WHITE, 30);
                 exec = true;
                 SoundManager.playSound(SoundManager.TRAP_CLIC);
             }

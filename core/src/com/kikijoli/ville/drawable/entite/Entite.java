@@ -120,7 +120,7 @@ public abstract class Entite extends Sprite implements ISpriteDrawable {
 
     public void talk(String message, Color color, int duration) {
         Vector2 centerString = MathUtils.centerString(message, MessageManager.SHOWG, this.getBoundingRectangle());
-        MessageManager.addIndicator(centerString.x, getY() + getHeight() + 10, message, this, color, duration);
+        MessageManager.addIndicator(centerString.x, getY() + getHeight() + 10, message, color, duration);
     }
 
     public void talk(String message, Color color) {
@@ -133,8 +133,8 @@ public abstract class Entite extends Sprite implements ISpriteDrawable {
 
     public void talkDouble(String message, Color color, Color fore, int duration) {
         Vector2 centerString = MathUtils.centerString(message, MessageManager.SHOWG, this.getBoundingRectangle());
-        MessageManager.addIndicator(centerString.x + 4, getY() + getHeight() + 8, message, this, color, 60);
-        MessageManager.addIndicator(centerString.x, getY() + getHeight() + 10, message, this, fore, 60);
+        MessageManager.addIndicator(centerString.x + 4, getY() + getHeight() + 8, message, color, 60);
+        MessageManager.addIndicator(centerString.x, getY() + getHeight() + 10, message, fore, 60);
 
     }
 

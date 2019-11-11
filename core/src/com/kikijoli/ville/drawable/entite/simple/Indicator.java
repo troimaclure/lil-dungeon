@@ -7,7 +7,6 @@ package com.kikijoli.ville.drawable.entite.simple;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.kikijoli.ville.drawable.entite.Entite;
 import com.kikijoli.ville.manager.MessageManager;
 import com.kikijoli.ville.util.Constantes;
 import com.kikijoli.ville.interfaces.ISpriteDrawable;
@@ -19,32 +18,28 @@ import com.kikijoli.ville.interfaces.ISpriteDrawable;
 public class Indicator implements ISpriteDrawable {
 
     String message;
-    Entite entite;
     float x, y;
     public int count = 60 * 2;
     Color color;
 
-    public Indicator(float x, float y, String message, Entite entite) {
+    public Indicator(float x, float y, String message) {
         this.x = x;
         this.y = y;
         this.message = message;
-        this.entite = entite;
         this.color = Color.GREEN;
     }
 
-    public Indicator(float x, float y, String message, Entite entite, Color color) {
+    public Indicator(float x, float y, String message, Color color) {
         this.x = x;
         this.y = y;
         this.message = message;
-        this.entite = entite;
         this.color = color;
     }
 
-    public Indicator(float x, float y, String message, Entite entite, Color color, int count) {
+    public Indicator(float x, float y, String message, Color color, int count) {
         this.x = x;
         this.y = y;
         this.message = message;
-        this.entite = entite;
         this.color = color;
         this.count = count;
     }

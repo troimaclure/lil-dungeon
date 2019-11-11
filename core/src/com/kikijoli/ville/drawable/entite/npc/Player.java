@@ -94,10 +94,7 @@ public final class Player extends Entite implements IBusiness, IShapeDrawable {
         dashCount -= (dashCooldown * dashTotal) / 2;
     }
 
-    public void hide(boolean hide) {
-        if (!this.hide && hide) {
-            talk("Hidden...", Color.WHITE);
-        }
+    public void setHide(boolean hide) {
         this.hide = hide;
     }
 

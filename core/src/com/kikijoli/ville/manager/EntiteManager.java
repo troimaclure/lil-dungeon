@@ -20,6 +20,7 @@ import com.kikijoli.ville.shader.WalkShader;
 import com.kikijoli.ville.util.MathUtils;
 import com.kikijoli.ville.util.Move;
 import java.util.ArrayList;
+import java.util.Optional;
 
 /**
  *
@@ -267,7 +268,16 @@ public class EntiteManager {
     }
 
     private static void checkPlayerVisible() {
-        player.hide(StageManager.hideouts.stream().anyMatch(e -> e.overlaps(player.getBoundingRectangle())));
+
+        Optional<Rectangle> findFirst = StageManager.hideouts.stream().filter(e -> e.overlaps(player.getBoundingRectangle())).findFirst();
+        if (findFirst.isPresent()) {
+            if (player.isHidden()) return;
+            player.setHide(true);
+            MessageManager.talk(findFirst.get(), "hidden..", Color.WHITE);
+        } else {
+            player.setHide(false);
+        }
+
     }
 
     public static ArrayList<Entite> getSeeEntite(PointLight sonar) {

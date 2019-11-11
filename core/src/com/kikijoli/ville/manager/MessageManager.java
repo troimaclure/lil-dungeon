@@ -7,10 +7,13 @@ package com.kikijoli.ville.manager;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.kikijoli.ville.drawable.entite.Entite;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.kikijoli.ville.drawable.entite.simple.Indicator;
 import com.kikijoli.ville.drawable.entite.simple.Message;
 import com.kikijoli.ville.maps.Tmap;
+import com.kikijoli.ville.util.MathUtils;
+import com.kikijoli.ville.util.Time;
 import java.util.ArrayList;
 
 /**
@@ -31,16 +34,25 @@ public class MessageManager {
         segoe = FontManager.getFont("vinet", 25, Color.WHITE);
     }
 
-    public static void addIndicator(float x, float y, String message, Entite entite) {
-        indicators.add(new Indicator(x, y, message, entite));
+    public static void talk(Rectangle rect, String message, Color color, int duration) {
+        Vector2 centerString = MathUtils.centerString(message, MessageManager.SHOWG, rect);
+        indicators.add(new Indicator(centerString.x, rect.y + rect.height + 10, message, color, duration));
     }
 
-    public static void addIndicator(float x, float y, String message, Entite entite, Color color) {
-        indicators.add(new Indicator(x, y, message, entite, color));
+    public static void talk(Rectangle rect, String message, Color color) {
+        talk(rect, message, color, Time.SECONDE);
     }
 
-    public static void addIndicator(float x, float y, String message, Entite entite, Color color, int count) {
-        indicators.add(new Indicator(x, y, message, entite, color, count));
+    public static void addIndicator(float x, float y, String message) {
+        indicators.add(new Indicator(x, y, message));
+    }
+
+    public static void addIndicator(float x, float y, String message, Color color) {
+        indicators.add(new Indicator(x, y, message, color));
+    }
+
+    public static void addIndicator(float x, float y, String message, Color color, int count) {
+        indicators.add(new Indicator(x, y, message, color, count));
     }
 
     public static void addMessage(float x, float y, String message, Color color, int time) {
