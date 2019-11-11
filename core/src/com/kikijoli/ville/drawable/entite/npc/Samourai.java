@@ -34,4 +34,14 @@ public final class Samourai extends Ennemy implements IBusiness {
         return new SamouraiBusiness(this);
     }
 
+    @Override
+    public int getMinSpeed() {
+        return 2;
+    }
+
+    @Override
+    public int getMaxSpeed() {
+        return 5;
+    }
+
 }

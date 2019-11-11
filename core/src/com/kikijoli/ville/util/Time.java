@@ -7,10 +7,9 @@ package com.kikijoli.ville.util;
 
 /**
  *
- * @author troïmaclure
+ * @author Arthur
  */
-public class Constantes {
+public class Time {
 
-    public static int TILESIZE = 64;
-    public static int SEC = 60;
+    public static int SECONDE = 60;
 }

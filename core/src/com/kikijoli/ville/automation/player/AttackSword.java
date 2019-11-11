@@ -10,6 +10,7 @@ import com.kikijoli.ville.component.SwordComponent;
 import com.kikijoli.ville.drawable.entite.Entite;
 import com.kikijoli.ville.drawable.entite.simple.Sword;
 import com.kikijoli.ville.manager.EntiteManager;
+import com.kikijoli.ville.util.Count;
 
 /**
  *
@@ -21,6 +22,7 @@ public abstract class AttackSword extends AbstractAction {
     public int delaySword = 30;
     private final Entite entite;
     private final Sword sword;
+    Count cooldown = new Count(0, 30);
 
     /**
      *
@@ -33,9 +35,11 @@ public abstract class AttackSword extends AbstractAction {
 
     @Override
     public void act() {
-        sword.setRotation(-countSword * 12);
+        countSword += 3;
+        if (countSword < delaySword)
+            sword.setRotation(-countSword * 12 + entite.getRotation());
         EntiteManager.attack(entite);
-        if (countSword++ > delaySword) {
+        if (cooldown.stepAndComplete()) {
             end();
         }
     }

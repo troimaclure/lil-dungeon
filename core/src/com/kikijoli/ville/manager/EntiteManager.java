@@ -1,5 +1,6 @@
 package com.kikijoli.ville.manager;
 
+import box2dLight.PointLight;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.math.Rectangle;
@@ -266,7 +267,16 @@ public class EntiteManager {
     }
 
     private static void checkPlayerVisible() {
-        player.hide = (StageManager.hideouts.stream().anyMatch(e -> e.overlaps(player.getBoundingRectangle())));
+        player.hide(StageManager.hideouts.stream().anyMatch(e -> e.overlaps(player.getBoundingRectangle())));
+    }
+
+    public static ArrayList<Entite> getSeeEntite(PointLight sonar) {
+        ArrayList<Entite> target = new ArrayList<>();
+        entites.forEach((entite) -> {
+            Vector2 center = entite.getCenter();
+            if (sonar.contains(center.x, center.y)) target.add(entite);
+        });
+        return target;
     }
 
     private EntiteManager() {

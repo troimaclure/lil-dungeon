@@ -19,6 +19,7 @@ import com.kikijoli.ville.util.Constantes;
 public class CameraManager {
 
     public static OrthographicCamera camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+    public static int indice = 5;
 
     public static void initialize(int x, int y) {
         camera.position.x = x;
@@ -32,8 +33,8 @@ public class CameraManager {
         camera.unproject(worldCoordinates);
         Vector3 target = new Vector3((int) EntiteManager.player.getX(), (int) EntiteManager.player.getY(), 0);
         Vector3 cameraPosition = camera.position;
-        target.scl(Tmap.delta * 2);
-        cameraPosition.scl(1.0f - Tmap.delta * 2);
+        target.scl(Tmap.delta * indice);
+        cameraPosition.scl(1.0f - Tmap.delta * indice);
         cameraPosition.add(target);
         camera.position.set(cameraPosition);
         handleBorder();

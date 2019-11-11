@@ -34,7 +34,7 @@ public final class Player extends Entite implements IBusiness, IShapeDrawable {
     public float dashCooldown = 3 * 60;
     public float dashCount = dashTotal * dashCooldown;
     public PointLight vision;
-    public boolean hide;
+    private boolean hide;
     public boolean invincible = false;
     public boolean touched = false;
 
@@ -92,6 +92,17 @@ public final class Player extends Entite implements IBusiness, IShapeDrawable {
 
     public void dash() {
         dashCount -= (dashCooldown * dashTotal) / 2;
+    }
+
+    public void hide(boolean hide) {
+        if (!this.hide && hide) {
+            talk("Hidden...", Color.WHITE);
+        }
+        this.hide = hide;
+    }
+
+    public boolean isHidden() {
+        return this.hide;
     }
 
 }

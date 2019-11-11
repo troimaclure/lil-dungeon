@@ -57,6 +57,14 @@ public final class KeyGuard extends Ennemy implements IBusiness {
         LockManager.addKey(this.getX(), this.getY());
     }
 
- 
+    @Override
+    public int getMinSpeed() {
+        return 4;
+    }
+
+    @Override
+    public int getMaxSpeed() {
+        return 7;
+    }
 
 }

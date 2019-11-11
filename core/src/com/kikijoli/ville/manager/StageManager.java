@@ -124,7 +124,7 @@ public class StageManager {
     }
 
     public static void tour() {
-        stopwatch -= stopwatch > 0 ? 1 : 0;
+        stopwatch -= stopwatch > 0 ? 0 : 0;
         if (stopwatch <= 0) {
             EntiteManager.touch(player);
         }

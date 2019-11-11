@@ -49,4 +49,14 @@ public final class ArcherSamourai extends Ennemy implements IBusiness {
         return new ArcherSamouraiBusiness(this);
     }
 
+    @Override
+    public int getMinSpeed() {
+        return 0;
+    }
+
+    @Override
+    public int getMaxSpeed() {
+        return 0;
+    }
+
 }

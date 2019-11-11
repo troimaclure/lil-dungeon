@@ -35,6 +35,7 @@ public class GoTo extends AbstractAction {
     private int count = 30;
     private final int delay = 50;
     private IFunction callback;
+    private boolean exitOnFailed = false;
 
     public GoTo(Entite entite, Entite target) {
         this.entite = entite;
@@ -43,10 +44,13 @@ public class GoTo extends AbstractAction {
     }
 
     public GoTo(Entite entite, Entite target, IFunction consumer) {
-        this.entite = entite;
-        this.target = target;
-        entite.shader = new WalkShader();
+        this(entite, target);
         this.callback = consumer;
+    }
+
+    public GoTo(Entite entite, Entite target, IFunction consumer, boolean exitOnFailed) {
+        this(entite, target, consumer);
+        this.exitOnFailed = exitOnFailed;
     }
 
     @Override
@@ -61,9 +65,12 @@ public class GoTo extends AbstractAction {
             getGoal();
             goToGoal();
             checkGoal();
+        } else if (exitOnFailed) {
+            if (callback != null) callback.run();
         }
     }
 
+    @Override
     public boolean isFinish() {
         boolean finish = Intersector.overlaps(target.getBoundingRectangle(), entite.getBoundingRectangle());
         if (finish) {

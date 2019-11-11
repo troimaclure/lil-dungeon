@@ -88,7 +88,7 @@ public class Tmap implements Screen {
         if (ray == null) {
             ray = new RayHandler(getWorld(), Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
             ray.setCulling(true);
-            
+
         }
         return ray;
     }
@@ -260,17 +260,16 @@ public class Tmap implements Screen {
     private void draw() {
 
         StageManager.tiledMapRenderer.setView(camera);
-        StageManager.tiledMapRenderer.render(new int[]{0, 1, 2, 3});
+        StageManager.tiledMapRenderer.render(new int[]{0, 1});
+        WaterManager.drawWater();
+        StageManager.tiledMapRenderer.render(new int[]{2, 4});
         drawShapes();
-
         spriteBatch.begin();
         drawSprites();
         ParticleManager.draw(Tmap.delta);
-
         spriteBatch.flush();
         spriteBatch.end();
-        water();
-        StageManager.tiledMapRenderer.render(new int[]{4});
+        StageManager.tiledMapRenderer.render(new int[]{5});
 
     }
 
@@ -372,10 +371,6 @@ public class Tmap implements Screen {
         }
         spriteBatch.flush();
         spriteBatch.end();
-    }
-
-    private void water() {
-        WaterManager.drawWater();
     }
 
     private void setLevel() {

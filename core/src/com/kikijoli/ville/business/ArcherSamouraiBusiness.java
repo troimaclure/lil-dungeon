@@ -5,13 +5,16 @@
  */
 package com.kikijoli.ville.business;
 
+import com.badlogic.gdx.graphics.Color;
 import com.kikijoli.ville.abstracts.AbstractAction;
 import com.kikijoli.ville.automation.ennemy.AttackBowEnnemy;
 import com.kikijoli.ville.drawable.entite.npc.ArcherSamourai;
+import com.kikijoli.ville.drawable.entite.npc.Ennemy;
 import com.kikijoli.ville.manager.EntiteManager;
 import com.kikijoli.ville.manager.SoundManager;
 import com.kikijoli.ville.util.Count;
 import com.kikijoli.ville.util.MathUtils;
+import com.kikijoli.ville.util.Time;
 
 /**
  *
@@ -33,10 +36,12 @@ public class ArcherSamouraiBusiness extends AbstractBusiness {
     private class AttackPlayer extends AbstractAction {
 
         private static final String BOW = "BOW";
-        Count alarmed = new Count(0, 4 * 60);
+        Count alarmed = new Count(0, 4 * Time.SECONDE);
 
         public AttackPlayer() {
             actions.clear();
+            archer.alarmed();
+            Ennemy.callFriend(archer);
         }
 
         @Override
@@ -69,24 +74,25 @@ public class ArcherSamouraiBusiness extends AbstractBusiness {
 
     public class WaitPlayer extends AbstractAction {
 
-        int[] vision = new int[]{0, 90, 180, 270};
-        Count delay = new Count(0, 60 * 3);
+        Count delay = new Count(0, Time.SECONDE * 3);
         int currentVision = 0;
 
         public WaitPlayer() {
+
             actions.clear();
         }
 
         @Override
         public void act() {
+
             if (delay.stepAndComplete()) {
-                currentVision = vision[com.badlogic.gdx.math.MathUtils.random(vision.length - 1)];
+                currentVision = archer.getLookSomewhereElse();
             }
             if (!com.badlogic.gdx.math.MathUtils.isEqual(currentVision, archer.getRotation(), 10)) {
                 float angle = archer.getRotation() > currentVision ? archer.getRotation() - 5 : archer.getRotation() + 5;
                 archer.setRotation(angle);
             }
-            if (archer.see(EntiteManager.player)) {
+            if (archer.see(EntiteManager.player) || archer.isAlarmed) {
                 archer.alarmed();
                 current = new AttackPlayer();
             }
@@ -96,8 +102,8 @@ public class ArcherSamouraiBusiness extends AbstractBusiness {
 
     private class LostPlayer extends AbstractAction {
 
-        Count lookingFor = new Count(0, 4 * 60);
-        Count waitRotation = new Count(0, 60);
+        Count lookingFor = new Count(0, 4 * Time.SECONDE);
+        Count waitRotation = new Count(0, Time.SECONDE);
 
         private float targetRotation;
 
@@ -109,8 +115,12 @@ public class ArcherSamouraiBusiness extends AbstractBusiness {
 
         @Override
         public void act() {
-            if (archer.see(EntiteManager.player))
+
+            if (archer.see(EntiteManager.player) || archer.isAlarmed) {
                 current = new AttackPlayer();
+                System.out.println("set to attack");
+                return;
+            }
             if (com.badlogic.gdx.math.MathUtils.isEqual(archer.getRotation(), targetRotation, 10)) {
                 if (waitRotation.stepAndComplete()) {
                     targetRotation = com.badlogic.gdx.math.MathUtils.random(360);
@@ -118,8 +128,10 @@ public class ArcherSamouraiBusiness extends AbstractBusiness {
             } else {
                 archer.setRotation(archer.getRotation() + (archer.getRotation() < targetRotation ? 5 : (-5)));
             }
-            if (lookingFor.stepAndComplete())
+            if (lookingFor.stepAndComplete()) {
                 current = new WaitPlayer();
+                archer.talk("Don't care...", Color.WHITE);
+            }
         }
 
     }
