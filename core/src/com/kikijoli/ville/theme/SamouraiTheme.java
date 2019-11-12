@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.maps.tiled.objects.TiledMapTileMapObject;
 import com.kikijoli.ville.drawable.entite.npc.ArcherSamourai;
 import com.kikijoli.ville.drawable.entite.npc.Samourai;
+import com.kikijoli.ville.drawable.entite.object.ArrowObject;
 import com.kikijoli.ville.drawable.entite.object.Help;
 import com.kikijoli.ville.drawable.entite.object.Key;
 import com.kikijoli.ville.drawable.hud.BowTile;
@@ -19,6 +20,13 @@ import java.util.Arrays;
  */
 public class SamouraiTheme extends AbstractTheme {
 
+    private static final String ARROW = "arrow";
+    private static final String HELP = "help";
+    private static final String LOCK = "lock";
+    private static final String KEY = "key";
+    private static final String ARCHERSAMOURAI = "archersamourai";
+    private static final String SAMOURAI = "samourai";
+
     public SamouraiTheme() {
         super(Arrays.asList(new BowTile(), new SwordTile()));
     }
@@ -26,20 +34,23 @@ public class SamouraiTheme extends AbstractTheme {
     @Override
     public void handleFromTmx(TiledMapTileMapObject entite) {
         switch (entite.getName()) {
-            case "samourai":
+            case SAMOURAI:
                 EntiteManager.addEntite(new Samourai(entite.getX(), entite.getY()));
                 break;
-            case "archersamourai":
+            case ARCHERSAMOURAI:
                 EntiteManager.addEntite(new ArcherSamourai(entite.getX(), entite.getY()));
                 break;
-            case "key":
+            case KEY:
                 ObjectManager.objects.add(new Key(entite.getX(), entite.getY()));
                 break;
-            case "lock":
+            case LOCK:
                 LockManager.addLock(entite.getX(), entite.getY());
                 break;
-            case "help":
+            case HELP:
                 ObjectManager.objects.add(new Help(entite.getX(), entite.getY()));
+                break;
+            case ARROW:
+                ObjectManager.objects.add(new ArrowObject(entite.getX(), entite.getY()));
                 break;
         }
 

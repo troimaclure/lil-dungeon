@@ -180,9 +180,9 @@ public class Tmap implements Screen {
 
     private static void drawLights() {
         getRay().setCombinedMatrix(camera.combined,
-            camera.position.x, camera.position.y,
-            camera.viewportWidth * camera.zoom,
-            camera.viewportHeight * camera.zoom);
+                camera.position.x, camera.position.y,
+                camera.viewportWidth * camera.zoom,
+                camera.viewportHeight * camera.zoom);
 
         getRay().updateAndRender();
     }
@@ -235,6 +235,7 @@ public class Tmap implements Screen {
         Gdx.gl20.glClearColor(ThemeManager.currentTheme.getFontColor().r, ThemeManager.currentTheme.getFontColor().g, ThemeManager.currentTheme.getFontColor().b, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
         worldCoordinates = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
+        RankManager.tour();
         ShaderManager.step();
         CameraManager.tour();
         EntiteManager.tour();

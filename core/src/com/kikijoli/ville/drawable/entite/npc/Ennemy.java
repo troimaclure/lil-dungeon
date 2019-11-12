@@ -9,6 +9,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.kikijoli.ville.drawable.entite.Entite;
 import com.kikijoli.ville.manager.EntiteManager;
+import com.kikijoli.ville.manager.RankManager;
 import com.kikijoli.ville.maps.Tmap;
 import com.kikijoli.ville.util.Constantes;
 import java.util.ArrayList;
@@ -92,7 +93,7 @@ public abstract class Ennemy extends Entite {
         this.vision.setColor(alarm);
         this.speed = getMaxSpeed();
         this.talk("See you !", Color.RED);
-
+        RankManager.caught(); 
     }
 
     public int getLookSomewhereElse() {

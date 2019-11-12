@@ -5,6 +5,7 @@
  */
 package com.kikijoli.ville.business;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.kikijoli.ville.abstracts.AbstractAction;
 import com.kikijoli.ville.automation.player.AttackBow;
@@ -63,16 +64,22 @@ public class PlayerBuisiness extends AbstractBusiness {
 
         switch (EntiteManager.player.currentComponent.getClass().getSimpleName()) {
             case "BowComponent":
-                if (bow()) return;
+                bow();
+                break;
             case "SwordComponent":
-                if (sword()) return;
+                sword();
+                break;
         }
 
     }
 
-    private boolean bow() {
-        if (actions.containsKey(BowComponent.class.getSimpleName()) || EntiteManager.arrowCount == 0) {
-            return true;
+    private void bow() {
+        if (EntiteManager.arrowCount == 0) {
+            EntiteManager.player.talk("Arrow needed", Color.WHITE);
+            return;
+        }
+        if (actions.containsKey(BowComponent.class.getSimpleName())) {
+            return;
         }
         SoundManager.playSound(SoundManager.BOW);
         EntiteManager.arrowCount -= 1;
@@ -82,13 +89,12 @@ public class PlayerBuisiness extends AbstractBusiness {
                 actions.remove(BowComponent.class.getSimpleName());
             }
         });
-        return false;
     }
 
-    private boolean sword() {
+    private void sword() {
 
         if (actions.containsKey(SwordComponent.class.getSimpleName())) {
-            return true;
+            return;
         }
         SoundManager.playSound(SoundManager.SWORD);
         actions.put(SwordComponent.class.getSimpleName(), new AttackSword(EntiteManager.player) {
@@ -97,7 +103,6 @@ public class PlayerBuisiness extends AbstractBusiness {
                 actions.remove(SwordComponent.class.getSimpleName());
             }
         });
-        return false;
     }
 
 }

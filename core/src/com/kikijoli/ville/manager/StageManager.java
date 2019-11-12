@@ -48,16 +48,20 @@ public class StageManager {
     public static Integer widthd = 0;
     public static Integer heightd = 0;
 
+    private static final String HEIGHT = "height";
+    private static final String WIDTH = "width";
+
     public static void loadFromXml(String level) {
         tiledMap = new TmxMapLoader().load("stage/" + level + ".tmx");
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
         stopwatch = 60 * 60;
         RankManager.currentStagePoint = 0;
-        widthd = (Integer) tiledMap.getProperties().get("width");
-        heightd = (Integer) tiledMap.getProperties().get("height");
+        widthd = (Integer) tiledMap.getProperties().get(WIDTH);
+        heightd = (Integer) tiledMap.getProperties().get(HEIGHT);
         Tmap.removeAllBoxs();
         GridManager.initialize(widthd, heightd, Constantes.TILESIZE);
         ShadowFBO.lightSize = widthd * Constantes.TILESIZE;
+        EntiteManager.arrowCount = 0;
         createWall();
         createWater();
         createCannotMove();
@@ -65,7 +69,6 @@ public class StageManager {
         createHideOut();
         Move.initialize();
         currentLevel = level;
-        EntiteManager.arrowCount = (int) EntiteManager.entites.stream().filter(e -> e != EntiteManager.player).count();
 
     }
 
