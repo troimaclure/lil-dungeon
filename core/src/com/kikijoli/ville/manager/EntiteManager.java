@@ -6,14 +6,13 @@ import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.kikijoli.ville.drawable.entite.Entite;
-import com.kikijoli.ville.drawable.entite.build.Key;
+import com.kikijoli.ville.drawable.entite.object.Key;
 import com.kikijoli.ville.drawable.entite.npc.Ennemy;
 import com.kikijoli.ville.drawable.entite.npc.Player;
 import com.kikijoli.ville.drawable.entite.projectile.Spell.Spell;
 import com.kikijoli.ville.drawable.entite.simple.Blood;
 import com.kikijoli.ville.listeners.GeneralKeyListener;
 import static com.kikijoli.ville.manager.LockManager.handleDoor;
-import static com.kikijoli.ville.manager.LockManager.playerAddKey;
 import static com.kikijoli.ville.maps.Tmap.spriteBatch;
 import static com.kikijoli.ville.maps.Tmap.worldCoordinates;
 import com.kikijoli.ville.shader.WalkShader;
@@ -97,7 +96,6 @@ public class EntiteManager {
                 move = handleX() || move;
                 playerMove(move);
             }
-            handleGet();
             handleDoor();
         }
         rotatePlayer();
@@ -182,15 +180,6 @@ public class EntiteManager {
         ball = ParticleManager.addParticle("particle/ball.p", 0, 0, 0.5f);
     }
 
-    private static void handleGet() {
-        for (Key key : LockManager.keys) {
-            if (player.getBoundingRectangle().overlaps(key.getBoundingRectangle())) {
-                playerAddKey(key);
-                break;
-            }
-        }
-    }
-
     public static void moveBall() {
         ball.setPosition(worldCoordinates.x, worldCoordinates.y);
         currentBallPosition.x = worldCoordinates.x;
@@ -209,11 +198,14 @@ public class EntiteManager {
         if (entite == player && (player.invincible || player.touched)) return;
         if (entite.shield != null) {
             entite.shield = null;
-            if (entite == player) player.touched = true;
+
             SoundManager.playSound(SoundManager.SHIELD_CRASH);
             return;
         }
-
+        if (entite == player) {
+            player.hurted();
+            if (player.pv > 0) return;
+        }
         addDead(entite);
         ParticleManager.addParticle("particle/blood.p", entite.getX(), entite.getY() + entite.getWidth(), 0.5f);
         entite.buisiness = null;

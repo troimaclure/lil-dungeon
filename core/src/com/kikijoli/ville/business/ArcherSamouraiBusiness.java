@@ -53,12 +53,11 @@ public class ArcherSamouraiBusiness extends AbstractBusiness {
             }
             if (!archer.isAlarmed) return;
             if (archer.see(EntiteManager.player))
-                archer.lookAt(EntiteManager.player);
-            handleBow();
+                handleBow();
         }
 
         private void handleBow() {
-            if (!archer.see(EntiteManager.player)) return;
+            archer.lookAt(EntiteManager.player);
             if (!actions.containsKey(BOW)) {
                 SoundManager.playSound(SoundManager.PREPARE_SPELL);
                 SoundManager.playSound(SoundManager.BOW);

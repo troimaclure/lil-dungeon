@@ -46,7 +46,7 @@ public class SamouraiBusiness extends AbstractBusiness {
         private static final String DASH = "DASH";
         private static final String ATTACK = "ATTACK";
 
-        Count dash = new Count(60, Time.SECONDE);
+        Count dash = new Count(30, Time.SECONDE);
         Count alarmed = new Count(0, 4 * Time.SECONDE);
 
         public AttackPlayer() {

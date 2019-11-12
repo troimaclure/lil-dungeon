@@ -35,4 +35,8 @@ public class Count {
         if (ok) count = 0;
         return ok;
     }
+
+    public int stepAndGet() {
+        return count++;
+    }
 }

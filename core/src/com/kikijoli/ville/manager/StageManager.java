@@ -137,7 +137,7 @@ public class StageManager {
         EntiteManager.clearDead();
         LockManager.doors.clear();
         LockManager.locks.clear();
-        LockManager.keys.clear();
+        ObjectManager.objects.clear();
         EntiteManager.keys.clear();
         DrawManager.entites.clear();
         WaterManager.waters.clear();

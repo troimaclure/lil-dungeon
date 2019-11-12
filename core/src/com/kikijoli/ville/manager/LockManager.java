@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.kikijoli.ville.drawable.entite.build.Door;
-import com.kikijoli.ville.drawable.entite.build.Key;
+import com.kikijoli.ville.drawable.entite.object.Key;
 import com.kikijoli.ville.drawable.entite.build.Lock;
 import static com.kikijoli.ville.manager.EntiteManager.player;
 import static com.kikijoli.ville.manager.StageManager.stopwatch;
@@ -30,7 +30,6 @@ public class LockManager {
     public static ArrayList<Lock> locks = new ArrayList<>();
     public static ArrayList<Rectangle> lockRectangles = new ArrayList<>();
     public static ArrayList<Door> doors = new ArrayList<>();
-    public static ArrayList<Key> keys = new ArrayList<>();
 
     public static void addLock(float x, float y) {
         Lock lock = new Lock(x, y);
@@ -39,18 +38,11 @@ public class LockManager {
         GridManager.setState("1", lock.getBoundingRectangle());
     }
 
-    public static void addKey(float x, float y) {
-        keys.add(new Key(x, y));
-    }
-
     public static void draw() {
         locks.forEach((lock) -> {
             lock.draw(Tmap.spriteBatch);
         });
 
-        keys.forEach((key) -> {
-            key.draw(Tmap.spriteBatch);
-        });
         doors.forEach((t) -> {
             t.draw(Tmap.spriteBatch);
         });
@@ -91,14 +83,6 @@ public class LockManager {
             RankManager.point += MathUtils.transformIpsToSec(stopwatch) * RankManager.TIME_POINT;
             RankManager.point += RankManager.currentStagePoint;
         }
-    }
-
-    public static void playerAddKey(Key key) {
-        SoundManager.playSound(SoundManager.TAKE_KEY);
-        EntiteManager.keys.add(key);
-        LockManager.keys.remove(key);
-        EntiteManager.player.talkDouble("Got key !", Color.BLACK, Color.ORANGE);
-
     }
 
     public static void lockOpen(Lock lock) {

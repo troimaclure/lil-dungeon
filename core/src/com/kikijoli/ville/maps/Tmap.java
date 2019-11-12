@@ -30,7 +30,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
 import com.kikijoli.ville.automation.common.GoTo;
 import com.kikijoli.ville.drawable.entite.Entite;
-import com.kikijoli.ville.drawable.entite.build.Key;
+import com.kikijoli.ville.drawable.entite.object.Key;
 import com.kikijoli.ville.listeners.GeneralKeyListener;
 import com.kikijoli.ville.manager.ProjectileManager;
 import com.kikijoli.ville.manager.CameraManager;
@@ -44,6 +44,7 @@ import com.kikijoli.ville.manager.WaterManager;
 import com.kikijoli.ville.manager.ShaderManager;
 import com.kikijoli.ville.manager.StageManager;
 import com.kikijoli.ville.manager.HudManager;
+import com.kikijoli.ville.manager.ObjectManager;
 import com.kikijoli.ville.manager.RankManager;
 import com.kikijoli.ville.manager.SpellManager;
 import com.kikijoli.ville.manager.ThemeManager;
@@ -82,8 +83,8 @@ public class Tmap implements Screen {
     private static final String SCORE = "SCORE : ";
     private static final String LEVEL_SCORE = "LEVEL SCORE : ";
     public static float delta;
-//    public static ShadowFBO shadowFBO = new ShadowFBO();
 
+//    public static ShadowFBO shadowFBO = new ShadowFBO();
     public static RayHandler getRay() {
         if (ray == null) {
             ray = new RayHandler(getWorld(), Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -168,6 +169,7 @@ public class Tmap implements Screen {
     public static void drawSprites() {
 
         EntiteManager.draw();
+        ObjectManager.draw();
         LockManager.draw();
         DrawManager.draw();
 
@@ -178,9 +180,9 @@ public class Tmap implements Screen {
 
     private static void drawLights() {
         getRay().setCombinedMatrix(camera.combined,
-                camera.position.x, camera.position.y,
-                camera.viewportWidth * camera.zoom,
-                camera.viewportHeight * camera.zoom);
+            camera.position.x, camera.position.y,
+            camera.viewportWidth * camera.zoom,
+            camera.viewportHeight * camera.zoom);
 
         getRay().updateAndRender();
     }
@@ -207,6 +209,7 @@ public class Tmap implements Screen {
         Gdx.input.setInputProcessor(new InputMultiplexer(new GeneralKeyListener()));
         CameraManager.initialize(Constantes.TILESIZE * 15, Constantes.TILESIZE * 10);
         EntiteManager.initialize();
+
         addRain();
         test();
     }
@@ -235,6 +238,7 @@ public class Tmap implements Screen {
         ShaderManager.step();
         CameraManager.tour();
         EntiteManager.tour();
+        ObjectManager.tour();
         ProjectileManager.tour();
         StageManager.tour();
 
@@ -414,8 +418,8 @@ public class Tmap implements Screen {
 
     private void drawTime() {
         MessageManager.SHOWG.setColor(Color.SALMON);
-        float fontX = 50;
-        float fontY = (Gdx.graphics.getHeight() - 50);
+        float fontX = Constantes.TILESIZE;
+        float fontY = (Gdx.graphics.getHeight() - Constantes.TILESIZE);
         MessageManager.SHOWG.draw(hudBatch, TIME + Integer.toString(MathUtils.transformIpsToSec(StageManager.stopwatch)), fontX, fontY);
         MessageManager.SHOWG.draw(hudBatch, SCORE + Integer.toString(RankManager.point), fontX + 200, fontY);
         MessageManager.SHOWG.draw(hudBatch, LEVEL_SCORE + Integer.toString(RankManager.currentStagePoint), fontX + 450, fontY);

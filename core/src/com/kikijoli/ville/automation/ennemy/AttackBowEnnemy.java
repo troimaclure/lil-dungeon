@@ -15,7 +15,7 @@ import com.kikijoli.ville.drawable.entite.Entite;
  */
 public abstract class AttackBowEnnemy extends AttackBow {
 
-    int count = 0, delay = 60;
+    int count = 0, delay = 20;
 
     public AttackBowEnnemy(Entite entite, Vector2 destination) {
         super(entite, destination);
