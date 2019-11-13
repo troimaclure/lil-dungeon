@@ -10,7 +10,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputAdapter;
 import com.kikijoli.ville.abstracts.AbstractAction;
-import com.kikijoli.ville.business.PlayerBuisiness;
+import com.kikijoli.ville.business.PlayerBusiness;
 import com.kikijoli.ville.manager.EntiteManager;
 import com.kikijoli.ville.manager.HudManager;
 import com.kikijoli.ville.manager.StageManager;
@@ -135,11 +135,11 @@ public class GeneralKeyListener extends InputAdapter {
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 
         rightButton = button == Input.Buttons.RIGHT;
-        if (((PlayerBuisiness) EntiteManager.player.buisiness) != null)
+        if (((PlayerBusiness) EntiteManager.player.buisiness) != null)
             if (rightButton) {
-                ((PlayerBuisiness) EntiteManager.player.buisiness).dash();
+                ((PlayerBusiness) EntiteManager.player.buisiness).dash();
             } else {
-                ((PlayerBuisiness) EntiteManager.player.buisiness).attack();
+                ((PlayerBusiness) EntiteManager.player.buisiness).attack();
             }
         return super.touchDown(screenX, screenY, pointer, button); //To change body of generated methods, choose Tools | Templates.
     }

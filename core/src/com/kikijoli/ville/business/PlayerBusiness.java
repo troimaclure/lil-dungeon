@@ -12,7 +12,9 @@ import com.kikijoli.ville.automation.player.AttackBow;
 import com.kikijoli.ville.automation.player.Dash;
 import com.kikijoli.ville.automation.common.None;
 import com.kikijoli.ville.automation.player.AttackSword;
+import com.kikijoli.ville.automation.player.ThrowPebble;
 import com.kikijoli.ville.component.BowComponent;
+import com.kikijoli.ville.component.PebbleComponent;
 import com.kikijoli.ville.component.SwordComponent;
 import com.kikijoli.ville.manager.EntiteManager;
 import com.kikijoli.ville.manager.SoundManager;
@@ -23,12 +25,12 @@ import com.kikijoli.ville.util.Count;
  *
  * @author Arthur
  */
-public class PlayerBuisiness extends AbstractBusiness {
+public class PlayerBusiness extends AbstractBusiness {
 
     public static final String DASH = "Dash";
     Count touchable = new Count(0, 60 * 2);
 
-    public PlayerBuisiness() {
+    public PlayerBusiness() {
     }
 
     @Override
@@ -69,6 +71,9 @@ public class PlayerBuisiness extends AbstractBusiness {
             case "SwordComponent":
                 sword();
                 break;
+            case "PebbleComponent":
+                pebble();
+                break;
         }
 
     }
@@ -101,6 +106,24 @@ public class PlayerBuisiness extends AbstractBusiness {
             @Override
             public void onFinish() {
                 actions.remove(SwordComponent.class.getSimpleName());
+            }
+        });
+    }
+
+    private void pebble() {
+        if (EntiteManager.pebbleCount <= 0) {
+            EntiteManager.player.talk("Pebble needed", Color.WHITE);
+            return;
+        }
+        if (actions.containsKey(PebbleComponent.class.getSimpleName())) {
+            return;
+        }
+        SoundManager.playSound(SoundManager.PEBBLE);
+        EntiteManager.pebbleCount -= 1;
+        actions.put(PebbleComponent.class.getSimpleName(), new ThrowPebble(EntiteManager.player, new Vector2(Tmap.worldCoordinates.x, Tmap.worldCoordinates.y)) {
+            @Override
+            public void onFinish() {
+                actions.remove(PebbleComponent.class.getSimpleName());
             }
         });
     }

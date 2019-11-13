@@ -7,7 +7,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.kikijoli.ville.automation.prevent.Prevent;
 import com.kikijoli.ville.drawable.entite.Entite;
+import com.kikijoli.ville.drawable.entite.simple.Pebble;
 import com.kikijoli.ville.manager.EntiteManager;
 import com.kikijoli.ville.manager.RankManager;
 import com.kikijoli.ville.maps.Tmap;
@@ -34,6 +36,7 @@ public abstract class Ennemy extends Entite {
     public Vector2 initial;
     public Color calm = new Color(0, 0, 0, 0.3f);
     public Color alarm = Color.RED;
+    public Prevent prevent;
 
     public Ennemy(String path, float srcX, float srcY, float srcWidth, float srcHeight) {
         super(path, srcX, srcY, srcWidth, srcHeight);
@@ -93,7 +96,7 @@ public abstract class Ennemy extends Entite {
         this.vision.setColor(alarm);
         this.speed = getMaxSpeed();
         this.talk("See you !", Color.RED);
-        RankManager.caught(); 
+        RankManager.caught();
     }
 
     public int getLookSomewhereElse() {
@@ -108,5 +111,7 @@ public abstract class Ennemy extends Entite {
     public abstract int getMinSpeed();
 
     public abstract int getMaxSpeed();
+
+  
 
 }

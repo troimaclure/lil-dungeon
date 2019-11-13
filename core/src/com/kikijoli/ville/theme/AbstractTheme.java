@@ -15,6 +15,7 @@ public abstract class AbstractTheme {
 
     public AbstractTheme(List<Tile> tiles) {
         this.tiles = tiles;
+        this.tiles.get(0).selected = true;
     }
 
     public List<Tile> getTiles() {

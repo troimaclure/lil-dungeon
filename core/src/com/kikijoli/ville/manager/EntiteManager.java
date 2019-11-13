@@ -5,19 +5,23 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.kikijoli.ville.automation.prevent.Prevent;
 import com.kikijoli.ville.drawable.entite.Entite;
 import com.kikijoli.ville.drawable.entite.object.Key;
 import com.kikijoli.ville.drawable.entite.npc.Ennemy;
 import com.kikijoli.ville.drawable.entite.npc.Player;
 import com.kikijoli.ville.drawable.entite.projectile.Spell.Spell;
 import com.kikijoli.ville.drawable.entite.simple.Blood;
+import com.kikijoli.ville.drawable.entite.simple.Pebble;
 import com.kikijoli.ville.listeners.GeneralKeyListener;
 import static com.kikijoli.ville.manager.LockManager.handleDoor;
 import static com.kikijoli.ville.maps.Tmap.spriteBatch;
 import static com.kikijoli.ville.maps.Tmap.worldCoordinates;
 import com.kikijoli.ville.shader.WalkShader;
+import com.kikijoli.ville.util.Count;
 import com.kikijoli.ville.util.MathUtils;
 import com.kikijoli.ville.util.Move;
+import com.kikijoli.ville.util.Time;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -30,12 +34,13 @@ public class EntiteManager {
     public static Player player = new Player(100, 100);
     public static ArrayList<Entite> entites = new ArrayList<>();
     public static ArrayList<Entite> removes = new ArrayList<>();
-    private static final ArrayList<Entite> deads = new ArrayList<>();
+    private static ArrayList<Entite> deads = new ArrayList<>();
     public static ParticleEffect ball;
-    public static final ArrayList<Key> keys = new ArrayList<>();
+    public static ArrayList<Key> keys = new ArrayList<>();
     public static Vector2 currentBallPosition = new Vector2();
     public static boolean playerDead;
     public static int arrowCount = 0;
+    public static int pebbleCount = 3;
     public static Vector2 currentMove = new Vector2(0, 0);
     private static int rotationExpected;
 
@@ -279,6 +284,18 @@ public class EntiteManager {
             if (sonar.contains(center.x, center.y)) target.add(entite);
         });
         return target;
+    }
+
+    public static void pebble(Pebble pebble) {
+        entites.stream().filter(e -> e instanceof Ennemy).map(e -> ((Ennemy) e)).forEach(e -> {
+            Vector2 center = pebble.getCenter();
+            if (e.sonar.contains(center.x, center.y)) {
+                e.talk("uh ?", Color.ORANGE);
+                e.prevent = new Prevent(new Count(0, 2 * Time.SECONDE), () -> {
+                    e.lookAt(pebble);
+                });
+            }
+        });
     }
 
     private EntiteManager() {

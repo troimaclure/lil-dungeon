@@ -8,6 +8,7 @@ import com.kikijoli.ville.drawable.entite.object.ArrowObject;
 import com.kikijoli.ville.drawable.entite.object.Help;
 import com.kikijoli.ville.drawable.entite.object.Key;
 import com.kikijoli.ville.drawable.hud.BowTile;
+import com.kikijoli.ville.drawable.hud.PebbleTile;
 import com.kikijoli.ville.drawable.hud.SwordTile;
 import com.kikijoli.ville.manager.EntiteManager;
 import com.kikijoli.ville.manager.LockManager;
@@ -28,7 +29,8 @@ public class SamouraiTheme extends AbstractTheme {
     private static final String SAMOURAI = "samourai";
 
     public SamouraiTheme() {
-        super(Arrays.asList(new BowTile(), new SwordTile()));
+        super(Arrays.asList(new BowTile(), new SwordTile(), new PebbleTile()));
+        
     }
 
     @Override

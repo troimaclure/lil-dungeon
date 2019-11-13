@@ -20,12 +20,10 @@ import com.kikijoli.ville.util.Time;
  *
  * @author Arthur
  */
-public class ArcherSamouraiBusiness extends AbstractBusiness {
+public class ArcherSamouraiBusiness extends EnnemyBusiness {
 
-    ArcherSamourai archer;
-
-    public ArcherSamouraiBusiness(ArcherSamourai guard) {
-        this.archer = guard;
+    public ArcherSamouraiBusiness(ArcherSamourai ennemy) {
+        super(ennemy);
     }
 
     @Override
@@ -40,28 +38,28 @@ public class ArcherSamouraiBusiness extends AbstractBusiness {
 
         public AttackPlayer() {
             actions.clear();
-            archer.alarmed();
-            Ennemy.callFriend(archer);
+            ennemy.alarmed();
+            Ennemy.callFriend(ennemy);
         }
 
         @Override
         public void act() {
-            if (archer.isAlarmed && !archer.see(EntiteManager.player)) {
+            if (ennemy.isAlarmed && !ennemy.see(EntiteManager.player)) {
                 if (alarmed.stepAndComplete()) {
                     current = new LostPlayer();
                 }
             }
-            if (!archer.isAlarmed) return;
-            if (archer.see(EntiteManager.player))
+            if (!ennemy.isAlarmed) return;
+            if (ennemy.see(EntiteManager.player))
                 handleBow();
         }
 
         private void handleBow() {
-            archer.lookAt(EntiteManager.player);
+            ennemy.lookAt(EntiteManager.player);
             if (!actions.containsKey(BOW)) {
                 SoundManager.playSound(SoundManager.PREPARE_SPELL);
                 SoundManager.playSound(SoundManager.BOW);
-                actions.put(BOW, new AttackBowEnnemy(archer, MathUtils.getCenter(EntiteManager.player.getBoundingRectangle())) {
+                actions.put(BOW, new AttackBowEnnemy(ennemy, MathUtils.getCenter(EntiteManager.player.getBoundingRectangle())) {
                     @Override
                     public void onFinish() {
                         actions.remove(BOW);
@@ -85,14 +83,14 @@ public class ArcherSamouraiBusiness extends AbstractBusiness {
         public void act() {
 
             if (delay.stepAndComplete()) {
-                currentVision = archer.getLookSomewhereElse();
+                currentVision = ennemy.getLookSomewhereElse();
             }
-            if (!com.badlogic.gdx.math.MathUtils.isEqual(currentVision, archer.getRotation(), 10)) {
-                float angle = archer.getRotation() > currentVision ? archer.getRotation() - 5 : archer.getRotation() + 5;
-                archer.setRotation(angle);
+            if (!com.badlogic.gdx.math.MathUtils.isEqual(currentVision, ennemy.getRotation(), 10)) {
+                float angle = ennemy.getRotation() > currentVision ? ennemy.getRotation() - 5 : ennemy.getRotation() + 5;
+                ennemy.setRotation(angle);
             }
-            if (archer.see(EntiteManager.player) || archer.isAlarmed) {
-                archer.alarmed();
+            if (ennemy.see(EntiteManager.player) || ennemy.isAlarmed) {
+                ennemy.alarmed();
                 current = new AttackPlayer();
             }
         }
@@ -107,29 +105,29 @@ public class ArcherSamouraiBusiness extends AbstractBusiness {
         private float targetRotation;
 
         public LostPlayer() {
-            archer.shader = null;
-            archer.calmDown();
+            ennemy.shader = null;
+            ennemy.calmDown();
             actions.clear();
         }
 
         @Override
         public void act() {
 
-            if (archer.see(EntiteManager.player) || archer.isAlarmed) {
+            if (ennemy.see(EntiteManager.player) || ennemy.isAlarmed) {
                 current = new AttackPlayer();
                 System.out.println("set to attack");
                 return;
             }
-            if (com.badlogic.gdx.math.MathUtils.isEqual(archer.getRotation(), targetRotation, 10)) {
+            if (com.badlogic.gdx.math.MathUtils.isEqual(ennemy.getRotation(), targetRotation, 10)) {
                 if (waitRotation.stepAndComplete()) {
                     targetRotation = com.badlogic.gdx.math.MathUtils.random(360);
                 }
             } else {
-                archer.setRotation(archer.getRotation() + (archer.getRotation() < targetRotation ? 5 : (-5)));
+                ennemy.setRotation(ennemy.getRotation() + (ennemy.getRotation() < targetRotation ? 5 : (-5)));
             }
             if (lookingFor.stepAndComplete()) {
                 current = new WaitPlayer();
-                archer.talk("Don't care...", Color.WHITE);
+                ennemy.talk("Don't care...", Color.WHITE);
             }
         }
 

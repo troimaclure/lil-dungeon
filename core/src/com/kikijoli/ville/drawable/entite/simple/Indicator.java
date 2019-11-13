@@ -52,6 +52,6 @@ public class Indicator implements ISpriteDrawable {
         MessageManager.SHOWG.setColor(this.color);
         MessageManager.SHOWG.draw(batch, message, x + Constantes.TILESIZE / 2, y + Constantes.TILESIZE / 2);
         count -= 1;
-
+        
     }
 }

@@ -180,14 +180,15 @@ public class Tmap implements Screen {
 
     private static void drawLights() {
         getRay().setCombinedMatrix(camera.combined,
-                camera.position.x, camera.position.y,
-                camera.viewportWidth * camera.zoom,
-                camera.viewportHeight * camera.zoom);
+            camera.position.x, camera.position.y,
+            camera.viewportWidth * camera.zoom,
+            camera.viewportHeight * camera.zoom);
 
         getRay().updateAndRender();
     }
 
     private final Sprite arrowCountSprite = new Sprite(TextureUtil.getTexture("sprite/arrow.png"));
+    private final Sprite pebbleCountSprite = new Sprite(TextureUtil.getTexture("sprite/pebble.png"));
     Box2DDebugRenderer debugRenderer = new Box2DDebugRenderer();
 
     public Tmap() {
@@ -295,7 +296,9 @@ public class Tmap implements Screen {
 
         drawKeys();
         drawArrowCount();
+        drawPebbleCount();
         drawTime();
+
         if (EntiteManager.playerDead) {
             drawDeadMessage();
         }
@@ -437,7 +440,15 @@ public class Tmap implements Screen {
     private void drawArrowCount() {
         hudBatch.setColor(Color.WHITE);
         hudBatch.draw(arrowCountSprite.getTexture(), Gdx.graphics.getWidth() - Constantes.TILESIZE * 2, Gdx.graphics.getHeight() - Constantes.TILESIZE * 1.5f, Constantes.TILESIZE, Constantes.TILESIZE);
+        MessageManager.SHOWG.setColor(Color.SALMON);
         MessageManager.SHOWG.draw(hudBatch, "x " + EntiteManager.arrowCount, Gdx.graphics.getWidth() - Constantes.TILESIZE, Gdx.graphics.getHeight() - Constantes.TILESIZE);
+    }
+
+    private void drawPebbleCount() {
+        hudBatch.setColor(Color.WHITE);
+        hudBatch.draw(pebbleCountSprite.getTexture(), Gdx.graphics.getWidth() - Constantes.TILESIZE * 2, Gdx.graphics.getHeight() - Constantes.TILESIZE * 3f, Constantes.TILESIZE, Constantes.TILESIZE);
+        MessageManager.SHOWG.setColor(Color.SALMON);
+        MessageManager.SHOWG.draw(hudBatch, "x " + EntiteManager.pebbleCount, Gdx.graphics.getWidth() - Constantes.TILESIZE, Gdx.graphics.getHeight() - Constantes.TILESIZE * 2);
     }
 
     @Override

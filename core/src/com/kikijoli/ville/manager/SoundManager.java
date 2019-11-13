@@ -36,6 +36,7 @@ public class SoundManager {
     public static final String TAKE_KEY = "TAKE_KEY";
     public static final String TRAP_CLIC = "TRAP_CLIC";
     public static final String TRAP_EXPLODE = "TRAP_EXPLODE";
+    public static final String PEBBLE = "PEBBLE";
 
     private static final HashMap<String, Sound> sounds = new HashMap<>();
 

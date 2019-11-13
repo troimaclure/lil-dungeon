@@ -7,13 +7,14 @@ package com.kikijoli.ville.drawable.entite.npc;
 
 import box2dLight.PointLight;
 import com.badlogic.gdx.graphics.Color;
-import com.kikijoli.ville.business.PlayerBuisiness;
+import com.kikijoli.ville.business.PlayerBusiness;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.kikijoli.ville.business.AbstractBusiness;
 import com.kikijoli.ville.component.BowComponent;
 import com.kikijoli.ville.component.IComponent;
+import com.kikijoli.ville.component.PebbleComponent;
 import com.kikijoli.ville.component.SwordComponent;
 import com.kikijoli.ville.drawable.entite.Entite;
 import com.kikijoli.ville.interfaces.IBusiness;
@@ -48,7 +49,7 @@ public final class Player extends Entite implements IBusiness, IShapeDrawable {
 //        this.shield = new PlayerShield((int) this.getX(), (int) this.getY());
         this.components.addAll(Arrays.asList(new IComponent[]{new BowComponent(this, (t) -> {
             return new Vector2(Tmap.worldCoordinates.x, Tmap.worldCoordinates.y);
-        }), new SwordComponent(this)}));
+        }), new SwordComponent(this), new PebbleComponent(this)}));
         this.currentComponent = this.components.get(0);
     }
 
@@ -78,7 +79,7 @@ public final class Player extends Entite implements IBusiness, IShapeDrawable {
 
     @Override
     public AbstractBusiness getDefault() {
-        return new PlayerBuisiness();
+        return new PlayerBusiness();
     }
 
     private float calculateDashWidth() {
