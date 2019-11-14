@@ -56,12 +56,14 @@ public class StageManager {
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
         stopwatch = 60 * 60;
         RankManager.currentStagePoint = 0;
+
         widthd = (Integer) tiledMap.getProperties().get(WIDTH);
         heightd = (Integer) tiledMap.getProperties().get(HEIGHT);
         Tmap.removeAllBoxs();
         GridManager.initialize(widthd, heightd, Constantes.TILESIZE);
         ShadowFBO.lightSize = widthd * Constantes.TILESIZE;
         EntiteManager.arrowCount = 0;
+        EntiteManager.pebbleCount = 3;
         createWall();
         createWater();
         createCannotMove();
@@ -135,6 +137,7 @@ public class StageManager {
 
     public static void setLevel(String level) {
 
+        CheckpointManager.currentCheckpoint = null;
         EntiteManager.entites.removeIf(e -> e != EntiteManager.player);
         ParticleManager.particleEffects.removeIf(e -> e != EntiteManager.ball);
         EntiteManager.clearDead();
@@ -145,6 +148,7 @@ public class StageManager {
         DrawManager.entites.clear();
         WaterManager.waters.clear();
         DrawManager.spritesFilled.clear();
+        DrawManager.spritesDrawed.clear();
         ThemeManager.currentTheme.getTiles().stream().forEach(e -> {
             e.disabled = false;
             e.count = 0;
@@ -161,10 +165,15 @@ public class StageManager {
 
     public static void reload() {
         EntiteManager.playerDead = false;
+
+        if (handleChekpoint()) {
+            return;
+        }
         EntiteManager.clearDead();
         EntiteManager.player = new Player(0, 0);
         HudManager.setSelected(0);
         EntiteManager.addEntite(player);
+
         setLevel(getCurrentLevel());
     }
 
@@ -174,6 +183,12 @@ public class StageManager {
 
     public static boolean isClearZone(Vector2 moved, List<Rectangle> rectangle) {
         return !rectangle.stream().filter(e -> e.contains(moved)).findFirst().isPresent();
+    }
+
+    private static boolean handleChekpoint() {
+        if (CheckpointManager.currentCheckpoint == null) return false;
+        CheckpointManager.currentCheckpoint.gameState.load();
+        return true;
     }
 
     private StageManager() {

@@ -27,5 +27,4 @@ public class Arrow extends Bullet {
     public List<Rectangle> getMouvementFilter() {
         return Move.BULLET_MOVE_FILTER;
     }
-
 }

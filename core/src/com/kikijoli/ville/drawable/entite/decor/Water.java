@@ -24,5 +24,4 @@ public class Water extends Decor {
     public void draw(SpriteBatch batch) {
         super.draw(batch);
     }
-
 }

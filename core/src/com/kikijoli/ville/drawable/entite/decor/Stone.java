@@ -6,7 +6,6 @@
 package com.kikijoli.ville.drawable.entite.decor;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.kikijoli.ville.maps.Tmap;
 import com.kikijoli.ville.util.Constantes;
 
 /**

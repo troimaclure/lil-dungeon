@@ -34,7 +34,7 @@ public class EntiteManager {
     public static Player player = new Player(100, 100);
     public static ArrayList<Entite> entites = new ArrayList<>();
     public static ArrayList<Entite> removes = new ArrayList<>();
-    private static ArrayList<Entite> deads = new ArrayList<>();
+    public static ArrayList<Entite> deads = new ArrayList<>();
     public static ParticleEffect ball;
     public static ArrayList<Key> keys = new ArrayList<>();
     public static Vector2 currentBallPosition = new Vector2();

@@ -35,6 +35,7 @@ import com.kikijoli.ville.listeners.GeneralKeyListener;
 import com.kikijoli.ville.manager.ProjectileManager;
 import com.kikijoli.ville.manager.CameraManager;
 import static com.kikijoli.ville.manager.CameraManager.camera;
+import com.kikijoli.ville.manager.CheckpointManager;
 import com.kikijoli.ville.manager.DrawManager;
 import com.kikijoli.ville.manager.EntiteManager;
 import com.kikijoli.ville.manager.LockManager;
@@ -169,6 +170,7 @@ public class Tmap implements Screen {
     public static void drawSprites() {
 
         EntiteManager.draw();
+        CheckpointManager.draw();
         ObjectManager.draw();
         LockManager.draw();
         DrawManager.draw();
@@ -240,6 +242,7 @@ public class Tmap implements Screen {
         ShaderManager.step();
         CameraManager.tour();
         EntiteManager.tour();
+        CheckpointManager.tour();
         ObjectManager.tour();
         ProjectileManager.tour();
         StageManager.tour();

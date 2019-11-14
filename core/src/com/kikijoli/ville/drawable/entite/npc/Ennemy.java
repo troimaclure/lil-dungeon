@@ -9,7 +9,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.kikijoli.ville.automation.prevent.Prevent;
 import com.kikijoli.ville.drawable.entite.Entite;
-import com.kikijoli.ville.drawable.entite.simple.Pebble;
 import com.kikijoli.ville.manager.EntiteManager;
 import com.kikijoli.ville.manager.RankManager;
 import com.kikijoli.ville.maps.Tmap;
@@ -34,8 +33,8 @@ public abstract class Ennemy extends Entite {
     public PointLight sonar;
     public boolean isAlarmed;
     public Vector2 initial;
-    public Color calm = new Color(0, 0, 0, 0.3f);
-    public Color alarm = Color.RED;
+    public transient Color calm = new Color(0, 0, 0, 0.3f);
+    public transient Color alarm = Color.RED;
     public Prevent prevent;
 
     public Ennemy(String path, float srcX, float srcY, float srcWidth, float srcHeight) {
@@ -47,6 +46,9 @@ public abstract class Ennemy extends Entite {
 
     public Ennemy(String path, float srcX, float srcY) {
         this(path, srcX, srcY, Constantes.TILESIZE, Constantes.TILESIZE);
+    }
+
+    public Ennemy() {
     }
 
     public void initVision(float srcX, float srcY) {
@@ -112,6 +114,68 @@ public abstract class Ennemy extends Entite {
 
     public abstract int getMaxSpeed();
 
-  
+    public Body getBody() {
+        return body;
+    }
+
+    public void setBody(Body body) {
+        this.body = body;
+    }
+
+    public ConeLight getVision() {
+        return vision;
+    }
+
+    public void setVision(ConeLight vision) {
+        this.vision = vision;
+    }
+
+    public PointLight getSonar() {
+        return sonar;
+    }
+
+    public void setSonar(PointLight sonar) {
+        this.sonar = sonar;
+    }
+
+    public boolean isIsAlarmed() {
+        return isAlarmed;
+    }
+
+    public void setIsAlarmed(boolean isAlarmed) {
+        this.isAlarmed = isAlarmed;
+    }
+
+    public Vector2 getInitial() {
+        return initial;
+    }
+
+    public void setInitial(Vector2 initial) {
+        this.initial = initial;
+    }
+
+    public Color getCalm() {
+        return calm;
+    }
+
+    public void setCalm(Color calm) {
+        this.calm = calm;
+    }
+
+    public Color getAlarm() {
+        return alarm;
+    }
+
+    public void setAlarm(Color alarm) {
+        this.alarm = alarm;
+    }
+
+    public Prevent getPrevent() {
+        return prevent;
+    }
+
+    public void setPrevent(Prevent prevent) {
+        this.prevent = prevent;
+    }
 
 }

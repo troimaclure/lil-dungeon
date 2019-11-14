@@ -21,6 +21,7 @@ import com.kikijoli.ville.util.TextureUtil;
 import com.kikijoli.ville.interfaces.ISpriteDrawable;
 import com.kikijoli.ville.manager.MessageManager;
 import com.kikijoli.ville.util.MathUtils;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -28,7 +29,7 @@ import java.util.Optional;
  *
  * @author troïmaclure
  */
-public abstract class Entite extends Sprite implements ISpriteDrawable {
+public abstract class Entite extends Sprite implements ISpriteDrawable, Serializable {
 
     public ArrayList<IComponent> components = new ArrayList<>();
     public IComponent currentComponent;
@@ -42,10 +43,13 @@ public abstract class Entite extends Sprite implements ISpriteDrawable {
     public int speed = 2;
     public int strenght = 2;
     public Vector2 centerOrigin;
-    public int width;
-    public int height;
+    public int customWidth;
+    public int customHeight;
     public ArrayList<AbstractEffect> effects = new ArrayList<>();
     public PlayerShield shield;
+
+    public Entite() {
+    }
 
     public Entite(String path, float srcX, float srcY, float srcWidth, float srcHeight) {
         super(TextureUtil.getTexture(path), (int) srcX, (int) srcY, (int) srcWidth, (int) srcHeight);
@@ -53,8 +57,8 @@ public abstract class Entite extends Sprite implements ISpriteDrawable {
         this.setY(srcY);
         calculateAnchors();
         centerOrigin = MathUtils.getCenter(new Rectangle(0, 0, srcWidth, srcHeight));
-        width = (int) srcWidth;
-        height = (int) srcHeight;
+        customWidth = (int) srcWidth;
+        customHeight = (int) srcHeight;
     }
 
     public Entite(String path, float x, float y) {
@@ -70,16 +74,16 @@ public abstract class Entite extends Sprite implements ISpriteDrawable {
             this.shield.draw(batch);
         }
         batch.draw(getTexture(),
-                getX(), getY(),
-                centerOrigin.x,
-                centerOrigin.y,
-                (int) width, (int) height,
-                1, 1,
-                getRotation(),
-                (int) 0,
-                (int) 0,
-                (int) getTexture().getWidth(), (int) getTexture().getHeight(),
-                false, false);
+            getX(), getY(),
+            centerOrigin.x,
+            centerOrigin.y,
+            (int) customWidth, (int) customHeight,
+            1, 1,
+            getRotation(),
+            (int) 0,
+            (int) 0,
+            (int) getTexture().getWidth(), (int) getTexture().getHeight(),
+            false, false);
         if (currentComponent != null) {
             this.currentComponent.draw(batch);
         }
@@ -139,9 +143,137 @@ public abstract class Entite extends Sprite implements ISpriteDrawable {
     }
 
     public void lookAt(Entite e) {
-
         Vector2 center = getCenter();
         this.setRotation(90 + MathUtils.getRotation(e.getX(), e.getY(), center.x, center.y));
 
     }
+
+    public ArrayList<IComponent> getComponents() {
+        return components;
+    }
+
+    public void setComponents(ArrayList<IComponent> components) {
+        this.components = components;
+    }
+
+    public IComponent getCurrentComponent() {
+        return currentComponent;
+    }
+
+    public void setCurrentComponent(IComponent currentComponent) {
+        this.currentComponent = currentComponent;
+    }
+
+    public boolean isIsTouchable() {
+        return isTouchable;
+    }
+
+    public void setIsTouchable(boolean isTouchable) {
+        this.isTouchable = isTouchable;
+    }
+
+    public int getPoint() {
+        return point;
+    }
+
+    public void setPoint(int point) {
+        this.point = point;
+    }
+
+    public Circle getAnchor() {
+        return anchor;
+    }
+
+    public void setAnchor(Circle anchor) {
+        this.anchor = anchor;
+    }
+
+    public boolean isGood() {
+        return good;
+    }
+
+    public void setGood(boolean good) {
+        this.good = good;
+    }
+
+    public AbstractShader getShader() {
+        return shader;
+    }
+
+    public void setShader(AbstractShader shader) {
+        this.shader = shader;
+    }
+
+    public boolean isVisible() {
+        return visible;
+    }
+
+    public void setVisible(boolean visible) {
+        this.visible = visible;
+    }
+
+    public AbstractBusiness getBuisiness() {
+        return buisiness;
+    }
+
+    public void setBuisiness(AbstractBusiness buisiness) {
+        this.buisiness = buisiness;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
+
+    public int getStrenght() {
+        return strenght;
+    }
+
+    public void setStrenght(int strenght) {
+        this.strenght = strenght;
+    }
+
+    public Vector2 getCenterOrigin() {
+        return centerOrigin;
+    }
+
+    public void setCenterOrigin(Vector2 centerOrigin) {
+        this.centerOrigin = centerOrigin;
+    }
+
+    public ArrayList<AbstractEffect> getEffects() {
+        return effects;
+    }
+
+    public void setEffects(ArrayList<AbstractEffect> effects) {
+        this.effects = effects;
+    }
+
+    public PlayerShield getShield() {
+        return shield;
+    }
+
+    public void setShield(PlayerShield shield) {
+        this.shield = shield;
+    }
+
+    public int getCustomWidth() {
+        return customWidth;
+    }
+
+    public void setCustomWidth(int customWidth) {
+        this.customWidth = customWidth;
+    }
+
+    public int getCustomHeight() {
+        return customHeight;
+    }
+
+    public void setCustomHeight(int customHeight) {
+        this.customHeight = customHeight;
+    }
+
 }
