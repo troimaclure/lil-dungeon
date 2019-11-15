@@ -18,6 +18,11 @@ public class Blood implements IShapeDrawable {
         this.bounds = bounds;
     }
 
+    public Blood(Rectangle bounds , int radius) {
+        this.bounds = bounds;
+        this.radius = radius ; 
+    }
+
     @Override
     public void draw(ShapeRenderer batch) {
         batch.setColor(Color.RED);

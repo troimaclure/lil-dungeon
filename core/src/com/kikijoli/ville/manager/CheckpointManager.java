@@ -14,12 +14,9 @@ public class CheckpointManager {
     public static ArrayList<Firecamp> firecamps = new ArrayList<>();
 
     public static void tour() {
-        for (Firecamp firecamp : firecamps) {
-            if (firecamp.touch) continue;
-            if (EntiteManager.player.getBoundingRectangle().overlaps(firecamp.getBoundingRectangle())) {
-                firecamp.touch();
-            }
-        }
+        firecamps.stream().filter((firecamp) -> !(firecamp.touch)).filter((firecamp) -> (EntiteManager.player.getBoundingRectangle().overlaps(firecamp.getBoundingRectangle()))).forEachOrdered((firecamp) -> {
+            firecamp.touch();
+        });
     }
 
     public static void draw() {

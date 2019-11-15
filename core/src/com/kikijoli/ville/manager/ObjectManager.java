@@ -31,4 +31,7 @@ public class ObjectManager {
         objects.removeAll(remove);
     }
 
+    public static void addObject(Entite entite) {
+        objects.add(entite);
+    }
 }

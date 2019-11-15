@@ -26,6 +26,7 @@ public final class Samourai extends Ennemy implements IBusiness {
         this.point = 1000;
         this.components.addAll(Arrays.asList(new IComponent[]{new SwordComponent(this)}));
         this.currentComponent = this.components.get(0);
+        this.pv = 1;
     }
 
     @Override

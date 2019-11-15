@@ -21,7 +21,7 @@ public class ArrowObject extends Entite implements IObject {
 
     @Override
     public void get() {
-        EntiteManager.player.talk("Arrow +1", Color.WHITE);
+        EntiteManager.player.talkDouble("Arrow +1", Color.BLACK, Color.CYAN);
         EntiteManager.arrowCount += 1;
     }
 }

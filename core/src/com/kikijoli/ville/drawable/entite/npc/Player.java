@@ -19,6 +19,7 @@ import com.kikijoli.ville.component.SwordComponent;
 import com.kikijoli.ville.drawable.entite.Entite;
 import com.kikijoli.ville.interfaces.IBusiness;
 import com.kikijoli.ville.interfaces.IShapeDrawable;
+import com.kikijoli.ville.interfaces.Ipv;
 import static com.kikijoli.ville.manager.EntiteManager.player;
 import com.kikijoli.ville.maps.Tmap;
 import com.kikijoli.ville.util.Constantes;
@@ -28,7 +29,7 @@ import java.util.Arrays;
  *
  * @author troïmaclure
  */
-public final class Player extends Entite implements IBusiness, IShapeDrawable {
+public final class Player extends Entite implements IBusiness, IShapeDrawable, Ipv {
 
     private static final String SPRITESIMPLEPNG = "sprite/simple.png";
     public float dashTotal = 2;
@@ -37,11 +38,10 @@ public final class Player extends Entite implements IBusiness, IShapeDrawable {
     public PointLight vision;
     private boolean hide;
     public boolean invincible = false;
-    public boolean touched = false;
     public int maxPv = 3;
     public int pv = maxPv;
 
-    public Player(int srcX, int srcY) {
+    public Player(float srcX, float srcY) {
         super(SPRITESIMPLEPNG, srcX, srcY);
         this.buisiness = this.getDefault();
         good = true;
@@ -57,11 +57,9 @@ public final class Player extends Entite implements IBusiness, IShapeDrawable {
     public void draw(SpriteBatch batch) {
         batch.setColor(Color.WHITE);
         if (this.invincible) batch.setColor(Color.RED);
-        if (this.touched || this.hide)
+        if (this.hide)
             batch.setColor(batch.getColor().r, batch.getColor().g, batch.getColor().b, 0.5f);
         super.draw(batch);
-        batch.setColor(Color.WHITE);
-        batch.setColor(batch.getColor().r, batch.getColor().g, batch.getColor().b, 1.0f);
     }
 
     @Override
@@ -106,10 +104,19 @@ public final class Player extends Entite implements IBusiness, IShapeDrawable {
     }
 
     public void hurted() {
-        player.touched = true;
-        player.pv -= 1;
+
         player.talk("Ouch", Color.RED);
 
+    }
+
+    @Override
+    public int getPv() {
+        return this.pv;
+    }
+
+    @Override
+    public void setPv(int pv) {
+        this.pv = pv;
     }
 
 }

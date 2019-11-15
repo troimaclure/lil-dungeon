@@ -9,7 +9,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.kikijoli.ville.drawable.entite.build.Door;
-import com.kikijoli.ville.drawable.entite.object.Key;
 import com.kikijoli.ville.drawable.entite.build.Lock;
 import static com.kikijoli.ville.manager.EntiteManager.player;
 import static com.kikijoli.ville.manager.StageManager.stopwatch;
@@ -38,6 +37,12 @@ public class LockManager {
         GridManager.setState("1", lock.getBoundingRectangle());
     }
 
+    public static void addLock(Lock lock) {
+        locks.add(lock);
+        Tmap.addBox(lock.getX(), lock.getY());
+        GridManager.setState("1", lock.getBoundingRectangle());
+    }
+
     public static void draw() {
         locks.forEach((lock) -> {
             lock.draw(Tmap.spriteBatch);
@@ -50,6 +55,10 @@ public class LockManager {
 
     public static void addDoor(int x, int y, String data) {
         doors.add(new Door(x, y, data));
+    }
+
+    public static void addDoor(Door door) {
+        doors.add(door);
     }
 
     public static ArrayList<Rectangle> getLocksRectangle() {

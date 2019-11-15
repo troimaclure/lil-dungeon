@@ -20,17 +20,35 @@ import com.kikijoli.ville.util.Constantes;
 import com.kikijoli.ville.util.TextureUtil;
 import com.kikijoli.ville.interfaces.ISpriteDrawable;
 import com.kikijoli.ville.manager.MessageManager;
+import com.kikijoli.ville.save.EntiteWrapper;
+import com.kikijoli.ville.util.Count;
 import com.kikijoli.ville.util.MathUtils;
-import java.io.Serializable;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author troïmaclure
  */
-public abstract class Entite extends Sprite implements ISpriteDrawable, Serializable {
+public abstract class Entite extends Sprite implements ISpriteDrawable {
 
+    public static void load(EntiteWrapper wrapper, Entite entite) {
+        entite.setX(wrapper.x);
+        entite.setY(wrapper.y);
+        try {
+            Class<?> loadClass = Entite.class.getClassLoader().loadClass(wrapper.classDestination);
+            Method declaredMethod = loadClass.getDeclaredMethod(wrapper.methodDestination, Entite.class);
+            declaredMethod.invoke(null, entite);
+        } catch (ClassNotFoundException | SecurityException | NoSuchMethodException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
+            Logger.getLogger(Entite.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public Count touchedCount = new Count(0, 60);
+    public boolean touched = false;
     public ArrayList<IComponent> components = new ArrayList<>();
     public IComponent currentComponent;
     public boolean isTouchable = true;
@@ -47,9 +65,6 @@ public abstract class Entite extends Sprite implements ISpriteDrawable, Serializ
     public int customHeight;
     public ArrayList<AbstractEffect> effects = new ArrayList<>();
     public PlayerShield shield;
-
-    public Entite() {
-    }
 
     public Entite(String path, float srcX, float srcY, float srcWidth, float srcHeight) {
         super(TextureUtil.getTexture(path), (int) srcX, (int) srcY, (int) srcWidth, (int) srcHeight);
@@ -68,7 +83,10 @@ public abstract class Entite extends Sprite implements ISpriteDrawable, Serializ
     @Override
     public void draw(SpriteBatch batch) {
         calculateAnchors();
-
+        if (touched) {
+            touched = !touchedCount.stepAndComplete();
+            batch.setColor(batch.getColor().r, batch.getColor().g, batch.getColor().b, 0.5f);
+        }
         if (this.shield != null) {
             this.shield.step(this.getX(), this.getY(), this.getWidth(), this.getHeight());
             this.shield.draw(batch);
@@ -87,6 +105,9 @@ public abstract class Entite extends Sprite implements ISpriteDrawable, Serializ
         if (currentComponent != null) {
             this.currentComponent.draw(batch);
         }
+        batch.setColor(Color.WHITE);
+        batch.setColor(batch.getColor().r, batch.getColor().g, batch.getColor().b, 1.0f);
+
     }
 
     protected void calculateAnchors() {
@@ -148,132 +169,8 @@ public abstract class Entite extends Sprite implements ISpriteDrawable, Serializ
 
     }
 
-    public ArrayList<IComponent> getComponents() {
-        return components;
-    }
-
-    public void setComponents(ArrayList<IComponent> components) {
-        this.components = components;
-    }
-
-    public IComponent getCurrentComponent() {
-        return currentComponent;
-    }
-
-    public void setCurrentComponent(IComponent currentComponent) {
-        this.currentComponent = currentComponent;
-    }
-
-    public boolean isIsTouchable() {
-        return isTouchable;
-    }
-
-    public void setIsTouchable(boolean isTouchable) {
-        this.isTouchable = isTouchable;
-    }
-
-    public int getPoint() {
-        return point;
-    }
-
-    public void setPoint(int point) {
-        this.point = point;
-    }
-
-    public Circle getAnchor() {
-        return anchor;
-    }
-
-    public void setAnchor(Circle anchor) {
-        this.anchor = anchor;
-    }
-
-    public boolean isGood() {
-        return good;
-    }
-
-    public void setGood(boolean good) {
-        this.good = good;
-    }
-
-    public AbstractShader getShader() {
-        return shader;
-    }
-
-    public void setShader(AbstractShader shader) {
-        this.shader = shader;
-    }
-
-    public boolean isVisible() {
-        return visible;
-    }
-
-    public void setVisible(boolean visible) {
-        this.visible = visible;
-    }
-
-    public AbstractBusiness getBuisiness() {
-        return buisiness;
-    }
-
-    public void setBuisiness(AbstractBusiness buisiness) {
-        this.buisiness = buisiness;
-    }
-
-    public int getSpeed() {
-        return speed;
-    }
-
-    public void setSpeed(int speed) {
-        this.speed = speed;
-    }
-
-    public int getStrenght() {
-        return strenght;
-    }
-
-    public void setStrenght(int strenght) {
-        this.strenght = strenght;
-    }
-
-    public Vector2 getCenterOrigin() {
-        return centerOrigin;
-    }
-
-    public void setCenterOrigin(Vector2 centerOrigin) {
-        this.centerOrigin = centerOrigin;
-    }
-
-    public ArrayList<AbstractEffect> getEffects() {
-        return effects;
-    }
-
-    public void setEffects(ArrayList<AbstractEffect> effects) {
-        this.effects = effects;
-    }
-
-    public PlayerShield getShield() {
-        return shield;
-    }
-
-    public void setShield(PlayerShield shield) {
-        this.shield = shield;
-    }
-
-    public int getCustomWidth() {
-        return customWidth;
-    }
-
-    public void setCustomWidth(int customWidth) {
-        this.customWidth = customWidth;
-    }
-
-    public int getCustomHeight() {
-        return customHeight;
-    }
-
-    public void setCustomHeight(int customHeight) {
-        this.customHeight = customHeight;
+    public EntiteWrapper write(String classDest, String propertyDest) {
+        return new EntiteWrapper(getX(), getY(), classDest, propertyDest, this.getClass().getCanonicalName());
     }
 
 }

@@ -5,7 +5,6 @@
  */
 package com.kikijoli.ville.maps;
 
-import box2dLight.Light;
 import box2dLight.RayHandler;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
@@ -57,7 +56,6 @@ import com.kikijoli.ville.util.MathUtils;
 import com.kikijoli.ville.util.SetLevel;
 import com.kikijoli.ville.util.TextureUtil;
 import com.kikijoli.ville.weather.StormWeather;
-import java.util.ArrayList;
 
 /**
  *
@@ -67,7 +65,6 @@ public class Tmap implements Screen {
 
     public static World world;
     public static RayHandler ray;
-    public static ArrayList<Light> lights = new ArrayList<>();
     public static ShapeRenderer shapeRenderer;
     public static ShapeRenderer hudShapeRenderer;
     public static SpriteBatch spriteBatch;
@@ -110,14 +107,13 @@ public class Tmap implements Screen {
             if (body.getUserData() instanceof Rectangle) {
                 if (Intersector.overlaps((Rectangle) body.getUserData(), rectangle)) {
                     destroy = body;
-                    break;
-
+                    getWorld().destroyBody(destroy);
+                    destroy.setUserData(null);
+                    destroy = null;
                 }
             }
         }
-        getWorld().destroyBody(destroy);
-        destroy.setUserData(null);
-        destroy = null;
+
     }
 
     public static void removeAllBoxs() {

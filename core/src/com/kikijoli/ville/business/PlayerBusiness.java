@@ -36,11 +36,6 @@ public class PlayerBusiness extends AbstractBusiness {
     @Override
     public void act() {
         super.act();
-        if (EntiteManager.player.touched) {
-            if (touchable.stepAndComplete()) {
-                EntiteManager.player.touched = false;
-            }
-        }
     }
 
     @Override

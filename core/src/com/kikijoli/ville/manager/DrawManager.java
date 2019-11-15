@@ -39,4 +39,8 @@ public class DrawManager {
             sprite.draw(Tmap.shapeRenderer);
         });
     }
+
+    public static void addEntite(Entite entite) {
+        entites.add(entite);
+    }
 }

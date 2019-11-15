@@ -26,7 +26,7 @@ public class Key extends Entite implements IObject {
     @Override
     public void get() {
         EntiteManager.keys.add(this);
-        EntiteManager.player.talkDouble("Key +1", Color.BLACK, Color.ORANGE);
+        EntiteManager.player.talkDouble("Key +1", Color.BLACK, Color.CYAN);
         SoundManager.playSound(SoundManager.TAKE_KEY);
 
     }

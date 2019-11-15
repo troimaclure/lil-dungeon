@@ -1,5 +1,6 @@
 package com.kikijoli.ville.drawable.entite.object;
 
+import com.badlogic.gdx.graphics.Color;
 import com.kikijoli.ville.drawable.entite.Entite;
 import com.kikijoli.ville.manager.EntiteManager;
 
@@ -15,7 +16,9 @@ public class Help extends Entite implements IObject {
 
     @Override
     public void get() {
+        if (EntiteManager.player.pv == EntiteManager.player.maxPv) return;
         EntiteManager.player.pv += EntiteManager.player.maxPv > EntiteManager.player.pv ? 1 : 0;
+        EntiteManager.player.talkDouble("Pv +1", Color.BLACK, Color.CYAN);
     }
 
 }

@@ -13,6 +13,7 @@ import com.kikijoli.ville.drawable.entite.npc.Player;
 import com.kikijoli.ville.drawable.entite.projectile.Spell.Spell;
 import com.kikijoli.ville.drawable.entite.simple.Blood;
 import com.kikijoli.ville.drawable.entite.simple.Pebble;
+import com.kikijoli.ville.interfaces.Ipv;
 import com.kikijoli.ville.listeners.GeneralKeyListener;
 import static com.kikijoli.ville.manager.LockManager.handleDoor;
 import static com.kikijoli.ville.maps.Tmap.spriteBatch;
@@ -46,6 +47,10 @@ public class EntiteManager {
 
     public static void addEntite(Entite entite) {
         entites.add(entite);
+    }
+
+    public static void addKey(Key key) {
+        keys.add(key);
     }
 
     public static void draw() {
@@ -198,9 +203,9 @@ public class EntiteManager {
     }
 
     public static void touch(Entite entite) {
-        if (!entite.isTouchable) return;
+        if (!entite.isTouchable || entite.touched) return;
 
-        if (entite == player && (player.invincible || player.touched)) return;
+        if (entite == player && (player.invincible)) return;
         if (entite.shield != null) {
             entite.shield = null;
 
@@ -209,9 +214,15 @@ public class EntiteManager {
         }
         if (entite == player) {
             player.hurted();
-            if (player.pv > 0) return;
         }
-        addDead(entite);
+        if (entite instanceof Ipv) {
+            ((Ipv) entite).setPv(((Ipv) entite).getPv() - 1);
+            entite.touched = true;
+            entite.talkDouble("Aïe", Color.BLACK, Color.WHITE);
+            if (((Ipv) entite).getPv() > 0) return;
+
+        }
+        handleDead(entite);
         ParticleManager.addParticle("particle/blood.p", entite.getX(), entite.getY() + entite.getWidth(), 0.5f);
         entite.buisiness = null;
         Vector2 center = MathUtils.getCenter(entite.getBoundingRectangle());
@@ -238,6 +249,11 @@ public class EntiteManager {
     }
 
     public static void addDead(Entite entite) {
+        deads.add(entite);
+        DrawManager.spritesFilled.add(new Blood(new Rectangle(entite.getCenter().x, entite.getY(), entite.getWidth(), entite.getHeight()), (int) (entite.getWidth() * 2)));
+    }
+
+    public static void handleDead(Entite entite) {
         if (entite != player) {
             SoundManager.playSound(SoundManager.KILL);
         } else {

@@ -36,6 +36,7 @@ public final class ArcherSamourai extends Ennemy implements IBusiness {
         })}));
         this.currentComponent = this.components.get(0);
         this.vision.setDistance(1000);
+        this.pv = 1;
     }
 
     @Override
