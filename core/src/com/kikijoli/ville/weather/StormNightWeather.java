@@ -17,9 +17,9 @@ import com.kikijoli.ville.util.Count;
  *
  * @author Arthur
  */
-public class StormWeather extends AbstractAction {
+public class StormNightWeather extends AbstractAction {
 
-    public Color weatherColor = new Color(Color.BLACK.r, Color.BLACK.g, Color.BLACK.b, 0.5f);
+    public Color weatherColor = new Color(Color.BLUE.r, Color.BLUE.g, Color.BLUE.b, 0.3f);
 
     public final int THUNDER_DELAY_MAX = 30;
     public final int THUNDER_DELAY_MIN = 10;
@@ -27,7 +27,7 @@ public class StormWeather extends AbstractAction {
     public boolean isAnimationRunning = false;
     public AbstractAction currentAnimation;
 
-    public StormWeather() {
+    public StormNightWeather() {
         Tmap.getRay().setAmbientLight(weatherColor);
         ParticleManager.addParticleFixed("particle/rain.p", -20, Gdx.graphics.getHeight(), 1f);
         ParticleManager.addParticleFixed("particle/rain.p", Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), 1f);

@@ -22,10 +22,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
-import com.badlogic.gdx.physics.box2d.Shape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
@@ -57,7 +55,7 @@ import com.kikijoli.ville.util.Constantes;
 import com.kikijoli.ville.util.MathUtils;
 import com.kikijoli.ville.util.SetLevel;
 import com.kikijoli.ville.util.TextureUtil;
-import com.kikijoli.ville.weather.StormWeather;
+import com.kikijoli.ville.weather.StormNightWeather;
 
 /**
  *
@@ -206,24 +204,12 @@ public class Tmap implements Screen {
         hudShapeRenderer.setAutoShapeType(true);
         spriteBatch = new SpriteBatch();
         hudBatch = new SpriteBatch();
-        WeatherManager.currentWeather = new StormWeather();
+        WeatherManager.currentWeather = new StormNightWeather();
         Gdx.input.setInputProcessor(new InputMultiplexer(new GeneralKeyListener()));
         CameraManager.initialize(Constantes.TILESIZE * 15, Constantes.TILESIZE * 10);
         EntiteManager.initialize();
 
-        addRain();
         test();
-    }
-
-    private void addRain() {
-        ParticleManager.addParticleFixed("particle/rain.p", -20, Gdx.graphics.getHeight(), 1f);
-        ParticleManager.addParticleFixed("particle/rain.p", Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), 1f);
-
-//        for (int i = -1; i < 26; i++) {
-//            for (int j = -1; j < 25; j++) {
-//                ParticleManager.addParticleFixed("particle/fog.p", Gdx.graphics.getWidth() / 25 * i, Gdx.graphics.getHeight() / 25 * j, 2.5f);
-//            }
-//        }
     }
 
     @Override
