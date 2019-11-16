@@ -83,10 +83,10 @@ public final class Gamestate implements Serializable {
     public void load() {
         Gamestate g = getGameState();
         clearAll();
-        repopulateLight();
         buildEntite(g);
         buildGameProperties(g);
         buildPlayer(g);
+        manageEntite();
     }
 
     public Gamestate getGameState() {
@@ -115,20 +115,22 @@ public final class Gamestate implements Serializable {
     }
 
     public void buildEntite(Gamestate g) {
-        for (EntiteWrapper entiteWrapper : g.entiteWrappers) {
+        g.entiteWrappers.forEach((entiteWrapper) -> {
             try {
                 Class<?> forName = Class.forName(entiteWrapper.className);
                 Constructor<?> constructor = forName.getConstructor(float.class, float.class);
                 Entite newInstance = (Entite) constructor.newInstance(0, 0);
-                Entite.load(entiteWrapper, newInstance);
+                newInstance.load(entiteWrapper);
             } catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
                 Logger.getLogger(Gamestate.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
+        });
     }
 
-    public void repopulateLight() {
-        CheckpointManager.firecamps.forEach(e -> e.addLight());
+    private void manageEntite() {
+        CheckpointManager.firecamps.stream().filter((firecamp) -> (firecamp.touch)).forEachOrdered((firecamp) -> {
+            firecamp.resetLight();
+        });
     }
 
     public void clearAll() {

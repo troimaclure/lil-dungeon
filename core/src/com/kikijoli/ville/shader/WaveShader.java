@@ -14,9 +14,9 @@ import com.kikijoli.ville.drawable.entite.Entite;
  */
 public class WaveShader extends AbstractShader {
 
-    public float amplitudeWave = 2.075f;
+    public float amplitudeWave = 3.075f;
     public float angleWave = 360.0f;
-    public float angleWaveSpeed = 2f;
+    public float angleWaveSpeed = 1f;
     public final float PI2 = 3.1415926535897932384626433832795f * 2.0f;
 
     public WaveShader() {

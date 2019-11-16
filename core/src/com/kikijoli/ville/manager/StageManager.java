@@ -149,6 +149,7 @@ public class StageManager {
         WaterManager.waters.clear();
         DrawManager.spritesFilled.clear();
         DrawManager.spritesDrawed.clear();
+        CheckpointManager.firecamps.clear();
         ThemeManager.currentTheme.getTiles().stream().forEach(e -> {
             e.disabled = false;
             e.count = 0;

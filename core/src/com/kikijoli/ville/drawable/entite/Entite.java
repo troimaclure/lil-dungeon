@@ -36,17 +36,6 @@ import java.util.logging.Logger;
  */
 public abstract class Entite extends Sprite implements ISpriteDrawable {
 
-    public static void load(EntiteWrapper wrapper, Entite entite) {
-        entite.setX(wrapper.x);
-        entite.setY(wrapper.y);
-        try {
-            Class<?> loadClass = Entite.class.getClassLoader().loadClass(wrapper.classDestination);
-            Method declaredMethod = loadClass.getDeclaredMethod(wrapper.methodDestination, Entite.class);
-            declaredMethod.invoke(null, entite);
-        } catch (ClassNotFoundException | SecurityException | NoSuchMethodException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
-            Logger.getLogger(Entite.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
     public Count touchedCount = new Count(0, 60);
     public boolean touched = false;
     public ArrayList<IComponent> components = new ArrayList<>();
@@ -80,6 +69,18 @@ public abstract class Entite extends Sprite implements ISpriteDrawable {
         this(path, x, y, Constantes.TILESIZE, Constantes.TILESIZE);
     }
 
+    public void load(EntiteWrapper wrapper) {
+        this.setX(wrapper.x);
+        this.setY(wrapper.y);
+        try {
+            Class<?> loadClass = Entite.class.getClassLoader().loadClass(wrapper.classDestination);
+            Method declaredMethod = loadClass.getDeclaredMethod(wrapper.methodDestination, Entite.class);
+            declaredMethod.invoke(null, this);
+        } catch (ClassNotFoundException | SecurityException | NoSuchMethodException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
+            Logger.getLogger(Entite.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     @Override
     public void draw(SpriteBatch batch) {
         calculateAnchors();
@@ -92,16 +93,16 @@ public abstract class Entite extends Sprite implements ISpriteDrawable {
             this.shield.draw(batch);
         }
         batch.draw(getTexture(),
-            getX(), getY(),
-            centerOrigin.x,
-            centerOrigin.y,
-            (int) customWidth, (int) customHeight,
-            1, 1,
-            getRotation(),
-            (int) 0,
-            (int) 0,
-            (int) getTexture().getWidth(), (int) getTexture().getHeight(),
-            false, false);
+                getX(), getY(),
+                centerOrigin.x,
+                centerOrigin.y,
+                (int) customWidth, (int) customHeight,
+                1, 1,
+                getRotation(),
+                (int) 0,
+                (int) 0,
+                (int) getTexture().getWidth(), (int) getTexture().getHeight(),
+                false, false);
         if (currentComponent != null) {
             this.currentComponent.draw(batch);
         }

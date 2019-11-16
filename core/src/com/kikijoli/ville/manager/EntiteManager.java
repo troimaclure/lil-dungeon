@@ -208,7 +208,6 @@ public class EntiteManager {
         if (entite == player && (player.invincible)) return;
         if (entite.shield != null) {
             entite.shield = null;
-
             SoundManager.playSound(SoundManager.SHIELD_CRASH);
             return;
         }
@@ -218,8 +217,10 @@ public class EntiteManager {
         if (entite instanceof Ipv) {
             ((Ipv) entite).setPv(((Ipv) entite).getPv() - 1);
             entite.touched = true;
-            entite.talkDouble("Aïe", Color.BLACK, Color.WHITE);
-            if (((Ipv) entite).getPv() > 0) return;
+            if (((Ipv) entite).getPv() > 0) {
+                entite.talkDouble("Aïe", Color.BLACK, Color.WHITE);
+                return;
+            }
 
         }
         handleDead(entite);

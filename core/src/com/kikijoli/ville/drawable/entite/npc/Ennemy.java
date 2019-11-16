@@ -13,6 +13,8 @@ import com.kikijoli.ville.interfaces.Ipv;
 import com.kikijoli.ville.manager.EntiteManager;
 import com.kikijoli.ville.manager.RankManager;
 import com.kikijoli.ville.maps.Tmap;
+import com.kikijoli.ville.save.EnnemyWrapper;
+import com.kikijoli.ville.save.EntiteWrapper;
 import com.kikijoli.ville.util.Constantes;
 import java.util.ArrayList;
 
@@ -50,10 +52,16 @@ public abstract class Ennemy extends Entite implements Ipv {
         this(path, srcX, srcY, Constantes.TILESIZE, Constantes.TILESIZE);
     }
 
+    public void load(EntiteWrapper wrapper) {
+        this.setPv(((EnnemyWrapper) wrapper).pv);
+        System.out.println("load ennemy");
+        super.load(wrapper);
+    }
+
     public void initVision(float srcX, float srcY) {
-        this.vision = new ConeLight(Tmap.getRay(), 20, calm, 1000, srcX + getWidth() / 2, srcY + getHeight() / 2, 0, 75);
+        this.vision = new ConeLight(Tmap.getRay(), 50, calm, 1000, srcX + getWidth() / 2, srcY + getHeight() / 2, 0, 75);
         this.vision.setSoftnessLength(Constantes.TILESIZE);
-        this.sonar = new PointLight(Tmap.getRay(), 20, Color.CLEAR, 1000, srcX, srcY);
+        this.sonar = new PointLight(Tmap.getRay(), 50, Color.CLEAR, 1000, srcX, srcY);
 
     }
 
@@ -67,6 +75,13 @@ public abstract class Ennemy extends Entite implements Ipv {
     @Override
     public void draw(SpriteBatch batch) {
         super.draw(batch);
+        if (this.pv <= 0) {
+            if (this.vision.isActive())
+                this.vision.setActive(false);
+            if (this.sonar.isActive())
+                this.sonar.setActive(false);
+            return;
+        }
         this.vision.setPosition(this.getX() + Constantes.TILESIZE / 2, this.getY() + Constantes.TILESIZE / 2);
         this.sonar.setPosition(this.getX() + Constantes.TILESIZE / 2, this.getY() + Constantes.TILESIZE / 2);
     }
@@ -121,6 +136,11 @@ public abstract class Ennemy extends Entite implements Ipv {
     @Override
     public int getPv() {
         return this.pv;
+    }
+
+    @Override
+    public EntiteWrapper write(String classDest, String propertyDest) {
+        return new EnnemyWrapper(this.getPv(), getX(), getY(), classDest, propertyDest, this.getClass().getCanonicalName());
     }
 
 }

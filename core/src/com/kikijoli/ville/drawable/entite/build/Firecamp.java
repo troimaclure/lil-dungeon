@@ -22,8 +22,8 @@ public class Firecamp extends Entite {
     private PointLight pointLight;
     private float distance = 100;
     private boolean up;
-    private float distanceMax = 125;
-    private float distanceMin = 75;
+    private final float distanceMax = 125;
+    private final float distanceMin = 75;
 
     public Firecamp(float srcX, float srcY) {
         super("sprite/firecamp.png", srcX, srcY, Constantes.TILESIZE, Constantes.TILESIZE);
@@ -45,6 +45,7 @@ public class Firecamp extends Entite {
     @Override
     public void draw(SpriteBatch batch) {
         super.draw(batch); //To change body of generated methods, choose Tools | Templates.
+
         if (pointLight != null) {
             if (distance == distanceMax) up = false;
             if (distance == distanceMin) up = true;
@@ -53,7 +54,14 @@ public class Firecamp extends Entite {
     }
 
     public void addLight() {
+        if (pointLight != null) return;
         Vector2 center = getCenter();
         pointLight = new PointLight(Tmap.getRay(), 50, Color.ORANGE, 100, center.x, center.y);
     }
+
+    public void resetLight() {
+        Vector2 center = getCenter();
+        pointLight = new PointLight(Tmap.getRay(), 50, Color.ORANGE, 100, center.x, center.y);
+    }
+
 }

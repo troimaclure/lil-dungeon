@@ -6,6 +6,7 @@
 package com.kikijoli.ville.drawable.entite.decor;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.kikijoli.ville.manager.ParticleManager;
 import com.kikijoli.ville.manager.ShaderManager;
 import com.kikijoli.ville.util.Constantes;
 
@@ -16,8 +17,10 @@ import com.kikijoli.ville.util.Constantes;
 public class Water extends Decor {
 
     public Water(float srcX, float srcY) {
-        super("sprite/water.png", srcX, srcY, Constantes.TILESIZE, Constantes.TILESIZE);
+        super("sprite/waterflat.png", srcX, srcY, Constantes.TILESIZE, Constantes.TILESIZE);
         this.shader = ShaderManager.waveShader;
+        ParticleManager.addParticle("particle/wave.p", getX() + Constantes.TILESIZE / 2, getY() + Constantes.TILESIZE / 2, 1.0f);
+
     }
 
     @Override
