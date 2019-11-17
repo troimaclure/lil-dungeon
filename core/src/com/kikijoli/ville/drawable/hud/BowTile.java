@@ -9,10 +9,12 @@ import com.kikijoli.ville.util.Constantes;
  *
  * @author ajosse
  */
-public class BowTile extends Tile {
+public class BowTile extends TileWithAmmo {
 
     public BowTile() {
-        super(new Bow(0, 0, Constantes.TILESIZE, Constantes.TILESIZE));
+        super(new Bow(0, 0, Constantes.TILESIZE, Constantes.TILESIZE), () -> {
+            return EntiteManager.arrowCount;
+        });
     }
 
     @Override

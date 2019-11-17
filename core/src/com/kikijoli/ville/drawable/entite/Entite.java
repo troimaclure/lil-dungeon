@@ -6,6 +6,7 @@
 package com.kikijoli.ville.drawable.entite;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Circle;
@@ -92,7 +93,17 @@ public abstract class Entite extends Sprite implements ISpriteDrawable {
             this.shield.step(this.getX(), this.getY(), this.getWidth(), this.getHeight());
             this.shield.draw(batch);
         }
-        batch.draw(getTexture(),
+        this.draw(batch, getTexture());
+        if (currentComponent != null) {
+            this.currentComponent.draw(batch);
+        }
+        batch.setColor(Color.WHITE);
+        batch.setColor(batch.getColor().r, batch.getColor().g, batch.getColor().b, 1.0f);
+
+    }
+
+    protected void draw(SpriteBatch batch, Texture texture) {
+        batch.draw(texture,
                 getX(), getY(),
                 centerOrigin.x,
                 centerOrigin.y,
@@ -103,12 +114,6 @@ public abstract class Entite extends Sprite implements ISpriteDrawable {
                 (int) 0,
                 (int) getTexture().getWidth(), (int) getTexture().getHeight(),
                 false, false);
-        if (currentComponent != null) {
-            this.currentComponent.draw(batch);
-        }
-        batch.setColor(Color.WHITE);
-        batch.setColor(batch.getColor().r, batch.getColor().g, batch.getColor().b, 1.0f);
-
     }
 
     protected void calculateAnchors() {

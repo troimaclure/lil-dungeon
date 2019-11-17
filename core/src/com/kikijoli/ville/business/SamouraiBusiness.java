@@ -55,6 +55,7 @@ public class SamouraiBusiness extends EnnemyBusiness {
 
         @Override
         public void act() {
+            if (EntiteManager.player.vanish) current = new LostPlayer();
             if (ennemy.isAlarmed && !ennemy.see(EntiteManager.player)) {
                 if (alarmed.stepAndComplete()) {
                     current = new LostPlayer();
@@ -74,32 +75,31 @@ public class SamouraiBusiness extends EnnemyBusiness {
 
         private void handleDash() {
 
-            if (!actions.containsKey(DASH) && dash.step()) {
-                if (MathUtils.getDistance(ennemy.getCenter(), EntiteManager.player.getCenter()) > 200)
-                    return;
-                if (!ennemy.vision.contains(EntiteManager.player.getX(), EntiteManager.player.getY()))
-                    return;
-                dash.complete();
-                actions.remove(GOTO);
-                SoundManager.playSound(SoundManager.PREPARE_SPELL);
+            if (!(!actions.containsKey(DASH) && dash.step())) return;
+            if (MathUtils.getDistance(ennemy.getCenter(), EntiteManager.player.getCenter()) > 200)
+                return;
+            if (!ennemy.see(EntiteManager.player))
+                return;
+            dash.complete();
+            actions.remove(GOTO);
+            SoundManager.playSound(SoundManager.PREPARE_SPELL);
 
-                SoundManager.playSound(SoundManager.DASH);
-                actions.put(DASH, new DashEnnemy(ennemy, new Vector2(EntiteManager.player.getX(), EntiteManager.player.getY())) {
-                    @Override
-                    public void onFinish() {
-                        handleWalk();
-                        actions.remove(DASH);
-                    }
-                });
-                SoundManager.playSound(SoundManager.SWORD);
-                actions.put(ATTACK, new AttackSword(ennemy) {
-                    @Override
-                    public void onFinish() {
-                        actions.remove(ATTACK);
-                    }
-                });
+            SoundManager.playSound(SoundManager.DASH);
+            actions.put(DASH, new DashEnnemy(ennemy, new Vector2(EntiteManager.player.getX(), EntiteManager.player.getY())) {
+                @Override
+                public void onFinish() {
+                    handleWalk();
+                    actions.remove(DASH);
+                }
+            });
+            SoundManager.playSound(SoundManager.SWORD);
+            actions.put(ATTACK, new AttackSword(ennemy) {
+                @Override
+                public void onFinish() {
+                    actions.remove(ATTACK);
+                }
+            });
 
-            }
         }
     }
 
@@ -118,6 +118,7 @@ public class SamouraiBusiness extends EnnemyBusiness {
 
             if (!actions.containsKey(GOTO)) {
                 ArrayList<Tile> tileFor = GridManager.getTileFor(ennemy.sonar);
+                if (tileFor.isEmpty()) return;
                 Tile t = tileFor.get(com.badlogic.gdx.math.MathUtils.random(tileFor.size() - 1));
                 goTo = new GoTo(ennemy, t, () -> {
                     if (go.stepAndComplete()) {

@@ -44,6 +44,7 @@ public class ArcherSamouraiBusiness extends EnnemyBusiness {
 
         @Override
         public void act() {
+            if (EntiteManager.player.vanish) current = new LostPlayer();
             if (ennemy.isAlarmed && !ennemy.see(EntiteManager.player)) {
                 if (alarmed.stepAndComplete()) {
                     current = new LostPlayer();
@@ -115,7 +116,6 @@ public class ArcherSamouraiBusiness extends EnnemyBusiness {
 
             if (ennemy.see(EntiteManager.player) || ennemy.isAlarmed) {
                 current = new AttackPlayer();
-                System.out.println("set to attack");
                 return;
             }
             if (com.badlogic.gdx.math.MathUtils.isEqual(ennemy.getRotation(), targetRotation, 10)) {

@@ -56,6 +56,7 @@ public class MathUtils {
         final float fontY = rect.y + (rect.height + layout.height) / 2;
         return new Vector2(fontX, fontY);
     }
+    
 
     public static double getDistance(Vector2 object1, Vector2 object2) {
         return Math.sqrt(Math.pow((object2.x - object1.x), 2) + Math.pow((object2.y - object1.y), 2));

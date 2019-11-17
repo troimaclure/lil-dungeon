@@ -64,6 +64,7 @@ public class StageManager {
         ShadowFBO.lightSize = widthd * Constantes.TILESIZE;
         EntiteManager.arrowCount = 0;
         EntiteManager.pebbleCount = 3;
+        EntiteManager.vanishCount = 2;
         createWall();
         createWater();
         createCannotMove();

@@ -9,6 +9,7 @@ import com.kikijoli.ville.drawable.entite.object.ArrowObject;
 import com.kikijoli.ville.drawable.entite.object.Help;
 import com.kikijoli.ville.drawable.entite.object.Key;
 import com.kikijoli.ville.drawable.hud.BowTile;
+import com.kikijoli.ville.drawable.hud.VanishTile;
 import com.kikijoli.ville.drawable.hud.PebbleTile;
 import com.kikijoli.ville.drawable.hud.SwordTile;
 import com.kikijoli.ville.manager.CheckpointManager;
@@ -32,7 +33,7 @@ public class SamouraiTheme extends AbstractTheme {
     public static final String FIRECAMP = "firecamp";
 
     public SamouraiTheme() {
-        super(Arrays.asList(new BowTile(), new SwordTile(), new PebbleTile()));
+        super(Arrays.asList(new BowTile(), new SwordTile(), new PebbleTile(), new VanishTile()));
 
     }
 

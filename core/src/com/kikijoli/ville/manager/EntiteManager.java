@@ -44,6 +44,7 @@ public class EntiteManager {
     public static int pebbleCount = 3;
     public static Vector2 currentMove = new Vector2(0, 0);
     private static int rotationExpected;
+    public static int vanishCount = 2;
 
     public static void addEntite(Entite entite) {
         entites.add(entite);
@@ -282,6 +283,10 @@ public class EntiteManager {
     }
 
     private static void checkPlayerVisible() {
+        if (player.vanish) {
+            player.setHide(true);
+            return;
+        }
 
         Optional<Rectangle> findFirst = StageManager.hideouts.stream().filter(e -> e.overlaps(player.getBoundingRectangle())).findFirst();
         if (findFirst.isPresent()) {

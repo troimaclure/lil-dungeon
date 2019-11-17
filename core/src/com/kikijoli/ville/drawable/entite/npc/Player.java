@@ -7,12 +7,14 @@ package com.kikijoli.ville.drawable.entite.npc;
 
 import box2dLight.PointLight;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.kikijoli.ville.business.PlayerBusiness;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.kikijoli.ville.business.AbstractBusiness;
 import com.kikijoli.ville.component.BowComponent;
+import com.kikijoli.ville.component.VanishComponent;
 import com.kikijoli.ville.component.IComponent;
 import com.kikijoli.ville.component.PebbleComponent;
 import com.kikijoli.ville.component.SwordComponent;
@@ -23,6 +25,7 @@ import com.kikijoli.ville.interfaces.Ipv;
 import static com.kikijoli.ville.manager.EntiteManager.player;
 import com.kikijoli.ville.maps.Tmap;
 import com.kikijoli.ville.util.Constantes;
+import com.kikijoli.ville.util.TextureUtil;
 import java.util.Arrays;
 
 /**
@@ -32,11 +35,13 @@ import java.util.Arrays;
 public final class Player extends Entite implements IBusiness, IShapeDrawable, Ipv {
 
     private static final String SPRITESIMPLEPNG = "sprite/simple.png";
+    Texture hidedTexture = TextureUtil.getTexture("sprite/playerninjahided.png");
     public float dashTotal = 2;
     public float dashCooldown = 3 * 60;
     public float dashCount = dashTotal * dashCooldown;
     public PointLight vision;
     private boolean hide;
+    public boolean vanish;
     public boolean invincible = false;
     public int maxPv = 3;
     public int pv = maxPv;
@@ -49,7 +54,7 @@ public final class Player extends Entite implements IBusiness, IShapeDrawable, I
 //        this.shield = new PlayerShield((int) this.getX(), (int) this.getY());
         this.components.addAll(Arrays.asList(new IComponent[]{new BowComponent(this, (t) -> {
             return new Vector2(Tmap.worldCoordinates.x, Tmap.worldCoordinates.y);
-        }), new SwordComponent(this), new PebbleComponent(this)}));
+        }), new SwordComponent(this), new PebbleComponent(this), new VanishComponent(this)}));
         this.currentComponent = this.components.get(0);
     }
 
@@ -57,9 +62,14 @@ public final class Player extends Entite implements IBusiness, IShapeDrawable, I
     public void draw(SpriteBatch batch) {
         batch.setColor(Color.WHITE);
         if (this.invincible) batch.setColor(Color.RED);
-        if (this.hide)
-            batch.setColor(batch.getColor().r, batch.getColor().g, batch.getColor().b, 0.5f);
+
         super.draw(batch);
+    }
+
+    public void postDraw(SpriteBatch batch) {
+        if (this.isHidden()) {
+            this.draw(batch, hidedTexture);
+        }
     }
 
     @Override
@@ -100,7 +110,7 @@ public final class Player extends Entite implements IBusiness, IShapeDrawable, I
     }
 
     public boolean isHidden() {
-        return this.hide;
+        return this.vanish || this.hide;
     }
 
     public void hurted() {

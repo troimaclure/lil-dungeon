@@ -12,8 +12,10 @@ import com.kikijoli.ville.automation.player.AttackBow;
 import com.kikijoli.ville.automation.player.Dash;
 import com.kikijoli.ville.automation.common.None;
 import com.kikijoli.ville.automation.player.AttackSword;
+import com.kikijoli.ville.automation.player.VanishAction;
 import com.kikijoli.ville.automation.player.ThrowPebble;
 import com.kikijoli.ville.component.BowComponent;
+import com.kikijoli.ville.component.VanishComponent;
 import com.kikijoli.ville.component.PebbleComponent;
 import com.kikijoli.ville.component.SwordComponent;
 import com.kikijoli.ville.manager.EntiteManager;
@@ -69,6 +71,9 @@ public class PlayerBusiness extends AbstractBusiness {
             case "PebbleComponent":
                 pebble();
                 break;
+            case "VanishComponent":
+                vanish();
+                break;
         }
 
     }
@@ -119,6 +124,26 @@ public class PlayerBusiness extends AbstractBusiness {
             @Override
             public void onFinish() {
                 actions.remove(PebbleComponent.class.getSimpleName());
+            }
+        });
+    }
+
+    private void vanish() {
+        if (EntiteManager.vanishCount <= 0) {
+            EntiteManager.player.talk("Can't vanish", Color.WHITE);
+            return;
+        }
+        if (actions.containsKey(VanishComponent.class.getSimpleName()))
+            return;
+
+        SoundManager.playSound(SoundManager.PEBBLE);
+        EntiteManager.vanishCount -= 1;
+        actions.put(VanishComponent.class.getSimpleName(), new VanishAction(EntiteManager.player) {
+            @Override
+            public void onFinish() {
+                actions.remove(VanishComponent.class.getSimpleName());
+                EntiteManager.player.vanish = false;
+                EntiteManager.player.visible = true;
             }
         });
     }

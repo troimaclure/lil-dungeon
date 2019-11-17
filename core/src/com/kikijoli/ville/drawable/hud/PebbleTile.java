@@ -9,10 +9,12 @@ import com.kikijoli.ville.util.Constantes;
  *
  * @author ajosse
  */
-public class PebbleTile extends Tile {
+public class PebbleTile extends TileWithAmmo {
 
     public PebbleTile() {
-        super(new Pebble(0, 0, Constantes.TILESIZE, Constantes.TILESIZE));
+        super(new Pebble(0, 0, Constantes.TILESIZE, Constantes.TILESIZE), () -> {
+            return EntiteManager.pebbleCount;
+        });
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.kikijoli.ville.manager;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.kikijoli.ville.drawable.hud.Tile;
 import com.kikijoli.ville.maps.Tmap;
@@ -19,11 +20,20 @@ public class HudManager {
     public static boolean resetBlood = false;
 
     public static void drawSprite() {
-        int index = 0;
+        drawLife();
+        handleTouchedAndBlood();
+        drawTiles();
+    }
+
+    private static void drawLife() {
+        Tmap.hudBatch.setColor(Color.WHITE);
         for (int i = 0; i < EntiteManager.player.pv; i++) {
             Tmap.hudBatch.draw(life, Constantes.TILESIZE + i * Constantes.TILESIZE / 2, Gdx.graphics.getHeight() - Constantes.TILESIZE * 2.5f, Constantes.TILESIZE / 2, Constantes.TILESIZE / 2);
         }
-        handleTouchedAndBlood();
+    }
+
+    private static void drawTiles() {
+        int index = 0;
         for (Tile tile : ThemeManager.currentTheme.getTiles()) {
             tile.setX(++index * Constantes.TILESIZE);
             tile.setY(Constantes.TILESIZE);
@@ -65,8 +75,10 @@ public class HudManager {
 
     public static void setSelected(int amount) {
         int indexOf = (amount) + ThemeManager.currentTheme.getTiles().indexOf(ThemeManager.currentTheme.getTiles().stream().filter(e -> e.selected).findFirst().orElse(ThemeManager.currentTheme.getTiles().get(0)));
-        if (indexOf < 0) indexOf = ThemeManager.currentTheme.getTiles().size() - 1;
-        if (indexOf > ThemeManager.currentTheme.getTiles().size() - 1) indexOf = 0;
+        if (indexOf < 0)
+            indexOf = ThemeManager.currentTheme.getTiles().size() - 1;
+        if (indexOf > ThemeManager.currentTheme.getTiles().size() - 1)
+            indexOf = 0;
         ThemeManager.currentTheme.getTiles().get(indexOf).action();
     }
 }

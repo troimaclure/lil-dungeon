@@ -10,7 +10,6 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.kikijoli.ville.abstracts.AbstractAction;
 import com.kikijoli.ville.drawable.entite.Entite;
-import com.kikijoli.ville.interfaces.IFunction;
 import com.kikijoli.ville.manager.PathFinderManager;
 import com.kikijoli.ville.pathfind.Tile;
 import com.kikijoli.ville.shader.WalkShader;
@@ -34,7 +33,7 @@ public class GoTo extends AbstractAction {
     private int index = 0;
     private int count = 30;
     private final int delay = 50;
-    private IFunction callback;
+    private Runnable callback;
     private boolean exitOnFailed = false;
 
     public GoTo(Entite entite, Entite target) {
@@ -43,12 +42,12 @@ public class GoTo extends AbstractAction {
         entite.shader = new WalkShader();
     }
 
-    public GoTo(Entite entite, Entite target, IFunction consumer) {
+    public GoTo(Entite entite, Entite target, Runnable consumer) {
         this(entite, target);
         this.callback = consumer;
     }
 
-    public GoTo(Entite entite, Entite target, IFunction consumer, boolean exitOnFailed) {
+    public GoTo(Entite entite, Entite target, Runnable consumer, boolean exitOnFailed) {
         this(entite, target, consumer);
         this.exitOnFailed = exitOnFailed;
     }

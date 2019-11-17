@@ -35,6 +35,7 @@ import com.kikijoli.ville.manager.ProjectileManager;
 import com.kikijoli.ville.manager.CameraManager;
 import static com.kikijoli.ville.manager.CameraManager.camera;
 import com.kikijoli.ville.manager.CheckpointManager;
+import com.kikijoli.ville.manager.CountManager;
 import com.kikijoli.ville.manager.DrawManager;
 import com.kikijoli.ville.manager.EntiteManager;
 import com.kikijoli.ville.manager.LockManager;
@@ -187,6 +188,7 @@ public class Tmap implements Screen {
 
     private final Sprite arrowCountSprite = new Sprite(TextureUtil.getTexture("sprite/arrow.png"));
     private final Sprite pebbleCountSprite = new Sprite(TextureUtil.getTexture("sprite/pebble.png"));
+    private final Sprite vanishCountSprite = new Sprite(TextureUtil.getTexture("sprite/vanish.png"));
     Box2DDebugRenderer debugRenderer = new Box2DDebugRenderer();
 
     public Tmap() {
@@ -226,6 +228,7 @@ public class Tmap implements Screen {
         ShaderManager.step();
         CameraManager.tour();
         EntiteManager.tour();
+        CountManager.tour();
         CheckpointManager.tour();
         ObjectManager.tour();
         ProjectileManager.tour();
@@ -256,14 +259,19 @@ public class Tmap implements Screen {
         StageManager.tiledMapRenderer.render(new int[]{0, 1});
         WaterManager.drawWater();
         StageManager.tiledMapRenderer.render(new int[]{2, 4});
+
         drawShapes();
         spriteBatch.begin();
+
         drawSprites();
         ParticleManager.draw(Tmap.delta);
         spriteBatch.flush();
         spriteBatch.end();
         StageManager.tiledMapRenderer.render(new int[]{5});
-
+        spriteBatch.begin();
+        EntiteManager.player.postDraw(Tmap.spriteBatch);
+        spriteBatch.flush();
+        spriteBatch.end();
     }
 
     private void drawHud() {
@@ -282,8 +290,6 @@ public class Tmap implements Screen {
         HudManager.drawSprite();
 
         drawKeys();
-        drawArrowCount();
-        drawPebbleCount();
         drawTime();
 
         if (EntiteManager.playerDead) {
@@ -422,20 +428,6 @@ public class Tmap implements Screen {
         for (Key key : EntiteManager.keys) {
             hudBatch.draw(key.getTexture(), Gdx.graphics.getWidth() - (i++ * (Constantes.TILESIZE)), Constantes.TILESIZE, Constantes.TILESIZE / 2, Constantes.TILESIZE / 2);
         }
-    }
-
-    private void drawArrowCount() {
-        hudBatch.setColor(Color.WHITE);
-        hudBatch.draw(arrowCountSprite.getTexture(), Gdx.graphics.getWidth() - Constantes.TILESIZE * 2, Gdx.graphics.getHeight() - Constantes.TILESIZE * 1.5f, Constantes.TILESIZE, Constantes.TILESIZE);
-        MessageManager.SHOWG.setColor(Color.SALMON);
-        MessageManager.SHOWG.draw(hudBatch, "x " + EntiteManager.arrowCount, Gdx.graphics.getWidth() - Constantes.TILESIZE, Gdx.graphics.getHeight() - Constantes.TILESIZE);
-    }
-
-    private void drawPebbleCount() {
-        hudBatch.setColor(Color.WHITE);
-        hudBatch.draw(pebbleCountSprite.getTexture(), Gdx.graphics.getWidth() - Constantes.TILESIZE * 2, Gdx.graphics.getHeight() - Constantes.TILESIZE * 3f, Constantes.TILESIZE, Constantes.TILESIZE);
-        MessageManager.SHOWG.setColor(Color.SALMON);
-        MessageManager.SHOWG.draw(hudBatch, "x " + EntiteManager.pebbleCount, Gdx.graphics.getWidth() - Constantes.TILESIZE, Gdx.graphics.getHeight() - Constantes.TILESIZE * 2);
     }
 
     @Override
