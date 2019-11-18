@@ -30,7 +30,7 @@ import java.util.logging.Logger;
  */
 public final class Gamestate implements Serializable {
 
-    int arrowCount, pebbleCount, pv, currentPoint;
+    int arrowCount, pebbleCount, pv, currentPoint, vanishCount;
     float x, y;
     byte[] byteArray;
     ArrayList<EntiteWrapper> entiteWrappers = new ArrayList<>();
@@ -70,6 +70,7 @@ public final class Gamestate implements Serializable {
             pebbleCount = EntiteManager.pebbleCount;
             pv = EntiteManager.player.pv;
             currentPoint = RankManager.currentStagePoint;
+            vanishCount = EntiteManager.vanishCount;
             x = EntiteManager.player.getX();
             y = EntiteManager.player.getY();
             os = new ObjectOutputStream(arrayOutputStream);
@@ -112,6 +113,7 @@ public final class Gamestate implements Serializable {
         EntiteManager.arrowCount = g.arrowCount;
         EntiteManager.pebbleCount = g.pebbleCount;
         RankManager.currentStagePoint = g.currentPoint;
+        EntiteManager.vanishCount = g.vanishCount;
     }
 
     public void buildEntite(Gamestate g) {

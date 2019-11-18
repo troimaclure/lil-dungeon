@@ -15,19 +15,17 @@ public class ObjectManager {
     public static ArrayList<Entite> objects = new ArrayList<>();
 
     public static void draw() {
-        for (Entite object : objects) {
+        objects.forEach((object) -> {
             object.draw(Tmap.spriteBatch);
-        }
+        });
     }
 
     public static void tour() {
         ArrayList<Entite> remove = new ArrayList<>();
-        objects.stream().filter((object) -> (Intersector.overlaps(EntiteManager.player.getBoundingRectangle(), object.getBoundingRectangle()))).map((object) -> {
-            ((IObject) object).get();
-            return object;
-        }).forEachOrdered((object) -> {
+        objects.stream().filter((object) -> (Intersector.overlaps(EntiteManager.player.getBoundingRectangle(), object.getBoundingRectangle()))).filter((object) -> (((IObject) object).get())).forEachOrdered((object) -> {
             remove.add(object);
         });
+
         objects.removeAll(remove);
     }
 

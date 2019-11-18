@@ -13,4 +13,5 @@ public class Constantes {
 
     public static int TILESIZE = 64;
     public static int SEC = 60;
+    public static int SEELANTENCY = 15;
 }

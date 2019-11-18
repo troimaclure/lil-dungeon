@@ -50,8 +50,8 @@ public class EntiteManager {
         entites.add(entite);
     }
 
-    public static void addKey(Key key) {
-        keys.add(key);
+    public static void addKey(Entite key) {
+        keys.add((Key) key);
     }
 
     public static void draw() {

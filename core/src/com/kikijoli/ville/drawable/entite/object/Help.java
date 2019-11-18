@@ -15,10 +15,11 @@ public class Help extends Entite implements IObject {
     }
 
     @Override
-    public void get() {
-        if (EntiteManager.player.pv == EntiteManager.player.maxPv) return;
+    public boolean get() {
+        if (EntiteManager.player.pv == EntiteManager.player.maxPv) return false;
         EntiteManager.player.pv += EntiteManager.player.maxPv > EntiteManager.player.pv ? 1 : 0;
         EntiteManager.player.talkDouble("Pv +1", Color.BLACK, Color.CYAN);
+        return true;
     }
 
 }

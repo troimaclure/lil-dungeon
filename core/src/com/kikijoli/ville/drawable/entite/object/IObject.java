@@ -6,6 +6,6 @@ package com.kikijoli.ville.drawable.entite.object;
  */
 public interface IObject {
 
-    public void get();
+    public boolean get();
 
 }

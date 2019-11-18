@@ -16,6 +16,7 @@ import com.kikijoli.ville.manager.EntiteManager;
 import com.kikijoli.ville.manager.SoundManager;
 import com.kikijoli.ville.pathfind.GridManager;
 import com.kikijoli.ville.pathfind.Tile;
+import com.kikijoli.ville.util.Constantes;
 import com.kikijoli.ville.util.Count;
 import com.kikijoli.ville.util.MathUtils;
 import com.kikijoli.ville.util.Time;
@@ -80,7 +81,7 @@ public class SamouraiBusiness extends EnnemyBusiness {
                 return;
             if (!ennemy.see(EntiteManager.player))
                 return;
-            dash.complete();
+            dash.reset();
             actions.remove(GOTO);
             SoundManager.playSound(SoundManager.PREPARE_SPELL);
 
@@ -105,6 +106,7 @@ public class SamouraiBusiness extends EnnemyBusiness {
 
     public class WaitPlayer extends AbstractAction {
 
+        private final Count see = new Count(0, Constantes.SEELANTENCY);
         float degree = 0;
         private GoTo goTo;
         Count go = new Count(0, Time.SECONDE * 2);
@@ -127,9 +129,15 @@ public class SamouraiBusiness extends EnnemyBusiness {
                 }, true);
                 actions.put(GOTO, goTo);
             }
-
-            if (ennemy.see(EntiteManager.player) || ennemy.isAlarmed) {
+            if (ennemy.isAlarmed) {
                 current = new AttackPlayer();
+            } else if (ennemy.see(EntiteManager.player)) {
+                if (see.getCount() == 0) ennemy.talk(" Hu ? ", Color.ORANGE);
+                if (see.stepAndComplete()) {
+                    current = new AttackPlayer();
+                }
+            } else {
+                see.reset();
             }
         }
 

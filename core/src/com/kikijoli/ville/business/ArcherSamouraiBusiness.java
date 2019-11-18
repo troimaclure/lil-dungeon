@@ -12,6 +12,7 @@ import com.kikijoli.ville.drawable.entite.npc.ArcherSamourai;
 import com.kikijoli.ville.drawable.entite.npc.Ennemy;
 import com.kikijoli.ville.manager.EntiteManager;
 import com.kikijoli.ville.manager.SoundManager;
+import com.kikijoli.ville.util.Constantes;
 import com.kikijoli.ville.util.Count;
 import com.kikijoli.ville.util.MathUtils;
 import com.kikijoli.ville.util.Time;
@@ -72,11 +73,11 @@ public class ArcherSamouraiBusiness extends EnnemyBusiness {
 
     public class WaitPlayer extends AbstractAction {
 
+        private final Count see = new Count(0, Constantes.SEELANTENCY);
         Count delay = new Count(0, Time.SECONDE * 3);
         int currentVision = 0;
 
         public WaitPlayer() {
-
             actions.clear();
         }
 
@@ -90,9 +91,17 @@ public class ArcherSamouraiBusiness extends EnnemyBusiness {
                 float angle = ennemy.getRotation() > currentVision ? ennemy.getRotation() - 5 : ennemy.getRotation() + 5;
                 ennemy.setRotation(angle);
             }
-            if (ennemy.see(EntiteManager.player) || ennemy.isAlarmed) {
-                ennemy.alarmed();
+            if (ennemy.isAlarmed) {
                 current = new AttackPlayer();
+
+            } else if (ennemy.see(EntiteManager.player)) {
+                if (see.getCount() == 0) ennemy.talk(" Hu ? ", Color.ORANGE);
+                if (see.stepAndComplete()) {
+                    current = new AttackPlayer();
+                }
+
+            } else {
+                see.reset();
             }
         }
 

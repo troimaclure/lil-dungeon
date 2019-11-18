@@ -22,7 +22,7 @@ public class Count {
         return count++ >= delay;
     }
 
-    public void complete() {
+    public void reset() {
         count = 0;
     }
 
@@ -38,5 +38,9 @@ public class Count {
 
     public int stepAndGet() {
         return count++;
+    }
+
+    public int getCount() {
+        return count;
     }
 }

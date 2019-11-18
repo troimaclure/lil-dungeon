@@ -52,16 +52,16 @@ public abstract class Ennemy extends Entite implements Ipv {
         this(path, srcX, srcY, Constantes.TILESIZE, Constantes.TILESIZE);
     }
 
+    @Override
     public void load(EntiteWrapper wrapper) {
         this.setPv(((EnnemyWrapper) wrapper).pv);
         super.load(wrapper);
     }
 
     public void initVision(float srcX, float srcY) {
-        this.vision = new ConeLight(Tmap.getRay(), 150, calm, 1000, srcX + getWidth() / 2, srcY + getHeight() / 2, 0, 75);
+        this.vision = new ConeLight(Tmap.getRay(), 150, calm, 500, srcX + getWidth() / 2, srcY + getHeight() / 2, 0, 75);
         this.vision.setSoftnessLength(Constantes.TILESIZE);
-        this.sonar = new PointLight(Tmap.getRay(), 25, Color.CLEAR, 250, srcX, srcY);
-
+        this.sonar = new PointLight(Tmap.getRay(), 25, Color.CLEAR, 500, srcX, srcY);
     }
 
     @Override
