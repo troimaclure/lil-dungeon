@@ -58,8 +58,8 @@ public class LockManager {
         doors.add(new Door(x, y, data));
     }
 
-    public static void addDoor(Door door) {
-        doors.add(door);
+    public static void addDoor(Entite door) {
+        doors.add((Door) door);
     }
 
     public static ArrayList<Rectangle> getLocksRectangle() {
