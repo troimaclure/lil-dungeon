@@ -6,7 +6,6 @@
 package com.kikijoli.ville.weather;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.kikijoli.ville.maps.Tmap;
 
 /**
@@ -20,6 +19,4 @@ public class ClearNightWeather extends AbstractWeather {
     public ClearNightWeather() {
         Tmap.getRay().setAmbientLight(weatherColor);
     }
-
-
 }

@@ -133,6 +133,7 @@ public class SamouraiBusiness extends EnnemyBusiness {
                 current = new AttackPlayer();
             } else if (ennemy.see(EntiteManager.player)) {
                 if (see.getCount() == 0) ennemy.talk(" Hu ? ", Color.ORANGE);
+                ennemy.lookAt(EntiteManager.player);
                 if (see.stepAndComplete()) {
                     current = new AttackPlayer();
                 }

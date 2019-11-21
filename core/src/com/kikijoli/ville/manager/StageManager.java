@@ -51,6 +51,8 @@ public class StageManager {
     private static final String HEIGHT = "height";
     private static final String WIDTH = "width";
 
+    public static final String WEATHER = "weather";
+
     public static void loadFromXml(String level) {
         tiledMap = new TmxMapLoader().load("stage/" + level + ".tmx");
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
@@ -71,6 +73,8 @@ public class StageManager {
         createEntite();
         createHideOut();
         Move.initialize();
+        WeatherManager.setCurrentWeather((String)tiledMap.getProperties().get(WEATHER));
+
         currentLevel = level;
 
     }

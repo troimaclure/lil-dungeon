@@ -7,6 +7,7 @@ package com.kikijoli.ville.manager;
 
 import com.kikijoli.ville.maps.Tmap;
 import com.kikijoli.ville.weather.AbstractWeather;
+import com.kikijoli.ville.weather.ClearWeather;
 
 /**
  *
@@ -24,6 +25,16 @@ public class WeatherManager {
     public static void draw() {
         if (currentWeather != null) {
             currentWeather.draw(Tmap.spriteBatch);
+        }
+    }
+
+    public static void setCurrentWeather(String get) {
+
+        try {
+            Class<? extends AbstractWeather> loadClass = (Class<? extends AbstractWeather>) WeatherManager.class.getClassLoader().loadClass("com.kikijoli.ville.weather." + get);
+            currentWeather = loadClass.newInstance();
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
+            currentWeather = new ClearWeather();
         }
     }
 }

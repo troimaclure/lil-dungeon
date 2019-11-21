@@ -56,8 +56,6 @@ import com.kikijoli.ville.util.Constantes;
 import com.kikijoli.ville.util.MathUtils;
 import com.kikijoli.ville.util.SetLevel;
 import com.kikijoli.ville.util.TextureUtil;
-import com.kikijoli.ville.weather.FogWeather;
-import com.kikijoli.ville.weather.StormNightWeather;
 
 /**
  *
@@ -207,7 +205,6 @@ public class Tmap implements Screen {
         hudShapeRenderer.setAutoShapeType(true);
         spriteBatch = new SpriteBatch();
         hudBatch = new SpriteBatch();
-        WeatherManager.currentWeather = new FogWeather();
         Gdx.input.setInputProcessor(new InputMultiplexer(new GeneralKeyListener()));
         CameraManager.initialize(Constantes.TILESIZE * 15, Constantes.TILESIZE * 10);
         EntiteManager.initialize();
