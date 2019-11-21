@@ -74,8 +74,7 @@ public class StageManager {
         createEntite();
         createHideOut();
         Move.initialize();
-//        WeatherManager.setCurrentWeather((String)tiledMap.getProperties().get(WEATHER));
-        WeatherManager.currentWeather = new FogWeather(); 
+        WeatherManager.setCurrentWeather((String)tiledMap.getProperties().get(WEATHER));
 
         currentLevel = level;
 
