@@ -56,6 +56,7 @@ import com.kikijoli.ville.util.Constantes;
 import com.kikijoli.ville.util.MathUtils;
 import com.kikijoli.ville.util.SetLevel;
 import com.kikijoli.ville.util.TextureUtil;
+import com.kikijoli.ville.weather.FogWeather;
 import com.kikijoli.ville.weather.StormNightWeather;
 
 /**
@@ -179,9 +180,9 @@ public class Tmap implements Screen {
 
     private static void drawLights() {
         getRay().setCombinedMatrix(camera.combined,
-                camera.position.x, camera.position.y,
-                camera.viewportWidth * camera.zoom,
-                camera.viewportHeight * camera.zoom);
+            camera.position.x, camera.position.y,
+            camera.viewportWidth * camera.zoom,
+            camera.viewportHeight * camera.zoom);
 
         getRay().updateAndRender();
     }
@@ -206,7 +207,7 @@ public class Tmap implements Screen {
         hudShapeRenderer.setAutoShapeType(true);
         spriteBatch = new SpriteBatch();
         hudBatch = new SpriteBatch();
-        WeatherManager.currentWeather = new StormNightWeather();
+        WeatherManager.currentWeather = new FogWeather();
         Gdx.input.setInputProcessor(new InputMultiplexer(new GeneralKeyListener()));
         CameraManager.initialize(Constantes.TILESIZE * 15, Constantes.TILESIZE * 10);
         EntiteManager.initialize();
@@ -238,7 +239,6 @@ public class Tmap implements Screen {
         shapeRenderer.setProjectionMatrix(camera.combined);
 
         draw();
-        drawLights();
 
         if (setLevel != null) {
             settingLevel = true;
@@ -268,10 +268,13 @@ public class Tmap implements Screen {
         spriteBatch.flush();
         spriteBatch.end();
         StageManager.tiledMapRenderer.render(new int[]{5});
+        drawLights();
         spriteBatch.begin();
         EntiteManager.player.postDraw(Tmap.spriteBatch);
+        WeatherManager.draw();
         spriteBatch.flush();
         spriteBatch.end();
+
     }
 
     private void drawHud() {

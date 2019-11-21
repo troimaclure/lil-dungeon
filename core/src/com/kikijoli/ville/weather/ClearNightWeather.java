@@ -6,14 +6,14 @@
 package com.kikijoli.ville.weather;
 
 import com.badlogic.gdx.graphics.Color;
-import com.kikijoli.ville.abstracts.AbstractAction;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.kikijoli.ville.maps.Tmap;
 
 /**
  *
  * @author Arthur
  */
-public class ClearNightWeather extends AbstractAction {
+public class ClearNightWeather extends AbstractWeather {
 
     public Color weatherColor = new Color(Color.BLUE.r, Color.BLUE.g, Color.BLUE.b, 0.3f);
 
@@ -21,9 +21,5 @@ public class ClearNightWeather extends AbstractAction {
         Tmap.getRay().setAmbientLight(weatherColor);
     }
 
-    @Override
-    public void act() {
-
-    }
 
 }

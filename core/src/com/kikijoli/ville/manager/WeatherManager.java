@@ -5,7 +5,8 @@
  */
 package com.kikijoli.ville.manager;
 
-import com.kikijoli.ville.abstracts.AbstractAction;
+import com.kikijoli.ville.maps.Tmap;
+import com.kikijoli.ville.weather.AbstractWeather;
 
 /**
  *
@@ -13,10 +14,16 @@ import com.kikijoli.ville.abstracts.AbstractAction;
  */
 public class WeatherManager {
 
-    public static AbstractAction currentWeather;
+    public static AbstractWeather currentWeather;
 
     public static void tour() {
         if (currentWeather != null)
             currentWeather.act();
+    }
+
+    public static void draw() {
+        if (currentWeather != null) {
+            currentWeather.draw(Tmap.spriteBatch);
+        }
     }
 }

@@ -6,24 +6,18 @@
 package com.kikijoli.ville.weather;
 
 import com.badlogic.gdx.graphics.Color;
-import com.kikijoli.ville.abstracts.AbstractAction;
 import com.kikijoli.ville.maps.Tmap;
 
 /**
  *
  * @author Arthur
  */
-public class ClearWeather extends AbstractAction {
+public class ClearWeather extends AbstractWeather {
 
     public Color weatherColor = new Color(Color.BLACK.r, Color.BLACK.g, Color.BLACK.b, 0.9f);
 
     public ClearWeather() {
         Tmap.getRay().setAmbientLight(weatherColor);
-    }
-
-    @Override
-    public void act() {
-
     }
 
 }

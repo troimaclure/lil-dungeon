@@ -5,8 +5,10 @@
  */
 package com.kikijoli.ville.weather;
 
+import com.kikijoli.ville.weather.element.Thunder;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.kikijoli.ville.abstracts.AbstractAction;
 import com.kikijoli.ville.manager.ParticleManager;
@@ -17,7 +19,7 @@ import com.kikijoli.ville.util.Count;
  *
  * @author Arthur
  */
-public class StormNightWeather extends AbstractAction {
+public class StormNightWeather extends AbstractWeather {
 
     public Color weatherColor = new Color(Color.BLUE.r, Color.BLUE.g, Color.BLUE.b, 0.3f);
 
@@ -52,5 +54,7 @@ public class StormNightWeather extends AbstractAction {
         }
 
     }
+
+ 
 
 }
