@@ -59,7 +59,6 @@ public class StageManager {
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
         stopwatch = 60 * 60;
         RankManager.currentStagePoint = 0;
-
         widthd = (Integer) tiledMap.getProperties().get(WIDTH);
         heightd = (Integer) tiledMap.getProperties().get(HEIGHT);
         Tmap.removeAllBoxs();
