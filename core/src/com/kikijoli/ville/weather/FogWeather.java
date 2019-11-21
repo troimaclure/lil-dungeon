@@ -34,8 +34,10 @@ public class FogWeather extends AbstractWeather {
     @Override
     public void act() {
         if (count.stepAndComplete()) {
-            up = index == max ? false : index == 0 ? true : up;
-            index += up ? 1 : (-1);
+            index
+                += (up = index == max ? false : index == 0 ? true : up)
+                    ? 1
+                    : (-1);
         }
     }
 
