@@ -8,7 +8,6 @@ package com.kikijoli.ville.weather;
 import com.kikijoli.ville.weather.element.Thunder;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.kikijoli.ville.abstracts.AbstractAction;
 import com.kikijoli.ville.manager.ParticleManager;
