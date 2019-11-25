@@ -47,7 +47,7 @@ import com.kikijoli.ville.manager.StageManager;
 import com.kikijoli.ville.manager.HudManager;
 import com.kikijoli.ville.manager.ObjectManager;
 import com.kikijoli.ville.manager.RankManager;
-import com.kikijoli.ville.manager.SpellManager;
+import com.kikijoli.ville.manager.StateManager;
 import com.kikijoli.ville.manager.ThemeManager;
 import com.kikijoli.ville.manager.WeatherManager;
 import com.kikijoli.ville.pathfind.GridManager;
@@ -226,6 +226,7 @@ public class Tmap implements Screen {
         ShaderManager.step();
         CameraManager.tour();
         EntiteManager.tour();
+        StateManager.tour();
         CountManager.tour();
         CheckpointManager.tour();
         ObjectManager.tour();
@@ -332,9 +333,7 @@ public class Tmap implements Screen {
             Rectangle r = entite.getBoundingRectangle();
             shapeRenderer.rect(r.getX(), r.getY(), r.getWidth(), r.getHeight());
         });
-        SpellManager.spells.forEach((t) -> {
-            shapeRenderer.rect(t.getAnchors().getX(), t.getAnchors().getY(), t.getAnchors().getWidth(), t.getAnchors().getHeight());
-        });
+
         LockManager.doors.forEach((t) -> {
             shapeRenderer.circle(t.anchor.x, t.anchor.y, t.anchor.radius);
             shapeRenderer.rect(t.getBoundingRectangle().x, t.getBoundingRectangle().y, t.getBoundingRectangle().width, t.getBoundingRectangle().height);

@@ -62,7 +62,6 @@ public final class Player extends Entite implements IBusiness, IShapeDrawable, I
     public void draw(SpriteBatch batch) {
         batch.setColor(Color.WHITE);
         if (this.invincible) batch.setColor(Color.RED);
-
         super.draw(batch);
     }
 

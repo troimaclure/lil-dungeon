@@ -74,12 +74,9 @@ public class KeyGuardBuisiness extends AbstractBusiness {
                     }
                 });
                 SoundManager.playSound(SoundManager.SWORD);
-                actions.put(ATTACK, new AttackSword(guard) {
-                    @Override
-                    public void onFinish() {
-                        actions.remove(ATTACK);
-                    }
-                });
+                actions.put(ATTACK, new AttackSword(guard, () -> {
+                    actions.remove(ATTACK);
+                }));
             }
         }
     }

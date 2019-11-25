@@ -23,7 +23,6 @@ import com.kikijoli.ville.maps.Tmap;
 import com.kikijoli.ville.pathfind.GridManager;
 import com.kikijoli.ville.util.Constantes;
 import com.kikijoli.ville.util.Move;
-import com.kikijoli.ville.weather.FogWeather;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -73,7 +72,7 @@ public class StageManager {
         createEntite();
         createHideOut();
         Move.initialize();
-        WeatherManager.setCurrentWeather((String)tiledMap.getProperties().get(WEATHER));
+        WeatherManager.setCurrentWeather((String) tiledMap.getProperties().get(WEATHER));
 
         currentLevel = level;
 
@@ -160,7 +159,6 @@ public class StageManager {
             e.count = 0;
         });
         ProjectileManager.projectiles.clear();
-        SpellManager.spells.clear();
         Tmap.getRay().removeAll();
         loadFromXml(level);
     }

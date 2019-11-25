@@ -10,7 +10,6 @@ import com.kikijoli.ville.manager.LockManager;
 import com.kikijoli.ville.manager.ObjectManager;
 import com.kikijoli.ville.manager.ProjectileManager;
 import com.kikijoli.ville.manager.RankManager;
-import com.kikijoli.ville.manager.SpellManager;
 import com.kikijoli.ville.maps.Tmap;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -137,7 +136,6 @@ public final class Gamestate implements Serializable {
 
     public void clearAll() {
         Tmap.getRay().removeAll();
-        SpellManager.spells.clear();
         ProjectileManager.projectiles.clear();
         DrawManager.spritesFilled.clear();
         DrawManager.spritesDrawed.clear();

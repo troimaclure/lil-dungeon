@@ -16,38 +16,37 @@ import com.kikijoli.ville.util.Count;
  *
  * @author Arthur
  */
-public abstract class AttackSword extends AbstractAction {
+public class AttackSword extends AbstractAction {
 
     public int countSword = 0;
-    public int delaySword = 30;
     private final Entite entite;
     private final Sword sword;
-    Count cooldown = new Count(0, 30);
+    Count cooldown = new Count(0, 10);
+    public Runnable finish;
 
     /**
      *
      * @param entite
+     * @param finish
      */
-    public AttackSword(Entite entite) {
+    public AttackSword(Entite entite, Runnable finish) {
         this.entite = entite;
         this.sword = ((SwordComponent) this.entite.getComponent(SwordComponent.class)).sword;
+        this.finish = finish;
     }
 
     @Override
     public void act() {
-        countSword += 3;
-        if (countSword < delaySword)
-            sword.setRotation(-countSword * 12 + entite.getRotation());
+
+        sword.setRotation(-countSword++ * 24 + entite.getRotation());
         EntiteManager.attack(entite);
         if (cooldown.stepAndComplete()) {
             end();
         }
     }
 
-    public abstract void onFinish();
-
     private void end() {
-        onFinish();
+        finish.run();
     }
 
 }

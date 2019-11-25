@@ -102,12 +102,9 @@ public class PlayerBusiness extends AbstractBusiness {
             return;
         }
         SoundManager.playSound(SoundManager.SWORD);
-        actions.put(SwordComponent.class.getSimpleName(), new AttackSword(EntiteManager.player) {
-            @Override
-            public void onFinish() {
-                actions.remove(SwordComponent.class.getSimpleName());
-            }
-        });
+        actions.put(SwordComponent.class.getSimpleName(), new AttackSword(EntiteManager.player, () -> {
+            actions.remove(SwordComponent.class.getSimpleName());
+        }));
     }
 
     private void pebble() {

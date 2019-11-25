@@ -10,7 +10,6 @@ import com.kikijoli.ville.drawable.entite.Entite;
 import com.kikijoli.ville.drawable.entite.object.Key;
 import com.kikijoli.ville.drawable.entite.npc.Ennemy;
 import com.kikijoli.ville.drawable.entite.npc.Player;
-import com.kikijoli.ville.drawable.entite.projectile.Spell.Spell;
 import com.kikijoli.ville.drawable.entite.simple.Blood;
 import com.kikijoli.ville.drawable.entite.simple.Pebble;
 import com.kikijoli.ville.interfaces.Ipv;
@@ -56,13 +55,9 @@ public class EntiteManager {
 
     public static void draw() {
         Color c = spriteBatch.getColor();
-        handlePlayer();
 
         entites.stream().forEach((Entite entite) -> {
             renderEntity(entite);
-            entite.effects.forEach((effect) -> {
-                effect.draw(entite);
-            });
         });
         spriteBatch.setColor(c);
         handleDeads();
@@ -70,23 +65,14 @@ public class EntiteManager {
 
     public static void tour() {
         currentMove = new Vector2(0, 0);
-
+        handlePlayer();
         moveBall();
 
-        for (Entite remove : removes) {
-            remove.effects.forEach((effect) -> {
-                ParticleManager.particleEffects.remove(effect.effect);
-            });
-            remove.effects.clear();
-        }
         entites.forEach((entite) -> {
             if (entite.buisiness != null) {
                 entite.buisiness.act();
             }
-            entite.effects.stream().filter((effect) -> (effect.end)).forEachOrdered((effect) -> {
-                ParticleManager.particleEffects.remove(effect.effect);
-            });
-            entite.effects.removeIf(e -> e.end);
+
         });
         entites.removeAll(removes);
     }
@@ -100,9 +86,9 @@ public class EntiteManager {
     }
 
     private static void handlePlayer() {
-
+        if (StateManager.states.stream().anyMatch(e -> e.entite == player && e.moveImpact)) return;
         for (int i = 0; i < player.speed; i++) {
-            if (isPlayerDead()) {
+            if (isNotDead()) {
                 boolean move = handleY();
                 move = handleX() || move;
                 playerMove(move);
@@ -113,7 +99,7 @@ public class EntiteManager {
         checkPlayerVisible();
     }
 
-    private static boolean isPlayerDead() {
+    private static boolean isNotDead() {
         return player.buisiness != null;
     }
 
@@ -242,12 +228,6 @@ public class EntiteManager {
                 playerDead = true;
             }
         });
-    }
-
-    public static void spellEffect(Entite entite, Spell spell) {
-        if (entite.effects.stream().anyMatch(e -> e.getClass() == spell.getEffectType()))
-            return;
-        entite.effects.add(spell.getEffect(entite.getX(), entite.getY()));
     }
 
     public static void addDead(Entite entite) {

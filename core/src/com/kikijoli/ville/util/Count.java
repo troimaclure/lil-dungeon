@@ -14,6 +14,10 @@ public class Count {
         this.delay = delay;
     }
 
+    public Count(int delay) {
+        this.delay = delay;
+    }
+
     public void increment() {
         count++;
     }

@@ -15,7 +15,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.kikijoli.ville.business.AbstractBusiness;
 import com.kikijoli.ville.component.IComponent;
 import com.kikijoli.ville.drawable.entite.simple.PlayerShield;
-import com.kikijoli.ville.effect.AbstractEffect;
 import com.kikijoli.ville.shader.AbstractShader;
 import com.kikijoli.ville.util.Constantes;
 import com.kikijoli.ville.util.TextureUtil;
@@ -53,7 +52,6 @@ public abstract class Entite extends Sprite implements ISpriteDrawable {
     public Vector2 centerOrigin;
     public int customWidth;
     public int customHeight;
-    public ArrayList<AbstractEffect> effects = new ArrayList<>();
     public PlayerShield shield;
 
     public Entite(String path, float srcX, float srcY, float srcWidth, float srcHeight) {
@@ -104,16 +102,16 @@ public abstract class Entite extends Sprite implements ISpriteDrawable {
 
     protected void draw(SpriteBatch batch, Texture texture) {
         batch.draw(texture,
-                getX(), getY(),
-                centerOrigin.x,
-                centerOrigin.y,
-                (int) customWidth, (int) customHeight,
-                1, 1,
-                getRotation(),
-                (int) 0,
-                (int) 0,
-                (int) getTexture().getWidth(), (int) getTexture().getHeight(),
-                false, false);
+            getX(), getY(),
+            centerOrigin.x,
+            centerOrigin.y,
+            (int) customWidth, (int) customHeight,
+            1, 1,
+            getRotation(),
+            (int) 0,
+            (int) 0,
+            (int) getTexture().getWidth(), (int) getTexture().getHeight(),
+            false, false);
     }
 
     protected void calculateAnchors() {

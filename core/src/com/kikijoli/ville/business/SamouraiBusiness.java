@@ -94,12 +94,9 @@ public class SamouraiBusiness extends EnnemyBusiness {
                 }
             });
             SoundManager.playSound(SoundManager.SWORD);
-            actions.put(ATTACK, new AttackSword(ennemy) {
-                @Override
-                public void onFinish() {
-                    actions.remove(ATTACK);
-                }
-            });
+            actions.put(ATTACK, new AttackSword(ennemy, () -> {
+                actions.remove(ATTACK);
+            }));
 
         }
     }
