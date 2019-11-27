@@ -8,7 +8,7 @@ package com.kikijoli.ville.business;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Intersector;
 import com.kikijoli.ville.abstracts.AbstractAction;
-import com.kikijoli.ville.drawable.entite.npc.Trap;
+import com.kikijoli.ville.drawable.entite.npc.ExplodeTrap;
 import com.kikijoli.ville.drawable.entite.simple.CircleEffect;
 import com.kikijoli.ville.manager.EntiteManager;
 import com.kikijoli.ville.manager.MessageManager;
@@ -23,12 +23,12 @@ import com.kikijoli.ville.util.MathUtils;
 public class TrapBusiness extends AbstractBusiness {
 
     CircleEffect circleEffect;
-    Trap trap;
+    ExplodeTrap trap;
     boolean exec;
     boolean explode;
     int delay = 60;
 
-    public TrapBusiness(Trap turret) {
+    public TrapBusiness(ExplodeTrap turret) {
         this.trap = turret;
         this.circleEffect = new CircleEffect(trap.getBoundsEffect(), Color.RED);
     }

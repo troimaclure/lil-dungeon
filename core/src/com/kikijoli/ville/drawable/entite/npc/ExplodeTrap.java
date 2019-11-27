@@ -5,39 +5,42 @@
  */
 package com.kikijoli.ville.drawable.entite.npc;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Circle;
+import com.badlogic.gdx.math.Vector2;
 import com.kikijoli.ville.business.AbstractBusiness;
-import com.kikijoli.ville.business.ParalyzedTrapBusiness;
+import com.kikijoli.ville.business.TrapBusiness;
 import com.kikijoli.ville.drawable.entite.Entite;
 import com.kikijoli.ville.interfaces.IBusiness;
 import com.kikijoli.ville.interfaces.INotTouchable;
 import com.kikijoli.ville.util.Constantes;
+import com.kikijoli.ville.util.MathUtils;
 
 /**
  *
  * @author troïmaclure
  */
-public final class ParalyzedTrap extends Entite implements IBusiness,INotTouchable {
+public final class ExplodeTrap extends Entite implements IBusiness, INotTouchable {
 
-    private static final String TRAP = "sprite/trap-paralyzed.png";
-    public boolean hided = true;
+    private static final String TRAP = "sprite/floor.png";
 
-    public ParalyzedTrap(float srcX, float srcY) {
+    public ExplodeTrap(int srcX, int srcY) {
         super(TRAP, srcX, srcY, Constantes.TILESIZE, Constantes.TILESIZE);
         this.buisiness = this.getDefault();
     }
 
     @Override
     public void draw(SpriteBatch batch) {
-        if (this.hided) batch.setColor(new Color(Color.WHITE.r, Color.WHITE.g, Color.WHITE.b, 0.1f));
-        super.draw(batch);
-        batch.setColor(Color.WHITE);
+//        super.draw(batch);
     }
 
     @Override
     public AbstractBusiness getDefault() {
-        return new ParalyzedTrapBusiness(this);
+        return new TrapBusiness(this);
     }
 
+    public Circle getBoundsEffect() {
+        Vector2 center = MathUtils.getCenter(this.getBoundingRectangle());
+        return new Circle(center.x, center.y, Constantes.TILESIZE * 2);
+    }
 }

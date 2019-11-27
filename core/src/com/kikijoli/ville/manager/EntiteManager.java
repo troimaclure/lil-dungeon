@@ -12,6 +12,7 @@ import com.kikijoli.ville.drawable.entite.npc.Ennemy;
 import com.kikijoli.ville.drawable.entite.npc.Player;
 import com.kikijoli.ville.drawable.entite.simple.Blood;
 import com.kikijoli.ville.drawable.entite.simple.Pebble;
+import com.kikijoli.ville.interfaces.INotTouchable;
 import com.kikijoli.ville.interfaces.Ipv;
 import com.kikijoli.ville.listeners.GeneralKeyListener;
 import static com.kikijoli.ville.manager.LockManager.handleDoor;
@@ -184,7 +185,7 @@ public class EntiteManager {
     }
 
     public static void attack(Entite entite) {
-        entites.stream().filter((target) -> (target != entite && target.good != entite.good && target.getBoundingRectangle().overlaps(entite.getBoundingRectangle()))).forEachOrdered((target) -> {
+        entites.stream().filter((target) -> (!(target instanceof INotTouchable) && target != entite && target.good != entite.good && target.getBoundingRectangle().overlaps(entite.getBoundingRectangle()))).forEachOrdered((target) -> {
             touch(target);
         });
     }

@@ -9,13 +9,14 @@ import com.kikijoli.ville.business.AbstractBusiness;
 import com.kikijoli.ville.business.RollingTrapBusiness;
 import com.kikijoli.ville.drawable.entite.Entite;
 import com.kikijoli.ville.interfaces.IBusiness;
+import com.kikijoli.ville.interfaces.INotTouchable;
 import com.kikijoli.ville.util.Constantes;
 
 /**
  *
  * @author troïmaclure
  */
-public final class RollingTrap extends Entite implements IBusiness {
+public final class RollingTrap extends Entite implements IBusiness, INotTouchable {
 
     private static final String RollingTrap = "sprite/rolling_trap.png";
 

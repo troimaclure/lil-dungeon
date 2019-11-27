@@ -36,7 +36,6 @@ public class SamouraiTheme extends AbstractTheme {
 
     public SamouraiTheme() {
         super(Arrays.asList(new BowTile(), new SwordTile(), new PebbleTile(), new VanishTile()));
-
     }
 
     @Override

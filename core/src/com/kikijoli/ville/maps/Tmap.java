@@ -13,7 +13,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Intersector;
@@ -55,7 +54,6 @@ import com.kikijoli.ville.pathfind.Tile;
 import com.kikijoli.ville.util.Constantes;
 import com.kikijoli.ville.util.MathUtils;
 import com.kikijoli.ville.util.SetLevel;
-import com.kikijoli.ville.util.TextureUtil;
 
 /**
  *
@@ -172,7 +170,6 @@ public class Tmap implements Screen {
         DrawManager.draw();
 
         ProjectileManager.draw();
-//        SpellManager.tour();
 
     }
 
@@ -185,13 +182,10 @@ public class Tmap implements Screen {
         getRay().updateAndRender();
     }
 
-    private final Sprite arrowCountSprite = new Sprite(TextureUtil.getTexture("sprite/arrow.png"));
-    private final Sprite pebbleCountSprite = new Sprite(TextureUtil.getTexture("sprite/pebble.png"));
-    private final Sprite vanishCountSprite = new Sprite(TextureUtil.getTexture("sprite/vanish.png"));
     Box2DDebugRenderer debugRenderer = new Box2DDebugRenderer();
 
     public Tmap() {
-        StageManager.loadFromXml("1");
+        StageManager.loadFromXml("2");
     }
 
     @Override
