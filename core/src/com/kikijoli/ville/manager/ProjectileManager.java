@@ -2,6 +2,7 @@ package com.kikijoli.ville.manager;
 
 import com.kikijoli.ville.drawable.entite.projectile.Bullet.Bullet;
 import com.kikijoli.ville.drawable.entite.Entite;
+import com.kikijoli.ville.interfaces.INotTouchable;
 import com.kikijoli.ville.maps.Tmap;
 import com.kikijoli.ville.util.MathUtils;
 import java.util.ArrayList;
@@ -36,7 +37,7 @@ public class ProjectileManager {
         if (!StageManager.isClearZone(MathUtils.getCenter(bullet), bullet.getMouvementFilter()))
             removes.add(bullet);
         for (Entite entite : EntiteManager.entites) {
-            if (!entite.equals(bullet.author) && entite.good != bullet.author.good && entite.isTouchable) {
+            if (!(entite instanceof INotTouchable) && !entite.equals(bullet.author) && entite.good != bullet.author.good && entite.isTouchable) {
                 if (bullet instanceof Bullet) {
                     if (bullet.isTouching(entite.getBoundingRectangle())) {
                         removes.add(bullet);
