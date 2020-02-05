@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.maps.tiled.objects.TiledMapTileMapObject;
 import com.kikijoli.ville.drawable.entite.build.Firecamp;
 import com.kikijoli.ville.drawable.entite.npc.ArcherSamourai;
+import com.kikijoli.ville.drawable.entite.npc.Ennemy;
 import com.kikijoli.ville.drawable.entite.npc.ParalyzedTrap;
 import com.kikijoli.ville.drawable.entite.npc.Samourai;
 import com.kikijoli.ville.drawable.entite.object.ArrowObject;
@@ -17,6 +18,9 @@ import com.kikijoli.ville.manager.CheckpointManager;
 import com.kikijoli.ville.manager.EntiteManager;
 import com.kikijoli.ville.manager.LockManager;
 import com.kikijoli.ville.manager.ObjectManager;
+import com.kikijoli.ville.manager.StageManager;
+import com.kikijoli.ville.util.Count;
+import com.kikijoli.ville.util.Time;
 import java.util.Arrays;
 
 /**
@@ -33,6 +37,8 @@ public class SamouraiTheme extends AbstractTheme {
     private static final String SAMOURAI = "samourai";
     public static final String FIRECAMP = "firecamp";
     public static final String TRAPPARALYZED = "trap-paralyzed";
+    public static final String KILL_THEM_ALL = "Kill them all !";
+    public Count test = new Count(5 * Time.SECONDE);
 
     public SamouraiTheme() {
         super(Arrays.asList(new BowTile(), new SwordTile(), new PebbleTile(), new VanishTile()));
@@ -71,7 +77,17 @@ public class SamouraiTheme extends AbstractTheme {
 
     @Override
     public Color getFontColor() {
-        return Color.valueOf("#27ae60");
+        return Color.RED;
+    }
+
+    @Override
+    public boolean victoryCondition() {
+        return !EntiteManager.getEntites().stream().filter(e -> e instanceof Ennemy && ((Ennemy) e).pv > 0).findAny().isPresent();
+    }
+
+    @Override
+    public String getThemeObjectiveMessage() {
+        return KILL_THEM_ALL + " : " + EntiteManager.getEntites().stream().filter(e -> e instanceof Ennemy && ((Ennemy) e).pv > 0).count() + " left";
     }
 
 }

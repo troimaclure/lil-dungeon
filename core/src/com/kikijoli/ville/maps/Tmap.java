@@ -79,8 +79,9 @@ public class Tmap implements Screen {
     private static final String SCORE = "SCORE : ";
     private static final String LEVEL_SCORE = "LEVEL SCORE : ";
     public static float delta;
-
+    public static Rectangle questRectangle = new Rectangle(Gdx.graphics.getWidth() - 350, Constantes.TILESIZE, 500, Constantes.TILESIZE);
 //    public static ShadowFBO shadowFBO = new ShadowFBO();
+
     public static RayHandler getRay() {
         if (ray == null) {
             ray = new RayHandler(getWorld(), Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -185,7 +186,7 @@ public class Tmap implements Screen {
     Box2DDebugRenderer debugRenderer = new Box2DDebugRenderer();
 
     public Tmap() {
-        StageManager.loadFromXml("2");
+        StageManager.loadFromXml("1");
     }
 
     @Override
@@ -277,6 +278,8 @@ public class Tmap implements Screen {
         if (EntiteManager.playerDead) {
             drawDeadBackground();
         }
+        hudShapeRenderer.setColor(Color.BLACK);
+        hudShapeRenderer.rect(questRectangle.x, questRectangle.y, questRectangle.width, questRectangle.height);
         hudShapeRenderer.flush();
         hudShapeRenderer.end();
 
@@ -285,7 +288,7 @@ public class Tmap implements Screen {
         HudManager.drawSprite();
 
         drawKeys();
-        drawTime();
+        drawHudMessage();
 
         if (EntiteManager.playerDead) {
             drawDeadMessage();
@@ -294,6 +297,8 @@ public class Tmap implements Screen {
         hudBatch.flush();
         hudBatch.end();
         hudShapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+        hudShapeRenderer.setColor(Color.WHITE);
+        hudShapeRenderer.rect(questRectangle.x, questRectangle.y, questRectangle.width, questRectangle.height);
 
         HudManager.drawLines();
 
@@ -380,9 +385,9 @@ public class Tmap implements Screen {
         int number = setLevel.end ? 0 * setLevel.count / 2 : (setLevel.count + 1 - setLevel.delay) * setLevel.count / 2;
 
         MessageManager.LEVELFONT.setColor(ThemeManager.currentTheme.getFontColor());
-        MessageManager.LEVELFONT.draw(hudBatch, title, centerString.x + number, centerString.y + number);
+        MessageManager.LEVELFONT.draw(hudBatch, title, centerString.x + Gdx.graphics.getWidth() / 2 + number, centerString.y + number);
         MessageManager.LEVELFONT.setColor(Color.WHITE);
-        MessageManager.LEVELFONT.draw(hudBatch, title, centerString.x + 5 - number, centerString.y + 5 - number);
+        MessageManager.LEVELFONT.draw(hudBatch, title, centerString.x + 5 + Gdx.graphics.getWidth() / 2 - number, centerString.y + 5 - number);
         hudBatch.flush();
         hudBatch.end();
         setLevel.setting();
@@ -406,13 +411,18 @@ public class Tmap implements Screen {
         MessageManager.segoe.draw(hudBatch, ESCAPE_TO_RAGE_QUIT, fontX, fontY);
     }
 
-    private void drawTime() {
+    private void drawHudMessage() {
         MessageManager.SHOWG.setColor(Color.SALMON);
         float fontX = Constantes.TILESIZE;
         float fontY = (Gdx.graphics.getHeight() - Constantes.TILESIZE);
         MessageManager.SHOWG.draw(hudBatch, TIME + Integer.toString(MathUtils.transformIpsToSec(StageManager.stopwatch)), fontX, fontY);
         MessageManager.SHOWG.draw(hudBatch, SCORE + Integer.toString(RankManager.point), fontX + 200, fontY);
         MessageManager.SHOWG.draw(hudBatch, LEVEL_SCORE + Integer.toString(RankManager.currentStagePoint), fontX + 450, fontY);
+        MessageManager.SHOWG.setColor(Color.WHITE);
+        Vector2 center = MathUtils.centerString(ThemeManager.currentTheme.getThemeObjectiveMessage(), MessageManager.SHOWG, questRectangle);
+        MessageManager.SHOWG.draw(hudBatch, ThemeManager.currentTheme.getThemeObjectiveMessage(), questRectangle.x + 25, center.y);
+        MessageManager.SHOWG.setColor(ThemeManager.currentTheme.getFontColor());
+        MessageManager.SHOWG.draw(hudBatch, ThemeManager.currentTheme.getThemeObjectiveMessage(), questRectangle.x + 26, center.y + 1);
     }
 
     private void drawKeys() {

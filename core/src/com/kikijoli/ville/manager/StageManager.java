@@ -22,7 +22,10 @@ import static com.kikijoli.ville.manager.EntiteManager.player;
 import com.kikijoli.ville.maps.Tmap;
 import com.kikijoli.ville.pathfind.GridManager;
 import com.kikijoli.ville.util.Constantes;
+import com.kikijoli.ville.util.Count;
 import com.kikijoli.ville.util.Move;
+import com.kikijoli.ville.util.SetLevel;
+import com.kikijoli.ville.util.Time;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +42,6 @@ public class StageManager {
     public static ArrayList<Rectangle> walls = new ArrayList<>();
     public static ArrayList<Rectangle> hideouts = new ArrayList<>();
     public static ArrayList<Rectangle> cannotmove = new ArrayList<>();
-
     public static final String PHYSIQUE = "physique";
     public static final String MOVE_PHYSIQUE = "move_physique";
     public static final String LIGHT_PHYSIQUE = "light_physique";
@@ -47,10 +49,8 @@ public class StageManager {
     public static final String PLAYER = "player";
     public static Integer widthd = 0;
     public static Integer heightd = 0;
-
     private static final String HEIGHT = "height";
     private static final String WIDTH = "width";
-
     public static final String WEATHER = "weather";
 
     public static void loadFromXml(String level) {
@@ -79,6 +79,7 @@ public class StageManager {
     }
 
     private static void createWall() {
+
         MapLayer collisionObjectLayer = (MapLayer) tiledMap.getLayers().get(PHYSIQUE);
         MapObjects objects = collisionObjectLayer.getObjects();
         for (RectangleMapObject rectangleObject : objects.getByType(RectangleMapObject.class)) {
@@ -137,6 +138,11 @@ public class StageManager {
         if (stopwatch <= 0) {
             EntiteManager.touch(player);
         }
+        if (ThemeManager.currentTheme.victoryCondition()) {
+            if (Tmap.setLevel == null) {
+                Tmap.setLevel = new SetLevel(Integer.toString(Integer.parseInt(getCurrentLevel()) + 1));
+            }
+        }
     }
 
     public static void setLevel(String level) {
@@ -145,6 +151,9 @@ public class StageManager {
         EntiteManager.entites.removeIf(e -> e != EntiteManager.player);
         ParticleManager.particleEffects.removeIf(e -> e != EntiteManager.ball);
         EntiteManager.clearDead();
+        StageManager.walls.clear();
+        StageManager.cannotmove.clear();
+        StageManager.hideouts.clear();
         LockManager.doors.clear();
         LockManager.locks.clear();
         ObjectManager.objects.clear();
@@ -163,7 +172,7 @@ public class StageManager {
         loadFromXml(level);
     }
 
-    static String getCurrentLevel() {
+    public static String getCurrentLevel() {
         return currentLevel;
     }
 

@@ -25,4 +25,8 @@ public abstract class AbstractTheme {
     public abstract void handleFromTmx(TiledMapTileMapObject entite);
 
     public abstract Color getFontColor();
+
+    public abstract boolean victoryCondition();
+
+    public abstract String getThemeObjectiveMessage();
 }
