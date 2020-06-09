@@ -37,7 +37,7 @@ public abstract class Ennemy extends Entite implements Ipv {
     public PointLight sonar;
     public boolean isAlarmed;
     public Vector2 initial;
-    public transient Color calm = new Color(0, 0, 0, 0.3f);
+    public transient Color calm = new Color(0, 0, 0, 0.7f);
     public transient Color alarm = Color.RED;
     public Prevent prevent;
 

@@ -112,7 +112,6 @@ public class Tmap implements Screen {
                 }
             }
         }
-
     }
 
     public static void removeAllBoxs() {
