@@ -46,7 +46,7 @@ public abstract class Entite extends Sprite implements ISpriteDrawable {
     public boolean good;
     public AbstractShader shader;
     public boolean visible = true;
-    public AbstractBusiness buisiness;
+    public AbstractBusiness business;
     public int speed = 2;
     public int strenght = 2;
     public Vector2 centerOrigin;
@@ -75,7 +75,8 @@ public abstract class Entite extends Sprite implements ISpriteDrawable {
             Class<?> loadClass = Entite.class.getClassLoader().loadClass(wrapper.classDestination);
             Method declaredMethod = loadClass.getDeclaredMethod(wrapper.methodDestination, Entite.class);
             declaredMethod.invoke(null, this);
-        } catch (ClassNotFoundException | SecurityException | NoSuchMethodException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
+        } catch (ClassNotFoundException | SecurityException | NoSuchMethodException | IllegalAccessException
+                | IllegalArgumentException | InvocationTargetException ex) {
             Logger.getLogger(Entite.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -101,17 +102,9 @@ public abstract class Entite extends Sprite implements ISpriteDrawable {
     }
 
     protected void draw(SpriteBatch batch, Texture texture) {
-        batch.draw(texture,
-            getX(), getY(),
-            centerOrigin.x,
-            centerOrigin.y,
-            (int) customWidth, (int) customHeight,
-            1, 1,
-            getRotation(),
-            (int) 0,
-            (int) 0,
-            (int) getTexture().getWidth(), (int) getTexture().getHeight(),
-            false, false);
+        batch.draw(texture, getX(), getY(), centerOrigin.x, centerOrigin.y, (int) customWidth, (int) customHeight, 1, 1,
+                getRotation(), (int) 0, (int) 0, (int) getTexture().getWidth(), (int) getTexture().getHeight(), false,
+                false);
     }
 
     protected void calculateAnchors() {
@@ -128,13 +121,14 @@ public abstract class Entite extends Sprite implements ISpriteDrawable {
     public void dead() {
         this.currentComponent = null;
         this.components.clear();
-        if (this.buisiness != null)
-            this.buisiness.stop = true;
+        if (this.business != null)
+            this.business.stop = true;
     }
 
     public IComponent getComponent(Class clazz) throws NullPointerException {
         Optional<IComponent> findFirst = this.components.stream().filter(e -> e.getClass().equals(clazz)).findFirst();
-        if (findFirst.isPresent()) return findFirst.get();
+        if (findFirst.isPresent())
+            return findFirst.get();
         throw new NullPointerException();
     }
 

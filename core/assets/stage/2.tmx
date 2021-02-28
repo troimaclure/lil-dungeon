@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.3.0" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="40" height="40" tilewidth="64" tileheight="64" infinite="0" nextlayerid="22" nextobjectid="406">
+<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="40" height="40" tilewidth="64" tileheight="64" infinite="0" nextlayerid="22" nextobjectid="406">
  <properties>
   <property name="weather" value="ClearNightWeather"/>
  </properties>
@@ -149,14 +149,6 @@
  </layer>
  <objectgroup id="6" name="entite">
   <object id="6" name="player" type="player" gid="6" x="156" y="2404" width="64" height="64"/>
-  <object id="9" name="lock" type="lock" gid="9" x="912" y="2768" width="64" height="64"/>
-  <object id="49" name="key" type="key" gid="8" x="770" y="2704" width="64" height="64"/>
-  <object id="61" name="archersamourai" type="archersamourai" gid="7" x="666" y="2724" width="64" height="64"/>
-  <object id="62" name="samourai" type="samourai" gid="5" x="284" y="2776" width="64" height="64"/>
-  <object id="99" name="help" type="help" gid="13" x="550" y="2746" width="64" height="64"/>
-  <object id="100" name="arrow" type="arrow" gid="14" x="386" y="2754" width="64" height="64"/>
-  <object id="119" name="firecamp" type="firecamp" gid="18" x="1042" y="2768" width="64" height="64"/>
-  <object id="225" name="trap-paralyzed" type="trap-paralyzed" gid="21" x="16" y="2746" width="64" height="64"/>
   <object id="305" name="firecamp" type="firecamp" gid="18" x="1536" y="1280" width="64" height="64"/>
   <object id="306" name="lock" type="lock" gid="9" x="1280" y="2496" width="64" height="64"/>
   <object id="307" name="key" type="key" gid="8" x="832" y="2176" width="64" height="64"/>

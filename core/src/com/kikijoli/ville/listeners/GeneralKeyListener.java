@@ -135,11 +135,11 @@ public class GeneralKeyListener extends InputAdapter {
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 
         rightButton = button == Input.Buttons.RIGHT;
-        if (((PlayerBusiness) EntiteManager.player.buisiness) != null)
+        if (((PlayerBusiness) EntiteManager.player.business) != null)
             if (rightButton) {
-                ((PlayerBusiness) EntiteManager.player.buisiness).dash();
+                ((PlayerBusiness) EntiteManager.player.business).dash();
             } else {
-                ((PlayerBusiness) EntiteManager.player.buisiness).attack();
+                ((PlayerBusiness) EntiteManager.player.business).attack();
             }
         return super.touchDown(screenX, screenY, pointer, button); //To change body of generated methods, choose Tools | Templates.
     }

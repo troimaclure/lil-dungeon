@@ -26,7 +26,7 @@ public final class ArcherSamourai extends Ennemy implements IBusiness {
 
     public ArcherSamourai(float srcX, float srcY) {
         super(ARCHER, srcX, srcY);
-        this.buisiness = this.getDefault();
+        this.business = this.getDefault();
         this.point = 500;
         this.components.addAll(Arrays.asList(new IComponent[]{new BowComponent(this, (t) -> {
             if (isAlarmed && see(EntiteManager.player)) {

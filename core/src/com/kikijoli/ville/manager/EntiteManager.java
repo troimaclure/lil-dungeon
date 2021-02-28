@@ -70,8 +70,8 @@ public class EntiteManager {
         moveBall();
 
         entites.forEach((entite) -> {
-            if (entite.buisiness != null) {
-                entite.buisiness.act();
+            if (entite.business != null) {
+                entite.business.act();
             }
 
         });
@@ -87,7 +87,8 @@ public class EntiteManager {
     }
 
     private static void handlePlayer() {
-        if (StateManager.states.stream().anyMatch(e -> e.entite == player && e.moveImpact)) return;
+        if (StateManager.states.stream().anyMatch(e -> e.entite == player && e.moveImpact))
+            return;
         for (int i = 0; i < player.speed; i++) {
             if (isNotDead()) {
                 boolean move = handleY();
@@ -101,7 +102,7 @@ public class EntiteManager {
     }
 
     private static boolean isNotDead() {
-        return player.buisiness != null;
+        return player.business != null;
     }
 
     private static void playerMove(boolean move) {
@@ -185,15 +186,18 @@ public class EntiteManager {
     }
 
     public static void attack(Entite entite) {
-        entites.stream().filter((target) -> (!(target instanceof INotTouchable) && target != entite && target.good != entite.good && target.getBoundingRectangle().overlaps(entite.getBoundingRectangle()))).forEachOrdered((target) -> {
-            touch(target);
-        });
+        entites.stream().filter((target) -> (!(target instanceof INotTouchable) && target != entite
+                && target.good != entite.good && target.getBoundingRectangle().overlaps(entite.getBoundingRectangle())))
+                .forEachOrdered((target) -> {
+                    touch(target);
+                });
     }
 
     public static void touch(Entite entite) {
-        if (!entite.isTouchable || entite.touched) return;
-
-        if (entite == player && (player.invincible)) return;
+        if (!entite.isTouchable || entite.touched)
+            return;
+        if (entite == player && (player.invincible))
+            return;
         if (entite.shield != null) {
             entite.shield = null;
             SoundManager.playSound(SoundManager.SHIELD_CRASH);
@@ -213,9 +217,10 @@ public class EntiteManager {
         }
         handleDead(entite);
         ParticleManager.addParticle("particle/blood.p", entite.getX(), entite.getY() + entite.getWidth(), 0.5f);
-        entite.buisiness = null;
+        entite.business = null;
         Vector2 center = MathUtils.getCenter(entite.getBoundingRectangle());
-        DrawManager.spritesFilled.add(new Blood(new Rectangle(center.x, entite.getY(), entite.getWidth(), entite.getHeight())));
+        DrawManager.spritesFilled
+                .add(new Blood(new Rectangle(center.x, entite.getY(), entite.getWidth(), entite.getHeight())));
         removes.add(entite);
     }
 
@@ -233,7 +238,9 @@ public class EntiteManager {
 
     public static void addDead(Entite entite) {
         deads.add(entite);
-        DrawManager.spritesFilled.add(new Blood(new Rectangle(entite.getCenter().x, entite.getY(), entite.getWidth(), entite.getHeight()), (int) (entite.getWidth() * 2)));
+        DrawManager.spritesFilled.add(
+                new Blood(new Rectangle(entite.getCenter().x, entite.getY(), entite.getWidth(), entite.getHeight()),
+                        (int) (entite.getWidth() * 2)));
     }
 
     public static void handleDead(Entite entite) {
@@ -269,9 +276,11 @@ public class EntiteManager {
             return;
         }
 
-        Optional<Rectangle> findFirst = StageManager.hideouts.stream().filter(e -> e.overlaps(player.getBoundingRectangle())).findFirst();
+        Optional<Rectangle> findFirst = StageManager.hideouts.stream()
+                .filter(e -> e.overlaps(player.getBoundingRectangle())).findFirst();
         if (findFirst.isPresent()) {
-            if (player.isHidden()) return;
+            if (player.isHidden())
+                return;
             player.setHide(true);
             MessageManager.talk(findFirst.get(), "hidden..", Color.WHITE);
         } else {
@@ -284,7 +293,8 @@ public class EntiteManager {
         ArrayList<Entite> target = new ArrayList<>();
         entites.forEach((entite) -> {
             Vector2 center = entite.getCenter();
-            if (sonar.contains(center.x, center.y)) target.add(entite);
+            if (sonar.contains(center.x, center.y))
+                target.add(entite);
         });
         return target;
     }

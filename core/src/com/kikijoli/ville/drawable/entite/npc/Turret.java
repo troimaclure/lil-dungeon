@@ -32,7 +32,7 @@ public final class Turret extends Entite implements IBusiness {
 
     public Turret(int srcX, int srcY) {
         super(TURRET, srcX, srcY, Constantes.TILESIZE, Constantes.TILESIZE);
-        this.buisiness = this.getDefault();
+        this.business = this.getDefault();
         this.vision = new PointLight(Tmap.getRay(), 20, Color.BLACK, 500, this.getX(), this.getY());
         this.vision.setXray(true);
         this.point = 1500;

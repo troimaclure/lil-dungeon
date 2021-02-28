@@ -10,7 +10,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.utils.Array;
 import com.kikijoli.ville.manager.CameraManager;
-import com.kikijoli.ville.manager.StageManager;
 import com.kikijoli.ville.maps.Tmap;
 import com.kikijoli.ville.shader.ShadowMap;
 import com.kikijoli.ville.shader.ShadowRender;

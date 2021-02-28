@@ -185,7 +185,7 @@ public class Tmap implements Screen {
     Box2DDebugRenderer debugRenderer = new Box2DDebugRenderer();
 
     public Tmap() {
-        StageManager.loadFromXml("1");
+        StageManager.loadFromXml("2");
     }
 
     @Override

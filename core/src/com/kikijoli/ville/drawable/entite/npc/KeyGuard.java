@@ -32,7 +32,7 @@ public final class KeyGuard extends Ennemy implements IBusiness {
     public KeyGuard(int srcX, int srcY) {
         super(KeyGuard, srcX, srcY, Constantes.TILESIZE, Constantes.TILESIZE);
 
-        this.buisiness = this.getDefault();
+        this.business = this.getDefault();
         this.vision = new PointLight(Tmap.getRay(), 40, Color.BLACK, 500, this.getX(), this.getY());
         this.vision.setSoft(false);
         this.shield = new PlayerShield(srcX, srcY, getWidth(), getHeight());

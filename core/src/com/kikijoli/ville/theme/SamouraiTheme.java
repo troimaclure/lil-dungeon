@@ -23,6 +23,8 @@ import com.kikijoli.ville.util.Count;
 import com.kikijoli.ville.util.Time;
 import java.util.Arrays;
 
+import javax.sound.sampled.SourceDataLine;
+
 /**
  *
  * @author ajosse
@@ -82,12 +84,12 @@ public class SamouraiTheme extends AbstractTheme {
 
     @Override
     public boolean victoryCondition() {
-        return !EntiteManager.getEntites().stream().filter(e -> e instanceof Ennemy && ((Ennemy) e).pv > 0).findAny().isPresent();
+        return !EntiteManager.entites.stream().filter(e -> e instanceof Ennemy && ((Ennemy) e).pv > 0).findAny().isPresent();
     }
 
     @Override
     public String getThemeObjectiveMessage() {
-        return KILL_THEM_ALL + " : " + EntiteManager.getEntites().stream().filter(e -> e instanceof Ennemy && ((Ennemy) e).pv > 0).count() + " left";
+        return KILL_THEM_ALL + " : " + EntiteManager.entites.stream().filter(e -> e instanceof Ennemy && ((Ennemy) e).pv > 0).count() + " left";
     }
 
 }

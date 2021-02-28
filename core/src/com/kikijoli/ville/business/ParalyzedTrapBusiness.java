@@ -38,9 +38,6 @@ public class ParalyzedTrapBusiness extends AbstractBusiness {
 
     private class AttackPlayer extends AbstractAction {
 
-        int bowDelay = 150;
-        int countBow = 150;
-
         @Override
         public void act() {
             if (isContacted()) {
@@ -49,11 +46,13 @@ public class ParalyzedTrapBusiness extends AbstractBusiness {
         }
 
         public void handleBoom() {
-            if (explode) return;
+            if (explode)
+                return;
             explode = true;
             trap.hided = false;
             trap.talk("Traped", Color.RED);
-            ParticleManager.addParticle("particle/blood.p", trap.getX() + trap.getWidth() / 2, trap.getY() + trap.getHeight() / 2, 1.0f);
+            ParticleManager.addParticle("particle/blood.p", trap.getX() + trap.getWidth() / 2,
+                    trap.getY() + trap.getHeight() / 2, 1.0f);
             SoundManager.playSound(SoundManager.TRAP_EXPLODE);
             StateManager.states.add(new ParalyzedState(new Count(2 * Time.SECONDE), EntiteManager.player));
             Vector2 center = trap.getCenter();

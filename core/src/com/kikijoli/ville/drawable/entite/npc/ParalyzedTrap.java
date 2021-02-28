@@ -25,7 +25,7 @@ public final class ParalyzedTrap extends Entite implements IBusiness,INotTouchab
 
     public ParalyzedTrap(float srcX, float srcY) {
         super(TRAP, srcX, srcY, Constantes.TILESIZE, Constantes.TILESIZE);
-        this.buisiness = this.getDefault();
+        this.business = this.getDefault();
     }
 
     @Override

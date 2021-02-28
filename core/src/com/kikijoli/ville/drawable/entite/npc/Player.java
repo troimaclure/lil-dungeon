@@ -48,9 +48,10 @@ public final class Player extends Entite implements IBusiness, IShapeDrawable, I
 
     public Player(float srcX, float srcY) {
         super(SPRITESIMPLEPNG, srcX, srcY);
-        this.buisiness = this.getDefault();
+        this.business = this.getDefault();
         good = true;
         this.speed = 7;
+        // this.invincible = true;
 //        this.shield = new PlayerShield((int) this.getX(), (int) this.getY());
         this.components.addAll(Arrays.asList(new IComponent[]{new BowComponent(this, (t) -> {
             return new Vector2(Tmap.worldCoordinates.x, Tmap.worldCoordinates.y);
@@ -113,9 +114,7 @@ public final class Player extends Entite implements IBusiness, IShapeDrawable, I
     }
 
     public void hurted() {
-
         player.talk("Ouch", Color.RED);
-
     }
 
     @Override

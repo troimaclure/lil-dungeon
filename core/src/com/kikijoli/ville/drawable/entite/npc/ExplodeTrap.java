@@ -26,7 +26,7 @@ public final class ExplodeTrap extends Entite implements IBusiness, INotTouchabl
 
     public ExplodeTrap(int srcX, int srcY) {
         super(TRAP, srcX, srcY, Constantes.TILESIZE, Constantes.TILESIZE);
-        this.buisiness = this.getDefault();
+        this.business = this.getDefault();
     }
 
     @Override

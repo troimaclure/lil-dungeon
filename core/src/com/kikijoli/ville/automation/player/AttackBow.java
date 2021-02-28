@@ -5,14 +5,12 @@
  */
 package com.kikijoli.ville.automation.player;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.kikijoli.ville.abstracts.AbstractAction;
 import com.kikijoli.ville.component.BowComponent;
-import com.kikijoli.ville.drawable.entite.projectile.Bullet.Arrow;
 import com.kikijoli.ville.drawable.entite.Entite;
+import com.kikijoli.ville.drawable.entite.projectile.Bullet.Arrow;
 import com.kikijoli.ville.drawable.entite.simple.Bow;
-import com.kikijoli.ville.manager.EntiteManager;
 import com.kikijoli.ville.manager.ProjectileManager;
 import com.kikijoli.ville.util.MathUtils;
 

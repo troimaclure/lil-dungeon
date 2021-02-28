@@ -26,7 +26,7 @@ public final class RollingTrap extends Entite implements IBusiness, INotTouchabl
         super(RollingTrap, srcX, srcY, Constantes.TILESIZE, Constantes.TILESIZE);
         this.speedX = speedX;
         this.speedY = speedY;
-        this.buisiness = this.getDefault();
+        this.business = this.getDefault();
         this.point = 1500;
         isTouchable = false;
     }
