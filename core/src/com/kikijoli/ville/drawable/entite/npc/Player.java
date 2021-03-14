@@ -52,17 +52,18 @@ public final class Player extends Entite implements IBusiness, IShapeDrawable, I
         good = true;
         this.speed = 7;
         // this.invincible = true;
-//        this.shield = new PlayerShield((int) this.getX(), (int) this.getY());
-        this.components.addAll(Arrays.asList(new IComponent[]{new BowComponent(this, (t) -> {
+        // this.shield = new PlayerShield((int) this.getX(), (int) this.getY());
+        this.components.addAll(Arrays.asList(new IComponent[] { new BowComponent(this, (t) -> {
             return new Vector2(Tmap.worldCoordinates.x, Tmap.worldCoordinates.y);
-        }), new SwordComponent(this), new PebbleComponent(this), new VanishComponent(this)}));
+        }), new SwordComponent(this), new PebbleComponent(this), new VanishComponent(this) }));
         this.currentComponent = this.components.get(0);
     }
 
     @Override
     public void draw(SpriteBatch batch) {
         batch.setColor(Color.WHITE);
-        if (this.invincible) batch.setColor(Color.RED);
+        if (this.invincible)
+            batch.setColor(Color.RED);
         super.draw(batch);
     }
 
@@ -125,6 +126,10 @@ public final class Player extends Entite implements IBusiness, IShapeDrawable, I
     @Override
     public void setPv(int pv) {
         this.pv = pv;
+    }
+
+    public boolean isDead() {
+        return this.pv <= 0;
     }
 
 }

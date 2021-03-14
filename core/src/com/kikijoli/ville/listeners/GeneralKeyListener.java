@@ -96,6 +96,7 @@ public class GeneralKeyListener extends InputAdapter {
     }
 
     private void tilesAction(int index) {
+        if(EntiteManager.player.isDead())return ; 
         if (index > ThemeManager.currentTheme.getTiles().size() - 1) return;
         ThemeManager.currentTheme.getTiles().get(index).action();
     }
